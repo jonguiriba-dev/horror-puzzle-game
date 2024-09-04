@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=4 uid="uid://dgnb5agqhm5k2"]
+
+[ext_resource type="Script" path="res://levels/level_1.gd" id="1_d4o1q"]
+[ext_resource type="Texture2D" uid="uid://c20hh2v84go24" path="res://assets/tiles/test_32.png" id="1_p66io"]
+[ext_resource type="Texture2D" uid="uid://uw1gg7rmh15v" path="res://assets/player.png" id="2_651un"]
+[ext_resource type="Texture2D" uid="uid://c4ry1gy4f8hm7" path="res://assets/tiles/test_red_32.png" id="2_jmqjq"]
+[ext_resource type="Script" path="res://levels/tile_map_layer.gd" id="2_wytmt"]
+[ext_resource type="Script" path="res://levels/player.gd" id="6_nf84j"]
+[ext_resource type="Texture2D" uid="uid://c70djwfskb837" path="res://assets/enemy1.png" id="6_v7uj8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2hjvs"]
+vertices = PackedVector2Array(16, 0, 0, 8, -16, 0, 0, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -8, -16, 0, 0, 8, 16, 0)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rc310"]
+texture = ExtResource("1_p66io")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_2hjvs")
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_646cb"]
+texture = ExtResource("2_jmqjq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_781ca"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+navigation_layer_0/layers = 1
+sources/6 = SubResource("TileSetAtlasSource_rc310")
+sources/8 = SubResource("TileSetAtlasSource_646cb")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1ieu"]
+size = Vector2(17, 7)
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_d4o1q")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(269, 130)
+tile_map_data = PackedByteArray("AAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAACAP//BgAAAAAAAAADAP//BgAAAAAAAAADAAAABgAAAAAAAAADAAMABgAAAAAAAAAEAAMABgAAAAAAAAAFAAMABgAAAAAAAAAFAAIABgAAAAAAAAAEAAAABgAAAAAAAAAEAP//BgAAAAAAAAAFAP//BgAAAAAAAAAFAAAABgAAAAAAAAAFAAEABgAAAAAAAAAGAAEABgAAAAAAAAAGAAIABgAAAAAAAAAGAAMABgAAAAAAAAAGAAAABgAAAAAAAAAGAP//BgAAAAAAAAACAAMABgAAAAAAAAACAAAABgAAAAAAAAABAAAABgAAAAAAAAABAAIABgAAAAAAAAABAAMABgAAAAAAAAAAAAMABgAAAAAAAAAAAAIABgAAAAAAAAAAAAEABgAAAAAAAAAAAAAABgAAAAAAAAAGAAQABgAAAAAAAAAFAAQABgAAAAAAAAAEAAQABgAAAAAAAAADAAQABgAAAAAAAAACAAQABgAAAAAAAAABAAQABgAAAAAAAAAAAAQABgAAAAAAAAABAAEABgAAAAAAAAA=")
+tile_set = SubResource("TileSet_781ca")
+script = ExtResource("2_wytmt")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(222, 159)
+script = ExtResource("6_nf84j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-1, 20)
+shape = SubResource("RectangleShape2D_s1ieu")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="player"]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+position = Vector2(0, -9)
+texture = ExtResource("2_651un")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(397, 168)
+texture = ExtResource("6_v7uj8")
+
+[connection signal="velocity_computed" from="player/NavigationAgent2D" to="player" method="_on_navigation_agent_2d_velocity_computed"]
