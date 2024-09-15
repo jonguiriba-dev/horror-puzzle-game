@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-WorldManager="*res://globals/world_manager/WorldManager.gd"
-C="*res://globals/Constants.gd"
+C="*res://globals/constants.gd"
+WorldManager="*res://globals/world_manager.gd"
+SceneManager="*res://globals/scene_manager.gd"
 
 [display]
 

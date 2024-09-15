@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://ks6cgkvk6ldm" path="res://levels/default_tileset.tres" id="2_to8ub"]
 [ext_resource type="TileSet" uid="uid://dxtj5ode8whoc" path="res://levels/highlight_tileset.tres" id="4_43tvt"]
 [ext_resource type="Script" path="res://levels/tile_map_layer.gd" id="4_umbho"]
-[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://entities/Unit/Unit.tscn" id="6_lg12u"]
+[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://entities/unit/Unit.tscn" id="6_lg12u"]
 [ext_resource type="Texture2D" uid="uid://c70djwfskb837" path="res://assets/enemy1.png" id="7_cvitc"]
 [ext_resource type="PackedScene" uid="uid://dum802m5tm8ou" path="res://scripts/ai/base/Base.tscn" id="7_mc7da"]
 [ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://abilities/ability_strike/Ability_Strike.tscn" id="8_p0tqm"]

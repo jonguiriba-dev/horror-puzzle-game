@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://byewhar62xc7f"]
 
-[ext_resource type="Script" path="res://entities/Entity/entity.gd" id="1_6l7sk"]
+[ext_resource type="Script" path="res://entities/entity/entity.gd" id="1_6l7sk"]
 [ext_resource type="Texture2D" uid="uid://bcdurkxbs78rq" path="res://assets/obstacle.png" id="1_u4p8j"]
 
 [node name="Entity" type="Node2D"]
