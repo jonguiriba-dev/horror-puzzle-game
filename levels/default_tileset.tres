@@ -1,0 +1,34 @@
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://ks6cgkvk6ldm"]
+
+[ext_resource type="Texture2D" uid="uid://c20hh2v84go24" path="res://assets/tiles/test_32.png" id="1_5nikv"]
+[ext_resource type="Texture2D" uid="uid://c4ry1gy4f8hm7" path="res://assets/tiles/test_red_32.png" id="2_2f6k8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2hjvs"]
+vertices = PackedVector2Array(16, 0, 0, 8, -16, 0, 0, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -8, -16, 0, 0, 8, 16, 0)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rc310"]
+texture = ExtResource("1_5nikv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_2hjvs")
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_646cb"]
+texture = ExtResource("2_2f6k8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+navigation_layer_0/layers = 1
+sources/6 = SubResource("TileSetAtlasSource_rc310")
+sources/8 = SubResource("TileSetAtlasSource_646cb")

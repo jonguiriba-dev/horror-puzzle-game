@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ycn35yh87wy"]
+
+[ext_resource type="Script" path="res://abilities/ability_strike/ability_strike.gd" id="1_4yv0e"]
+
+[node name="Ability_Strike" type="Node"]
+script = ExtResource("1_4yv0e")

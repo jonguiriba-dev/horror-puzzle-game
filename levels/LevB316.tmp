@@ -18,12 +18,6 @@ tile_map_data = PackedByteArray("AAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAACAP//BgAAAAA
 tile_set = ExtResource("2_to8ub")
 script = ExtResource("4_umbho")
 
-[node name="HighlightLayer" type="TileMapLayer" parent="TileMapLayer"]
-tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAA=")
-tile_set = ExtResource("4_43tvt")
-navigation_enabled = false
-script = ExtResource("4_umbho")
-
 [node name="Unit" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
 position = Vector2(-47, 29)
 
@@ -34,3 +28,10 @@ sprite_texture = ExtResource("7_cvitc")
 [node name="Base" parent="TileMapLayer/Unit2" instance=ExtResource("7_mc7da")]
 
 [node name="Ability_Strike" parent="TileMapLayer/Unit2" instance=ExtResource("8_p0tqm")]
+
+[node name="HighlightTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAA=")
+tile_set = ExtResource("4_43tvt")
+navigation_enabled = false
+script = ExtResource("4_umbho")
