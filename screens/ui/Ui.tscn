@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://de11wfnraklxo"]
+
+[ext_resource type="Script" path="res://levels/ui.gd" id="1_bd621"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bd621")
+
+[node name="AbilityContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 302.0
+offset_right = 640.0
+offset_bottom = 358.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 91.0
+offset_right = 629.0
+offset_bottom = 114.0
+text = "DEBUG"
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 24.0
+offset_right = 52.0
+offset_bottom = 47.0

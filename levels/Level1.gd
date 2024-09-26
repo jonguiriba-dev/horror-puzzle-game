@@ -1,4 +1,5 @@
 extends Node2D
+class_name World
 
 @onready var tilemap : TileMapLayer = $TileMapLayer
 @onready var player_unit := $TileMapLayer/Unit
@@ -6,11 +7,11 @@ extends Node2D
 func _ready() -> void:
 	tilemap.set_cell(Vector2i(0,0),8,Vector2i(0,0))
 	WorldManager.active_tilemap = tilemap
+	UIManager.initialize()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if(event.is_action_pressed("click")):
-		var map_pos = get_global_mouse_position()
-		player_unit.move_to(map_pos)
+		pass
 		
 	if(event.is_action_pressed("alt-click")):
 		var mouse_pos = WorldManager.active_tilemap.get_local_mouse_position()
@@ -34,3 +35,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		#WorldManager.active_tilemap.add_child(entity)
 		#
 		#entity.add_to_group(C.TARGETS)
+
+func test_move(event:InputEvent):
+	if(event.is_action_pressed("click")):
+		var map_pos = get_global_mouse_position()
+		player_unit.move_to(map_pos)
+
+
+# values for each bit flag
+#const RIGHT: = 1
+#const LEFT: = 2
+#const UP: = 4
+#const DOWN: = 8
+#
+#var flags: = 0
+#flags |= RIGHT	# OR set unconditionally
+#flags &= ~LEFT	# AND with NOT to unconditionally remove
+#
+## if same flag is set you get that value. Non 0 value is true
+#if (flags & UP):    # (6 & 4) > 0 == (4) > 0
+	#print("Success")

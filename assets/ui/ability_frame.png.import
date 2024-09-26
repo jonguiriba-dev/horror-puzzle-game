@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb7vwr7735ie5"
-path="res://.godot/imported/highlight_green.png-27a7426f1128db60f04f0da8ce5a38d0.ctex"
+uid="uid://jce6i6vgo6aw"
+path="res://.godot/imported/ability_frame.png-da8186a912b83bebd470c487a3546f27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/highlight_green.png"
-dest_files=["res://.godot/imported/highlight_green.png-27a7426f1128db60f04f0da8ce5a38d0.ctex"]
+source_file="res://assets/ui/ability_frame.png"
+dest_files=["res://.godot/imported/ability_frame.png-da8186a912b83bebd470c487a3546f27.ctex"]
 
 [params]
 

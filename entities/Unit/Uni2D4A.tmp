@@ -16,10 +16,9 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_s1ieu")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 1.0
-target_desired_distance = 1.0
+path_desired_distance = 5.0
+target_desired_distance = 5.0
 path_postprocessing = 1
-simplify_path = true
 avoidance_enabled = true
 debug_enabled = true
 debug_use_custom = true
@@ -29,8 +28,6 @@ debug_path_custom_color = Color(1, 0, 0, 1)
 position = Vector2(0, -9)
 texture = ExtResource("2_3oflm")
 
-[connection signal="death" from="." to="." method="_on_death"]
-[connection signal="hit" from="." to="." method="_on_hit"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

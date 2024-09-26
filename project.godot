@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 C="*res://globals/constants.gd"
 WorldManager="*res://globals/world_manager.gd"
 SceneManager="*res://globals/scene_manager.gd"
+UIManager="*res://globals/ui_manager.gd"
+
+[debug]
+
+gdscript/warnings/unused_private_class_variable=0
 
 [display]
 
