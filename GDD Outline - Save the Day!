@@ -1,0 +1,46 @@
+GDD Outline - Save the Day! 
+-Founding idea
+-Steam tags
+-Run length
+-Other game comparables
+-DESIGN PILLARS
+-Feature Ideas
+
+Story - Save the Day! (current)
+- Bunch of super heroes trying to save the day
+
+Ideas
+- cat in tree
+- truck crash
+- goons
+- smart leader
+- citizens with different quirks
+
+Heroes
+- Psychic - Pushes stuff around 
+- Math - Requires to line up stuff numerically; friendly fire if wrong but near global reach
+- Samurai - dashes around; gains buff if only using abilities
+- Pirate - dreams of the sea; strong near water; ships; likes playing pirate! ( canon, ships, treasure, eyepatch, sword)
+
+Entity Types
+-Environment Objects
+-Civilians
+-Enemies
+-Heroes
+
+Concepts
+*good
+-Speedster
+-Strongman
+-Brainiac
+
+*bad
+-Goon
+
+
+
+TODO:
+-
+
+Done:
+-Enemy can now attack target within range

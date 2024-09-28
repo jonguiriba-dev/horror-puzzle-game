@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnm4c87ef7dpv"]
+
+[ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="1_c4ysh"]
+
+[node name="RescueText" type="Sprite2D"]
+texture = ExtResource("1_c4ysh")

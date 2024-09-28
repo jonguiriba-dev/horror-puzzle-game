@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=4 uid="uid://dgnb5agqhm5k2"]
+
+[ext_resource type="Script" path="res://src/levels/level1.gd" id="1_8stg4"]
+[ext_resource type="TileSet" uid="uid://ks6cgkvk6ldm" path="res://src/levels/default_tileset.tres" id="2_to8ub"]
+[ext_resource type="Script" path="res://src/levels/tile_map_layer.gd" id="3_yx5ki"]
+[ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/levels/highlight_tileset.tres" id="4_gelbg"]
+[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="6_lg12u"]
+[ext_resource type="Texture2D" uid="uid://c70djwfskb837" path="res://assets/enemy1.png" id="7_bdok7"]
+[ext_resource type="PackedScene" uid="uid://dum802m5tm8ou" path="res://src/scripts/ai/base/AI_Base.tscn" id="7_mc7da"]
+[ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://src/abilities/ability_strike/Ability_Strike.tscn" id="8_p0tqm"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_8stg4")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAACAP//BgAAAAAAAAADAP//BgAAAAAAAAADAAAABgAAAAAAAAADAAMABgAAAAAAAAAEAAMABgAAAAAAAAAFAAMABgAAAAAAAAAFAAIABgAAAAAAAAAEAAAABgAAAAAAAAAEAP//BgAAAAAAAAAFAP//BgAAAAAAAAAFAAAABgAAAAAAAAAFAAEABgAAAAAAAAAGAAEABgAAAAAAAAAGAAIABgAAAAAAAAAGAAMABgAAAAAAAAAGAAAABgAAAAAAAAAGAP//BgAAAAAAAAACAAMABgAAAAAAAAABAAAABgAAAAAAAAABAAIABgAAAAAAAAABAAMABgAAAAAAAAAAAAMABgAAAAAAAAAAAAIABgAAAAAAAAAAAAEABgAAAAAAAAAAAAAABgAAAAAAAAAGAAQABgAAAAAAAAAFAAQABgAAAAAAAAAEAAQABgAAAAAAAAADAAQABgAAAAAAAAACAAQABgAAAAAAAAABAAQABgAAAAAAAAAAAAQABgAAAAAAAAABAAEABgAAAAAAAAACAAAABgAAAAAAAAACAAIABgAAAAAAAAACAAEABgAAAAAAAAADAAEABgAAAAAAAAADAAIABgAAAAAAAAAEAAIABgAAAAAAAAAEAAEABgAAAAAAAAA=")
+tile_set = ExtResource("2_to8ub")
+script = ExtResource("3_yx5ki")
+
+[node name="HighlightLayer" type="TileMapLayer" parent="TileMapLayer"]
+tile_map_data = PackedByteArray("AAACAAAAAAAAAAAAAAA=")
+tile_set = ExtResource("4_gelbg")
+
+[node name="Unit" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
+position = Vector2(-1, 29)
+entity_name = "Player"
+
+[node name="Ability_Strike" parent="TileMapLayer/Unit" instance=ExtResource("8_p0tqm")]
+
+[node name="Unit2" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
+position = Vector2(49, 55)
+entity_name = "Enemy"
+sprite_texture = ExtResource("7_bdok7")
+team = 1
+
+[node name="AI_Base" parent="TileMapLayer/Unit2" instance=ExtResource("7_mc7da")]
+
+[node name="Ability_Strike" parent="TileMapLayer/Unit2" instance=ExtResource("8_p0tqm")]
