@@ -1,5 +1,5 @@
-extends Node
 
+extends Node
 var ui: UI
 signal initialized
 

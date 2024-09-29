@@ -9,6 +9,7 @@ func _ready() -> void:
 	tilemap.set_cell(Vector2i(0,0),8,Vector2i(0,0))
 	WorldManager.active_tilemap = tilemap
 	UIManager.initialize()
+	print(get_tree().get_nodes_in_group(C.GROUPS.UNITS))
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if(event.is_action_pressed("click")):

@@ -28,11 +28,12 @@ tile_set = ExtResource("4_gelbg")
 [node name="Unit" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
 position = Vector2(0, 33)
 script = ExtResource("6_4vec3")
+entity_name = "Player test"
 
 [node name="Ability_Strike" parent="TileMapLayer/Unit" instance=ExtResource("8_p0tqm")]
 
 [node name="Unit2" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(48, 56)
+position = Vector2(96, 48)
 script = ExtResource("6_4vec3")
 entity_name = "Enemy1"
 sprite_texture = ExtResource("7_bdok7")

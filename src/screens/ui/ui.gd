@@ -11,6 +11,8 @@ enum STATE{
 var state := STATE.INACTIVE
 var context
 
+signal end_turn_pressed
+
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
 		child.queue_free()
@@ -37,3 +39,8 @@ func set_context(ctx):
 	if context is Unit:
 		show_ability_icons()
 		generate_ability_icons(context.get_abilities())
+
+
+func _on_end_turn_pressed() -> void:
+	end_turn_pressed.emit()
+	pass # Replace with function body.

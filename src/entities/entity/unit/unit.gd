@@ -1,34 +1,14 @@
 extends Entity
 class_name Unit
 
-
-enum STATE{
-	INACTIVE,
-	SELECTED,
-	MOVE_SELECTION,
-	MOVED,
-	TARGETTING
-}
-
-var move_speed = 55
-var move_range = 3
-var can_move := false
-var state := STATE.INACTIVE
-var health = 1
-var target_position=null
-var path=null
-signal hit(damage:int)
-signal death
-
 func _ready() -> void:
 	super()
 	add_to_group(C.GROUPS.UNITS)
-	hit.connect(_on_hit)
-	death.connect(_on_death)
-	for ability in get_abilities():
-		ability.connect("targetting",_on_ability_targetting)
-		ability.connect("stopped_targetting",_on_ability_stopped_targetting)
-		
+	#hit.connect(_on_hit)
+	#death.connect(_on_death)
+	WorldManager.turn_end.connect(_on_turn_end)
+	WorldManager.turn_start.connect(_on_turn_start)
+	
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("action2"):
@@ -44,35 +24,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			): 
 				show_move_range()
 			elif(event.is_action_pressed("click") and state == STATE.MOVE_SELECTION):
-				move_to_selected_tile()
+				var mouse_pos = WorldManager.active_tilemap.get_local_mouse_position()
+				var map_pos = WorldManager.active_tilemap.local_to_map(mouse_pos)
+				var is_within_range = get_reachable_tiles(move_range).has(WorldManager.active_tilemap.get_map_mouse_position())
+				if(is_within_range):
+					move_to_selected_tile(map_pos)
+				else:
+					state = STATE.SELECTED
+		
+				remove_from_group(C.GROUPS.TARGETTING_ENTITY)
 			elif(event.is_action_pressed("click") and state == STATE.TARGETTING):
 				print("apply_ability")
 		
-func _physics_process(delta: float) -> void:
-	if target_position:
+func _process(delta: float) -> void:
+	if target_position and path.size() > 0:
 		move(delta)
 	
-
-func get_next_path_tile(next_path_pos:Vector2)->Vector2i:
-	var next_tile = WorldManager.active_tilemap.local_to_map(position)
-	var direction = global_position.direction_to(next_path_pos)
-	
-	print("XXX ",next_path_pos)
-	if abs(direction).x > abs(direction.y):
-		direction.y = 0
-	else:
-		direction.x = 0
-	print("XXX direction ",direction)
-		
-	var rounded_direction = Vector2i(roundi(direction.x),roundi(direction.y))
-	next_tile = WorldManager.active_tilemap.local_to_map(position) + rounded_direction
-	
-	if rounded_direction != Vector2i(0,0):
-		print("direction",rounded_direction)
-		print("curr_tile",WorldManager.active_tilemap.local_to_map(position) )
-		print("-next_tile",next_tile )
-	return next_tile
-
 func move(delta: float)->void:
 	var curr_tile = WorldManager.active_tilemap.local_to_map(position)
 	WorldManager.active_tilemap.set_highlight(curr_tile,CustomTileMapLayer.HIGHLIGHT_COLORS.BLUE)
@@ -85,12 +52,28 @@ func move(delta: float)->void:
 	if path.size() == 0:
 		target_position = null
 		check_overlap(curr_tile)
+		move_end.emit()
 	pass
 
-func check_overlap(map_pos:Vector2):
+func move_to_selected_tile(map_pos:Vector2):
+		var local_pos = WorldManager.active_tilemap.map_to_local(map_pos) 
+		var curr_tile = WorldManager.active_tilemap.local_to_map(position)
+		target_position = map_pos
+		path = WorldManager.active_tilemap.astar_grid.get_id_path(curr_tile, target_position)
+		path.remove_at(0)
+		print("path:", path)
+		for tile in path:
+			WorldManager.active_tilemap.set_highlight(tile, CustomTileMapLayer.HIGHLIGHT_COLORS.ORANGE)
+	
+		#state = STATE.MOVED
+		state = STATE.SELECTED # test
+
+func check_overlap(map_pos:Vector2i):
 	for entity in get_tree().get_nodes_in_group(C.GROUPS.ENTITIES):
 		if entity is Civilian:
-			entity.rescued.emit()
+			var civilian_tile_pos = WorldManager.active_tilemap.local_to_map(entity.position)
+			if civilian_tile_pos == map_pos:
+				entity.rescued.emit()
 	
 func get_abilities()->Array[Ability]:
 	var abilities:Array[Ability]= []
@@ -132,64 +115,42 @@ func _on_mouse_entered() -> void:
 	
 func _on_mouse_exited() -> void:
 	remove_from_group(C.HOVERED_ENTITIES)
-	
-func _on_ability_targetting(ability:Ability) -> void:
-	highlight_attack_range_tiles(ability.ability_range)
-	print("STATE 3")
-	state = STATE.TARGETTING
 
-func _on_ability_stopped_targetting(ability:Ability) -> void:
-	WorldManager.active_tilemap.clear_all_highlights()
-	state = STATE.SELECTED
-	print("STATE 2")
-
-func _on_hit(damage:int) -> void:
-	health -= damage
-	print("took damage", damage, " health ", health )
-	if health <= 0:
-		health = 0
-		death.emit()
-		print("death.emit")
-
-func _on_death() -> void:
-	print("death ",self)
-	queue_free()
 	
 func show_move_range():
 	highlight_moveable_tiles(move_range)
 	UIManager.ui.set_context(self)
-	state = STATE.MOVE_SELECTION
 	add_to_group(C.GROUPS.TARGETTING_ENTITY)
-	print("state: MOVE_SELECTION", state)
+	state = STATE.MOVE_SELECTION
+	print("state: MOVE_SELECTION")
 
-func move_to_selected_tile():
-	var is_within_range = get_reachable_tiles(move_range).has(WorldManager.active_tilemap.get_map_mouse_position())
-	if(is_within_range):
-		var mouse_pos = WorldManager.active_tilemap.get_local_mouse_position()
-		var map_pos = WorldManager.active_tilemap.local_to_map(mouse_pos)
-		var local_pos = WorldManager.active_tilemap.map_to_local(map_pos) 
+func _on_turn_start(team_turn:C.TEAM):
+	print("team_turn: ", team_turn)
+	if team_turn == team:
+		print("start turn ", entity_name)
+		state = STATE.INACTIVE
 		
-		#var target = get_tree().get_first_node_in_group(C.HOVERED_ENTITIES)
-		#if target and target is Civilian:
-			#WorldManager.active_tilemap.set_text_highlight("RESCUE", map_pos)
+		if team == C.TEAM.PLAYER:
+			sprite.modulate = Color("ffffff")
 	
-		var curr_tile = WorldManager.active_tilemap.local_to_map(position)
-		target_position = map_pos
-		path = WorldManager.active_tilemap.astar_grid.get_id_path(curr_tile, target_position)
-		path.remove_at(0)
-		print("path:", path)
-		for tile in path:
-			WorldManager.active_tilemap.set_highlight(tile, CustomTileMapLayer.HIGHLIGHT_COLORS.ORANGE)
-	#
-		#var global = WorldManager.active_tilemap.to_global(local_pos)
-		#global -= Vector2(1,3) # wonder why this works best
-		#move_to(global)
-		#state = STATE.MOVED
-		state = STATE.SELECTED # test
-	else:
-		state = STATE.SELECTED
-		
-	remove_from_group(C.GROUPS.TARGETTING_ENTITY)
-		
-	#WorldManager.active_tilemap.clear_all_highlights() #test
-		
+func _on_turn_end(team_turn: C.TEAM):
+	print("team_turn: ", team_turn)
+	if team_turn == team :
+		WorldManager.active_tilemap.clear_all_highlights()
+		state = STATE.DONE
+		print("end turn: ", entity_name)
+	
+		if team == C.TEAM.PLAYER:
+			sprite.modulate = Color("626262")
+			
+
+#func _on_hit(damage:int) -> void:
+	#health -= damage
+	#print("took damage", damage, " health ", health )
+	#if health <= 0:
+		#health = 0
+		#death.emit()
+		#print("death.emit")
+#func _on_death() -> void:
+	#print("death ",self)
+	#queue_free()

@@ -1,25 +1,44 @@
 extends Node
+class_name AI
 
 @onready var host:Unit = self.get_parent()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if(event.is_action_pressed("action2")):
-		find_target()	
+var possible_tiles = []
+var threat
+func _ready():
+	WorldManager.turn_start.connect(_on_turn_start)
+	host.move_end.connect(_on_host_move_end)
+	
+func _on_turn_start(team_turn:C.TEAM):
+	if threat:
+		attack_target()
 		
-func find_target():
-	print("find_target")
+	if team_turn == host.team:
+		analyze_tiles()
+		for possible_tile in possible_tiles:
+			if possible_tile.value > 0:
+				host.move_to_selected_tile(possible_tile.position)
+				
+func _on_host_move_end():
+	highlight_target()
+	
+func highlight_target():
+	for ability in host.get_abilities():
+		var reachable_tiles = host.get_reachable_tiles(ability.ability_range)
+		for target in get_tree().get_nodes_in_group(C.TARGETS):
+			var target_map_pos = WorldManager.active_tilemap.local_to_map(target.position)
+			if reachable_tiles.has(target_map_pos):
+				threat = {"tile":target_map_pos, "ability":ability, "target":target}
+				WorldManager.active_tilemap.set_highlight(target_map_pos,CustomTileMapLayer.HIGHLIGHT_COLORS.RED)
+
+func attack_target():
+	threat.ability.apply_effect(threat.target) 
+	threat = null
+func analyze_tiles():
 	for tile in host.get_reachable_tiles(host.move_range):
-		#WorldManager.active_tilemap.set_highlight(tile)
-		var tile_value = get_tile_value(tile)
-		if tile_value > 0:
-			WorldManager.active_tilemap.set_highlight(tile)
-			host.move_to(tile)
-			print("tile ",tile)
-			var tile_local_pos = WorldManager.active_tilemap.map_to_local(tile)
-			var global_pos = WorldManager.active_tilemap.to_global(tile_local_pos)
-			print("local ",tile_local_pos)
-			print("global ",global_pos)
-			host.move_to(global_pos)
+		possible_tiles.push_front({
+			"position": tile,
+			"value": get_tile_value(tile)
+		})
 		
 func get_tile_value(tile_pos:Vector2)->int:
 	var value = 0
@@ -30,17 +49,4 @@ func get_tile_value(tile_pos:Vector2)->int:
 			var distance = tile_pos.distance_to(target_map_pos)
 			if distance <= ability.ability_range and distance != 0:
 				value = +10
-			#print('tile_pos - ',tile_pos,' target_pos - ',target_map_pos, ' distance - ',tile_pos.distance_to(target_map_pos))
 	return value
-		
-		
-		
-	
-func find_target_test():
-	for target in get_tree().get_nodes_in_group(C.TARGETS):
-		target = target as Entity
-		var target_pos = target.position
-		var local_pos = WorldManager.active_tilemap.local_to_map(target_pos)
-		
-		print("target pos ", target_pos)
-		WorldManager.active_highlight_tilemap.set_cell(local_pos,0,Vector2i(0,0))

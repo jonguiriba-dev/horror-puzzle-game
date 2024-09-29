@@ -6,6 +6,7 @@ signal rescued
 func _ready() -> void:
 	super()
 	add_to_group(C.GROUPS.CIVILIANS)
+	add_to_group(C.GROUPS.TARGETS)
 	rescued.connect(_on_rescued)
 	
 func _on_rescued():
