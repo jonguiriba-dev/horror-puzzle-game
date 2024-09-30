@@ -6,7 +6,6 @@ class_name World
 @onready var unit2 := $TileMapLayer/Unit2
 
 func _ready() -> void:
-	tilemap.set_cell(Vector2i(0,0),8,Vector2i(0,0))
 	WorldManager.active_tilemap = tilemap
 	UIManager.initialize()
 	print(get_tree().get_nodes_in_group(C.GROUPS.UNITS))

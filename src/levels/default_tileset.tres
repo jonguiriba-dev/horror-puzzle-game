@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=6 format=3 uid="uid://ks6cgkvk6ldm"]
 
-[ext_resource type="Texture2D" uid="uid://c20hh2v84go24" path="res://assets/tiles/test_32.png" id="1_5nikv"]
-[ext_resource type="Texture2D" uid="uid://c4ry1gy4f8hm7" path="res://assets/tiles/test_red_32.png" id="2_2f6k8"]
+[ext_resource type="Texture2D" uid="uid://c20hh2v84go24" path="res://assets/tiles/test/test_32.png" id="1_2o25f"]
+[ext_resource type="Texture2D" uid="uid://c4ry1gy4f8hm7" path="res://assets/tiles/test/test_red_32.png" id="2_gybqb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2hjvs"]
 vertices = PackedVector2Array(16, 0, 0, 8, -16, 0, 0, -8)
@@ -10,14 +10,14 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(0, -8, -16, 0, 0, 8, 16
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rc310"]
-texture = ExtResource("1_5nikv")
+texture = ExtResource("1_2o25f")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -8)
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_2hjvs")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_646cb"]
-texture = ExtResource("2_2f6k8")
+texture = ExtResource("2_gybqb")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -8)

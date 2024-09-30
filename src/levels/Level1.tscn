@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://dgnb5agqhm5k2"]
+[gd_scene load_steps=13 format=4 uid="uid://dgnb5agqhm5k2"]
 
 [ext_resource type="Script" path="res://src/levels/level1.gd" id="1_8stg4"]
-[ext_resource type="TileSet" uid="uid://ks6cgkvk6ldm" path="res://src/levels/default_tileset.tres" id="2_to8ub"]
+[ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/levels/city_tileset.tres" id="2_8rfxa"]
 [ext_resource type="Script" path="res://src/levels/tile_map_layer.gd" id="3_yx5ki"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/levels/highlight_tileset.tres" id="4_gelbg"]
+[ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/levels/prop_tileset.tres" id="4_naynq"]
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="6_4vec3"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="6_lg12u"]
 [ext_resource type="Texture2D" uid="uid://c70djwfskb837" path="res://assets/enemy1.png" id="7_bdok7"]
@@ -17,23 +18,26 @@ script = ExtResource("1_8stg4")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAACAP//BgAAAAAAAAADAP//BgAAAAAAAAADAAAABgAAAAAAAAADAAMABgAAAAAAAAAEAAMABgAAAAAAAAAFAAMABgAAAAAAAAAFAAIABgAAAAAAAAAEAAAABgAAAAAAAAAEAP//BgAAAAAAAAAFAP//BgAAAAAAAAAFAAAABgAAAAAAAAAFAAEABgAAAAAAAAAGAAEABgAAAAAAAAAGAAIABgAAAAAAAAAGAAMABgAAAAAAAAAGAAAABgAAAAAAAAAGAP//BgAAAAAAAAACAAMABgAAAAAAAAABAAAABgAAAAAAAAABAAIABgAAAAAAAAABAAMABgAAAAAAAAAAAAMABgAAAAAAAAAAAAIABgAAAAAAAAAAAAEABgAAAAAAAAAAAAAABgAAAAAAAAAGAAQABgAAAAAAAAAFAAQABgAAAAAAAAAEAAQABgAAAAAAAAADAAQABgAAAAAAAAACAAQABgAAAAAAAAABAAQABgAAAAAAAAAAAAQABgAAAAAAAAABAAEABgAAAAAAAAACAAAABgAAAAAAAAACAAIABgAAAAAAAAACAAEABgAAAAAAAAADAAEABgAAAAAAAAADAAIABgAAAAAAAAAEAAIABgAAAAAAAAAEAAEABgAAAAAAAAA=")
-tile_set = ExtResource("2_to8ub")
+tile_map_data = PackedByteArray("AAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAABAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAABAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAABAAAAAAADAP7/AAABAAAAAAADAP3/AAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAABAAQAAAAAAAEAAAABAAMAAAAAAAEAAAABAAIAAAAAAAEAAAABAAEAAAAAAAEAAAABAAAAAAAAAAEAAAABAP//AAAAAAEAAAABAP7/AAAAAAEAAAABAP3/AAAAAAEAAAAAAAQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAD///3/AAABAAEAAAD///7/AAABAAEAAAD/////AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD+/wQAAAABAAEAAAD+/wMAAAABAAEAAAD+/wIAAAABAAEAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAEAAAD9/wQAAAABAAEAAAD9/wMAAAABAAEAAAD9/wIAAAABAAEAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAEAAAA=")
+tile_set = ExtResource("2_8rfxa")
 script = ExtResource("3_yx5ki")
 
+[node name="PropLayer" type="TileMapLayer" parent="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAAAAMAAgAAAAAAAAAAAP//AgAAAAAAAAAAAAIAAgABAAAAAAAAAP7/AgABAAAAAAA=")
+tile_set = ExtResource("4_naynq")
+
 [node name="HighlightLayer" type="TileMapLayer" parent="TileMapLayer"]
-tile_map_data = PackedByteArray("AAACAAAAAAAAAAAAAAA=")
 tile_set = ExtResource("4_gelbg")
 
 [node name="Unit" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(0, 33)
+position = Vector2(-64, 16)
 script = ExtResource("6_4vec3")
 entity_name = "Player test"
 
 [node name="Ability_Strike" parent="TileMapLayer/Unit" instance=ExtResource("8_p0tqm")]
 
 [node name="Unit2" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(96, 48)
+position = Vector2(81, 40)
 script = ExtResource("6_4vec3")
 entity_name = "Enemy1"
 sprite_texture = ExtResource("7_bdok7")
@@ -44,7 +48,7 @@ team = 1
 [node name="Ability_Strike" parent="TileMapLayer/Unit2" instance=ExtResource("8_p0tqm")]
 
 [node name="Civilian" parent="TileMapLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(48, 25)
+position = Vector2(15, -7)
 script = ExtResource("10_pxuy6")
 entity_name = "Clara"
 sprite_texture = ExtResource("11_isefa")

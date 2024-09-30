@@ -34,13 +34,19 @@ Concepts
 -Strongman
 -Brainiac
 
+Locations
+-Downtown
+
 *bad
 -Goon
 
 
 
 TODO:
--
+- environment
 
 Done:
 -Enemy can now attack target within range
+-Astar movement
+-Enemy movement and attack (needs improvment later)
+-Civilian; highlights on hover
