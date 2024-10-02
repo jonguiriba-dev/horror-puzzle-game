@@ -1,6 +1,13 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://d4bdxckthb2de"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://d4bdxckthb2de"]
 
 [ext_resource type="Texture2D" uid="uid://ddtfg4yisd2fq" path="res://assets/tiles/city/props-sheet.png" id="1_elat8"]
+[ext_resource type="Texture2D" uid="uid://wnsq1liuiudb" path="res://assets/tiles/city/props_32_64-sheet.png" id="1_n50v5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4i2sc"]
+texture = ExtResource("1_n50v5")
+texture_region_size = Vector2i(32, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 24)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ucjig"]
 texture = ExtResource("1_elat8")
@@ -9,6 +16,10 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/texture_origin = Vector2i(0, 8)
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 8)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 8)
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, 8)
 
 [resource]
 tile_shape = 1
@@ -17,3 +28,4 @@ tile_offset_axis = 1
 tile_size = Vector2i(32, 16)
 navigation_layer_0/layers = 1
 sources/2 = SubResource("TileSetAtlasSource_ucjig")
+sources/1 = SubResource("TileSetAtlasSource_4i2sc")

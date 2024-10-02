@@ -18,5 +18,5 @@ func _on_ability_targetting(ability:Ability) -> void:
 	host.state = Unit.STATE.TARGETTING
 
 func _on_ability_stopped_targetting(ability:Ability) -> void:
-	WorldManager.active_tilemap.clear_all_highlights()
+	WorldManager.grid.clear_all_highlights()
 	host.state = Unit.STATE.SELECTED

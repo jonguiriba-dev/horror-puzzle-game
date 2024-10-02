@@ -1,6 +1,6 @@
 extends Node
 
-var active_tilemap: CustomTileMapLayer
+var grid: Grid
 var team_turn:C.TEAM
 
 var turn_order:=[C.TEAM.PLAYER,C.TEAM.ENEMY]
@@ -30,5 +30,5 @@ func _unhandled_input(event: InputEvent) -> void:
 				need_highlight = true
 					
 		if !need_highlight:
-			WorldManager.active_tilemap.clear_all_highlights()
+			WorldManager.grid.clear_all_highlights()
 				

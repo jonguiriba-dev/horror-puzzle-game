@@ -25,9 +25,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if target is not Unit:
 			return
 		if target != null:
-			var host_map_position = WorldManager.active_tilemap.local_to_map(host.position)
-			var target_map_position = WorldManager.active_tilemap.local_to_map(target.position)
-			if WorldManager.active_tilemap.is_within_range(host_map_position,target_map_position,ability_range):
+			var host_map_position = WorldManager.grid.local_to_map(host.position)
+			var target_map_position = WorldManager.grid.local_to_map(target.position)
+			if WorldManager.grid.is_within_range(host_map_position,target_map_position,ability_range):
 				apply_effect(target)
 		print("target ",target)
 		state = STATE.INACTIVE

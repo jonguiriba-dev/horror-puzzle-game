@@ -1,6 +1,7 @@
-extends TileMapLayer
-class_name CustomTileMapLayer
+extends Node2D
+class_name Grid
 
+@onready var tiles_layer :TileMapLayer= $TileMapLayer
 @onready var highlight_layer :TileMapLayer= $HighlightLayer
 @onready var prop_layer :TileMapLayer= $PropLayer
 @onready var astar_grid = AStarGrid2D.new()
@@ -14,12 +15,14 @@ enum HIGHLIGHT_COLORS{
 
 func _ready() -> void:
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	astar_grid.cell_size = tile_set.tile_size
-	astar_grid.region = get_used_rect()
+	astar_grid.cell_size = tiles_layer.tile_set.tile_size
+	astar_grid.region = tiles_layer.get_used_rect()
 	astar_grid.update()
-
+	
+	WorldManager.grid = self
+	
 func get_possible_tiles():
-	var tiles = get_used_cells()
+	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	var enemies = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
 	
@@ -27,7 +30,7 @@ func get_possible_tiles():
 		tiles.erase(prop_pos)
 		astar_grid.set_point_solid(prop_pos)
 	for enemy in enemies:
-		var enemy_map_pos = local_to_map(enemy.position)
+		var enemy_map_pos = prop_layer.local_to_map(enemy.position)
 		tiles.erase(enemy_map_pos)
 		astar_grid.set_point_solid(enemy_map_pos)
 	
@@ -48,22 +51,22 @@ func get_manhattan_distance(a:Vector2,b:Vector2):
 	return abs(y_distance) + abs(x_distance)
 
 func get_map_mouse_position()->Vector2i:
-	return local_to_map(get_local_mouse_position())
+	return prop_layer.local_to_map(prop_layer.get_local_mouse_position())
 	
 func is_within_range(a:Vector2,b:Vector2,range:int) -> bool:
 	return get_manhattan_distance(a,b) <= range
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		print("*Tile Position: ",WorldManager.grid.local_to_map(WorldManager.grid.get_local_mouse_position()))
+		print("*Tile Position: ",WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position()))
 		
 		
 			
 func add_test(map_position:Vector2):
-	set_cell(map_position,8,Vector2i(0,0))
+	prop_layer.set_cell(map_position,8,Vector2i(0,0))
 	print("add_test",map_position)
 	
-	var sprite_pos = map_to_local(map_position)
+	var sprite_pos = prop_layer.map_to_local(map_position)
 
 	var offset_vector = Vector2(0,-12)
 	var entity = preload("res://src/entities/entity/Entity.tscn").instantiate()
@@ -72,3 +75,9 @@ func add_test(map_position:Vector2):
 	add_child(entity)
 	entity.sprite.offset = offset_vector
 	entity.add_to_group(C.TARGETS)
+
+func local_to_map(local_pos:Vector2)->Vector2i:
+	return prop_layer.local_to_map(local_pos)
+
+func map_to_local(map_pos:Vector2i)->Vector2:
+	return prop_layer.map_to_local(map_pos)

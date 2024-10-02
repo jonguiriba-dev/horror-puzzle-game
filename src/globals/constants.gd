@@ -14,6 +14,7 @@ var GROUPS = {
 	HOVERED_ENTITIES = "hovered_entities",
 	TARGETS = "targets",
 	HIGHLIGHT_TEXT = "highlight_text",
+	ENEMIES = "enemies",
 	
 }
 

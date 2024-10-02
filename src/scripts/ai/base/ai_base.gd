@@ -25,10 +25,10 @@ func highlight_target():
 	for ability in host.get_abilities():
 		var reachable_tiles = host.get_reachable_tiles(ability.ability_range)
 		for target in get_tree().get_nodes_in_group(C.TARGETS):
-			var target_map_pos = WorldManager.active_tilemap.local_to_map(target.position)
+			var target_map_pos = WorldManager.grid.local_to_map(target.position)
 			if reachable_tiles.has(target_map_pos):
 				threat = {"tile":target_map_pos, "ability":ability, "target":target}
-				WorldManager.active_tilemap.set_highlight(target_map_pos,CustomTileMapLayer.HIGHLIGHT_COLORS.RED)
+				WorldManager.grid.set_highlight(target_map_pos,Grid.HIGHLIGHT_COLORS.RED)
 
 func attack_target():
 	threat.ability.apply_effect(threat.target) 
@@ -45,7 +45,7 @@ func get_tile_value(tile_pos:Vector2)->int:
 	
 	for ability in host.get_abilities():
 		for target in get_tree().get_nodes_in_group(C.TARGETS):
-			var target_map_pos = WorldManager.active_tilemap.local_to_map(target.position)
+			var target_map_pos = WorldManager.grid.local_to_map(target.position)
 			var distance = tile_pos.distance_to(target_map_pos)
 			if distance <= ability.ability_range and distance != 0:
 				value = +10
