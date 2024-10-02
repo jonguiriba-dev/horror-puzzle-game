@@ -7,6 +7,8 @@ func _ready() -> void:
 	
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS.ENEMIES)
+	else:
+		add_to_group(C.GROUPS.TARGETS)
 		
 	#hit.connect(_on_hit)
 	#death.connect(_on_death)

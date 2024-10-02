@@ -45,7 +45,7 @@ entity_name = "Testado"
 [node name="Ability_Strike" parent="Grid/PropLayer/Unit" instance=ExtResource("8_p0tqm")]
 
 [node name="Unit2" parent="Grid/PropLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(65, 32)
+position = Vector2(81, 40)
 script = ExtResource("6_4vec3")
 entity_name = "Enemy1"
 sprite_texture = ExtResource("7_bdok7")
