@@ -1,25 +1,14 @@
 extends Node2D
 class_name World
 
-@onready var player_unit := $Grid/PropLayer/Unit
-@onready var unit2 := $Grid/PropLayer/Unit2
 
 func _ready() -> void:
 	UIManager.initialize()
-	print(get_tree().get_nodes_in_group(C.GROUPS.UNITS))
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if(event.is_action_pressed("click")):
 		pass
-		
-	if(event.is_action_pressed("alt-click")):
-		var mouse_pos = WorldManager.grid.get_local_mouse_position()
-		var local_pos = WorldManager.grid.local_to_map(mouse_pos)
-		print("mouse_pos ",mouse_pos)
-		print("local_pos ",local_pos)
-		var unit_pos = unit2.global_position
-		print("unit_pos ",unit_pos)
-		WorldManager.grid.add_test(local_pos)
+	
 		
 		#WorldManager.grid.set_cell(local_pos,8,Vector2i(0,0))
 		#
@@ -35,10 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		#
 		#entity.add_to_group(C.TARGETS)
 
-func test_move(event:InputEvent):
-	if(event.is_action_pressed("click")):
-		var map_pos = get_global_mouse_position()
-		player_unit.move_to(map_pos)
+
 
 
 # values for each bit flag

@@ -5,6 +5,7 @@ class_name Grid
 @onready var highlight_layer :TileMapLayer= $HighlightLayer
 @onready var prop_layer :TileMapLayer= $PropLayer
 @onready var astar_grid = AStarGrid2D.new()
+var threat_tiles :Array[Vector2i]= []
 
 enum HIGHLIGHT_COLORS{
 	GREEN = 0,
@@ -21,14 +22,19 @@ func _ready() -> void:
 	
 	WorldManager.grid = self
 	
-func get_possible_tiles():
+func get_possible_tiles(include_obstacles:bool=true):
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	var enemies = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
 	
-	for prop_pos in props:
-		tiles.erase(prop_pos)
-		astar_grid.set_point_solid(prop_pos)
+	if include_obstacles:
+		for prop_pos in props:
+			tiles.erase(prop_pos)
+			astar_grid.set_point_solid(prop_pos)
+	else:
+		astar_grid.fill_solid_region(astar_grid.region,false)
+		
+	
 	for enemy in enemies:
 		var enemy_map_pos = prop_layer.local_to_map(enemy.position)
 		tiles.erase(enemy_map_pos)
@@ -53,14 +59,12 @@ func get_manhattan_distance(a:Vector2,b:Vector2):
 func get_map_mouse_position()->Vector2i:
 	return prop_layer.local_to_map(prop_layer.get_local_mouse_position())
 	
-func is_within_range(a:Vector2,b:Vector2,range:int) -> bool:
-	return get_manhattan_distance(a,b) <= range
+func is_within_range(a:Vector2,b:Vector2,_range:int) -> bool:
+	return get_manhattan_distance(a,b) <= _range
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		print("*Tile Position: ",WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position()))
-		
-		
 			
 func add_test(map_position:Vector2):
 	prop_layer.set_cell(map_position,8,Vector2i(0,0))
@@ -81,3 +85,10 @@ func local_to_map(local_pos:Vector2)->Vector2i:
 
 func map_to_local(map_pos:Vector2i)->Vector2:
 	return prop_layer.map_to_local(map_pos)
+	
+func get_nearest_path(source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
+	get_possible_tiles(include_obstacles)
+	var path := WorldManager.grid.astar_grid.get_id_path(source, target)
+	if path.size() > 0:
+		path.remove_at(0)
+	return path

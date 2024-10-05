@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Save The Day"
-run/main_scene="res://src/levels/Level1.tscn"
+run/main_scene="res://src/levels/tests/test_1/test_1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,13 @@ C="*res://src/globals/constants.gd"
 SceneManager="*res://src/globals/scene_manager.gd"
 WorldManager="*res://src/globals/world_manager.gd"
 UIManager="*res://src/globals/ui_manager.gd"
+Util="*res://src/globals/util.gd"
+
+[debug]
+
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
 
 [display]
 

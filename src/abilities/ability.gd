@@ -14,7 +14,7 @@ var state = STATE.INACTIVE
 signal targetting
 signal stopped_targetting
 
-func target():
+func set_target():
 	print("targeting")
 	targetting.emit(self)
 	state = STATE.TARGETTING
@@ -34,4 +34,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		stopped_targetting.emit(self)
 		
 func apply_effect(target):
+	if !is_instance_valid(target):
+		return 
 	print("apply_effect ", ability_name, " target ",target)

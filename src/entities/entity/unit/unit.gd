@@ -5,10 +5,6 @@ func _ready() -> void:
 	super()
 	add_to_group(C.GROUPS.UNITS)
 	
-	if team == C.TEAM.ENEMY:
-		add_to_group(C.GROUPS.ENEMIES)
-	else:
-		add_to_group(C.GROUPS.TARGETS)
 		
 	#hit.connect(_on_hit)
 	#death.connect(_on_death)
@@ -50,10 +46,8 @@ func move(delta: float)->void:
 	var new_position = position.lerp(next_local_pos,0.4)
 	
 
-	## Update position based on delta for smooth movement
 	position += (new_position - position) * delta * 45
-	#position = new_position
-	print(">> ",position," ",next_local_pos)
+	
 	var distance = position - new_position
 	if abs(distance.x) < 0.1 and abs(distance.y) < 0.1:
 		position = next_local_pos
@@ -67,14 +61,14 @@ func move(delta: float)->void:
 func move_to_selected_tile(target_pos:Vector2):
 		var curr_tile = WorldManager.grid.local_to_map(position)
 		path = WorldManager.grid.astar_grid.get_id_path(curr_tile, target_pos)
-		path.remove_at(0)
+		if path.size() > 0:
+			path.remove_at(0)
 		target_position = target_pos
 		
 		for tile in path:
 			WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE)
 	
-		#state = STATE.MOVED
-		state = STATE.SELECTED # test
+		state = STATE.MOVED
 
 func check_overlap(map_pos:Vector2i):
 	for entity in get_tree().get_nodes_in_group(C.GROUPS.ENTITIES):
@@ -92,10 +86,9 @@ func get_abilities()->Array[Ability]:
 		
 	return abilities
 
-func highlight_moveable_tiles(move_range):
+func highlight_moveable_tiles(_move_range:int):
 	WorldManager.grid.clear_all_highlights()
-	var moveable_tile_positions = get_moveable_tiles(move_range)
-	print("moveable_tile_positions:",moveable_tile_positions)
+	var moveable_tile_positions = get_moveable_tiles(_move_range)
 	for pos in moveable_tile_positions:
 		WorldManager.grid.set_highlight(pos, Grid.HIGHLIGHT_COLORS.BLUE)
 		
@@ -146,29 +139,23 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	remove_from_group(C.HOVERED_ENTITIES)
 
-	
 func show_move_range():
 	highlight_moveable_tiles(move_range)
 	UIManager.ui.set_context(self)
 	add_to_group(C.GROUPS.TARGETTING_ENTITY)
 	state = STATE.MOVE_SELECTION
-	print("state: MOVE_SELECTION")
 
 func _on_turn_start(team_turn:C.TEAM):
-	print("team_turn: ", team_turn)
 	if team_turn == team:
-		print("start turn ", entity_name)
 		state = STATE.INACTIVE
 		
 		if team == C.TEAM.PLAYER:
 			sprite.modulate = Color("ffffff")
 	
 func _on_turn_end(team_turn: C.TEAM):
-	print("team_turn: ", team_turn)
 	if team_turn == team :
 		WorldManager.grid.clear_all_highlights()
 		state = STATE.DONE
-		print("end turn: ", entity_name)
 	
 		if team == C.TEAM.PLAYER:
 			sprite.modulate = Color("626262")

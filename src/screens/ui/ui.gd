@@ -22,7 +22,7 @@ func generate_ability_icons(abilities:Array[Ability]):
 		control.custom_minimum_size = Vector2(64,48)
 		var clickable_sprite:ClickableSprite = load("res://src/screens/ui/clickable_sprite/ClickableSprite.tscn").instantiate()
 		clickable_sprite.texture = ability.texture
-		clickable_sprite.connect("pressed",ability.target)
+		clickable_sprite.connect("pressed",ability.set_target)
 		control.add_child(clickable_sprite)
 		ability_container.add_child(control)
 		

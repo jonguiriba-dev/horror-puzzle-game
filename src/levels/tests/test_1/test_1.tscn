@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=4 uid="uid://buo6xmbdn614q"]
+
+[ext_resource type="Script" path="res://src/levels/level.gd" id="1_oct6g"]
+[ext_resource type="Script" path="res://src/components/grid/grid.gd" id="1_tvly6"]
+[ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="2_kw61n"]
+[ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="3_1xef5"]
+[ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="4_5yfex"]
+[ext_resource type="PackedScene" uid="uid://dqqnpjj2sije8" path="res://src/entities/entity/presets/test_enemy/test_enemy.tscn" id="6_g6nfe"]
+[ext_resource type="PackedScene" uid="uid://b3jwhsyvf6udj" path="res://src/entities/entity/presets/Nero/Nero.tscn" id="6_wiafu"]
+
+[node name="Test1" type="Node2D"]
+script = ExtResource("1_oct6g")
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource("1_tvly6")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAAAAAABAAAAAAAEAP//AAAAAAAAAAAEAP7/AAABAAAAAAAEAP3/AAABAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAABAP3/AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP3/AAAAAAAAAAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD9/wQAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
+tile_set = ExtResource("2_kw61n")
+
+[node name="HighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("3_1xef5")
+
+[node name="PropLayer" type="TileMapLayer" parent="Grid"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAABAAMAAgABAAEAAAABAAIAAgABAAEAAAABAAAAAgABAAEAAAABAP//AgABAAEAAAABAP7/AgABAAEAAAABAP3/AgABAAEAAAABAAQAAgABAAEAAAA=")
+tile_set = ExtResource("4_5yfex")
+
+[node name="Nero" parent="Grid/PropLayer" instance=ExtResource("6_wiafu")]
+
+[node name="TestEnemy" parent="Grid/PropLayer" instance=ExtResource("6_g6nfe")]
+position = Vector2(96, 0)

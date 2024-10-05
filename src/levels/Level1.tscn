@@ -1,63 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://dgnb5agqhm5k2"]
+[gd_scene load_steps=3 format=3 uid="uid://dgnb5agqhm5k2"]
 
-[ext_resource type="Script" path="res://src/levels/level1.gd" id="1_8stg4"]
-[ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/levels/city_tileset.tres" id="2_8rfxa"]
-[ext_resource type="Script" path="res://src/levels/grid.gd" id="2_wbbxk"]
-[ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/levels/highlight_tileset.tres" id="4_gelbg"]
-[ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/levels/prop_tileset.tres" id="4_naynq"]
-[ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="6_4vec3"]
-[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="6_lg12u"]
-[ext_resource type="Texture2D" uid="uid://c70djwfskb837" path="res://assets/enemy1.png" id="7_bdok7"]
-[ext_resource type="PackedScene" uid="uid://dum802m5tm8ou" path="res://src/scripts/ai/base/AI_Base.tscn" id="7_mc7da"]
-[ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://src/abilities/ability_strike/Ability_Strike.tscn" id="8_p0tqm"]
-[ext_resource type="Script" path="res://src/entities/entity/civilian/civilian.gd" id="10_pxuy6"]
-[ext_resource type="Texture2D" uid="uid://co5ui7ek8daqk" path="res://assets/civilian.png" id="11_isefa"]
+[ext_resource type="Script" path="res://src/levels/level.gd" id="1_8stg4"]
+[ext_resource type="PackedScene" uid="uid://b1nklre06x1x4" path="res://src/components/grid/Grid.tscn" id="2_0jyg5"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_8stg4")
 
-[node name="Grid" type="Node2D" parent="."]
-script = ExtResource("2_wbbxk")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
-y_sort_enabled = true
-position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAACAAQAAAAAAAEAAAACAAMAAAAAAAEAAAACAAIAAAAAAAEAAAACAAEAAAAAAAEAAAACAAAAAAAAAAEAAAACAP//AAAAAAEAAAACAP7/AAAAAAEAAAACAP3/AAAAAAEAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAAAAAABAAAAAAAEAP//AAAAAAAAAAAEAP7/AAABAAAAAAAEAP3/AAABAAAAAAABAAQAAAABAAEAAAABAAMAAAABAAEAAAABAAIAAAABAAEAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAEAAAABAP3/AAABAAEAAAAAAAQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAD///3/AAABAAEAAAD///7/AAABAAEAAAD/////AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD+/wQAAAABAAEAAAD+/wMAAAABAAEAAAD+/wIAAAABAAEAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAEAAAD9/wQAAAABAAEAAAD9/wMAAAABAAEAAAD9/wIAAAABAAEAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAEAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
-tile_set = ExtResource("2_8rfxa")
-
-[node name="HighlightLayer" type="TileMapLayer" parent="Grid"]
-y_sort_enabled = true
-position = Vector2(264, 141)
-tile_set = ExtResource("4_gelbg")
-
-[node name="PropLayer" type="TileMapLayer" parent="Grid"]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAAAAAMAAgABAAEAAAAAAP//AgABAAEAAAAAAAIAAgAAAAEAAAAAAP7/AgAAAAEAAAAAAAEAAQAAAAAAAAA=")
-tile_set = ExtResource("4_naynq")
-
-[node name="Unit" parent="Grid/PropLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(-63, 18)
-script = ExtResource("6_4vec3")
-entity_name = "Testado"
-
-[node name="Ability_Strike" parent="Grid/PropLayer/Unit" instance=ExtResource("8_p0tqm")]
-
-[node name="Unit2" parent="Grid/PropLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(65, 32)
-script = ExtResource("6_4vec3")
-entity_name = "Enemy1"
-sprite_texture = ExtResource("7_bdok7")
-team = 1
-
-[node name="AI_Base" parent="Grid/PropLayer/Unit2" instance=ExtResource("7_mc7da")]
-
-[node name="Ability_Strike" parent="Grid/PropLayer/Unit2" instance=ExtResource("8_p0tqm")]
-
-[node name="Civilian" parent="Grid/PropLayer" instance=ExtResource("6_lg12u")]
-position = Vector2(15, -7)
-script = ExtResource("10_pxuy6")
-entity_name = "Clara"
-sprite_texture = ExtResource("11_isefa")
-team = 2
+[node name="Grid" parent="." instance=ExtResource("2_0jyg5")]

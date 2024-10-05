@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=4 uid="uid://ccxa51fvstye7"]
+
+[ext_resource type="Script" path="res://src/levels/level.gd" id="1_3plys"]
+[ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_sshcj"]
+[ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="3_a5vek"]
+[ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="4_ckdpo"]
+[ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="5_0xavb"]
+[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/test_player/test_player.tscn" id="6_v7vo3"]
+[ext_resource type="Texture2D" uid="uid://djbn1q76utqu5" path="res://assets/player_test.png" id="7_obhll"]
+[ext_resource type="PackedScene" uid="uid://dqqnpjj2sije8" path="res://src/entities/entity/presets/test_enemy/test_enemy.tscn" id="7_r4lep"]
+[ext_resource type="PackedScene" uid="uid://bnpebawpowsmv" path="res://src/entities/entity/presets/test_civilian/test_civilian.tscn" id="8_tcmnx"]
+[ext_resource type="Script" path="res://src/entities/entity/civilian/civilian.gd" id="9_tus23"]
+
+[node name="Test1" type="Node2D"]
+script = ExtResource("1_3plys")
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource("2_sshcj")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAAAAAABAAAAAAAEAP//AAAAAAAAAAAEAP7/AAABAAAAAAAEAP3/AAABAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAABAP3/AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP3/AAAAAAAAAAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD9/wQAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
+tile_set = ExtResource("3_a5vek")
+
+[node name="HighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("4_ckdpo")
+
+[node name="PropLayer" type="TileMapLayer" parent="Grid"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAABAAMAAgABAAEAAAABAAIAAgABAAEAAAABAAEAAgABAAEAAAABAAAAAgABAAEAAAABAP7/AgABAAEAAAABAP3/AgABAAEAAAA=")
+tile_set = ExtResource("5_0xavb")
+
+[node name="TestPlayer" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
+position = Vector2(-47, -8)
+
+[node name="Sprite" parent="Grid/PropLayer/TestPlayer" index="0"]
+texture = ExtResource("7_obhll")
+
+[node name="TestPlayer3" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
+position = Vector2(48, -8)
+
+[node name="TestPlayer2" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
+position = Vector2(16, -38)
+
+[node name="TestEnemy" parent="Grid/PropLayer" instance=ExtResource("7_r4lep")]
+position = Vector2(96, 0)
+entity_name = "Betty1"
+
+[node name="TestEnemy2" parent="Grid/PropLayer" instance=ExtResource("7_r4lep")]
+position = Vector2(64, 17)
+entity_name = "Betty2"
+
+[node name="TestEnemy3" parent="Grid/PropLayer" instance=ExtResource("7_r4lep")]
+position = Vector2(30, 32)
+entity_name = "Betty3"
+
+[node name="TestCivilian" parent="Grid/PropLayer" instance=ExtResource("8_tcmnx")]
+position = Vector2(-32, 31)
+script = ExtResource("9_tus23")
+
+[editable path="Grid/PropLayer/TestPlayer"]

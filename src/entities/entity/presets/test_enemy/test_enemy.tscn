@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqqnpjj2sije8"]
+
+[ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_6e05s"]
+[ext_resource type="Texture2D" uid="uid://c70djwfskb837" path="res://assets/enemy1.png" id="2_memp6"]
+[ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="3_o10p3"]
+[ext_resource type="PackedScene" uid="uid://dum802m5tm8ou" path="res://src/scripts/ai/base/AI_Base.tscn" id="4_vr4tu"]
+[ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://src/abilities/ability_strike/Ability_Strike.tscn" id="5_gggip"]
+
+[node name="TestEnemy" type="Node2D"]
+script = ExtResource("1_6e05s")
+entity_name = "Betty"
+sprite_texture = ExtResource("2_memp6")
+team = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("2_memp6")
+
+[node name="RescueText" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(0, -32)
+texture = ExtResource("3_o10p3")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 16)
+polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
+
+[node name="AI_Base" parent="." instance=ExtResource("4_vr4tu")]
+
+[node name="Ability_Strike" parent="." instance=ExtResource("5_gggip")]
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

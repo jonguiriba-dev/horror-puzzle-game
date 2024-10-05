@@ -10,6 +10,8 @@ func _ready() -> void:
 	
 func apply_effect(target):
 	super(target)
+	if !is_instance_valid(target):
+		return
 	if target is Entity:
 		target.hit.emit(damage)
 	
