@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://jjlhg6loc6fy"]
+
+[ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_terdb"]
+[ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_83wt7"]
+[ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://src/abilities/ability_strike/Ability_Strike.tscn" id="3_cbwby"]
+[ext_resource type="Texture2D" uid="uid://cf7jsjkn654ga" path="res://assets/dummy-sheet.png" id="4_dqjes"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugey7"]
+atlas = ExtResource("4_dqjes")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ule5n"]
+atlas = ExtResource("4_dqjes")
+region = Rect2(32, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4bft"]
+atlas = ExtResource("4_dqjes")
+region = Rect2(32, 40, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmdn3"]
+atlas = ExtResource("4_dqjes")
+region = Rect2(0, 40, 32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_812a7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugey7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ule5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4bft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmdn3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Dummy" type="Node2D"]
+script = ExtResource("1_terdb")
+entity_name = "Dummy"
+
+[node name="EntitySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_812a7")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="RescueText" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(0, -32)
+texture = ExtResource("2_83wt7")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 16)
+polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
+
+[node name="Ability_Strike" parent="." instance=ExtResource("3_cbwby")]
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

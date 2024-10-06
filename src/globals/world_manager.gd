@@ -34,9 +34,14 @@ func _on_turn_start(team:C.TEAM):
 		grid.threat_tiles = []
 		enemy_turn_queue = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
 		
-		var enemy = enemy_turn_queue.pop_front()
-		print("turn start emit ",enemy)
-		enemy.turn_start.emit(enemy)
+		var enemy
+		while enemy == null:
+			if enemy_turn_queue.size() == 0:
+				break
+			enemy = enemy_turn_queue.pop_front()
+		
+		if enemy:
+			enemy.turn_start.emit(enemy)
 		
 func _on_enemy_unit_turn_end(entity:Entity):
 	entity.hide_all_details()

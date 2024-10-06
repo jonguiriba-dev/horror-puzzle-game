@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=4 uid="uid://buo6xmbdn614q"]
+[gd_scene load_steps=11 format=4 uid="uid://buo6xmbdn614q"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_oct6g"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="1_tvly6"]
 [ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="2_kw61n"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="3_1xef5"]
 [ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="4_5yfex"]
-[ext_resource type="PackedScene" uid="uid://dqqnpjj2sije8" path="res://src/entities/entity/presets/test_enemy/test_enemy.tscn" id="6_g6nfe"]
 [ext_resource type="PackedScene" uid="uid://b3jwhsyvf6udj" path="res://src/entities/entity/presets/Nero/Nero.tscn" id="6_wiafu"]
+[ext_resource type="PackedScene" uid="uid://bpyf0tfj0uq8q" path="res://src/entities/entity/presets/Leah/Leah.tscn" id="8_bxyfl"]
+[ext_resource type="PackedScene" uid="uid://bxty3oqnyyn88" path="res://src/entities/entity/presets/Elias/Elias.tscn" id="9_p7qus"]
+[ext_resource type="PackedScene" uid="uid://tey48egr65w3" path="res://src/entities/entity/presets/Emma/Emma.tscn" id="10_guikr"]
+[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/Dummy/Dummy.tscn" id="10_kp04y"]
 
 [node name="Test1" type="Node2D"]
 script = ExtResource("1_oct6g")
@@ -29,10 +32,19 @@ tile_set = ExtResource("3_1xef5")
 z_index = 1
 y_sort_enabled = true
 position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAABAAMAAgABAAEAAAABAAIAAgABAAEAAAABAAAAAgABAAEAAAABAP//AgABAAEAAAABAP7/AgABAAEAAAABAP3/AgABAAEAAAABAAQAAgABAAEAAAA=")
+tile_map_data = PackedByteArray("AAABAAMAAgABAAEAAAABAAIAAgABAAEAAAABAAAAAgABAAEAAAABAP//AgABAAEAAAABAP7/AgABAAEAAAABAP3/AgABAAEAAAABAAQAAgABAAEAAAAEAAIAAwABAAEAAAAEAAMAAwAAAAEAAAAEAAEAAwACAAEAAAADAAMAAwAAAAAAAAADAAIAAwABAAAAAAADAAEAAwACAAAAAAA=")
 tile_set = ExtResource("4_5yfex")
 
 [node name="Nero" parent="Grid/PropLayer" instance=ExtResource("6_wiafu")]
 
-[node name="TestEnemy" parent="Grid/PropLayer" instance=ExtResource("6_g6nfe")]
-position = Vector2(96, 0)
+[node name="Leah" parent="Grid/PropLayer" instance=ExtResource("8_bxyfl")]
+position = Vector2(-32, 16)
+
+[node name="Elias" parent="Grid/PropLayer" instance=ExtResource("9_p7qus")]
+position = Vector2(31, -16)
+
+[node name="Emma" parent="Grid/PropLayer" instance=ExtResource("10_guikr")]
+position = Vector2(-64, 32)
+
+[node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
+position = Vector2(-31, -16)

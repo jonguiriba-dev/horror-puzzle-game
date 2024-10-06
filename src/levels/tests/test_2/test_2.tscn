@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="3_a5vek"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="4_ckdpo"]
 [ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="5_0xavb"]
-[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/test_player/test_player.tscn" id="6_v7vo3"]
+[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/Dummy/Dummy.tscn" id="6_v7vo3"]
 [ext_resource type="Texture2D" uid="uid://djbn1q76utqu5" path="res://assets/player_test.png" id="7_obhll"]
 [ext_resource type="PackedScene" uid="uid://dqqnpjj2sije8" path="res://src/entities/entity/presets/test_enemy/test_enemy.tscn" id="7_r4lep"]
 [ext_resource type="PackedScene" uid="uid://bnpebawpowsmv" path="res://src/entities/entity/presets/test_civilian/test_civilian.tscn" id="8_tcmnx"]
