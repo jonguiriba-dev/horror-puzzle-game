@@ -1,43 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://jjlhg6loc6fy"]
+[gd_scene load_steps=9 format=3 uid="uid://jjlhg6loc6fy"]
 
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_terdb"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_83wt7"]
 [ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://src/abilities/ability_strike/Ability_Strike.tscn" id="3_cbwby"]
 [ext_resource type="Texture2D" uid="uid://cf7jsjkn654ga" path="res://assets/dummy-sheet.png" id="4_dqjes"]
+[ext_resource type="PackedScene" uid="uid://qi4063hnm62t" path="res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn" id="5_n41x2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ugey7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7ps8"]
 atlas = ExtResource("4_dqjes")
 region = Rect2(0, 0, 32, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ule5n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg13q"]
 atlas = ExtResource("4_dqjes")
 region = Rect2(32, 0, 32, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4bft"]
-atlas = ExtResource("4_dqjes")
-region = Rect2(32, 40, 32, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lmdn3"]
-atlas = ExtResource("4_dqjes")
-region = Rect2(0, 40, 32, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_812a7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ugey7")
+"texture": SubResource("AtlasTexture_f7ps8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ule5n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h4bft")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lmdn3")
+"texture": SubResource("AtlasTexture_cg13q")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 1.0
 }]
 
@@ -48,11 +35,9 @@ entity_name = "Dummy"
 [node name="EntitySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_812a7")
+animation = &"idle"
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
-
-[node name="RescueText" type="Sprite2D" parent="Sprite"]
+[node name="RescueText" type="Sprite2D" parent="EntitySprite"]
 visible = false
 position = Vector2(0, -32)
 texture = ExtResource("2_83wt7")
@@ -65,6 +50,8 @@ position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
 
 [node name="Ability_Strike" parent="." instance=ExtResource("3_cbwby")]
+
+[node name="PlayerEntityStateMachine" parent="." instance=ExtResource("5_n41x2")]
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

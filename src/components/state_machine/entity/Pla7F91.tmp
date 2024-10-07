@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://qi4063hnm62t"]
+
+[ext_resource type="Script" path="res://src/components/state_machine/state_machine.gd" id="1_t1i2r"]
+[ext_resource type="Script" path="res://src/components/state_machine/entity/idle.gd" id="2_g2d7m"]
+[ext_resource type="Script" path="res://src/components/state_machine/entity/move_select.gd" id="3_rmhbf"]
+[ext_resource type="Script" path="res://src/components/state_machine/entity/ability_select.gd" id="4_8vho7"]
+[ext_resource type="Script" path="res://src/components/state_machine/entity/done.gd" id="4_pckyt"]
+
+[node name="PlayerEntityStateMachine" type="Node"]
+script = ExtResource("1_t1i2r")
+
+[node name="EntityIdleState" type="Node" parent="."]
+script = ExtResource("2_g2d7m")
+
+[node name="EntityMoveSelectState" type="Node" parent="."]
+script = ExtResource("3_rmhbf")
+
+[node name="EntityAbilitySelectState" type="Node" parent="."]
+script = ExtResource("4_8vho7")
+
+[node name="EntityDoneState" type="Node" parent="."]
+script = ExtResource("4_pckyt")

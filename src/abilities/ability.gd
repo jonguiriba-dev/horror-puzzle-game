@@ -5,15 +5,23 @@ enum STATE{
 	INACTIVE,
 	TARGETTING
 }
-@onready var host:Unit = get_parent()
+@onready var host:Entity = get_parent()
 var ability_name = "ability_name"
 var texture = preload("res://assets/ui/ability_frame.png")
 var ability_range = 0
 var damage = 0
 var state = STATE.INACTIVE
+var actions:Array[AbilityAction]
+
 signal targetting
 signal stopped_targetting
+signal applied(ability:Ability)
 
+
+func _ready() -> void:
+	connect("targetting",_on_ability_targetting)
+	connect("stopped_targetting",_on_ability_stopped_targetting)
+	
 func set_target():
 	print("targeting")
 	targetting.emit(self)
@@ -36,4 +44,21 @@ func _unhandled_input(event: InputEvent) -> void:
 func apply_effect(target):
 	if !is_instance_valid(target):
 		return 
+	for action in actions:
+		if !target.is_in_group(action.target_group):
+			return
+		if action.type == C.ABILITY_ACTION_TYPE.DAMAGE:
+			target.hit.emit(damage)
+		if action.type == C.ABILITY_ACTION_TYPE.MOVE:
+			host.move_target_set.emit(target)
+	applied.emit(self)
+		
 	print("apply_effect ", ability_name, " target ",target)
+
+func _on_ability_targetting(ability:Ability) -> void:
+	host.highlight_attack_range_tiles(ability.ability_range)
+
+func _on_ability_stopped_targetting(ability:Ability) -> void:
+	WorldManager.grid.clear_all_highlights()
+	
+#func highlight_range(ability_range:number)

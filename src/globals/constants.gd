@@ -15,13 +15,27 @@ var GROUPS = {
 	TARGETS = "targets",
 	HIGHLIGHT_TEXT = "highlight_text",
 	ENEMIES = "enemies",
-	
+	SELECTED = "selected"
 }
 
-#team
+
 enum TEAM{
 	PLAYER,
 	ENEMY,
 	CITIZEN,
 	GUEST
+}
+
+enum STATE{
+	ENTITY_IDLE,
+	ENTITY_SELECTED,
+	ENTITY_MOVE_SELECT,
+	ENTITY_ABILITY_SELECT,
+	ENTITY_DONE,
+	
+}
+
+enum ABILITY_ACTION_TYPE{
+	DAMAGE,
+	MOVE
 }

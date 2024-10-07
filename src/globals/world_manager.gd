@@ -57,11 +57,9 @@ func _on_enemy_unit_turn_start(entity:Entity):
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		var need_highlight = false
-		for unit in get_tree().get_nodes_in_group(C.GROUPS.UNITS):
-			if unit.state == Unit.STATE.MOVE_SELECTION:
-				need_highlight = true
-					
-		if !need_highlight:
+		var entity = get_tree().get_first_node_in_group(C.GROUPS.TARGETTING_ENTITY)
+		if entity:
+			pass
+		else:
 			WorldManager.grid.clear_all_highlights()
 				
