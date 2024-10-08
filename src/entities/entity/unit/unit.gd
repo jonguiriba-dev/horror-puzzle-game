@@ -11,11 +11,6 @@ func highlight_moveable_tiles(_move_range:int):
 	for pos in moveable_tile_positions:
 		WorldManager.grid.set_highlight(pos, Grid.HIGHLIGHT_COLORS.BLUE)
 		
-func highlight_attack_range_tiles(attack_range):
-	WorldManager.grid.clear_all_highlights()
-	var moveable_tile_positions = get_reachable_tiles(attack_range)
-	for pos in moveable_tile_positions:
-		WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.ORANGE)
 
 func get_reachable_tiles(_range:int):
 	var possible_tiles = WorldManager.grid.get_possible_tiles()
@@ -51,8 +46,3 @@ func get_moveable_tiles(_range:int):
 		if step == _range:
 			break
 	return navigatable_tiles
-
-func show_move_range():
-	highlight_moveable_tiles(move_range)
-	UIManager.ui.set_context(self)
-	add_to_group(C.GROUPS.TARGETTING_ENTITY)

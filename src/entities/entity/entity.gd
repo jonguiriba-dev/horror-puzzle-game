@@ -114,6 +114,7 @@ func move_to_selected_tile(target_pos:Vector2i):
 	for tile in path:
 		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE)
 	move_counter -= 1
+	
 func hide_all_details():
 	rescue_text.hide()
 	
@@ -132,11 +133,20 @@ func _on_mouse_exited() -> void:
 func get_abilities()->Array[Ability]:
 	var abilities:Array[Ability]= []
 	for child in get_children():
-		if child.name.contains("Ability_"):
+		if child.name.begins_with("Ability"):
 			var ability = child as Ability
 			abilities.append(ability)
 		
 	return abilities
+	
+func select_ability(ability_name:String):
+	for ability in get_abilities():
+		if ability.ability_name == ability_name:
+			ability.target_select.emit()	
 
 func _on_ability_applied(ability:Ability):
+	if ability.ability_name == "move":
+		return
 	action_counter -= 1
+
+	

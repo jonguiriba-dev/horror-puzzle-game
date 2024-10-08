@@ -2,9 +2,7 @@ extends Node
 
 var grid: Grid
 var team_turn:C.TEAM
-
 var turn_order:=[C.TEAM.PLAYER,C.TEAM.ENEMY]
-
 var enemy_turn_queue = []
 
 signal turn_changed
@@ -62,4 +60,3 @@ func _unhandled_input(event: InputEvent) -> void:
 			pass
 		else:
 			WorldManager.grid.clear_all_highlights()
-				

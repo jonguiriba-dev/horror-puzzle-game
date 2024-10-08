@@ -22,23 +22,23 @@ func _ready() -> void:
 	
 	WorldManager.grid = self
 	
-func get_possible_tiles(include_obstacles:bool=true):
+func get_possible_tiles(exclude_obstacles:bool=true,exclude_enemies:bool=true):
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	var enemies = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
 	
-	if include_obstacles:
+	if exclude_obstacles:
 		for prop_pos in props:
 			tiles.erase(prop_pos)
 			astar_grid.set_point_solid(prop_pos)
 	else:
 		astar_grid.fill_solid_region(astar_grid.region,false)
-		
 	
-	for enemy in enemies:
-		var enemy_map_pos = prop_layer.local_to_map(enemy.position)
-		tiles.erase(enemy_map_pos)
-		astar_grid.set_point_solid(enemy_map_pos)
+	if exclude_enemies:
+		for enemy in enemies:
+			var enemy_map_pos = prop_layer.local_to_map(enemy.position)
+			tiles.erase(enemy_map_pos)
+			astar_grid.set_point_solid(enemy_map_pos)
 	
 	return tiles
 

@@ -8,3 +8,5 @@ func initialize():
 	get_tree().get_current_scene().add_child(ui)
 	initialized.emit()
 	
+func info(text:String):
+	ui.debug_label.text = text

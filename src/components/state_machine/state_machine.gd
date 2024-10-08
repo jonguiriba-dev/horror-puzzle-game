@@ -19,11 +19,6 @@ func _on_host_ready():
 		add_state(child)
 		if state == null:
 			set_state(child.state_id)
-	host.visibility_changed.connect(_on_host_visibility_changed)
-
-
-func _on_host_visibility_changed():
-	is_enabled = host.is_visible_in_tree()	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if state != null:
@@ -86,3 +81,5 @@ func set_state(new_state):
 func add_state(state: State):
 	state.host = host
 	states[state.state_id] = state
+	state.configured.emit()
+	#host.ready.connect(state._on_host_ready)

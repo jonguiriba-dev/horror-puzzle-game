@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/components/state_machine/state_machine.gd" id="1_t1i2r"]
 [ext_resource type="Script" path="res://src/components/state_machine/entity/idle.gd" id="2_g2d7m"]
-[ext_resource type="Script" path="res://src/components/state_machine/entity/move_select.gd" id="3_rmhbf"]
-[ext_resource type="Script" path="res://src/components/state_machine/entity/ability_select.gd" id="4_8vho7"]
+[ext_resource type="Script" path="res://src/components/state_machine/entity/target_select.gd" id="4_8vho7"]
 [ext_resource type="Script" path="res://src/components/state_machine/entity/done.gd" id="4_pckyt"]
+[ext_resource type="Script" path="res://src/components/state_machine/entity/selected.gd" id="5_kw1wi"]
 
 [node name="PlayerEntityStateMachine" type="Node"]
 script = ExtResource("1_t1i2r")
@@ -12,10 +12,10 @@ script = ExtResource("1_t1i2r")
 [node name="EntityIdleState" type="Node" parent="."]
 script = ExtResource("2_g2d7m")
 
-[node name="EntityMoveSelectState" type="Node" parent="."]
-script = ExtResource("3_rmhbf")
+[node name="EntitySelectedState" type="Node" parent="."]
+script = ExtResource("5_kw1wi")
 
-[node name="EntityAbilitySelectState" type="Node" parent="."]
+[node name="EntityTargetSelectState" type="Node" parent="."]
 script = ExtResource("4_8vho7")
 
 [node name="EntityDoneState" type="Node" parent="."]

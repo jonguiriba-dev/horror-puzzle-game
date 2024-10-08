@@ -42,10 +42,10 @@ vertical_alignment = 1
 
 [node name="Debug" type="Label" parent="."]
 layout_mode = 2
-offset_left = 580.0
-offset_top = -2.0
-offset_right = 635.0
-offset_bottom = 21.0
+offset_left = 516.0
+offset_top = 2.0
+offset_right = 571.0
+offset_bottom = 25.0
 text = "DEBUG"
 
 [node name="Label" type="Label" parent="Debug"]
@@ -54,6 +54,7 @@ offset_left = 1.0
 offset_top = 24.0
 offset_right = 52.0
 offset_bottom = 47.0
+theme_override_font_sizes/font_size = 8
 
 [node name="EndTurn" type="Button" parent="."]
 layout_mode = 0

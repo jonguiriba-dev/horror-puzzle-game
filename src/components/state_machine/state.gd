@@ -11,13 +11,9 @@ var state_id :C.STATE
 @onready var _SM:StateMachine = get_parent()
 func _init():
 	pass
-	
-func configure(host):
-	self.host = host
-	host.connect('ready', _on_host_ready)
 
-func _on_host_ready():
-	pass
+func _ready() -> void:
+	configured.connect(_on_configured)
 
 func set_state(state_id):
 	_SM.set_state(state_id)
@@ -33,4 +29,6 @@ func _enter_state(old_state, new_state):
 func _exit_state(old_state, new_state):
 	pass
 func _update_sprite():
+	pass
+func _on_configured():
 	pass

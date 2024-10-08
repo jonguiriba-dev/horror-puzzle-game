@@ -49,9 +49,9 @@ position = Vector2(0, -12)
 position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
 
-[node name="PlayerEntityStateMachine" parent="." instance=ExtResource("5_n41x2")]
-
 [node name="AbilityStrike" parent="." instance=ExtResource("3_cbwby")]
+
+[node name="PlayerEntityStateMachine" parent="." instance=ExtResource("5_n41x2")]
 
 [node name="AbilityMove" type="Node" parent="."]
 script = ExtResource("6_667eo")
