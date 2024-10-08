@@ -25,7 +25,7 @@ func _ready() -> void:
 func get_possible_tiles(exclude_obstacles:bool=true,exclude_enemies:bool=true):
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
-	var enemies = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
+	var enemies = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 	
 	if exclude_obstacles:
 		for prop_pos in props:

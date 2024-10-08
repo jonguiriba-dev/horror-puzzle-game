@@ -55,7 +55,7 @@ func attack_target():
 	
 func analyze_tiles():
 	possible_tiles = []
-	var nearest = Util.get_nearest_in_group(host.position, C.GROUPS.TARGETS)
+	var nearest = Util.get_nearest_in_group(host.position, C.GROUPS_TARGETS)
 	if !nearest:
 		return
 	

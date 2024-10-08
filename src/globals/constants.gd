@@ -1,23 +1,14 @@
 extends Node
 
-#groups
-var ENTITIES = "entities"
-var HOVERED_ENTITIES = "hovered_entities"
-var TARGETS = "targets"
-var HIGHLIGHT_TEXT = "highlight_text"
-
-var GROUPS = {
-	ENTITIES = "entities",
-	UNITS= "units",
-	CIVILIANS= "civilians",
-	TARGETTING_ENTITY = "targetting_entity",
-	HOVERED_ENTITIES = "hovered_entities",
-	TARGETS = "targets",
-	HIGHLIGHT_TEXT = "highlight_text",
-	ENEMIES = "enemies",
-	SELECTED = "selected"
-}
-
+var GROUPS_ENTITIES = "entities"
+var GROUPS_UNITS= "units"
+var GROUPS_CIVILIANS= "civilians"
+var GROUPS_TARGETTING_ENTITY = "targetting_entity"
+var GROUPS_HOVERED_ENTITIES = "hovered_entities"
+var GROUPS_TARGETS = "targets"
+var GROUPS_HIGHLIGHT_TEXT = "highlight_text"
+var GROUPS_ENEMIES = "enemies"
+var GROUPS_SELECTED = "selected"
 
 enum TEAM{
 	PLAYER,
@@ -34,7 +25,6 @@ enum STATE{
 }
 
 var ABILITY_TARGET_GROUP = {
-	ENTITY = "target_group_entity",
 	TILE = "target_group_tile"
 }
 

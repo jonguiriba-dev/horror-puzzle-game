@@ -32,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		for action in actions:
 			if action.target_group == C.ABILITY_TARGET_GROUP.TILE:
 				can_target_tiles = true
-			if action.target_group == C.ABILITY_TARGET_GROUP.ENTITY:
+			if action.target_group == C.GROUPS_ENTITIES:
 				can_target_entities = true
 		
 		var target
@@ -42,12 +42,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			target = {"position":WorldManager.grid.get_map_mouse_position()} 
 		
 		if target:
+			print("Target found ", target)
 			var host_map_position = WorldManager.grid.local_to_map(host.position)
 			var target_map_position = target.position
 			if target is Node2D:
 				target_map_position = WorldManager.grid.local_to_map(target.position)
 			var reachable_tiles = get_reachable_tiles(ability_range)
-			if reachable_tiles.has(target.position):
+			if reachable_tiles.has(target_map_position):
 				apply_effect(target)
 				
 		stopped_targetting.emit()
@@ -79,12 +80,12 @@ func set_state(_state:STATE):
 func _on_target_select() -> void:
 	print("_on_target_select")
 	set_state(STATE.TARGET_SELECT)
-	host.add_to_group(C.GROUPS.TARGETTING_ENTITY)
+	host.add_to_group(C.GROUPS_TARGETTING_ENTITY)
 	highlight_range_tiles(ability_range)
 
 func _on_ability_stopped_targetting() -> void:
 	print("_on_ability_stopped_targetting")
-	host.remove_from_group(C.GROUPS.TARGETTING_ENTITY)
+	host.remove_from_group(C.GROUPS_TARGETTING_ENTITY)
 	WorldManager.grid.clear_all_highlights()
 	state = STATE.INACTIVE
 	

@@ -1,11 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://jjlhg6loc6fy"]
+[gd_scene load_steps=12 format=3 uid="uid://jjlhg6loc6fy"]
 
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_terdb"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_83wt7"]
-[ext_resource type="PackedScene" uid="uid://b7ycn35yh87wy" path="res://src/abilities/ability_strike/Ability_Strike.tscn" id="3_cbwby"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="2_fgxhs"]
 [ext_resource type="Texture2D" uid="uid://cf7jsjkn654ga" path="res://assets/dummy-sheet.png" id="4_dqjes"]
 [ext_resource type="PackedScene" uid="uid://qi4063hnm62t" path="res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn" id="5_n41x2"]
 [ext_resource type="Script" path="res://src/abilities/ability_move.gd" id="6_667eo"]
+[ext_resource type="Script" path="res://src/abilities/ability_strike.gd" id="6_ss0ji"]
+
+[sub_resource type="Resource" id="Resource_22sms"]
+script = ExtResource("2_fgxhs")
+entity_name = ""
+health = 1
+move_range = 3
+team = 0
+ability_list = Array[String]([])
+state_list = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f7ps8"]
 atlas = ExtResource("4_dqjes")
@@ -31,6 +41,7 @@ animations = [{
 
 [node name="Dummy" type="Node2D"]
 script = ExtResource("1_terdb")
+preset = SubResource("Resource_22sms")
 
 [node name="EntitySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -51,10 +62,11 @@ polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
 
 [node name="PlayerEntityStateMachine" parent="." instance=ExtResource("5_n41x2")]
 
-[node name="AbilityStrike" parent="." instance=ExtResource("3_cbwby")]
-
 [node name="AbilityMove" type="Node" parent="."]
 script = ExtResource("6_667eo")
+
+[node name="AbilityStrike" type="Node" parent="."]
+script = ExtResource("6_ss0ji")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -3,7 +3,7 @@ class_name Unit
 
 func _ready() -> void:
 	super()
-	add_to_group(C.GROUPS.UNITS)
+	add_to_group(C.GROUPS_UNITS)
 
 func highlight_moveable_tiles(_move_range:int):
 	WorldManager.grid.clear_all_highlights()

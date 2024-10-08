@@ -1,12 +1,13 @@
 extends Node2D
 class_name Entity
-
-@export var entity_name := ""
-@export var team :C.TEAM = C.TEAM.PLAYER
-
+# use shader https://godotshaders.com/shader/highlight-canvasitem/ for highlighting icons
 @onready var sprite :AnimatedSprite2D= $EntitySprite
 @onready var rescue_text := $EntitySprite/RescueText
 
+@export var preset:EntityPreset
+
+var entity_name := ""
+var team :C.TEAM = C.TEAM.PLAYER
 var move_speed = 55
 var move_range = 3
 var can_move := false
@@ -24,18 +25,18 @@ signal turn_end(entity:Entity)
 signal turn_start(entity:Entity)
 
 func _ready() -> void:
-	add_to_group(C.ENTITIES)
+	add_to_group(C.GROUPS_ENTITIES)
 	
 	move_target_set.connect(_on_move_target_set)
 	death.connect(_on_death)
 	hit.connect(_on_hit)
 	
 	if team == C.TEAM.ENEMY:
-		add_to_group(C.GROUPS.ENEMIES)
+		add_to_group(C.GROUPS_ENEMIES)
 		turn_end.connect(WorldManager._on_enemy_unit_turn_end)
 		turn_start.connect(WorldManager._on_enemy_unit_turn_start)
 	else:
-		add_to_group(C.GROUPS.TARGETS)
+		add_to_group(C.GROUPS_TARGETS)
 	
 	WorldManager.turn_end.connect(_on_turn_end)
 	WorldManager.turn_start.connect(_on_turn_start)
@@ -69,7 +70,7 @@ func move(delta: float)->void:
 
 	
 func check_overlap(map_pos:Vector2i):
-	for entity in get_tree().get_nodes_in_group(C.GROUPS.ENTITIES):
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		if entity is Civilian:
 			var civilian_tile_pos = WorldManager.grid.local_to_map(entity.position)
 			if civilian_tile_pos == map_pos:
@@ -96,10 +97,10 @@ func _on_hit(damage:int) -> void:
 func _on_death() -> void:
 	print("death ",self)
 	queue_free()
-	remove_from_group(C.GROUPS.ENTITIES)
-	remove_from_group(C.GROUPS.UNITS)
-	remove_from_group(C.GROUPS.CIVILIANS)
-	remove_from_group(C.GROUPS.TARGETS)
+	remove_from_group(C.GROUPS_ENTITIES)
+	remove_from_group(C.GROUPS_UNITS)
+	remove_from_group(C.GROUPS_CIVILIANS)
+	remove_from_group(C.GROUPS_TARGETS)
 
 func _on_move_target_set(map_position:Vector2i)->void:
 	move_to_selected_tile(map_position)

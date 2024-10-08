@@ -5,8 +5,8 @@ signal rescued
 
 func _ready() -> void:
 	super()
-	add_to_group(C.GROUPS.CIVILIANS)
-	add_to_group(C.GROUPS.TARGETS)
+	add_to_group(C.GROUPS_CIVILIANS)
+	add_to_group(C.GROUPS_TARGETS)
 	rescued.connect(_on_rescued)
 	
 func _on_rescued():
@@ -15,7 +15,7 @@ func _on_rescued():
 
 func _on_area_2d_mouse_entered() -> void:
 	super()
-	var targetting_entity = get_tree().get_first_node_in_group(C.GROUPS.TARGETTING_ENTITY)
+	var targetting_entity = get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ENTITY)
 	if(targetting_entity is Unit):
 		print("HERE")
 		var is_within_range = targetting_entity.get_reachable_tiles(targetting_entity.move_range).has(WorldManager.grid.get_map_mouse_position())

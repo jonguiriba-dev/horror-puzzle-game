@@ -9,4 +9,5 @@ func initialize():
 	initialized.emit()
 	
 func info(text:String):
-	ui.debug_label.text = text
+	if ui:
+		ui.debug_label.text = text

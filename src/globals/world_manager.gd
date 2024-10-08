@@ -30,7 +30,7 @@ func end_turn():
 func _on_turn_start(team:C.TEAM):
 	if team == C.TEAM.ENEMY:
 		grid.threat_tiles = []
-		enemy_turn_queue = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
+		enemy_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 		
 		var enemy
 		while enemy == null:
@@ -55,7 +55,7 @@ func _on_enemy_unit_turn_start(entity:Entity):
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		var entity = get_tree().get_first_node_in_group(C.GROUPS.TARGETTING_ENTITY)
+		var entity = get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ENTITY)
 		if entity:
 			pass
 		else:

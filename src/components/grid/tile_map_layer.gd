@@ -21,7 +21,7 @@ func _ready() -> void:
 func get_possible_tiles():
 	var tiles = get_used_cells()
 	var props = prop_layer.get_used_cells()
-	var enemies = get_tree().get_nodes_in_group(C.GROUPS.ENEMIES)
+	var enemies = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 	
 	for prop_pos in props:
 		tiles.erase(prop_pos)

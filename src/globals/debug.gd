@@ -5,7 +5,7 @@ var is_enabled = true
 func _physics_process(delta: float) -> void:
 	if is_enabled:
 		var text = ""
-		var node = get_tree().get_first_node_in_group(C.GROUPS.HOVERED_ENTITIES)
+		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:
 			UIManager.info(text)
 			return 
