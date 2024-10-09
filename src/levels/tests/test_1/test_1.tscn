@@ -1,36 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://buo6xmbdn614q"]
+[gd_scene load_steps=8 format=4 uid="uid://buo6xmbdn614q"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_oct6g"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="1_tvly6"]
 [ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="2_kw61n"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="3_1xef5"]
 [ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="4_5yfex"]
-[ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="7_4pleb"]
-[ext_resource type="Texture2D" uid="uid://cf7jsjkn654ga" path="res://assets/dummy-sheet.png" id="8_fuqi2"]
-[ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="9_ex458"]
+[ext_resource type="Resource" uid="uid://vwovwapoub31" path="res://src/entities/entity/presets/GoonPreset.tres" id="7_mc4vm"]
 [ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/Dummy/Dummy.tscn" id="10_kp04y"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7ps8"]
-atlas = ExtResource("8_fuqi2")
-region = Rect2(0, 0, 32, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cg13q"]
-atlas = ExtResource("8_fuqi2")
-region = Rect2(32, 0, 32, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_812a7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f7ps8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cg13q")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}]
 
 [node name="Test1" type="Node2D"]
 script = ExtResource("1_oct6g")
@@ -59,26 +35,20 @@ tile_set = ExtResource("4_5yfex")
 [node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
 position = Vector2(-31, -16)
 
-[node name="Dummy2" type="Node2D" parent="Grid/PropLayer"]
-position = Vector2(16, -8)
-script = ExtResource("7_4pleb")
+[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
+position = Vector2(-15, -23)
 
-[node name="EntitySprite" type="AnimatedSprite2D" parent="Grid/PropLayer/Dummy2"]
-position = Vector2(0, -12)
-sprite_frames = SubResource("SpriteFrames_812a7")
-animation = &"idle"
+[node name="Dummy4" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
+position = Vector2(-49, 41)
 
-[node name="RescueText" type="Sprite2D" parent="Grid/PropLayer/Dummy2/EntitySprite"]
-visible = false
-position = Vector2(0, -32)
-texture = ExtResource("9_ex458")
+[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
+position = Vector2(15, 72)
+preset = ExtResource("7_mc4vm")
 
-[node name="Area2D" type="Area2D" parent="Grid/PropLayer/Dummy2"]
-position = Vector2(0, -12)
+[node name="Dummy5" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
+position = Vector2(129, 18)
+preset = ExtResource("7_mc4vm")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Grid/PropLayer/Dummy2/Area2D"]
-position = Vector2(0, 16)
-polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
-
-[connection signal="mouse_entered" from="Grid/PropLayer/Dummy2/Area2D" to="Grid/PropLayer/Dummy2" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Grid/PropLayer/Dummy2/Area2D" to="Grid/PropLayer/Dummy2" method="_on_area_2d_mouse_exited"]
+[node name="Dummy6" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
+position = Vector2(81, 41)
+preset = ExtResource("7_mc4vm")

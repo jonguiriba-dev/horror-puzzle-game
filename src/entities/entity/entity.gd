@@ -6,16 +6,20 @@ class_name Entity
 
 @export var preset:EntityPreset
 
-var entity_name := ""
-var team :C.TEAM = C.TEAM.PLAYER
 var move_speed = 55
+
+var entity_name := ""
+var max_health = 1
+var health = 1
+var team :C.TEAM = C.TEAM.PLAYER
 var move_range = 3
 var can_move := false
-var health = 1
 var target_position=null
 var path=null
 var move_counter = 1
 var action_counter = 1
+var max_move_counter = 1
+var max_action_counter = 1
 
 signal hit(damage:int)
 signal move_target_set(map_position:Vector2i)
@@ -25,6 +29,8 @@ signal turn_end(entity:Entity)
 signal turn_start(entity:Entity)
 
 func _ready() -> void:
+	load_preset(preset)
+	
 	add_to_group(C.GROUPS_ENTITIES)
 	
 	move_target_set.connect(_on_move_target_set)
@@ -42,10 +48,28 @@ func _ready() -> void:
 	WorldManager.turn_start.connect(_on_turn_start)
 	
 	for ability in get_abilities():
+		print("ability ", ability.ability_name)
 		ability.applied.connect(_on_ability_applied)
 	
 	if sprite:
 		sprite.play("idle")
+
+func load_preset(_preset:EntityPreset):
+	if !_preset:
+		return
+	entity_name = _preset.entity_name
+	max_health = _preset.max_health
+	health = max_health
+	team = _preset.team
+	move_range = _preset.move_range
+	
+	for ability in _preset.get_abilities():
+		add_child(ability)
+	
+	add_child(_preset.get_state_machine())
+	
+	if preset.sprite_frames:
+		sprite.sprite_frames = preset.sprite_frames
 
 func _physics_process(delta: float) -> void:
 	if target_position != null and path.size() > 0:
@@ -77,10 +101,11 @@ func check_overlap(map_pos:Vector2i):
 				entity.rescued.emit()
 
 func _on_area_2d_mouse_entered() -> void:
-	add_to_group(C.HOVERED_ENTITIES)
+	print("hovered ",entity_name)
+	add_to_group(C.GROUPS_HOVERED_ENTITIES)
 
 func _on_area_2d_mouse_exited() -> void:
-	remove_from_group(C.HOVERED_ENTITIES)
+	remove_from_group(C.GROUPS_HOVERED_ENTITIES)
 
 func show_detail(detail_name:String):
 	if(detail_name == "rescue"):
@@ -111,16 +136,23 @@ func move_to_selected_tile(target_pos:Vector2i):
 	if path.size() > 0:
 		path.remove_at(0)
 	target_position = target_pos
-	
+		
+	move_counter -= 1
+
+	if Debug.show_move_path_highlight:
+		show_path_highlight()
+
+func show_path_highlight():
 	for tile in path:
 		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE)
-	move_counter -= 1
 	
 func hide_all_details():
 	rescue_text.hide()
 	
 func _on_turn_start(team_turn:C.TEAM):
-	pass
+	if team_turn  == team:
+		move_counter = max_move_counter
+		action_counter = max_action_counter
 	
 func _on_turn_end(team_turn: C.TEAM):
 	pass
@@ -134,7 +166,7 @@ func _on_mouse_exited() -> void:
 func get_abilities()->Array[Ability]:
 	var abilities:Array[Ability]= []
 	for child in get_children():
-		if child.name.begins_with("Ability"):
+		if child is Ability:
 			var ability = child as Ability
 			abilities.append(ability)
 		

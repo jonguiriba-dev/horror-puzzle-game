@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1m61om70coef"]
+
+[ext_resource type="Script" path="res://src/components/state_machine/state_machine.gd" id="1_hs25x"]
+[ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_attack.gd" id="2_poxe3"]
+[ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_idle.gd" id="3_uiwsi"]
+
+[node name="EnemyAiStateMachine" type="Node"]
+script = ExtResource("1_hs25x")
+
+[node name="AIIdleState" type="Node" parent="."]
+script = ExtResource("3_uiwsi")
+
+[node name="AIAttackState" type="Node" parent="."]
+script = ExtResource("2_poxe3")

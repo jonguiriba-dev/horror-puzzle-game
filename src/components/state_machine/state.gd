@@ -15,8 +15,8 @@ func _init():
 func _ready() -> void:
 	configured.connect(_on_configured)
 
-func set_state(state_id):
-	_SM.set_state(state_id)
+func set_state(_state_id):
+	_SM.set_state(_state_id)
 
 func _state_logic(delta):
 	pass

@@ -10,33 +10,29 @@ enum STATE_LISTS{
 
 @export_group("Stats")
 @export var entity_name := ""
-@export var health = 1
+@export var max_health = 1
 @export var move_range = 3
 @export var team :C.TEAM = C.TEAM.PLAYER
 
 @export_group("Nodes")
 ## Ability script file name
-@export var ability_list:Array[String] = []
+@export_file() var ability_1
+@export_file() var ability_2
+@export_file() var ability_3
+@export_file() var ability_4
 
 ## States
-@export var state_list:STATE_LISTS=STATE_LISTS.PLAYER_STATES
+@export_file() var state_machine
 
-func get_abilities()->Array[Ability]:
+@export_group("Resources")
+@export var sprite_frames:SpriteFrames
+
+func get_abilities()->Array:
 	var abilities = []
-	for ability in ability_list:
-		abilities.push_front(load("%s/%s"%[ability_file_path,ability]).new())
-	return abilities
+	for ability in [ability_1,ability_2,ability_3,ability_4]:
+		if ability:
+			abilities.push_front(load(ability).new())
+	return abilities 
 
-func get_states()->Array[State]:
-	var states = []
-	for state in state_list:
-		states.push_front(load("%s/%s"%[state_file_path,state]).new())
-	return states
-
-func get_payer_states():
-	return [
-		EntityIdleState.new(),
-		EntitySelectedState.new(),
-		EntityDoneState.new(),
-		EntityTargetSelectState.new(),
-	]
+func get_state_machine()->StateMachine:
+	return load(state_machine).instantiate()

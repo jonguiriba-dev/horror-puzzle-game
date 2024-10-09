@@ -14,6 +14,7 @@ signal state_changed(state_id:String)
 func _ready() -> void:
 	host.ready.connect(_on_host_ready)
 
+#the first state is set as initial current state
 func _on_host_ready():
 	for child in get_children():
 		add_state(child)
@@ -34,7 +35,6 @@ func _physics_process(delta):
 		var transition = _transition()
 		
 		if transition != null:
-			print("SETTING STATE ",transition)
 			set_state(transition)
 			
 func process(curr_state, delta):
@@ -78,8 +78,7 @@ func set_state(new_state):
 		state_changed.emit(new_state)
 		_enter_state(previous_state, new_state )
 	
-func add_state(state: State):
-	state.host = host
-	states[state.state_id] = state
-	state.configured.emit()
-	#host.ready.connect(state._on_host_ready)
+func add_state(_state: State):
+	_state.host = host
+	states[_state.state_id] = _state
+	_state.configured.emit()

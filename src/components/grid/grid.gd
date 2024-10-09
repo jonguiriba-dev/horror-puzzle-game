@@ -5,13 +5,16 @@ class_name Grid
 @onready var highlight_layer :TileMapLayer= $HighlightLayer
 @onready var prop_layer :TileMapLayer= $PropLayer
 @onready var astar_grid = AStarGrid2D.new()
-var threat_tiles :Array[Vector2i]= []
 
+var threat_tiles:Array[Vector2i]= []
+var highlight_lock_tiles: Array[Vector2i]= []
+var highlight_tiles: Array[Vector2i]= []
 enum HIGHLIGHT_COLORS{
 	GREEN = 0,
 	ORANGE = 1,
 	BLUE = 2,
-	RED = 3
+	RED = 3,
+	NONE = 99,
 }
 
 func _ready() -> void:
@@ -41,16 +44,27 @@ func get_possible_tiles(exclude_obstacles:bool=true,exclude_enemies:bool=true):
 			astar_grid.set_point_solid(enemy_map_pos)
 	
 	return tiles
+	
+func set_highlight(map_position:Vector2i, color:HIGHLIGHT_COLORS=HIGHLIGHT_COLORS.GREEN):
+	if color == HIGHLIGHT_COLORS.NONE:
+		highlight_tiles.erase(map_position)
+		highlight_lock_tiles.erase(map_position)
+		highlight_layer.erase_cell(map_position)
+	else:
+		highlight_tiles.push_front(map_position)
+		highlight_layer.set_cell(map_position,0,Vector2i(color,0))
 
-	
-func set_highlight(map_position:Vector2, color:HIGHLIGHT_COLORS=HIGHLIGHT_COLORS.GREEN):
-	highlight_layer.set_cell(map_position,0,Vector2i(color,0))
-	
-func clear_all_highlights():
-	highlight_layer.clear()
-	for node in get_tree().get_nodes_in_group(C.HIGHLIGHT_TEXT):
-		node.queue_free()
+func set_highlight_lock(map_position:Vector2i,lock:bool):
+	if lock:
+		highlight_lock_tiles.push_front(map_position)
+	else:
+		highlight_lock_tiles.erase(map_position)
 		
+func clear_all_highlights():
+	for tile in highlight_tiles:
+		if !highlight_lock_tiles.has(tile):
+			highlight_layer.erase_cell(tile)
+
 func get_manhattan_distance(a:Vector2,b:Vector2):
 	var y_distance = Vector2(0,a.y).distance_to(Vector2(0,b.y))
 	var x_distance = Vector2(a.x,0).distance_to(Vector2(b.x,0))

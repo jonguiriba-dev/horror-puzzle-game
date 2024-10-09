@@ -1,51 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://jjlhg6loc6fy"]
+[gd_scene load_steps=5 format=3 uid="uid://jjlhg6loc6fy"]
 
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_terdb"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_83wt7"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="2_fgxhs"]
-[ext_resource type="Texture2D" uid="uid://cf7jsjkn654ga" path="res://assets/dummy-sheet.png" id="4_dqjes"]
-[ext_resource type="PackedScene" uid="uid://qi4063hnm62t" path="res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn" id="5_n41x2"]
-[ext_resource type="Script" path="res://src/abilities/ability_move.gd" id="6_667eo"]
-[ext_resource type="Script" path="res://src/abilities/ability_strike.gd" id="6_ss0ji"]
-
-[sub_resource type="Resource" id="Resource_22sms"]
-script = ExtResource("2_fgxhs")
-entity_name = ""
-health = 1
-move_range = 3
-team = 0
-ability_list = Array[String]([])
-state_list = 0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7ps8"]
-atlas = ExtResource("4_dqjes")
-region = Rect2(0, 0, 32, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cg13q"]
-atlas = ExtResource("4_dqjes")
-region = Rect2(32, 0, 32, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_812a7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f7ps8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cg13q")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}]
+[ext_resource type="Resource" uid="uid://drknb3tcdylsc" path="res://src/entities/entity/presets/DummyPreset.tres" id="2_qrdk5"]
+[ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/Dummy/DummySpriteFrames.tres" id="3_k1fwx"]
 
 [node name="Dummy" type="Node2D"]
 script = ExtResource("1_terdb")
-preset = SubResource("Resource_22sms")
+preset = ExtResource("2_qrdk5")
 
 [node name="EntitySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
-sprite_frames = SubResource("SpriteFrames_812a7")
+sprite_frames = ExtResource("3_k1fwx")
 animation = &"idle"
 
 [node name="RescueText" type="Sprite2D" parent="EntitySprite"]
@@ -59,14 +25,6 @@ position = Vector2(0, -12)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
-
-[node name="PlayerEntityStateMachine" parent="." instance=ExtResource("5_n41x2")]
-
-[node name="AbilityMove" type="Node" parent="."]
-script = ExtResource("6_667eo")
-
-[node name="AbilityStrike" type="Node" parent="."]
-script = ExtResource("6_ss0ji")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

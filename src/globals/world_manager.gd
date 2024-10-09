@@ -32,7 +32,7 @@ func _on_turn_start(team:C.TEAM):
 		grid.threat_tiles = []
 		enemy_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 		
-		var enemy
+		var enemy=null
 		while enemy == null:
 			if enemy_turn_queue.size() == 0:
 				break

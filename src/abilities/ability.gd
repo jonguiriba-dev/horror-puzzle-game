@@ -37,7 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		var target
 		if can_target_entities:
-			target = get_tree().get_first_node_in_group(C.HOVERED_ENTITIES)
+			target = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		elif can_target_tiles:
 			target = {"position":WorldManager.grid.get_map_mouse_position()} 
 		
@@ -54,12 +54,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		stopped_targetting.emit()
 		
 func apply_effect(target):
-	if target is Node and !is_instance_valid(target):
+	print("apply_effect ",target)
+	if !is_instance_valid(target):
 		return 
+		
+	print("ability ",ability_name)
 	for action in actions:
+		print("action.target_group ", action.target_group)
 		if target is Node and !target.is_in_group(action.target_group):
+			print("target ", target)
 			return
 		if action.type == C.ABILITY_ACTION_TYPE.DAMAGE:
+			print("hit ")
 			target.hit.emit(damage)
 		if action.type == C.ABILITY_ACTION_TYPE.MOVE:
 			host.move_target_set.emit(target.position)
@@ -79,6 +85,8 @@ func set_state(_state:STATE):
 	
 func _on_target_select() -> void:
 	print("_on_target_select")
+	if host.action_counter == 0:
+		return 
 	set_state(STATE.TARGET_SELECT)
 	host.add_to_group(C.GROUPS_TARGETTING_ENTITY)
 	highlight_range_tiles(ability_range)
@@ -89,9 +97,9 @@ func _on_ability_stopped_targetting() -> void:
 	WorldManager.grid.clear_all_highlights()
 	state = STATE.INACTIVE
 	
-func highlight_range_tiles(ability_range):
+func highlight_range_tiles(_ability_range):
 	WorldManager.grid.clear_all_highlights()
-	var moveable_tile_positions = get_reachable_tiles(ability_range)
+	var moveable_tile_positions = get_reachable_tiles(_ability_range)
 	for pos in moveable_tile_positions:
 		if highlight_color == Color.ORANGE:
 			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.ORANGE)
@@ -111,3 +119,9 @@ func get_reachable_tiles(_range:int):
 				if next_position != map_position:
 					tiles.append(next_position)
 	return tiles
+
+func can_target_entities()->bool:
+	for action in actions:
+		if action.target_group == C.GROUPS_ENTITIES:
+			return true
+	return false
