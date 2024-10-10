@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://drknb3tcdylsc"]
 
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_v82ee"]
-[ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/Dummy/DummySpriteFrames.tres" id="2_d2xne"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_mtlwc"]
+[ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/Dummy/DummySpriteFrames.tres" id="2_whvdu"]
 
 [resource]
-script = ExtResource("1_v82ee")
-entity_name = "Dummy"
+script = ExtResource("1_mtlwc")
+entity_name = "Dummy1"
 max_health = 1
 move_range = 3
 team = 0
@@ -14,4 +14,4 @@ ability_2 = "res://src/abilities/ability_strike.gd"
 ability_3 = null
 ability_4 = null
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
-sprite_frames = ExtResource("2_d2xne")
+sprite_frames = ExtResource("2_whvdu")

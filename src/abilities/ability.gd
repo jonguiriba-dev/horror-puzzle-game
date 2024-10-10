@@ -14,6 +14,8 @@ var state = STATE.INACTIVE
 var actions:Array[AbilityAction]
 var has_ui = true
 var highlight_color = Color.ORANGE
+var is_enemy_obstacle = false
+var target_count = 1
 
 signal target_select
 signal stopped_targetting
@@ -40,7 +42,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			target = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		elif can_target_tiles:
 			target = {"position":WorldManager.grid.get_map_mouse_position()} 
-		
+			print("> ", is_instance_valid(target))
 		if target:
 			print("Target found ", target)
 			var host_map_position = WorldManager.grid.local_to_map(host.position)
@@ -55,8 +57,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func apply_effect(target):
 	print("apply_effect ",target)
-	if !is_instance_valid(target):
-		return 
 		
 	print("ability ",ability_name)
 	for action in actions:
@@ -94,20 +94,20 @@ func _on_target_select() -> void:
 func _on_ability_stopped_targetting() -> void:
 	print("_on_ability_stopped_targetting")
 	host.remove_from_group(C.GROUPS_TARGETTING_ENTITY)
-	WorldManager.grid.clear_all_highlights()
+	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	state = STATE.INACTIVE
 	
 func highlight_range_tiles(_ability_range):
-	WorldManager.grid.clear_all_highlights()
+	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	var moveable_tile_positions = get_reachable_tiles(_ability_range)
 	for pos in moveable_tile_positions:
 		if highlight_color == Color.ORANGE:
-			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.ORANGE)
+			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.ABILITY)
 		else:
-			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.GREEN)
+			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.GREEN,Grid.HIGHLIGHT_LAYERS.ABILITY)
 		
 func get_reachable_tiles(_range:int):
-	var possible_tiles = WorldManager.grid.get_possible_tiles(true,false)
+	var possible_tiles = WorldManager.grid.get_possible_tiles(true,is_enemy_obstacle)
 	var map_position = WorldManager.grid.local_to_map(host.position)
 	
 	var tiles = []

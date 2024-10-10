@@ -1,7 +1,6 @@
 extends Node
 
-func get_nearest_in_group(pos:Vector2,group:String):
-	var nodes := get_tree().get_nodes_in_group(group)
+func get_nearest(pos:Vector2,nodes:Array):
 	nodes.filter(func(e):
 		if is_instance_valid(e):
 			return true

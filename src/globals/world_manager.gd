@@ -59,4 +59,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		if entity:
 			pass
 		else:
-			WorldManager.grid.clear_all_highlights()
+			WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)

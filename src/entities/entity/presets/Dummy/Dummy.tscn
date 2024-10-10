@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_terdb"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_83wt7"]
-[ext_resource type="Resource" uid="uid://drknb3tcdylsc" path="res://src/entities/entity/presets/DummyPreset.tres" id="2_qrdk5"]
+[ext_resource type="Resource" uid="uid://drknb3tcdylsc" path="res://src/entities/entity/presets/DummyPreset1.tres" id="2_qrdk5"]
 [ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/Dummy/DummySpriteFrames.tres" id="3_k1fwx"]
 
 [node name="Dummy" type="Node2D"]

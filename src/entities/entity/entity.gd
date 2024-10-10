@@ -30,7 +30,7 @@ signal turn_start(entity:Entity)
 
 func _ready() -> void:
 	load_preset(preset)
-	
+	position.distance_squared_to
 	add_to_group(C.GROUPS_ENTITIES)
 	
 	move_target_set.connect(_on_move_target_set)
@@ -121,12 +121,10 @@ func _on_hit(damage:int) -> void:
 
 func _on_death() -> void:
 	print("death ",self)
+	for group in get_groups():
+		remove_from_group(group)
 	queue_free()
-	remove_from_group(C.GROUPS_ENTITIES)
-	remove_from_group(C.GROUPS_UNITS)
-	remove_from_group(C.GROUPS_CIVILIANS)
-	remove_from_group(C.GROUPS_TARGETS)
-
+		
 func _on_move_target_set(map_position:Vector2i)->void:
 	move_to_selected_tile(map_position)
 	
@@ -144,7 +142,7 @@ func move_to_selected_tile(target_pos:Vector2i):
 
 func show_path_highlight():
 	for tile in path:
-		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE)
+		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.ABILITY)
 	
 func hide_all_details():
 	rescue_text.hide()

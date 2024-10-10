@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_naa3p")
-entity_name = "Goon"
+entity_name = "Goon1"
 max_health = 1
 move_range = 3
 team = 1
