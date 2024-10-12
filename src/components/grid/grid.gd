@@ -42,9 +42,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			var entity_map_pos = WorldManager.grid.local_to_map(entity.position)
 			if entity_map_pos == mouse_map_position:
 				has_entity_in_tile = true
-		if has_entity_in_tile:
-			pass
-		elif (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ENTITY) == 0
+	
+		if (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ENTITY) == 0
 			and !is_ability_select):
 			tile_selected.emit(mouse_map_position)
 		print("*Tile Position: ",mouse_map_position)
@@ -132,3 +131,7 @@ func get_nearest_path(source:Vector2i,target:Vector2i, include_obstacles:bool=tr
 	if path.size() > 0:
 		path.remove_at(0)
 	return path
+	
+func is_within_bounds(map_pos:Vector2i):
+	var rect = tiles_layer.get_used_rect()
+	return rect.has_point(map_pos)

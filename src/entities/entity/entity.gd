@@ -21,6 +21,7 @@ var max_action_counter = 1
 var initial_position:Vector2i
 
 signal hit(damage:int)
+signal knockback(distance:int,source_pos:Vector2)
 signal death
 signal move_end
 signal turn_end
@@ -33,6 +34,7 @@ func _ready() -> void:
 	
 	death.connect(_on_death)
 	hit.connect(_on_hit)
+	knockback.connect(_on_knockback)
 	turn_end.connect(_on_turn_end)
 	turn_start.connect(_on_turn_start)
 	
@@ -50,6 +52,7 @@ func _ready() -> void:
 		sprite.play("idle")
 	
 	WorldManager.register_entity(self)
+	
 func load_preset(_preset:EntityPreset):
 	if !_preset:
 		return
@@ -136,3 +139,14 @@ func undo_move():
 	if move_counter < max_move_counter:
 		position = initial_position
 		move_counter += 1
+		
+func _on_knockback(distance:int, source_map_pos:Vector2i):
+	var tween = create_tween()
+	var direction = Util.get_direction(source_map_pos,WorldManager.grid.local_to_map(position))
+	#change direction to away from the source
+	var target_pos = WorldManager.grid.local_to_map(position) + direction * -1 * distance 
+	if !WorldManager.grid.is_within_bounds(target_pos):
+		return
+	if !WorldManager.grid.get_possible_tiles().has(target_pos):
+		return
+	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)

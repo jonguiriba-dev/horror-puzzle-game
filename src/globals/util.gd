@@ -23,3 +23,21 @@ func get_nearest(pos:Vector2,nodes:Array):
 			if new_distance < old_distance:
 				nearest = entity
 	return nearest
+
+func get_direction(source:Vector2i,target:Vector2i)->Vector2i:
+	var direction = (source - target)
+	print(">>>> ",direction)
+	if abs(direction.x) > abs(direction.y):
+		if direction.x > 0: 
+			direction.x = 1 
+		else:
+			direction.x = -1
+		direction.y = 0
+	else:
+		if direction.y > 0: 
+			direction.y = 1 
+		else:
+			direction.y = -1
+		direction.x = 0
+		
+	return direction

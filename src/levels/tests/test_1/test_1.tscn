@@ -57,9 +57,9 @@ position = Vector2(15, -7)
 preset = ExtResource("7_mc4vm")
 
 [node name="Dummy5" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
-position = Vector2(-14, 7)
+position = Vector2(-63, 1)
 preset = ExtResource("10_sq7j0")
 
 [node name="Dummy6" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
-position = Vector2(-32, 16)
+position = Vector2(32, 1)
 preset = ExtResource("11_0twb1")

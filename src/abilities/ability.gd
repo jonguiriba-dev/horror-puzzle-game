@@ -16,6 +16,7 @@ var has_ui = true
 var highlight_color = Color.ORANGE
 var is_enemy_obstacle = false
 var target_count = 1
+var knockback_distance = 0
 
 signal target_select
 signal stopped_targetting
@@ -45,8 +46,8 @@ func apply_effect(target):
 	for action in actions:
 		if action.type == AbilityAction.ABILITY_ACTION_TYPE.DAMAGE:
 			target.hit.emit(damage)
-		#if action.type == AbilityAction.ABILITY_ACTION_TYPE.MOVE:
-			#host.move_target_set.emit(target.position)
+		if action.type == AbilityAction.ABILITY_ACTION_TYPE.KNOCKBACK:
+			target.knockback.emit(knockback_distance, WorldManager.grid.local_to_map(host.position))
 			
 	applied.emit(self)
 

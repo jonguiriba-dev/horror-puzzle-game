@@ -72,3 +72,4 @@ func _unhandled_input(event: InputEvent) -> void:
 func register_entity(entity:Entity):
 	if entity.team == C.TEAM.ENEMY:
 		entity.turn_end.connect(_on_enemy_unit_turn_end)
+		

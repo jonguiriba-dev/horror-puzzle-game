@@ -1,7 +1,7 @@
 extends Ability
 class_name AbilityMove
 
-var path=null
+var path=[]
 var target_position=null
 var play_animation = false
 signal move_target_set(map_position:Vector2i)
