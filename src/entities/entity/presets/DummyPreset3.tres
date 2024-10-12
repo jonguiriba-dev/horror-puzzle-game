@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_0i1sa")
 entity_name = "Dummy3"
-max_health = 1
+max_health = 3
 move_range = 3
 team = 0
 ability_1 = "res://src/abilities/ability_move.gd"

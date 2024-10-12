@@ -1,19 +1,10 @@
 extends Node2D
 class_name Grid
 
-@onready var tiles_layer :TileMapLayer= $TileMapLayer
-@onready var ability_highlight_layer :TileMapLayer= $AbilityHighlightLayer
-@onready var threat_highlight_layer :TileMapLayer= $ThreatHighlightLayer
-@onready var prop_layer :TileMapLayer= $PropLayer
-@onready var astar_grid = AStarGrid2D.new()
-
-var threat_tiles:Array[Vector2i]= []
-var highlight_tiles: Array[Vector2i]= []
 
 enum HIGHLIGHT_LAYERS{
 	ABILITY,
 	THREAT,
-	
 }
 
 enum HIGHLIGHT_COLORS{
@@ -24,6 +15,17 @@ enum HIGHLIGHT_COLORS{
 	NONE = 99,
 }
 
+@onready var tiles_layer :TileMapLayer= $TileMapLayer
+@onready var ability_highlight_layer :TileMapLayer= $AbilityHighlightLayer
+@onready var threat_highlight_layer :TileMapLayer= $ThreatHighlightLayer
+@onready var prop_layer :TileMapLayer= $PropLayer
+@onready var astar_grid = AStarGrid2D.new()
+
+var threat_tiles:Array[Vector2i]= []
+var highlight_tiles: Array[Vector2i]= []
+var is_ability_select = false
+signal tile_selected(map_pos: Vector2i)
+
 func _ready() -> void:
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.cell_size = tiles_layer.tile_set.tile_size
@@ -32,6 +34,21 @@ func _ready() -> void:
 	
 	WorldManager.grid = self
 	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
+		var has_entity_in_tile = false
+		for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+			var entity_map_pos = WorldManager.grid.local_to_map(entity.position)
+			if entity_map_pos == mouse_map_position:
+				has_entity_in_tile = true
+		if has_entity_in_tile:
+			pass
+		elif (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ENTITY) == 0
+			and !is_ability_select):
+			tile_selected.emit(mouse_map_position)
+		print("*Tile Position: ",mouse_map_position)
+			
 func get_possible_tiles(exclude_obstacles:bool=true,exclude_enemies:bool=true):
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
@@ -80,16 +97,15 @@ func get_manhattan_distance(a:Vector2,b:Vector2):
 	var x_distance = Vector2(a.x,0).distance_to(Vector2(b.x,0))
 	return abs(y_distance) + abs(x_distance)
 
+func get_grid_local_mouse_position()->Vector2:
+	return prop_layer.get_local_mouse_position()
+	
 func get_map_mouse_position()->Vector2i:
 	return prop_layer.local_to_map(prop_layer.get_local_mouse_position())
 	
 func is_within_range(a:Vector2,b:Vector2,_range:int) -> bool:
 	return get_manhattan_distance(a,b) <= _range
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click"):
-		print("*Tile Position: ",WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position()))
-			
 func add_test(map_position:Vector2):
 	prop_layer.set_cell(map_position,8,Vector2i(0,0))
 	print("add_test",map_position)

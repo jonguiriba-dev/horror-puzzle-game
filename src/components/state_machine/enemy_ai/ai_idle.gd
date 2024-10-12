@@ -17,5 +17,5 @@ func _transition():
 	if to_attack:
 		return  C.STATE.AI_ATTACK
 
-func _on_turn_start(entity:Entity):
+func _on_turn_start():
 	to_attack = true

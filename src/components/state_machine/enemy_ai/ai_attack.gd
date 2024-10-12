@@ -36,8 +36,9 @@ func _enter_state(old_state, new_state):
 	
 		if Debug.show_enemy_ai_tile_values:
 			show_tile_values()
-			
-		host.move_to_selected_tile(possible_tiles[0].position)
+		
+		host.get_ability("move").use(possible_tiles[0].position)
+		#host.move_to_selected_tile(possible_tiles[0].position)
 
 func show_tile_values():
 	for t in possible_tiles:
@@ -55,7 +56,8 @@ func _transition():
 		
 func _on_host_move_end():
 	highlight_target()
-	host.turn_end.emit(host)
+	host.hide_all_details()
+	host.turn_end.emit()
 	to_idle = true
 	
 func highlight_target():
@@ -136,7 +138,7 @@ func analyze_tiles():
 #redundant remove when possible
 func get_moveable_tiles(_range:int):
 	var navigatable_tiles = []
-	var possible_tiles = WorldManager.grid.get_possible_tiles()
+	var _possible_tiles = WorldManager.grid.get_possible_tiles()
 	var map_position = WorldManager.grid.local_to_map(host.position)
 	
 	var queued_tiles = [map_position]
@@ -148,7 +150,7 @@ func get_moveable_tiles(_range:int):
 		for direction in [Vector2i(-1,0),Vector2i(1,0),Vector2i(0,-1),Vector2i(0,1)]:
 			for pending_tile in pending_tiles:
 				var next_tile = pending_tile + direction
-				if possible_tiles.has(next_tile):
+				if _possible_tiles.has(next_tile):
 					navigatable_tiles.push_front(next_tile)
 					queued_tiles.push_front(next_tile)
 		step += 1
@@ -180,9 +182,8 @@ func _get_attack_score(source_tile:Vector2i,target_map_pos:Vector2i, ability_ran
 	var distance_to_target = source_tile.distance_to(target_map_pos)
 	if distance_to_target <= ability_range and distance_to_target != 0:
 		if WorldManager.grid.threat_tiles.has(target_map_pos):
-			threat_factor = 0.5
-			print("halfed tile")
-		return	roundi(10 * threat_factor)
+			threat_factor = 2
+		return	roundi(10 / threat_factor)
 	return 0
 
 func _get_location_score(target_map_pos:Vector2i)->int: 

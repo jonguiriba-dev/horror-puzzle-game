@@ -52,11 +52,6 @@ func get_map_mouse_position()->Vector2i:
 	
 func is_within_range(a:Vector2,b:Vector2,range:int) -> bool:
 	return get_manhattan_distance(a,b) <= range
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click"):
-		print("*Tile Position: ",WorldManager.grid.local_to_map(WorldManager.grid.get_local_mouse_position()))
-		
 		
 			
 func add_test(map_position:Vector2):

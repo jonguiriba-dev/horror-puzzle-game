@@ -8,6 +8,6 @@ func _ready() -> void:
 	actions = [
 		AbilityAction.new(
 			C.GROUPS_ENTITIES,
-			C.ABILITY_ACTION_TYPE.DAMAGE
+			AbilityAction.ABILITY_ACTION_TYPE.DAMAGE
 		)
 	]

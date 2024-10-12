@@ -28,74 +28,53 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if(event.is_action_pressed("click") and state == STATE.TARGET_SELECT):
-		var can_target_tiles = false
-		var can_target_entities = false
+		var target_map_position = WorldManager.grid.get_map_mouse_position()
+		use(target_map_position)
 		
-		for action in actions:
-			if action.target_group == C.ABILITY_TARGET_GROUP.TILE:
-				can_target_tiles = true
-			if action.target_group == C.GROUPS_ENTITIES:
-				can_target_entities = true
+func use(target_map_position:Vector2i):
+	var target_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
+	var reachable_tiles = get_reachable_tiles(ability_range)
+	if reachable_tiles.has(target_map_position):
+		await _play_animation()
+		if is_instance_valid(target_entity):
+			apply_effect(target_entity)
 		
-		var target
-		if can_target_entities:
-			target = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
-		elif can_target_tiles:
-			target = {"position":WorldManager.grid.get_map_mouse_position()} 
-			print("> ", is_instance_valid(target))
-		if target:
-			print("Target found ", target)
-			var host_map_position = WorldManager.grid.local_to_map(host.position)
-			var target_map_position = target.position
-			if target is Node2D:
-				target_map_position = WorldManager.grid.local_to_map(target.position)
-			var reachable_tiles = get_reachable_tiles(ability_range)
-			if reachable_tiles.has(target_map_position):
-				apply_effect(target)
-				
-		stopped_targetting.emit()
-		
+	stopped_targetting.emit()
+	
 func apply_effect(target):
-	print("apply_effect ",target)
-		
-	print("ability ",ability_name)
 	for action in actions:
-		print("action.target_group ", action.target_group)
-		if target is Node and !target.is_in_group(action.target_group):
-			print("target ", target)
-			return
-		if action.type == C.ABILITY_ACTION_TYPE.DAMAGE:
-			print("hit ")
+		if action.type == AbilityAction.ABILITY_ACTION_TYPE.DAMAGE:
 			target.hit.emit(damage)
-		if action.type == C.ABILITY_ACTION_TYPE.MOVE:
-			host.move_target_set.emit(target.position)
+		#if action.type == AbilityAction.ABILITY_ACTION_TYPE.MOVE:
+			#host.move_target_set.emit(target.position)
 			
 	applied.emit(self)
-	print("apply_effect ", ability_name, " target ",target)
 
+func _play_animation():
+	await Util.wait(0.3)
 		
 func set_state(_state:STATE):
 	if _state == state:
 		return
 	if state == STATE.TARGET_SELECT:
-		print("ability ",ability_name, " is targeting")
 		target_select.emit()
+	
 	
 	state = _state
 	
 func _on_target_select() -> void:
-	print("_on_target_select")
 	if host.action_counter == 0:
 		return 
 	set_state(STATE.TARGET_SELECT)
 	host.add_to_group(C.GROUPS_TARGETTING_ENTITY)
+	WorldManager.grid.is_ability_select = true
 	highlight_range_tiles(ability_range)
 
 func _on_ability_stopped_targetting() -> void:
-	print("_on_ability_stopped_targetting")
 	host.remove_from_group(C.GROUPS_TARGETTING_ENTITY)
 	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	state = STATE.INACTIVE
+	WorldManager.grid.is_ability_select = false
 	
 func highlight_range_tiles(_ability_range):
 	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)

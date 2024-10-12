@@ -18,7 +18,8 @@ func _on_unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if host.is_in_group(C.GROUPS_HOVERED_ENTITIES): 
 			to_selected = true
-	
+			
+func _state_logic(delta:float):
 	if host.move_counter == 0 and host.action_counter == 0:
 		to_done = true
 				

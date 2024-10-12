@@ -1,5 +1,9 @@
 extends Node
 
+
+func wait(seconds: float) -> void:
+	await get_tree().create_timer(seconds).timeout
+
 func get_nearest(pos:Vector2,nodes:Array):
 	nodes.filter(func(e):
 		if is_instance_valid(e):

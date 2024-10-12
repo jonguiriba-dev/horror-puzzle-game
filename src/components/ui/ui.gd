@@ -7,12 +7,15 @@ enum STATE{
 }
 
 @onready var ability_container = $AbilityContainer
+@onready var undo_move = $UndoMove
 @onready var debug_label = $Debug/Label
 
 var state := STATE.INACTIVE
 var context
 
 signal end_turn_pressed
+signal undo_move_pressed
+
 
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
@@ -43,4 +46,8 @@ func set_context(ctx):
 
 func _on_end_turn_pressed() -> void:
 	end_turn_pressed.emit()
-	pass # Replace with function body.
+
+
+func _on_undo_move_pressed() -> void:
+	print("HERE > ")
+	undo_move_pressed.emit()

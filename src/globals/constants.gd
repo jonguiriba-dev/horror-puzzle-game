@@ -9,6 +9,7 @@ var GROUPS_TARGETS = "targets"
 var GROUPS_HIGHLIGHT_TEXT = "highlight_text"
 var GROUPS_ENEMIES = "enemies"
 var GROUPS_SELECTED = "selected"
+var GROUPS_PLAYER_ENTITIES = "player_entities"
 
 enum TEAM{
 	PLAYER,
@@ -28,9 +29,4 @@ enum STATE{
 
 var ABILITY_TARGET_GROUP = {
 	TILE = "target_group_tile"
-}
-
-enum ABILITY_ACTION_TYPE{
-	DAMAGE,
-	MOVE
 }
