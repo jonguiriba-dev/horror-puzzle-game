@@ -1,16 +1,21 @@
 extends Object
 class_name AbilityAction
 
-enum ABILITY_ACTION_TYPE{
+enum ACTION_TYPES{
 	DAMAGE,
 	KNOCKBACK,
 	MOVE
 }
 
+enum TARGET_TYPES{
+	ENEMY = 1 << 0,
+	ALLY = 1 << 1,
+	TILE = 1 << 2,
+}
 
-var target_group:String
-var type:ABILITY_ACTION_TYPE
+var target_type:TARGET_TYPES=TARGET_TYPES.ENEMY
+var action_type:ACTION_TYPES
 
-func _init(_target_group:String,_type:ABILITY_ACTION_TYPE) -> void:
-	target_group = _target_group
-	type = _type
+func _init(_target_type:TARGET_TYPES,_action_type:ACTION_TYPES) -> void:
+	target_type = _target_type
+	action_type = _action_type

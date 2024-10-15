@@ -8,11 +8,11 @@ func _ready() -> void:
 	damage = 1
 	actions = [
 		AbilityAction.new(
-			C.GROUPS_ENTITIES,
-			AbilityAction.ABILITY_ACTION_TYPE.DAMAGE
+			AbilityAction.TARGET_TYPES.ENEMY,
+			AbilityAction.ACTION_TYPES.DAMAGE
 		),
 		AbilityAction.new(
-			C.GROUPS_ENTITIES,
-			AbilityAction.ABILITY_ACTION_TYPE.KNOCKBACK
+			AbilityAction.TARGET_TYPES.ENEMY,
+			AbilityAction.ACTION_TYPES.KNOCKBACK
 		)
 	]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://ch7qmg8jhgmh8"]
+
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_1xqy7"]
+[ext_resource type="SpriteFrames" uid="uid://bpcqw3ux8t2hk" path="res://src/entities/entity/presets/civilian/civilian_sprite_frames.tres" id="2_pyme8"]
+
+[resource]
+script = ExtResource("1_1xqy7")
+entity_name = "Civilian1"
+max_health = 1
+move_range = 3
+team = 2
+ability_1 = null
+ability_2 = null
+ability_3 = null
+ability_4 = null
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+sprite_frames = ExtResource("2_pyme8")

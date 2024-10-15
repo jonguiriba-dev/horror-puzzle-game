@@ -3,7 +3,7 @@ extends Node
 var GROUPS_ENTITIES = "entities"
 var GROUPS_UNITS= "units"
 var GROUPS_CIVILIANS= "civilians"
-var GROUPS_TARGETTING_ENTITY = "targetting_entity"
+var GROUPS_TARGETTING_ABILITY = "targetting_ability"
 var GROUPS_HOVERED_ENTITIES = "hovered_entities"
 var GROUPS_TARGETS = "targets"
 var GROUPS_HIGHLIGHT_TEXT = "highlight_text"
@@ -27,6 +27,6 @@ enum STATE{
 	AI_IDLE,
 }
 
-var ABILITY_TARGET_GROUP = {
-	TILE = "target_group_tile"
+var ABILITY_target_type = {
+	TILE = "target_type_tile"
 }

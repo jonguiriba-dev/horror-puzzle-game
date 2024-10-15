@@ -19,6 +19,9 @@ var action_counter = 1
 var max_move_counter = 1
 var max_action_counter = 1
 var initial_position:Vector2i
+var map_position:Vector2i:
+	get:
+		return WorldManager.grid.local_to_map(position)
 
 signal hit(damage:int)
 signal knockback(distance:int,source_pos:Vector2)
@@ -40,6 +43,7 @@ func _ready() -> void:
 	
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
+		sprite.set_modulate(Color.RED)
 	else:
 		add_to_group(C.GROUPS_TARGETS)
 		if team == C.TEAM.PLAYER:
@@ -67,6 +71,8 @@ func load_preset(_preset:EntityPreset):
 	
 	add_child(_preset.get_state_machine())
 	
+	print(self)
+	print(sprite)
 	if preset.sprite_frames:
 		sprite.sprite_frames = preset.sprite_frames
 
@@ -137,16 +143,29 @@ func _on_ability_applied(ability:Ability):
 
 func undo_move():
 	if move_counter < max_move_counter:
-		position = initial_position
+		_move_position(initial_position)
 		move_counter += 1
 		
 func _on_knockback(distance:int, source_map_pos:Vector2i):
-	var tween = create_tween()
 	var direction = Util.get_direction(source_map_pos,WorldManager.grid.local_to_map(position))
-	#change direction to away from the source
+	#change direction to away from the source 
 	var target_pos = WorldManager.grid.local_to_map(position) + direction * -1 * distance 
 	if !WorldManager.grid.is_within_bounds(target_pos):
 		return
 	if !WorldManager.grid.get_possible_tiles().has(target_pos):
 		return
+	var tween = create_tween()
 	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)
+
+func _move_position(_position:Vector2):
+	position = _position
+	WorldManager.grid.set_map_cursor(WorldManager.grid.local_to_map(position))
+
+func get_enemies()->Array[Entity]:
+	var enemies:Array[Entity] = []
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		if entity.team == C.TEAM.ENEMY and team == C.TEAM.PLAYER:
+			enemies.push_front(entity as Entity)
+		elif entity.team != C.TEAM.ENEMY and team == C.TEAM.ENEMY:
+			enemies.push_front(entity as Entity)
+	return enemies 

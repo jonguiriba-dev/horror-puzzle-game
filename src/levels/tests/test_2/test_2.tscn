@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://ccxa51fvstye7"]
+[gd_scene load_steps=10 format=4 uid="uid://ccxa51fvstye7"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_3plys"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_sshcj"]
 [ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="3_a5vek"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="4_ckdpo"]
 [ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="5_0xavb"]
-[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/Dummy/Dummy.tscn" id="6_v7vo3"]
-[ext_resource type="Texture2D" uid="uid://djbn1q76utqu5" path="res://assets/player_test.png" id="7_obhll"]
-[ext_resource type="PackedScene" uid="uid://dqqnpjj2sije8" path="res://src/entities/entity/presets/test_enemy/test_enemy.tscn" id="7_r4lep"]
-[ext_resource type="PackedScene" uid="uid://bnpebawpowsmv" path="res://src/entities/entity/presets/test_civilian/test_civilian.tscn" id="8_tcmnx"]
-[ext_resource type="Script" path="res://src/entities/entity/civilian/civilian.gd" id="9_tus23"]
+[ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="5_4hyey"]
+[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/dummy/Dummy.tscn" id="6_v7vo3"]
+[ext_resource type="PackedScene" uid="uid://cv3s5hr6txmvy" path="res://src/entities/entity/presets/civilian/Civilian.tscn" id="7_3ntyg"]
+[ext_resource type="PackedScene" uid="uid://yhaj0m23qtd2" path="res://src/entities/entity/presets/goon/Goon.tscn" id="9_psu0r"]
 
 [node name="Test1" type="Node2D"]
 script = ExtResource("1_3plys")
@@ -20,10 +19,25 @@ script = ExtResource("2_sshcj")
 [node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
 position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAAAAAABAAAAAAAEAP//AAAAAAAAAAAEAP7/AAABAAAAAAAEAP3/AAABAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAABAP3/AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP3/AAAAAAAAAAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD9/wQAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAAQAAAABAAEAAAACAAMAAAABAAEAAAACAAIAAAABAAEAAAACAAEAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAACAP3/AAABAAEAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAABAAAAAAAEAAIAAAABAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAABAAAAAAAEAP//AAABAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAABAAQAAAABAAEAAAABAAMAAAABAAEAAAABAAIAAAABAAEAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAEAAAABAP3/AAABAAEAAAAAAAQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAD///3/AAABAAEAAAD///7/AAABAAEAAAD/////AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD+/wQAAAABAAEAAAD+/wMAAAABAAEAAAD+/wIAAAABAAEAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAEAAAD9/wQAAAABAAEAAAD9/wMAAAABAAEAAAD9/wIAAAABAAEAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAEAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
 tile_set = ExtResource("3_a5vek")
 
-[node name="HighlightLayer" type="TileMapLayer" parent="Grid"]
+[node name="ThreatHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("4_ckdpo")
+
+[node name="AbilityHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("4_ckdpo")
+
+[node name="CursorLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("5_4hyey")
+
+[node name="DebugHighlightLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
 position = Vector2(264, 141)
 tile_set = ExtResource("4_ckdpo")
@@ -32,35 +46,31 @@ tile_set = ExtResource("4_ckdpo")
 z_index = 1
 y_sort_enabled = true
 position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAABAAMAAgABAAEAAAABAAIAAgABAAEAAAABAAEAAgABAAEAAAABAAAAAgABAAEAAAABAP7/AgABAAEAAAABAP3/AgABAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAAAAgABAAEAAAABAP3/AgABAAEAAAAAAAEAAgABAAEAAAAAAAIAAgAAAAEAAAAAAAQAAQAAAAAAAAACAP3/AQAAAAAAAAA=")
 tile_set = ExtResource("5_0xavb")
 
-[node name="TestPlayer" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
-position = Vector2(-47, -8)
+[node name="Civilian" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
+position = Vector2(48, -24)
 
-[node name="Sprite" parent="Grid/PropLayer/TestPlayer" index="0"]
-texture = ExtResource("7_obhll")
+[node name="Civilian2" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
+position = Vector2(-62, 17)
 
-[node name="TestPlayer3" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
-position = Vector2(48, -8)
+[node name="Civilian3" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
+position = Vector2(63, -16)
 
-[node name="TestPlayer2" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
-position = Vector2(16, -38)
+[node name="Civilian4" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
+position = Vector2(16, 10)
 
-[node name="TestEnemy" parent="Grid/PropLayer" instance=ExtResource("7_r4lep")]
-position = Vector2(96, 0)
-entity_name = "Betty1"
+[node name="Civilian5" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
+position = Vector2(-16, 56)
 
-[node name="TestEnemy2" parent="Grid/PropLayer" instance=ExtResource("7_r4lep")]
-position = Vector2(64, 17)
-entity_name = "Betty2"
+[node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
+position = Vector2(17, -8)
 
-[node name="TestEnemy3" parent="Grid/PropLayer" instance=ExtResource("7_r4lep")]
-position = Vector2(30, 32)
-entity_name = "Betty3"
+[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
 
-[node name="TestCivilian" parent="Grid/PropLayer" instance=ExtResource("8_tcmnx")]
-position = Vector2(-32, 31)
-script = ExtResource("9_tus23")
+[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
+position = Vector2(-16, 9)
 
-[editable path="Grid/PropLayer/TestPlayer"]
+[node name="Goon4" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
+position = Vector2(31, 49)

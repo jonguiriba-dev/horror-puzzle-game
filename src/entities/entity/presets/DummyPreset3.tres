@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://dslls0jxhqbfw"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_0i1sa"]
-[ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/Dummy/DummySpriteFrames.tres" id="2_robdq"]
+[ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/dummy/dummy_sprite_frames.tres" id="2_robdq"]
 
 [resource]
 script = ExtResource("1_0i1sa")

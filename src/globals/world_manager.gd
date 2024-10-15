@@ -34,6 +34,7 @@ func end_turn():
 	turn_order.push_front(turn_order.pop_back())
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
+	
 	if team_turn == C.TEAM.PLAYER:
 		_start_player_turn()
 		
@@ -67,9 +68,21 @@ func _on_enemy_unit_turn_start(entity:Entity):
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		pass
+		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
+		var targetting_ability = get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY)
+		if targetting_ability:
+			targetting_ability.use(mouse_map_position)
+		else:
+			grid.tile_selected.emit(mouse_map_position)
+			
+		#var has_entity_in_tile = false
+		#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+			#var entity_map_pos = WorldManager.grid.local_to_map(entity.position)
+			#if entity_map_pos == mouse_map_position:
+				#has_entity_in_tile = true
+	#
+		print("*Tile Position: ",mouse_map_position)
 
 func register_entity(entity:Entity):
 	if entity.team == C.TEAM.ENEMY:
 		entity.turn_end.connect(_on_enemy_unit_turn_end)
-		

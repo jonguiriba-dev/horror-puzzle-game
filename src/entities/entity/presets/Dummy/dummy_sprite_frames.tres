@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cf7jsjkn654ga" path="res://assets/dummy-sheet.png" id="1_jy6dr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7ps8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpeic"]
 atlas = ExtResource("1_jy6dr")
 region = Rect2(0, 0, 32, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cg13q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5rle"]
 atlas = ExtResource("1_jy6dr")
 region = Rect2(32, 0, 32, 40)
 
@@ -14,10 +14,10 @@ region = Rect2(32, 0, 32, 40)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f7ps8")
+"texture": SubResource("AtlasTexture_xpeic")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cg13q")
+"texture": SubResource("AtlasTexture_h5rle")
 }],
 "loop": true,
 "name": &"idle",

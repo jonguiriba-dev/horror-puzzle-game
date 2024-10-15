@@ -1,8 +1,8 @@
 extends Node
 
 var is_enabled = true
-var show_enemy_ai_tile_values = false
-var show_move_path_highlight = false
+var show_enemy_ai_tile_values = true
+var show_move_path_highlight = true
 
 func _physics_process(delta: float) -> void:
 	if is_enabled:

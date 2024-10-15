@@ -1,22 +1,23 @@
-[gd_scene load_steps=12 format=4 uid="uid://buo6xmbdn614q"]
+[gd_scene load_steps=8 format=4 uid="uid://buo6xmbdn614q"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_oct6g"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="1_tvly6"]
 [ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="2_kw61n"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="3_1xef5"]
 [ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="4_5yfex"]
-[ext_resource type="Resource" uid="uid://b8joxppwoqdue" path="res://src/entities/entity/presets/DummyPreset2.tres" id="7_0ounn"]
-[ext_resource type="Resource" uid="uid://vwovwapoub31" path="res://src/entities/entity/presets/GoonPreset1.tres" id="7_mc4vm"]
-[ext_resource type="Resource" uid="uid://dslls0jxhqbfw" path="res://src/entities/entity/presets/DummyPreset3.tres" id="8_f16pq"]
-[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/Dummy/Dummy.tscn" id="10_kp04y"]
-[ext_resource type="Resource" uid="uid://cbdo0w6ifmv28" path="res://src/entities/entity/presets/GoonPreset2.tres" id="10_sq7j0"]
-[ext_resource type="Resource" uid="uid://c0l4gv6npb4a2" path="res://src/entities/entity/presets/GoonPreset3.tres" id="11_0twb1"]
+[ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="5_qo6t6"]
+[ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/dummy/Dummy.tscn" id="10_kp04y"]
 
 [node name="Test1" type="Node2D"]
 script = ExtResource("1_oct6g")
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("1_tvly6")
+
+[node name="DebugHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("3_1xef5")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
@@ -34,6 +35,11 @@ y_sort_enabled = true
 position = Vector2(264, 141)
 tile_set = ExtResource("3_1xef5")
 
+[node name="CursorLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("5_qo6t6")
+
 [node name="PropLayer" type="TileMapLayer" parent="Grid"]
 z_index = 1
 y_sort_enabled = true
@@ -42,24 +48,25 @@ tile_map_data = PackedByteArray("AAABAAMAAgABAAEAAAABAAIAAgABAAEAAAABAAAAAgABAAE
 tile_set = ExtResource("4_5yfex")
 
 [node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
-position = Vector2(-31, -16)
+position = Vector2(15, 25)
+preset = null
 
 [node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
 position = Vector2(-15, -23)
-preset = ExtResource("7_0ounn")
+preset = null
 
 [node name="Dummy4" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
 position = Vector2(-49, 41)
-preset = ExtResource("8_f16pq")
+preset = null
 
 [node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
 position = Vector2(15, -7)
-preset = ExtResource("7_mc4vm")
+preset = null
 
 [node name="Dummy5" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
-position = Vector2(-63, 1)
-preset = ExtResource("10_sq7j0")
+position = Vector2(-16, -7)
+preset = null
 
 [node name="Dummy6" parent="Grid/PropLayer" instance=ExtResource("10_kp04y")]
-position = Vector2(32, 1)
-preset = ExtResource("11_0twb1")
+position = Vector2(-16, 8)
+preset = null

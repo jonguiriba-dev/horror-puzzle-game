@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://cybb46stuffbp"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity.gd" id="1_t518p"]
-[ext_resource type="Texture2D" uid="uid://uw1gg7rmh15v" path="res://assets/player.png" id="2_3oflm"]
+[ext_resource type="SpriteFrames" uid="uid://bpcqw3ux8t2hk" path="res://src/entities/entity/presets/civilian/civilian_sprite_frames.tres" id="2_3s84t"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_7u8pd"]
 
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_t518p")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="EntitySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
-texture = ExtResource("2_3oflm")
+sprite_frames = ExtResource("2_3s84t")
+animation = &"idle"
 
-[node name="RescueText" type="Sprite2D" parent="Sprite"]
+[node name="RescueText" type="Sprite2D" parent="EntitySprite"]
 visible = false
 position = Vector2(0, -32)
 texture = ExtResource("2_7u8pd")

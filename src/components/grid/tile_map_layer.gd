@@ -18,7 +18,7 @@ func _ready() -> void:
 	astar_grid.region = get_used_rect()
 	astar_grid.update()
 
-func get_possible_tiles():
+func get_pathable_tiles():
 	var tiles = get_used_cells()
 	var props = prop_layer.get_used_cells()
 	var enemies = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
