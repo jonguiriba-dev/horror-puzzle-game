@@ -62,6 +62,7 @@ offset_left = 563.0
 offset_top = 298.0
 offset_right = 640.0
 offset_bottom = 360.0
+flat = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EndTurn"]
 position = Vector2(4, 0)

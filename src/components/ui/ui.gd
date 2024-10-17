@@ -6,9 +6,10 @@ enum STATE{
 	SELECTING_TARGET
 }
 
-@onready var ability_container = $AbilityContainer
-@onready var undo_move = $UndoMove
-@onready var debug_label = $Debug/Label
+@onready var ability_container := $AbilityContainer
+@onready var undo_move := $UndoMove
+@onready var end_turn := $EndTurn
+@onready var debug_label := $Debug/Label
 
 var state := STATE.INACTIVE
 var context
@@ -49,5 +50,4 @@ func _on_end_turn_pressed() -> void:
 
 
 func _on_undo_move_pressed() -> void:
-	print("HERE > ")
 	undo_move_pressed.emit()

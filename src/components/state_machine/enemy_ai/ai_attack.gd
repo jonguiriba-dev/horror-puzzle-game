@@ -59,8 +59,6 @@ func _on_host_move_end():
 	to_idle = true
 	
 	
-#TODO: Fix ai priority
-#TODO: fix civilians being ignored
 func apply_threat():
 	for ability in host.get_abilities():
 		print("ability ",ability.ability_name)
@@ -90,7 +88,8 @@ func analyze_tile_scores():
 	var targets = host.get_enemies()
 
 	if targets.size() == 0:
-		return
+		print(123,get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
+		return scored_tiles
 	
 	targets.sort_custom(func(target1, target2):
 		var distance1 = WorldManager.grid.get_manhattan_distance(target1.position,host.position)
@@ -106,8 +105,10 @@ func analyze_tile_scores():
 		
 	var nearest = targets[0]
 	if !nearest:
-		return
+		return scored_tiles
+	
 	print(host.entity_name, " is targeting ", nearest.entity_name)
+	
 	WorldManager.grid.set_highlight(
 		WorldManager.grid.local_to_map(nearest.position),
 		Grid.HIGHLIGHT_COLORS.BLUE,

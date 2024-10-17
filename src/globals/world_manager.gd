@@ -26,8 +26,9 @@ func _on_ui_manager_initalized():
 	UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
 
 func _on_end_turn_pressed():
+	UIManager.ui.end_turn.disabled = true
 	end_turn()
-
+	
 func end_turn():
 	turn_changed.emit()
 	turn_end.emit(team_turn)
@@ -57,6 +58,7 @@ func _on_enemy_turn_start():
 			
 func _on_enemy_unit_turn_end():
 	if enemy_turn_queue.size() == 0 and team_turn == C.TEAM.ENEMY:
+		UIManager.ui.end_turn.disabled = false
 		end_turn()
 		
 	var enemy = enemy_turn_queue.pop_front()

@@ -50,9 +50,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	#move_to_selected_tile(map_position)
 
 func use(target_map_position:Vector2i):
-	target_position = target_map_position
-	super(target_map_position)
-		
+	if target_map_position == host.map_position:
+		host.move_end.emit()
+	else:
+		target_position = target_map_position
+		super(target_map_position)
 func move_to_selected_tile(target_pos:Vector2i):
 	var curr_tile = WorldManager.grid.local_to_map(host.position)
 	path = WorldManager.grid.astar_grid.get_id_path(curr_tile, target_pos)
