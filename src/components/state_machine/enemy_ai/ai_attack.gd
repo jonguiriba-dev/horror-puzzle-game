@@ -2,6 +2,7 @@ extends State
 class_name AIAttackState
 
 var path_to_nearest_target
+var target
 var threat
 var tile_labels:Array = []
 var to_idle = false
@@ -66,35 +67,54 @@ func apply_threat():
 		if !ability.can_target_entities:
 			return
 		print("ability ",ability.ability_name)
-		var reachable_tiles = ability.get_reachable_tiles(host.map_position,ability.ability_range)
-		print("reachable_tiles ",reachable_tiles)
-		for target in get_tree().get_nodes_in_group(C.GROUPS_TARGETS):
-			if reachable_tiles.has(target.map_position):
-				print("reach")
-				threat = {"tile":target.map_position, "ability":ability, "target":target}
-				WorldManager.grid.set_highlight(target.map_position,Grid.HIGHLIGHT_COLORS.RED,Grid.HIGHLIGHT_LAYERS.THREAT)
-				WorldManager.grid.threat_tiles.push_front(threat.tile)
-				target_count += 1
-				if ability.target_count == target_count:
+		var valid_targets = ability.get_valid_targets()
+		print("valid_targets ",valid_targets)
+		for valid_target in valid_targets:
+			threat = {"tile":valid_target.map_position, "ability":ability, "target":valid_target}
+			WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.RED,Grid.HIGHLIGHT_LAYERS.THREAT)
+			WorldManager.grid.threat_tiles.push_front(threat.tile)
+			target_count += 1
+			if ability.target_count == target_count:
 					return
+		#for target in get_tree().get_nodes_in_group(C.GROUPS_EN):
+			#if reachable_tiles.has(target.map_position):
+				#print("reach")
+				#threat = {"tile":target.map_position, "ability":ability, "target":target}
+				#WorldManager.grid.set_highlight(target.map_position,Grid.HIGHLIGHT_COLORS.RED,Grid.HIGHLIGHT_LAYERS.THREAT)
+				#WorldManager.grid.threat_tiles.push_front(threat.tile)
+				#target_count += 1
+				#if ability.target_count == target_count:
+					#return
 func attack_target():
-	print("attack ")
+	print(">>> attack_target ")
 	await threat.ability.use(threat.tile) 
 	WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.NONE,Grid.HIGHLIGHT_LAYERS.THREAT)
 	threat = null
 	
 func analyze_tile_scores():
+	if Debug.highlight_enemy_target and is_instance_valid(target):
+		WorldManager.grid.set_highlight(
+			target.map_position,
+			Grid.HIGHLIGHT_COLORS.NONE,
+			Grid.HIGHLIGHT_LAYERS.DEBUG
+		)
+	
+	target = null
+	
 	var scored_tiles = []
 	var targets = host.get_enemies()
+	print("analyze_tile_scores ",get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
 
 	if targets.size() == 0:
-		print(123,get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
 		return scored_tiles
 	
+	targets.map(func (e:Node):
+		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position)
+		e.set_meta("distance_to_host",distance)
+	)
+	
 	targets.sort_custom(func(target1, target2):
-		var distance1 = WorldManager.grid.get_manhattan_distance(target1.position,host.position)
-		var distance2 = WorldManager.grid.get_manhattan_distance(target2.position,host.position)
-		return distance1 <= distance2
+		return target1.get_meta("distance_to_host") <= target2.get_meta("distance_to_host") 
 	)
 	
 	for target in targets:
@@ -107,13 +127,15 @@ func analyze_tile_scores():
 	if !nearest:
 		return scored_tiles
 	
+	target = nearest
 	print(host.entity_name, " is targeting ", nearest.entity_name)
 	
-	WorldManager.grid.set_highlight(
-		WorldManager.grid.local_to_map(nearest.position),
-		Grid.HIGHLIGHT_COLORS.BLUE,
-		Grid.HIGHLIGHT_LAYERS.DEBUG
-	)
+	if Debug.highlight_enemy_target:
+		WorldManager.grid.set_highlight(
+			target.map_position,
+			Grid.HIGHLIGHT_COLORS.BLUE,
+			Grid.HIGHLIGHT_LAYERS.DEBUG
+		)
 	
 	path_to_nearest_target = WorldManager.grid.get_nearest_path(
 		WorldManager.grid.local_to_map(host.position), 
@@ -128,8 +150,8 @@ func analyze_tile_scores():
 			false
 		)
 	
-	var moveable_tile = host.get_ability("move").get_reachable_tiles()
-	for tile in moveable_tile:
+	var moveable_tiles = host.get_ability("move").get_target_tiles()
+	for tile in moveable_tiles:
 		scored_tiles.push_front({
 			"position": tile,
 			"value": get_tile_value(tile)
@@ -151,6 +173,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 			continue
 		
 		for target in ability.get_valid_targets(tile_pos):
+			print("found valid target at ", target.map_position)
 			if WorldManager.grid.threat_tiles.has(target.map_position):
 				value += 5
 			else:

@@ -1,8 +1,9 @@
 extends Node
 
 var is_enabled = true
-var show_enemy_ai_tile_values = true
-var show_move_path_highlight = true
+var show_enemy_ai_tile_values = false
+var show_move_path_highlight = false
+var highlight_enemy_target = true
 
 func _physics_process(delta: float) -> void:
 	if is_enabled:
@@ -25,3 +26,7 @@ func _physics_process(delta: float) -> void:
 			text += "\nmove_counter: %s"%entity.move_counter
 			text += "\naction_counter: %s"%entity.action_counter
 		UIManager.info(text)
+
+func _on_test_button_pressed():
+	var entity = get_tree().get_first_node_in_group(C.GROUPS_ENEMIES)
+	entity.get_ability("strike").get_reachable_tiles()

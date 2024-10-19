@@ -10,6 +10,7 @@ enum STATE{
 @onready var undo_move := $UndoMove
 @onready var end_turn := $EndTurn
 @onready var debug_label := $Debug/Label
+@onready var test_button := $TestButton
 
 var state := STATE.INACTIVE
 var context
@@ -17,6 +18,8 @@ var context
 signal end_turn_pressed
 signal undo_move_pressed
 
+func _ready() -> void:
+	test_button.pressed.connect(Debug._on_test_button_pressed)
 
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
@@ -46,6 +49,7 @@ func set_context(ctx):
 		generate_ability_icons(context.get_abilities())
 
 func _on_end_turn_pressed() -> void:
+	print("end turn pressed")
 	end_turn_pressed.emit()
 
 

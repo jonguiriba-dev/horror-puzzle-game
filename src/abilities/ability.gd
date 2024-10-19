@@ -46,8 +46,8 @@ func _ready() -> void:
 	stopped_targetting.connect(_on_ability_stopped_targetting)
 
 func use(target_map_position:Vector2i):
-	var reachable_tiles = get_reachable_tiles(host.map_position,ability_range)
-	if reachable_tiles.has(target_map_position):
+	var target_tiles = get_target_tiles(host.map_position,ability_range)
+	if target_tiles.has(target_map_position):
 		await _play_animation()
 		
 		var target_entity = _get_tile_target(target_map_position)
@@ -91,7 +91,7 @@ func _on_target_select() -> void:
 	set_state(STATE.TARGET_SELECT)
 	add_to_group(C.GROUPS_TARGETTING_ABILITY)
 	WorldManager.grid.is_ability_select = true
-	highlight_range_tiles(ability_range)
+	highlight_target_tiles()
 
 func _on_ability_stopped_targetting() -> void:
 	remove_from_group(C.GROUPS_TARGETTING_ABILITY)
@@ -99,41 +99,38 @@ func _on_ability_stopped_targetting() -> void:
 	state = STATE.INACTIVE
 	WorldManager.grid.is_ability_select = false
 	
-func highlight_range_tiles(_ability_range):
-	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
+func highlight_target_tiles():
+	var target_tiles = get_target_tiles()
 	
-	var moveable_tile_positions = get_reachable_tiles(WorldManager.grid.local_to_map(host.position),_ability_range)
-	
-	for pos in moveable_tile_positions:
-	
+	for pos in target_tiles:
 		if highlight_color == Color.ORANGE:
 			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.ABILITY)
 		else:
 			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.GREEN,Grid.HIGHLIGHT_LAYERS.ABILITY)
-		
-func get_reachable_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range):
-	var possible_tiles = WorldManager.grid.get_possible_tiles()
-		
-	var tiles = []
-	for x in range(_range*-1, _range+1, 1):
-		for y in range(_range*-1, _range+1, 1):
+
+
+func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
+	var tiles:Array[Vector2i]= []
+	for x in range(_range*-1, _range+1):
+		for y in range(_range*-1, _range+1):
 			var next_position = Vector2i(x+map_pos.x, y+map_pos.y)
-			if(possible_tiles.has(next_position) and
-			 WorldManager.grid.get_manhattan_distance(map_pos,next_position) <= _range ):
-				if next_position != map_pos:
-					var has_self = false
-					
-					if next_position != host.map_position:
-						has_self = true
-						tiles.append(next_position)
+			if abs(Util.get_manhattan_distance(map_pos,next_position)) <= _range:
+				tiles.append(next_position)
+	
 	return tiles
 
-func get_valid_targets(map_pos:Vector2i)->Array[Entity]:
+func get_valid_targets(map_pos:Vector2i=Vector2i.ZERO)->Array[Entity]:
+	if map_pos == Vector2i.ZERO:
+		map_pos = host.map_position
+	
 	var targets:Array[Entity]=[]
-	var reachable_tiles = get_reachable_tiles(map_pos,ability_range)
+	var reachable_tiles = get_target_tiles(map_pos,ability_range)
 	if can_target_entities:
-		for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		for entity in host.get_enemies():
 			if reachable_tiles.has(entity.map_position) :
-				targets.push_front(entity)
+				if entity != host:
+					targets.push_front(entity)
 	return targets
+	
+	
 	

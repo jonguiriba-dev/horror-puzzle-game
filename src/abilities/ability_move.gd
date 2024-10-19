@@ -21,10 +21,9 @@ func _ready() -> void:
 	]
 	#move_target_set.connect(_on_move_target_set)
 
-func get_reachable_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range):
-	var navigatable_tiles = []
-	var possible_tiles = WorldManager.grid.get_possible_tiles()
-	
+func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
+	var navigatable_tiles:Array[Vector2i]= []
+	var possible_tiles = WorldManager.grid.get_possible_tiles(3)
 	var queued_tiles = [map_pos]
 	
 	var step = 0
@@ -35,7 +34,8 @@ func get_reachable_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_r
 			for pending_tile in pending_tiles:
 				var next_tile = pending_tile + direction
 				if possible_tiles.has(next_tile) and !navigatable_tiles.has(next_tile):
-					navigatable_tiles.push_front(next_tile)
+					if host.map_position != next_tile and !WorldManager.grid.ally_tiles.has(next_tile):
+						navigatable_tiles.push_front(next_tile)
 					queued_tiles.push_front(next_tile)
 		step += 1
 		if step == _range:
@@ -55,6 +55,7 @@ func use(target_map_position:Vector2i):
 	else:
 		target_position = target_map_position
 		super(target_map_position)
+		
 func move_to_selected_tile(target_pos:Vector2i):
 	var curr_tile = WorldManager.grid.local_to_map(host.position)
 	path = WorldManager.grid.astar_grid.get_id_path(curr_tile, target_pos)

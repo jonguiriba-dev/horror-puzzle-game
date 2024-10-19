@@ -62,7 +62,7 @@ func _on_enemy_unit_turn_end():
 		end_turn()
 		
 	var enemy = enemy_turn_queue.pop_front()
-	if enemy:
+	if is_instance_valid(enemy):
 		enemy.turn_start.emit()
 		
 func _on_enemy_unit_turn_start(entity:Entity):

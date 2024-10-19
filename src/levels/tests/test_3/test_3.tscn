@@ -50,7 +50,18 @@ tile_set = ExtResource("6_8qbkn")
 
 [node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("7_pusx7")]
 position = Vector2(-32, 0)
-preset = null
+
+[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("7_pusx7")]
+position = Vector2(-47, -8)
+
+[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("7_pusx7")]
+position = Vector2(-17, -7)
+
+[node name="Dummy4" parent="Grid/PropLayer" instance=ExtResource("7_pusx7")]
+position = Vector2(-32, -15)
 
 [node name="Goon" parent="Grid/PropLayer" instance=ExtResource("8_om0ks")]
 position = Vector2(-16, 9)
+
+[node name="Goon2" parent="Grid/PropLayer" instance=ExtResource("8_om0ks")]
+position = Vector2(2, 17)

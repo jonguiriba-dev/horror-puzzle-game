@@ -26,7 +26,6 @@ func get_nearest(pos:Vector2,nodes:Array):
 
 func get_direction(source:Vector2i,target:Vector2i)->Vector2i:
 	var direction = (source - target)
-	print(">>>> ",direction)
 	if abs(direction.x) > abs(direction.y):
 		if direction.x > 0: 
 			direction.x = 1 
@@ -41,3 +40,13 @@ func get_direction(source:Vector2i,target:Vector2i)->Vector2i:
 		direction.x = 0
 		
 	return direction
+	
+func get_manhattan_distance(a:Vector2,b:Vector2):
+	var y_distance = Vector2(0,a.y).distance_to(Vector2(0,b.y))
+	var x_distance = Vector2(a.x,0).distance_to(Vector2(b.x,0))
+	return abs(y_distance) + abs(x_distance)
+
+func get_pathfinding_distance(a:Vector2,b:Vector2):
+	WorldManager.grid.get_possible_tiles(7)
+	var path = WorldManager.grid.astar_grid.get_id_path(a, b)
+	return path.size()

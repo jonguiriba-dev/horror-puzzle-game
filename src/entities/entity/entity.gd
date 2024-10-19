@@ -34,7 +34,6 @@ signal selected
 func _ready() -> void:
 	load_preset(preset)
 	add_to_group(C.GROUPS_ENTITIES)
-	
 	death.connect(_on_death)
 	hit.connect(_on_hit)
 	knockback.connect(_on_knockback)
@@ -55,6 +54,7 @@ func _ready() -> void:
 	if sprite:
 		sprite.play("idle")
 	
+	
 	WorldManager.register_entity(self)
 	
 func load_preset(_preset:EntityPreset):
@@ -71,8 +71,6 @@ func load_preset(_preset:EntityPreset):
 	
 	add_child(_preset.get_state_machine())
 	
-	print(self)
-	print(sprite)
 	if preset.sprite_frames:
 		sprite.sprite_frames = preset.sprite_frames
 
@@ -140,7 +138,7 @@ func _on_ability_applied(ability:Ability):
 	if ability.ability_name == "move":
 		return
 	action_counter -= 1
-
+	move_counter = 0
 func undo_move():
 	if move_counter < max_move_counter:
 		_move_position(initial_position)

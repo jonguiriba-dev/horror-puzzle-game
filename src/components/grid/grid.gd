@@ -51,29 +51,33 @@ enum TILE_EXCLUDE_FLAGS{
 var possible_tiles_cache:Dictionary = {}
 func get_possible_tiles(exclude_flags:int=7):
 	populate_entity_tiles()
+	
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	
 	astar_grid.fill_solid_region(astar_grid.region,false)
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES) != 0:
+		print("> excldue obstacles")
 		for prop_pos in props:
 			tiles.erase(prop_pos)
 			astar_grid.set_point_solid(prop_pos)
 	
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_ENEMIES) != 0:
+		print("> excldue enemy")
 		for enemy_pos in enemy_tiles:
-			var enemy_map_pos = prop_layer.local_to_map(enemy_pos)
-			tiles.erase(enemy_map_pos)
-			astar_grid.set_point_solid(enemy_map_pos)
+			tiles.erase(enemy_pos)
+			astar_grid.set_point_solid(enemy_pos)
 			
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_ALLIES) != 0:
+		print("> excldue ally")
 		for ally_pos in ally_tiles:
-			var enemy_map_pos = prop_layer.local_to_map(ally_pos)
-			tiles.erase(enemy_map_pos)
-			astar_grid.set_point_solid(enemy_map_pos)
+			tiles.erase(ally_pos)
 	
 	return tiles
-	
+
+func get_all_tiles()->Array[Vector2i]:
+	return tiles_layer.get_used_cells()
+
 func set_highlight(map_position:Vector2i, color:HIGHLIGHT_COLORS,layer:HIGHLIGHT_LAYERS):
 	var highlight_layer = get_highlight_layer(layer)
 		
@@ -113,11 +117,6 @@ func get_highlight_layer(layer:HIGHLIGHT_LAYERS):
 		highlight_layer = debug_highlight_layer
 	return highlight_layer
 	
-func get_manhattan_distance(a:Vector2,b:Vector2):
-	var y_distance = Vector2(0,a.y).distance_to(Vector2(0,b.y))
-	var x_distance = Vector2(a.x,0).distance_to(Vector2(b.x,0))
-	return abs(y_distance) + abs(x_distance)
-
 func get_grid_local_mouse_position()->Vector2:
 	return prop_layer.get_local_mouse_position()
 	
@@ -125,7 +124,7 @@ func get_map_mouse_position()->Vector2i:
 	return prop_layer.local_to_map(prop_layer.get_local_mouse_position())
 	
 func is_within_range(a:Vector2,b:Vector2,_range:int) -> bool:
-	return get_manhattan_distance(a,b) <= _range
+	return Util.get_manhattan_distance(a,b) <= _range
 
 func local_to_map(local_pos:Vector2)->Vector2i:
 	return prop_layer.local_to_map(local_pos)
@@ -134,7 +133,7 @@ func map_to_local(map_pos:Vector2i)->Vector2:
 	return prop_layer.map_to_local(map_pos)
 	
 func get_nearest_path(source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
-	get_possible_tiles(include_obstacles if 1 else 3)
+	get_possible_tiles( 1 if include_obstacles else 3)
 	var path = WorldManager.grid.astar_grid.get_id_path(source, target)
 	if path.size() > 0:
 		path.remove_at(0)
@@ -174,6 +173,8 @@ func populate_entity_tiles():
 			enemy_tiles.push_front(entity.map_position)
 		elif entity.team != C.TEAM.ENEMY and WorldManager.team_turn == C.TEAM.ENEMY:
 			enemy_tiles.push_front(entity.map_position)
+		elif entity.team == C.TEAM.CITIZEN and WorldManager.team_turn == C.TEAM.PLAYER:
+			ally_tiles.push_front(entity.map_position)
 		elif entity.team == WorldManager.team_turn:
 			ally_tiles.push_front(entity.map_position)
 		

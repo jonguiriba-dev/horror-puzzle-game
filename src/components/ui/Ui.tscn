@@ -87,5 +87,13 @@ text = "Undo
 Move"
 vertical_alignment = 1
 
+[node name="TestButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 3.0
+offset_right = 484.0
+offset_bottom = 34.0
+text = "Test1"
+
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="UndoMove" to="." method="_on_undo_move_pressed"]

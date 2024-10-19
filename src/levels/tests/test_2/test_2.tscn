@@ -74,3 +74,9 @@ position = Vector2(-16, 9)
 
 [node name="Goon4" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
 position = Vector2(31, 49)
+
+[node name="Goon5" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
+position = Vector2(49, 39)
+
+[node name="Goon6" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
+position = Vector2(81, 24)

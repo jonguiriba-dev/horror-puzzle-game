@@ -42,16 +42,12 @@ func clear_all_highlights():
 	for node in get_tree().get_nodes_in_group(C.HIGHLIGHT_TEXT):
 		node.queue_free()
 		
-func get_manhattan_distance(a:Vector2,b:Vector2):
-	var y_distance = Vector2(0,a.y).distance_to(Vector2(0,b.y))
-	var x_distance = Vector2(a.x,0).distance_to(Vector2(b.x,0))
-	return abs(y_distance) + abs(x_distance)
 
 func get_map_mouse_position()->Vector2i:
 	return local_to_map(get_local_mouse_position())
 	
 func is_within_range(a:Vector2,b:Vector2,range:int) -> bool:
-	return get_manhattan_distance(a,b) <= range
+	return Util.get_manhattan_distance(a,b) <= range
 		
 			
 func add_test(map_position:Vector2):
