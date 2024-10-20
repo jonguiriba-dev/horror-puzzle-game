@@ -118,7 +118,6 @@ func analyze_tile_scores():
 	)
 	
 	for target in targets:
-		WorldManager.grid.debug_tile_text(target.map_position,str(target.position.distance_squared_to(host.position)))
 		if WorldManager.grid.threat_tiles.has(target.map_position):
 			targets.erase(target)
 			targets.push_back(target)
