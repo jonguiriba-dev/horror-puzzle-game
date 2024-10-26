@@ -16,7 +16,6 @@ func _ready() -> void:
 	UIManager.initialized.connect(_on_ui_manager_initalized)
 	team_turn = turn_order[0]
 	turn_start.connect(_on_turn_start)
-	
 
 func _on_scenetree_ready():
 	_start_player_turn()
@@ -24,6 +23,7 @@ func _on_scenetree_ready():
 	
 func _on_ui_manager_initalized():
 	UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
+	UIManager.ui.hide_portrait()
 
 func _on_end_turn_pressed():
 	UIManager.ui.end_turn.disabled = true
@@ -72,8 +72,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
 		var targetting_ability = get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY)
+		
 		if targetting_ability:
 			targetting_ability.use(mouse_map_position)
+			if !targetting_ability.is_valid_target(mouse_map_position):
+				grid.tile_selected.emit(mouse_map_position)
 		else:
 			grid.tile_selected.emit(mouse_map_position)
 			

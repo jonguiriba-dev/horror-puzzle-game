@@ -15,3 +15,4 @@ ability_3 = null
 ability_4 = null
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 sprite_frames = ExtResource("2_ncr73")
+portrait_image = "res://assets/portraits/layla-portrait.png"

@@ -24,8 +24,12 @@ enum STATE_LISTS{
 ## States
 @export_file() var state_machine
 
-@export_group("Resources")
+
+
+@export_group("Etc")
 @export var sprite_frames:SpriteFrames
+@export_file() var portrait_image
+
 
 func get_abilities()->Array:
 	var abilities = []

@@ -46,8 +46,7 @@ func _ready() -> void:
 	stopped_targetting.connect(_on_ability_stopped_targetting)
 
 func use(target_map_position:Vector2i):
-	var target_tiles = get_target_tiles(host.map_position,ability_range)
-	if target_tiles.has(target_map_position):
+	if is_valid_target(target_map_position):
 		await _play_animation()
 		
 		var target_entity = _get_tile_target(target_map_position)
@@ -131,6 +130,9 @@ func get_valid_targets(map_pos:Vector2i=Vector2i.ZERO)->Array[Entity]:
 				if entity != host:
 					targets.push_front(entity)
 	return targets
-	
-	
-	
+
+func is_valid_target(map_pos:Vector2i):
+	var target_tiles = get_target_tiles(host.map_position,ability_range)
+	if target_tiles.has(map_pos):
+		return true
+	return false

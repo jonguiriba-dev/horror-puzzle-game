@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv3s5hr6txmvy"]
+[gd_scene load_steps=9 format=3 uid="uid://cv3s5hr6txmvy"]
 
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_kp27u"]
 [ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="2_ppg2h"]
 [ext_resource type="SpriteFrames" uid="uid://bpcqw3ux8t2hk" path="res://src/entities/entity/presets/civilian/civilian_sprite_frames.tres" id="3_ea3dr"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="4_t2dne"]
+[ext_resource type="Texture2D" uid="uid://jgjhswf5f3pi" path="res://assets/ui/healthbar/health_under.png" id="5_21tx8"]
+[ext_resource type="Texture2D" uid="uid://b4pa8rvba3ac5" path="res://assets/ui/healthbar/health-over.png" id="6_dxur6"]
+[ext_resource type="Texture2D" uid="uid://bwp1lkqnpimga" path="res://assets/ui/healthbar/health_progress.png" id="7_pla2c"]
+[ext_resource type="Script" path="res://src/entities/entity/healthbar.gd" id="8_vdjqg"]
 
 [node name="Civilian" type="Node2D"]
 script = ExtResource("1_kp27u")
@@ -26,5 +30,18 @@ position = Vector2(0, -12)
 position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
 
+[node name="Healthbar" type="TextureProgressBar" parent="."]
+offset_left = -8.0
+offset_top = -33.0
+offset_right = 9.0
+offset_bottom = -29.0
+max_value = 2.0
+value = 2.0
+texture_under = ExtResource("5_21tx8")
+texture_over = ExtResource("6_dxur6")
+texture_progress = ExtResource("7_pla2c")
+script = ExtResource("8_vdjqg")
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="value_changed" from="Healthbar" to="Healthbar" method="_on_value_changed"]

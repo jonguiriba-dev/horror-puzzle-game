@@ -11,6 +11,9 @@ enum STATE{
 @onready var end_turn := $EndTurn
 @onready var debug_label := $Debug/Label
 @onready var test_button := $TestButton
+@onready var portrait_container := $Portrait
+@onready var portrait := $Portrait/image
+@onready var display_name := $Portrait/name
 
 var state := STATE.INACTIVE
 var context
@@ -42,11 +45,23 @@ func show_ability_icons():
 func hide_ability_icons():
 	ability_container.hide()
 
-func set_context(ctx):
-	context = ctx
-	if context is Unit:
-		show_ability_icons()
-		generate_ability_icons(context.get_abilities())
+func set_context(context:Entity):
+	print("SET CONTEXT ",context)
+	display_name.text = context.entity_name
+	show_ability_icons()
+	generate_ability_icons(context.get_abilities())
+	portrait.texture = context.portrait_image
+	show_portrait()
+		
+func clear_context():
+	hide_portrait()
+
+
+
+func hide_portrait():
+	portrait_container.hide()
+func show_portrait():
+	portrait_container.show()
 
 func _on_end_turn_pressed() -> void:
 	print("end turn pressed")

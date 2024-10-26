@@ -41,15 +41,18 @@ func _enter_state(old_state, new_state):
 	UIManager.ui.set_context(host)
 	UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
 	if host.move_counter > 0 and host.action_counter > 0:
-		host.get_ability("move").target_select.emit()	
+		host.get_ability("move").target_select.emit()
+	
 
 func _exit_state(old_state, new_state):
 	UIManager.ui.undo_move_pressed.disconnect(_on_undo_move_pressed)
+	UIManager.ui.clear_context()
 	
 func _on_tile_selected(map_pos:Vector2i):
 	if (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ABILITY) == 0):
 		#and ability.state != Ability.STATE.TARGET_SELECT):
 		to_idle = true
+		
 func _on_other_entity_selected():
 	to_idle = true
 	

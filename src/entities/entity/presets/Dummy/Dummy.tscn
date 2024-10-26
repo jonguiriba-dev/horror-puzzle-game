@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://jjlhg6loc6fy"]
+[gd_scene load_steps=9 format=3 uid="uid://jjlhg6loc6fy"]
 
 [ext_resource type="Script" path="res://src/entities/entity/unit/unit.gd" id="1_terdb"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_83wt7"]
 [ext_resource type="Resource" uid="uid://drknb3tcdylsc" path="res://src/entities/entity/presets/dummy/dummy_preset.tres" id="2_qrdk5"]
 [ext_resource type="SpriteFrames" uid="uid://cx1aygnj1t6f0" path="res://src/entities/entity/presets/dummy/dummy_sprite_frames.tres" id="3_k1fwx"]
+[ext_resource type="Texture2D" uid="uid://jgjhswf5f3pi" path="res://assets/ui/healthbar/health_under.png" id="5_msw61"]
+[ext_resource type="Texture2D" uid="uid://b4pa8rvba3ac5" path="res://assets/ui/healthbar/health-over.png" id="6_yefjw"]
+[ext_resource type="Texture2D" uid="uid://bwp1lkqnpimga" path="res://assets/ui/healthbar/health_progress.png" id="7_g4loh"]
+[ext_resource type="Script" path="res://src/entities/entity/healthbar.gd" id="8_nff4y"]
 
 [node name="Dummy" type="Node2D"]
 script = ExtResource("1_terdb")
@@ -25,6 +29,18 @@ position = Vector2(0, -12)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
+
+[node name="Healthbar" type="TextureProgressBar" parent="."]
+offset_left = -8.0
+offset_top = -33.0
+offset_right = 8.0
+offset_bottom = -29.0
+max_value = 5.0
+value = 4.0
+texture_under = ExtResource("5_msw61")
+texture_over = ExtResource("6_yefjw")
+texture_progress = ExtResource("7_g4loh")
+script = ExtResource("8_nff4y")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
