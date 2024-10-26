@@ -117,10 +117,10 @@ func analyze_tile_scores():
 		return target1.get_meta("distance_to_host") <= target2.get_meta("distance_to_host") 
 	)
 	
-	for target in targets:
-		if WorldManager.grid.threat_tiles.has(target.map_position):
-			targets.erase(target)
-			targets.push_back(target)
+	for _target in targets:
+		if WorldManager.grid.threat_tiles.has(_target.map_position):
+			targets.erase(_target)
+			targets.push_back(_target)
 		
 	var nearest = targets[0]
 	if !nearest:
@@ -171,9 +171,9 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		if !ability.can_target_entities:
 			continue
 		
-		for target in ability.get_valid_targets(tile_pos):
-			print("found valid target at ", target.map_position)
-			if WorldManager.grid.threat_tiles.has(target.map_position):
+		for _target in ability.get_valid_targets(tile_pos):
+			print("found valid target at ", _target.map_position)
+			if WorldManager.grid.threat_tiles.has(_target.map_position):
 				value += 5
 			else:
 				value += 10

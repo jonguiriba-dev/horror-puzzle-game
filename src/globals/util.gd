@@ -50,3 +50,5 @@ func get_pathfinding_distance(a:Vector2,b:Vector2):
 	WorldManager.grid.get_possible_tiles(7)
 	var path = WorldManager.grid.astar_grid.get_id_path(a, b)
 	return path.size()
+
+	

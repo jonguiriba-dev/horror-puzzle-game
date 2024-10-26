@@ -62,7 +62,7 @@ position = Vector2(-62, 17)
 position = Vector2(63, -16)
 
 [node name="Civilian4" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
-position = Vector2(16, 10)
+position = Vector2(80, 8)
 
 [node name="Civilian5" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
 position = Vector2(-16, 56)
@@ -79,10 +79,10 @@ position = Vector2(-16, 9)
 preset = ExtResource("11_wyt2o")
 
 [node name="Goon4" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
-position = Vector2(31, 49)
+position = Vector2(16, 9)
 
 [node name="Goon5" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
-position = Vector2(49, 39)
+position = Vector2(32, 16)
 
 [node name="Goon6" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
 position = Vector2(81, 24)

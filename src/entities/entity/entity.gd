@@ -20,7 +20,6 @@ var move_counter = 1
 var action_counter = 1
 var max_move_counter = 1
 var max_action_counter = 1
-var initial_position:Vector2i
 var map_position:Vector2i:
 	get:
 		return WorldManager.grid.local_to_map(position)
@@ -41,7 +40,7 @@ func _ready() -> void:
 	knockback.connect(_on_knockback)
 	turn_end.connect(_on_turn_end)
 	turn_start.connect(_on_turn_start)
-	
+	selected.connect(_on_selected)
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
 		sprite.set_modulate(Color.RED)
@@ -49,9 +48,6 @@ func _ready() -> void:
 		add_to_group(C.GROUPS_TARGETS)
 		if team == C.TEAM.PLAYER:
 			add_to_group(C.GROUPS_PLAYER_ENTITIES)
-	
-	for ability in get_abilities():
-		ability.applied.connect(_on_ability_applied)
 	
 	if sprite:
 		sprite.play("idle")
@@ -113,9 +109,6 @@ func get_ability(ability_name:String)->Ability:
 func hide_all_details():
 	rescue_text.hide()
 	
-func _move_position(_position:Vector2):
-	position = _position
-	WorldManager.grid.set_map_cursor(WorldManager.grid.local_to_map(position))
 
 func get_enemies()->Array[Entity]:
 	var enemies:Array[Entity] = []
@@ -126,15 +119,14 @@ func get_enemies()->Array[Entity]:
 			enemies.push_front(entity as Entity)
 	return enemies 
 	
-func undo_move():
-	if move_counter < max_move_counter:
-		_move_position(initial_position)
-		move_counter += 1
-		
+func undo_move(initial_position:Vector2):
+	WorldManager.grid.set_map_cursor(initial_position)
+	position = initial_position
+	move_counter = 1
+	
 func _on_turn_start():
 	move_counter = max_move_counter
 	action_counter = max_action_counter
-	initial_position = position
 	
 func _on_turn_end():
 	pass
@@ -145,11 +137,6 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	remove_from_group(C.HOVERED_ENTITIES)
 
-func _on_ability_applied(ability:Ability):
-	if ability.ability_name == "move":
-		return
-	action_counter -= 1
-	move_counter = 0
 	
 func _on_knockback(distance:int, source_map_pos:Vector2i):
 	var direction = Util.get_direction(source_map_pos,WorldManager.grid.local_to_map(position))
@@ -181,3 +168,9 @@ func _on_death() -> void:
 		remove_from_group(group)
 	queue_free()
 		
+
+func _on_selected():
+	if team == C.TEAM.PLAYER:
+		UIManager.ui.set_context(self)
+	else:
+		UIManager.ui.clear_context()

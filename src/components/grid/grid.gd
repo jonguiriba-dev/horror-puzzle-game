@@ -49,7 +49,7 @@ enum TILE_EXCLUDE_FLAGS{
 }
 
 var possible_tiles_cache:Dictionary = {}
-func get_possible_tiles(exclude_flags:int=7):
+func get_possible_tiles(exclude_flags:int=7)->Array[Vector2i]:
 	populate_entity_tiles()
 	
 	var tiles = tiles_layer.get_used_cells()

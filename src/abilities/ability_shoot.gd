@@ -17,12 +17,4 @@ func _ready() -> void:
 			AbilityAction.ACTION_TYPES.KNOCKBACK
 		)
 	]
-func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
-	var tiles:Array[Vector2i]= []
-	for x in range(_range*-1, _range+1):
-		for y in range(_range*-1, _range+1):
-			var next_position = Vector2i(x+map_pos.x, y+map_pos.y)
-			if abs(Util.get_manhattan_distance(map_pos,next_position)) <= _range:
-				tiles.append(next_position)
-	
-	return tiles
+	range_pattern = TilePattern.generate_line_pattern

@@ -2,6 +2,7 @@ extends Ability
 class_name AbilityMove
 
 var path=[]
+var initial_position
 var target_position=null
 var play_animation = false
 signal move_target_set(map_position:Vector2i)
@@ -50,6 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	#move_to_selected_tile(map_position)
 
 func use(target_map_position:Vector2i):
+	initial_position = host.position
 	if target_map_position == host.map_position:
 		host.move_end.emit()
 	else:
@@ -114,3 +116,6 @@ func show_path_highlight():
 	for tile in path:
 		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.DEBUG)
 	
+func _on_ability_applied():
+	print("APPLIED ",initial_position, " ", host)
+	WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})

@@ -45,7 +45,8 @@ func show_ability_icons():
 func hide_ability_icons():
 	ability_container.hide()
 
-func set_context(context:Entity):
+func set_context(_context:Entity):
+	context = _context
 	print("SET CONTEXT ",context)
 	display_name.text = context.entity_name
 	show_ability_icons()
@@ -55,8 +56,6 @@ func set_context(context:Entity):
 		
 func clear_context():
 	hide_portrait()
-
-
 
 func hide_portrait():
 	portrait_container.hide()

@@ -19,6 +19,7 @@ var highlight_color = Color.ORANGE
 var is_enemy_obstacle = false
 var target_count = 1
 var knockback_distance = 0
+var range_pattern:Callable=TilePattern.generate_diamond_pattern
 var can_target_entities:bool:
 	get:
 		for action in actions:
@@ -44,7 +45,8 @@ signal applied(ability:Ability)
 func _ready() -> void:
 	target_select.connect(_on_target_select)
 	stopped_targetting.connect(_on_ability_stopped_targetting)
-
+	applied.connect(_on_ability_applied)
+	
 func use(target_map_position:Vector2i):
 	if is_valid_target(target_map_position):
 		await _play_animation()
@@ -70,7 +72,7 @@ func apply_effect(target):
 		if action.action_type == AbilityAction.ACTION_TYPES.KNOCKBACK:
 			target.knockback.emit(knockback_distance, WorldManager.grid.local_to_map(host.position))
 			
-	applied.emit(self)
+	applied.emit()
 
 func _play_animation():
 	await Util.wait(0.3)
@@ -83,22 +85,8 @@ func set_state(_state:STATE):
 	
 	
 	state = _state
-	
-func _on_target_select() -> void:
-	if host.action_counter == 0:
-		return 
-	set_state(STATE.TARGET_SELECT)
-	add_to_group(C.GROUPS_TARGETTING_ABILITY)
-	WorldManager.grid.is_ability_select = true
-	highlight_target_tiles()
-
-func _on_ability_stopped_targetting() -> void:
-	remove_from_group(C.GROUPS_TARGETTING_ABILITY)
-	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
-	state = STATE.INACTIVE
-	WorldManager.grid.is_ability_select = false
-	
 func highlight_target_tiles():
+	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	var target_tiles = get_target_tiles()
 	
 	for pos in target_tiles:
@@ -109,12 +97,13 @@ func highlight_target_tiles():
 
 
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
-	var tiles:Array[Vector2i]= []
-	for x in range(_range*-1, _range+1):
-		for y in range(_range*-1, _range+1):
-			var next_position = Vector2i(x+map_pos.x, y+map_pos.y)
-			if abs(Util.get_manhattan_distance(map_pos,next_position)) <= _range:
-				tiles.append(next_position)
+	var possible_tiles = WorldManager.grid.get_possible_tiles(
+		Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES + Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_ALLIES
+	)
+	
+	var tiles = range_pattern.call(map_pos,_range).filter(func(e):
+		return possible_tiles.has(e)	
+	)
 	
 	return tiles
 
@@ -136,3 +125,23 @@ func is_valid_target(map_pos:Vector2i):
 	if target_tiles.has(map_pos):
 		return true
 	return false
+
+	
+func _on_target_select() -> void:
+	if host.action_counter == 0:
+		return 
+	set_state(STATE.TARGET_SELECT)
+	add_to_group(C.GROUPS_TARGETTING_ABILITY)
+	WorldManager.grid.is_ability_select = true
+	highlight_target_tiles()
+
+func _on_ability_stopped_targetting() -> void:
+	remove_from_group(C.GROUPS_TARGETTING_ABILITY)
+	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
+	state = STATE.INACTIVE
+	WorldManager.grid.is_ability_select = false
+	
+func _on_ability_applied():
+	WorldManager.entity_moved_history.clear()
+	host.action_counter -= 1
+	host.move_counter = 0
