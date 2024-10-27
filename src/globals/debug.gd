@@ -3,7 +3,7 @@ extends Node
 var is_enabled = true
 var show_enemy_ai_tile_values = false
 var show_move_path_highlight = false
-var highlight_enemy_target = true
+var highlight_enemy_target = false
 
 func _physics_process(delta: float) -> void:
 	if is_enabled:

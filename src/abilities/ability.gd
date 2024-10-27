@@ -20,6 +20,8 @@ var is_enemy_obstacle = false
 var target_count = 1
 var knockback_distance = 0
 var range_pattern:Callable=TilePattern.generate_diamond_pattern
+var aoe_pattern:Callable = TilePattern.point
+var use_host_as_origin = false
 var can_target_entities:bool:
 	get:
 		for action in actions:
@@ -40,23 +42,33 @@ var can_target_tiles:bool:
 signal target_select
 signal stopped_targetting
 signal applied(ability:Ability)
-
+signal used
 
 func _ready() -> void:
 	target_select.connect(_on_target_select)
 	stopped_targetting.connect(_on_ability_stopped_targetting)
-	applied.connect(_on_ability_applied)
 	
 func use(target_map_position:Vector2i):
 	if is_valid_target(target_map_position):
 		await _play_animation()
 		
-		var target_entity = _get_tile_target(target_map_position)
-		if is_instance_valid(target_entity):
-			apply_effect(target_entity)
+		var direction = Util.get_direction(host.map_position,target_map_position)
+		
+		var origin = target_map_position
+		
+		if use_host_as_origin:
+			origin = host.map_position + direction
+			
+		var affected_tiles = aoe_pattern.call(origin,ability_range,direction)
+		for affected_tile in affected_tiles:
+			var target_entity = _get_tile_target(affected_tile)
+			if is_instance_valid(target_entity):
+				apply_effect(target_entity)
+		
+		used.emit()
 		
 	stopped_targetting.emit()
-
+	
 func _get_tile_target(map_pos:Vector2i):
 	var entities = get_tree().get_nodes_in_group(C.GROUPS_ENTITIES).filter(func(e):
 		return e.map_position == map_pos
@@ -141,7 +153,3 @@ func _on_ability_stopped_targetting() -> void:
 	state = STATE.INACTIVE
 	WorldManager.grid.is_ability_select = false
 	
-func _on_ability_applied():
-	WorldManager.entity_moved_history.clear()
-	host.action_counter -= 1
-	host.move_counter = 0

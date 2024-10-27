@@ -12,3 +12,8 @@ func initialize():
 func info(text:String):
 	if ui:
 		ui.debug_label.text = text
+
+func play_game_start_sequence():
+	ui.game_start_overlay.show()
+	await Util.wait(2)
+	ui.game_start_overlay.hide()

@@ -1,6 +1,14 @@
 extends Node
 
-func generate_line_pattern(map_pos:Vector2i,_range:int)->Array[Vector2i]:
+func generate_directional_line_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO):
+	var tiles:Array[Vector2i]= []
+	
+	for i in range(_range):
+		tiles.push_front(map_pos + (direction * i))
+		
+	return tiles
+	
+func generate_line_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
 	var tiles:Array[Vector2i]= []
 	for x in range(_range*-1, _range+1):
 		for y in range(_range*-1, _range+1):
@@ -13,7 +21,7 @@ func generate_line_pattern(map_pos:Vector2i,_range:int)->Array[Vector2i]:
 	return tiles
 	
 
-func generate_diamond_pattern(map_pos:Vector2i,_range:int)->Array[Vector2i]:
+func generate_diamond_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
 	var tiles:Array[Vector2i]= []
 	for x in range(_range*-1, _range+1):
 		for y in range(_range*-1, _range+1):
@@ -22,3 +30,6 @@ func generate_diamond_pattern(map_pos:Vector2i,_range:int)->Array[Vector2i]:
 					tiles.append(next_position)
 
 	return tiles
+
+func point(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
+	return [map_pos]

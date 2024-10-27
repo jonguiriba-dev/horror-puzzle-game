@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=7 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
 [ext_resource type="Texture2D" uid="uid://cua2e6h571023" path="res://assets/ui/end_turn_btn.png" id="3_pekx1"]
 [ext_resource type="Texture2D" uid="uid://bevicnwmcacam" path="res://assets/portraits/eliana-portrait.png" id="4_1ngw0"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
+[ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -115,6 +116,16 @@ texture = ExtResource("4_1ngw0")
 [node name="frame" type="Sprite2D" parent="Portrait"]
 position = Vector2(33, 5)
 texture = ExtResource("5_kf4q6")
+
+[node name="Overlays" type="Control" parent="."]
+z_index = 99
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameStart" type="Sprite2D" parent="Overlays"]
+texture = ExtResource("6_wi4k2")
+centered = false
 
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="UndoMove" to="." method="_on_undo_move_pressed"]

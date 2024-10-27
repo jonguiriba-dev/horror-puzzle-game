@@ -20,7 +20,7 @@ func _ready() -> void:
 			AbilityAction.ACTION_TYPES.MOVE
 		)
 	]
-	#move_target_set.connect(_on_move_target_set)
+	used.connect(_on_ability_used)
 
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
 	var navigatable_tiles:Array[Vector2i]= []
@@ -116,6 +116,5 @@ func show_path_highlight():
 	for tile in path:
 		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.DEBUG)
 	
-func _on_ability_applied():
-	print("APPLIED ",initial_position, " ", host)
+func _on_ability_used():
 	WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})

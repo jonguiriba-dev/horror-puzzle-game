@@ -14,6 +14,7 @@ enum STATE{
 @onready var portrait_container := $Portrait
 @onready var portrait := $Portrait/image
 @onready var display_name := $Portrait/name
+@onready var game_start_overlay := $Overlays/GameStart
 
 var state := STATE.INACTIVE
 var context
@@ -23,7 +24,8 @@ signal undo_move_pressed
 
 func _ready() -> void:
 	test_button.pressed.connect(Debug._on_test_button_pressed)
-
+	game_start_overlay.hide()
+	
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
 		child.queue_free()

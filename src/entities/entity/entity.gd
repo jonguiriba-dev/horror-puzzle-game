@@ -52,7 +52,14 @@ func _ready() -> void:
 	if sprite:
 		sprite.play("idle")
 	
+	for ability in get_abilities():
+		if ability.ability_name == "move":
+			continue
+		ability.used.connect(_on_ability_used)
+	
 	WorldManager.register_entity(self)
+	
+	
 	
 func load_preset(_preset:EntityPreset):
 	if !_preset:
@@ -141,7 +148,7 @@ func _on_mouse_exited() -> void:
 func _on_knockback(distance:int, source_map_pos:Vector2i):
 	var direction = Util.get_direction(source_map_pos,WorldManager.grid.local_to_map(position))
 	#change direction to away from the source 
-	var target_pos = WorldManager.grid.local_to_map(position) + direction * -1 * distance 
+	var target_pos = WorldManager.grid.local_to_map(position) + direction * distance 
 	if !WorldManager.grid.is_within_bounds(target_pos):
 		return
 	if !WorldManager.grid.get_possible_tiles().has(target_pos):
@@ -174,3 +181,8 @@ func _on_selected():
 		UIManager.ui.set_context(self)
 	else:
 		UIManager.ui.clear_context()
+	
+func _on_ability_used():
+	WorldManager.entity_moved_history.clear()
+	action_counter -= 1
+	move_counter = 0

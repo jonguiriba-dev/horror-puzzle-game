@@ -25,7 +25,7 @@ func get_nearest(pos:Vector2,nodes:Array):
 	return nearest
 
 func get_direction(source:Vector2i,target:Vector2i)->Vector2i:
-	var direction = (source - target)
+	var direction = (target - source)
 	if abs(direction.x) > abs(direction.y):
 		if direction.x > 0: 
 			direction.x = 1 

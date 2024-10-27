@@ -8,6 +8,7 @@ func _ready() -> void:
 	knockback_distance = 1
 	damage = 1
 	target_count = 2
+	aoe_pattern = TilePattern.generate_directional_line_pattern
 	actions = [
 		AbilityAction.new(
 			AbilityAction.TARGET_TYPES.ENEMY,
@@ -19,3 +20,4 @@ func _ready() -> void:
 		)
 	]
 	range_pattern = TilePattern.generate_line_pattern
+	use_host_as_origin = true
