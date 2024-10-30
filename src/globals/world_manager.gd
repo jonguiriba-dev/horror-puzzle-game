@@ -7,6 +7,8 @@ var enemy_turn_queue = []
 
 var entity_moved_history:=[]
 
+var input_enabled = false
+
 signal turn_changed
 signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
@@ -40,7 +42,7 @@ func game_start():
 	await UIManager.play_game_start_sequence()
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
-	
+	input_enabled = true
 func _on_scenetree_ready():
 	viewport_ready.emit()
 	await game_start()
@@ -81,7 +83,7 @@ func _on_enemy_unit_turn_start(entity:Entity):
 
 var input_waiting_on_ability = false
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click"):
+	if event.is_action_pressed("click") and input_enabled:
 		
 		if input_waiting_on_ability:
 			return

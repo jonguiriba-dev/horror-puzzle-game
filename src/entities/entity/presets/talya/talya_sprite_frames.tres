@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://jc3proaf3kq0"]
+
+[ext_resource type="Texture2D" uid="uid://ywun0h7rqf65" path="res://assets/talia-sheet.png" id="1_fdqvf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0looy"]
+atlas = ExtResource("1_fdqvf")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rltf6"]
+atlas = ExtResource("1_fdqvf")
+region = Rect2(36, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0looy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rltf6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

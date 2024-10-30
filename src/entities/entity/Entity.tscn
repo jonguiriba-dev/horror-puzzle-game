@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cybb46stuffbp"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity.gd" id="1_t518p"]
-[ext_resource type="SpriteFrames" uid="uid://bpcqw3ux8t2hk" path="res://src/entities/entity/presets/civilian/civilian_sprite_frames.tres" id="2_3s84t"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_7u8pd"]
+[ext_resource type="SpriteFrames" uid="uid://dpvcly4qbu5y5" path="res://src/entities/entity/presets/elyana/elyana_sprite_frames.tres" id="2_nipxk"]
 [ext_resource type="Texture2D" uid="uid://jgjhswf5f3pi" path="res://assets/ui/healthbar/health_under.png" id="4_iflas"]
 [ext_resource type="Texture2D" uid="uid://b4pa8rvba3ac5" path="res://assets/ui/healthbar/health-over.png" id="5_70vys"]
 [ext_resource type="Texture2D" uid="uid://bwp1lkqnpimga" path="res://assets/ui/healthbar/health_progress.png" id="6_mvoms"]
@@ -13,7 +13,7 @@ script = ExtResource("1_t518p")
 
 [node name="EntitySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
-sprite_frames = ExtResource("2_3s84t")
+sprite_frames = ExtResource("2_nipxk")
 animation = &"idle"
 
 [node name="RescueText" type="Sprite2D" parent="EntitySprite"]

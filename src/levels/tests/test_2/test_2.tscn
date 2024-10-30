@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ccxa51fvstye7"]
+[gd_scene load_steps=14 format=4 uid="uid://ccxa51fvstye7"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_3plys"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_sshcj"]
@@ -8,9 +8,10 @@
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="5_4hyey"]
 [ext_resource type="PackedScene" uid="uid://jjlhg6loc6fy" path="res://src/entities/entity/presets/dummy/Dummy.tscn" id="6_v7vo3"]
 [ext_resource type="PackedScene" uid="uid://cv3s5hr6txmvy" path="res://src/entities/entity/presets/civilian/Civilian.tscn" id="7_3ntyg"]
-[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/Eliana.tres" id="9_fubid"]
+[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_ebi6k"]
+[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/elyana/elyana_preset.tres" id="9_fubid"]
 [ext_resource type="PackedScene" uid="uid://yhaj0m23qtd2" path="res://src/entities/entity/presets/goon/Goon.tscn" id="9_psu0r"]
-[ext_resource type="Resource" uid="uid://cjna5ehcpnsah" path="res://src/entities/entity/presets/Layla.tres" id="10_ou8kt"]
+[ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/talya/talya_preset.tres" id="10_2w1rq"]
 [ext_resource type="Resource" uid="uid://bgd10ru8u76c4" path="res://src/entities/entity/presets/Talia.tres" id="11_wyt2o"]
 
 [node name="Test1" type="Node2D"]
@@ -67,12 +68,13 @@ position = Vector2(80, 8)
 [node name="Civilian5" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
 position = Vector2(-16, 56)
 
-[node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
-position = Vector2(17, -8)
+[node name="Entity" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
+position = Vector2(16, -8)
 preset = ExtResource("9_fubid")
 
-[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
-preset = ExtResource("10_ou8kt")
+[node name="Entity2" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
+position = Vector2(0, 1)
+preset = ExtResource("10_2w1rq")
 
 [node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("6_v7vo3")]
 position = Vector2(-16, 9)
