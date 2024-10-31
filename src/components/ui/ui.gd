@@ -15,6 +15,7 @@ enum STATE{
 @onready var portrait := $Portrait/image
 @onready var display_name := $Portrait/name
 @onready var game_start_overlay := $Overlays/GameStart
+@onready var victory_overlay := $Overlays/Victory
 
 var state := STATE.INACTIVE
 var context
@@ -25,6 +26,7 @@ signal undo_move_pressed
 func _ready() -> void:
 	test_button.pressed.connect(Debug._on_test_button_pressed)
 	game_start_overlay.hide()
+	victory_overlay.hide()
 	
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
@@ -49,7 +51,6 @@ func hide_ability_icons():
 
 func set_context(_context:Entity):
 	context = _context
-	print("SET CONTEXT ",context)
 	display_name.text = context.entity_name
 	show_ability_icons()
 	generate_ability_icons(context.get_abilities())

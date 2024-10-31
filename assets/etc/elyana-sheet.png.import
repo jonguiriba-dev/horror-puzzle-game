@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcdurkxbs78rq"
-path="res://.godot/imported/obstacle.png-8750f5009cb316b1822a7355dd2a4e4c.ctex"
+uid="uid://npx2xkrowarf"
+path="res://.godot/imported/elyana-sheet.png-d7d74c0bb95ddf4b8e7c7af9a6fbbdf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/obstacle.png"
-dest_files=["res://.godot/imported/obstacle.png-8750f5009cb316b1822a7355dd2a4e4c.ctex"]
+source_file="res://assets/etc/elyana-sheet.png"
+dest_files=["res://.godot/imported/elyana-sheet.png-d7d74c0bb95ddf4b8e7c7af9a6fbbdf9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm5j3lywioryy"
-path="res://.godot/imported/fft.png-5f85a33d85b203f1715afb286ba33166.ctex"
+uid="uid://co5ui7ek8daqk"
+path="res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fft.png"
-dest_files=["res://.godot/imported/fft.png-5f85a33d85b203f1715afb286ba33166.ctex"]
+source_file="res://assets/etc/civilian.png"
+dest_files=["res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"]
 
 [params]
 

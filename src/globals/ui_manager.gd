@@ -17,3 +17,6 @@ func play_game_start_sequence():
 	ui.game_start_overlay.show()
 	await Util.wait(2)
 	ui.game_start_overlay.hide()
+
+func show_victory_overlay():
+	ui.victory_overlay.show()

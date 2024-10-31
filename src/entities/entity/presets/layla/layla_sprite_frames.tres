@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://d1taf2r4a1ps7"]
+
+[ext_resource type="Texture2D" uid="uid://2armrhn1jc2y" path="res://assets/etc/layla-sheet.png" id="1_5gn11"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0aa2"]
+atlas = ExtResource("1_5gn11")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gncru"]
+atlas = ExtResource("1_5gn11")
+region = Rect2(36, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0aa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gncru")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

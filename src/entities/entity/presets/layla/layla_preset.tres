@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://b5ej70tnc1s0t"]
+
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_7k8yi"]
+[ext_resource type="SpriteFrames" uid="uid://d1taf2r4a1ps7" path="res://src/entities/entity/presets/layla/layla_sprite_frames.tres" id="2_wlov1"]
+
+[resource]
+script = ExtResource("1_7k8yi")
+entity_name = "Layla"
+max_health = 3
+move_range = 3
+team = 0
+ability_1 = "res://src/abilities/ability_move.gd"
+ability_2 = "res://src/abilities/ability_spear_stab.gd"
+ability_3 = null
+ability_4 = null
+state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
+sprite_frames = ExtResource("2_wlov1")
+portrait_image = "res://assets/portraits/layla-portrait.png"

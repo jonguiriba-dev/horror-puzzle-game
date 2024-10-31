@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf7jsjkn654ga"
-path="res://.godot/imported/dummy-sheet.png-f0c47cb7d7eb09636e73fe0fdc1a4f13.ctex"
+uid="uid://2armrhn1jc2y"
+path="res://.godot/imported/layla-sheet.png-154a1d1e895c7ff9f8537ac2280863c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dummy-sheet.png"
-dest_files=["res://.godot/imported/dummy-sheet.png-f0c47cb7d7eb09636e73fe0fdc1a4f13.ctex"]
+source_file="res://assets/etc/layla-sheet.png"
+dest_files=["res://.godot/imported/layla-sheet.png-154a1d1e895c7ff9f8537ac2280863c0.ctex"]
 
 [params]
 

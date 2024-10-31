@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ywun0h7rqf65"
-path="res://.godot/imported/talia-sheet.png-e436419ed6901a9f09b7c3dca03068e8.ctex"
+path="res://.godot/imported/talia-sheet.png-6a4a501021c288bbec72f98200e0ab38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/talia-sheet.png"
-dest_files=["res://.godot/imported/talia-sheet.png-e436419ed6901a9f09b7c3dca03068e8.ctex"]
+source_file="res://assets/etc/talia-sheet.png"
+dest_files=["res://.godot/imported/talia-sheet.png-6a4a501021c288bbec72f98200e0ab38.ctex"]
 
 [params]
 

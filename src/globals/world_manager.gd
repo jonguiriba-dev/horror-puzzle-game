@@ -43,6 +43,11 @@ func game_start():
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
 	input_enabled = true
+	
+func check_player_victory():
+	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
+		UIManager.show_victory_overlay()
+
 func _on_scenetree_ready():
 	viewport_ready.emit()
 	await game_start()
@@ -117,8 +122,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("*Tile Position: ",mouse_map_position)
 
 func _on_undo_move_pressed():
-	print("1")
 	if entity_moved_history.size() > 0:
-		print("2")
 		var history = entity_moved_history.pop_front() as Dictionary
 		history["entity"].undo_move(history["prev_map_position"])

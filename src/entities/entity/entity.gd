@@ -173,8 +173,11 @@ func _on_hit(damage:int) -> void:
 func _on_death() -> void:
 	for group in get_groups():
 		remove_from_group(group)
+		
 	queue_free()
 		
+	if team == C.TEAM.ENEMY:
+		WorldManager.check_player_victory()
 
 func _on_selected():
 	if team == C.TEAM.PLAYER:
