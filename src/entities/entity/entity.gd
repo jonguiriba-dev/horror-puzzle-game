@@ -182,9 +182,9 @@ func _on_death() -> void:
 func _on_selected():
 	if team == C.TEAM.PLAYER:
 		UIManager.ui.set_context(self)
+		WorldManager.input_waiting_on_ability = false
 	else:
 		UIManager.ui.clear_context()
-	
 func _on_ability_used():
 	WorldManager.entity_moved_history.clear()
 	action_counter -= 1

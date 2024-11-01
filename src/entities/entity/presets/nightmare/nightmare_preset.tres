@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://ccmseiu3uh44q"]
+
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_2ieuu"]
+[ext_resource type="SpriteFrames" uid="uid://bjuo7701mc5ax" path="res://src/entities/entity/presets/nightmare/nightmare_sprite_frames.tres" id="2_f8img"]
+
+[resource]
+script = ExtResource("1_2ieuu")
+entity_name = "Nightmare"
+max_health = 2
+move_range = 3
+team = 1
+ability_1 = "res://src/abilities/ability_move.gd"
+ability_2 = "res://src/abilities/ability_strike.gd"
+ability_3 = null
+ability_4 = null
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+sprite_frames = ExtResource("2_f8img")
+portrait_image = "res://assets/portraits/layla-portrait.png"

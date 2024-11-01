@@ -1,17 +1,19 @@
-[gd_scene load_steps=13 format=4 uid="uid://ccxa51fvstye7"]
+[gd_scene load_steps=15 format=4 uid="uid://ccxa51fvstye7"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_3plys"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_sshcj"]
-[ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="3_a5vek"]
+[ext_resource type="TileSet" uid="uid://ytuuouvf4sl2" path="res://src/components/grid/tilesets/offroad_tiles_tileset.tres" id="3_eyxr7"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="4_ckdpo"]
-[ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="5_0xavb"]
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="5_4hyey"]
+[ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="6_gdmrn"]
 [ext_resource type="PackedScene" uid="uid://cv3s5hr6txmvy" path="res://src/entities/entity/presets/civilian/Civilian.tscn" id="7_3ntyg"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_ebi6k"]
 [ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/elyana/elyana_preset.tres" id="9_fubid"]
-[ext_resource type="PackedScene" uid="uid://yhaj0m23qtd2" path="res://src/entities/entity/presets/goon/Goon.tscn" id="9_psu0r"]
 [ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/talya/talya_preset.tres" id="10_2w1rq"]
 [ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/layla/layla_preset.tres" id="11_b0b0v"]
+[ext_resource type="Resource" uid="uid://dmdpdt2ttqdwo" path="res://src/entities/entity/presets/bloat/bloat_preset.tres" id="12_wl5aj"]
+[ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/nightmare/nightmare_preset.tres" id="13_f4ocu"]
+[ext_resource type="Resource" uid="uid://wdlgggc2ynf0" path="res://src/entities/entity/presets/twohead/twohead_preset.tres" id="14_rcroh"]
 
 [node name="Test1" type="Node2D"]
 script = ExtResource("1_3plys")
@@ -22,8 +24,8 @@ script = ExtResource("2_sshcj")
 [node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
 position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAACAAQAAAABAAEAAAACAAMAAAABAAEAAAACAAIAAAABAAEAAAACAAEAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAACAP3/AAABAAEAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAABAAAAAAAEAAIAAAABAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAABAAAAAAAEAP//AAABAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAABAAQAAAABAAEAAAABAAMAAAABAAEAAAABAAIAAAABAAEAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAEAAAABAP3/AAABAAEAAAAAAAQAAAABAAEAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAEAAAD///3/AAABAAEAAAD///7/AAABAAEAAAD/////AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD+/wQAAAABAAEAAAD+/wMAAAABAAEAAAD+/wIAAAABAAEAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAEAAAD9/wQAAAABAAEAAAD9/wMAAAABAAEAAAD9/wIAAAABAAEAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAEAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
-tile_set = ExtResource("3_a5vek")
+tile_map_data = PackedByteArray("AAACAAQAAAAAAAAAAAADAAQAAAAEAAAAAAADAAMAAAAEAAAAAAADAAIAAAAEAAAAAAADAAEAAAAEAAAAAAADAAAAAAAEAAAAAAADAP//AAAGAAAAAAADAP7/AAAHAAAAAAADAP3/AAAEAAAAAAACAP3/AAAEAAAAAAABAP3/AAAEAAAAAAAAAP3/AAAEAAAAAAD///3/AAADAAAAAAD+//3/AAAEAAAAAAD9//3/AAAEAAAAAAD8//3/AAAEAAAAAAD8//7/AAAHAAAAAAD8////AAAFAAAAAAD8/wAAAAAEAAAAAAD8/wEAAAAEAAAAAAD8/wIAAAAEAAAAAAD8/wMAAAAEAAAAAAD8/wQAAAADAAAAAAABAAQAAAACAAAAAAAAAAQAAAAEAAAAAAD//wQAAAAEAAAAAAD+/wQAAAAEAAAAAAD9/wQAAAAEAAAAAAD9/wMAAAAEAAAAAAD9/wIAAAAEAAAAAAD9/wEAAAAEAAAAAAD9/wAAAAAEAAAAAAD9////AAAGAAAAAAD9//7/AAAHAAAAAAD+//7/AAAHAAAAAAD+////AAAGAAAAAAD+/wAAAAAEAAAAAAD+/wEAAAAEAAAAAAD+/wIAAAADAAAAAAD+/wMAAAAEAAAAAAD//wMAAAAEAAAAAAD//wIAAAAEAAAAAAD//wEAAAAEAAAAAAD//wAAAAAEAAAAAAD/////AAAGAAAAAAD///7/AAAHAAAAAAAAAP7/AAAHAAAAAAAAAP//AAAFAAAAAAAAAAAAAAAEAAAAAAAAAAEAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAABAAAAAAABAAMAAAADAAAAAAABAAIAAAAEAAAAAAABAAEAAAAEAAAAAAABAAAAAAADAAAAAAABAP//AAAGAAAAAAABAP7/AAAHAAAAAAACAP7/AAAHAAAAAAACAP//AAAGAAAAAAACAAAAAAAEAAAAAAACAAEAAAAEAAAAAAACAAIAAAABAAAAAAACAAMAAAAEAAAAAAA=")
+tile_set = ExtResource("3_eyxr7")
 
 [node name="ThreatHighlightLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
@@ -49,8 +51,8 @@ tile_set = ExtResource("4_ckdpo")
 z_index = 1
 y_sort_enabled = true
 position = Vector2(264, 141)
-tile_map_data = PackedByteArray("AAACAAAAAgABAAEAAAABAP3/AgABAAEAAAAAAAEAAgABAAEAAAAAAAIAAgAAAAEAAAAAAAQAAQAAAAAAAAACAP3/AQAAAAAAAAA=")
-tile_set = ExtResource("5_0xavb")
+tile_map_data = PackedByteArray("AAAAAAEAAQAAAAAAAAAAAP//AQABAAAAAAD+/wQAAQAAAAAAAAABAP3/AQAAAAAAAAA=")
+tile_set = ExtResource("6_gdmrn")
 
 [node name="Civilian" parent="Grid/PropLayer" instance=ExtResource("7_3ntyg")]
 position = Vector2(48, -24)
@@ -68,22 +70,25 @@ position = Vector2(80, 8)
 position = Vector2(-16, 56)
 
 [node name="Entity" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
-position = Vector2(16, -8)
+position = Vector2(0, -32)
 preset = ExtResource("9_fubid")
 
 [node name="Entity2" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
-position = Vector2(0, 1)
+position = Vector2(-33, -16)
 preset = ExtResource("10_2w1rq")
 
 [node name="Entity3" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
-position = Vector2(-16, 8)
+position = Vector2(-64, 0)
 preset = ExtResource("11_b0b0v")
 
-[node name="Goon4" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
-position = Vector2(63, 32)
+[node name="Entity4" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
+position = Vector2(80, 24)
+preset = ExtResource("12_wl5aj")
 
-[node name="Goon5" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
-position = Vector2(34, 49)
+[node name="Entity5" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
+position = Vector2(48, 40)
+preset = ExtResource("13_f4ocu")
 
-[node name="Goon6" parent="Grid/PropLayer" instance=ExtResource("9_psu0r")]
-position = Vector2(81, 24)
+[node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_ebi6k")]
+position = Vector2(31, 49)
+preset = ExtResource("14_rcroh")

@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bjuo7701mc5ax"]
+
+[ext_resource type="Texture2D" uid="uid://cy7hh8poh3hdl" path="res://assets/etc/hound-sheet.png" id="1_lfayf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yem7o"]
+atlas = ExtResource("1_lfayf")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eiarq"]
+atlas = ExtResource("1_lfayf")
+region = Rect2(36, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yem7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eiarq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

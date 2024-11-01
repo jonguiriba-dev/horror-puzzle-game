@@ -12,7 +12,7 @@ func _ready() -> void:
 	highlight_color = Color.GREEN
 	has_ui = false
 	ability_name = "move"
-	ability_range = 3
+	ability_range = host.move_range
 	is_enemy_obstacle = true
 	actions = [
 		AbilityAction.new(
@@ -117,4 +117,5 @@ func show_path_highlight():
 		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.DEBUG)
 	
 func _on_ability_used():
-	WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})
+	if host.team == C.TEAM.PLAYER:
+		WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})

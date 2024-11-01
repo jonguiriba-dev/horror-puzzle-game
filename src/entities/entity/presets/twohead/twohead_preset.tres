@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://wdlgggc2ynf0"]
+
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_aovwl"]
+[ext_resource type="SpriteFrames" uid="uid://c15entj0nngfd" path="res://src/entities/entity/presets/twohead/twohead_sprite_frames.tres" id="2_5dhqf"]
+
+[resource]
+script = ExtResource("1_aovwl")
+entity_name = "Twohead"
+max_health = 3
+move_range = 3
+team = 1
+ability_1 = "res://src/abilities/ability_move.gd"
+ability_2 = "res://src/abilities/ability_strike.gd"
+ability_3 = null
+ability_4 = null
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+sprite_frames = ExtResource("2_5dhqf")
+portrait_image = "res://assets/portraits/layla-portrait.png"

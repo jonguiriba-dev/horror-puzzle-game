@@ -57,19 +57,16 @@ func get_possible_tiles(exclude_flags:int=7)->Array[Vector2i]:
 	
 	astar_grid.fill_solid_region(astar_grid.region,false)
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES) != 0:
-		print("> excldue obstacles")
 		for prop_pos in props:
 			tiles.erase(prop_pos)
 			astar_grid.set_point_solid(prop_pos)
 	
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_ENEMIES) != 0:
-		print("> excldue enemy")
 		for enemy_pos in enemy_tiles:
 			tiles.erase(enemy_pos)
 			astar_grid.set_point_solid(enemy_pos)
 			
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_ALLIES) != 0:
-		print("> excldue ally")
 		for ally_pos in ally_tiles:
 			tiles.erase(ally_pos)
 	

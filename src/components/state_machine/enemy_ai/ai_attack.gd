@@ -61,21 +61,27 @@ func _on_host_move_end():
 	
 	
 func apply_threat():
+	var target_found = false
+	print("apply_threat: ",host.entity_name)
 	for ability in host.get_abilities():
-		print("ability ",ability.ability_name)
-		var target_count = 0
 		if !ability.can_target_entities:
 			return
 		print("ability ",ability.ability_name)
 		var valid_targets = ability.get_valid_targets()
 		print("valid_targets ",valid_targets)
+		
+		if target_found:
+			return
+		
+		
 		for valid_target in valid_targets:
+			if target_found:
+				return
 			threat = {"tile":valid_target.map_position, "ability":ability, "target":valid_target}
 			WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.RED,Grid.HIGHLIGHT_LAYERS.THREAT)
 			WorldManager.grid.threat_tiles.push_front(threat.tile)
-			target_count += 1
-			if ability.target_count == target_count:
-					return
+			target_found = true
+			
 		#for target in get_tree().get_nodes_in_group(C.GROUPS_EN):
 			#if reachable_tiles.has(target.map_position):
 				#print("reach")

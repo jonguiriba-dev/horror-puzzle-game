@@ -42,7 +42,6 @@ func game_start():
 	await UIManager.play_game_start_sequence()
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
-	input_enabled = true
 	
 func check_player_victory():
 	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
@@ -76,43 +75,48 @@ func _on_enemy_turn_start():
 			
 func _on_enemy_unit_turn_end():
 	if enemy_turn_queue.size() == 0 and team_turn == C.TEAM.ENEMY:
-		UIManager.ui.end_turn.disabled = false
-		end_turn()
-		
+		_on_all_enemy_done()
 	var enemy = enemy_turn_queue.pop_front()
 	if is_instance_valid(enemy):
 		enemy.turn_start.emit()
-		
+
+func _on_all_enemy_done():
+	UIManager.ui.end_turn.disabled = false
+	end_turn()
+	input_enabled = true
+
+
 func _on_enemy_unit_turn_start(entity:Entity):
 	entity.show_detail("rescue")
 
 var input_waiting_on_ability = false
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click") and input_enabled:
-		
-		if input_waiting_on_ability:
-			return
-		
+	if event.is_action_pressed("click") and input_enabled and !input_waiting_on_ability:
 		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
 		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
 		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		
-		
+		print(">>> 1")
 		if targetting_ability and !input_waiting_on_ability:
+			print(">>> 2")
 			input_waiting_on_ability = true
 			targetting_ability.stopped_targetting.connect(func():
 				input_waiting_on_ability = false
 			,ConnectFlags.CONNECT_ONE_SHOT)
 			targetting_ability.use(mouse_map_position)
 			if !targetting_ability.is_valid_target(mouse_map_position):
+				print(">>> 3")
 				grid.tile_selected.emit(mouse_map_position)
 				if is_instance_valid(hovered_entity):
+					print(">>> 4")
 					hovered_entity.selected.emit()
 		elif is_instance_valid(hovered_entity):
+			print(">>> 5")
 			hovered_entity.selected.emit()
 		else:
+			print(">>> 6")
 			grid.tile_selected.emit(mouse_map_position)
-			
+			UIManager.ui.clear_context()
 		#var has_entity_in_tile = false
 		#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 			#var entity_map_pos = WorldManager.grid.local_to_map(entity.position)

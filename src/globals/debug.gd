@@ -8,6 +8,8 @@ var highlight_enemy_target = false
 func _physics_process(delta: float) -> void:
 	if is_enabled:
 		var text = ""
+		text += "\ninput_enabled: %s"%WorldManager.input_enabled
+		
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:
 			UIManager.info(text)
