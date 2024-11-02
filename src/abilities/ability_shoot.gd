@@ -18,3 +18,26 @@ func _ready() -> void:
 		)
 	]
 	range_pattern = TilePattern.generate_line_pattern
+
+func _play_animation(target_map_position:Vector2i):
+	var projectile = Sprite2D.new()
+	projectile.texture = load("res://assets/fx/crossbow-bolt.png")
+	projectile.position = host.position + Vector2(10,-5)
+	projectile.z_index = 99
+	var direction = Util.get_direction(host.map_position, target_map_position)
+	
+	var target_offset = Vector2(-5,-15)
+	if direction.x == 0:
+		target_offset = Vector2(-5,-5)
+		if direction.y == 1:
+			projectile.rotate(90)
+		else:
+			projectile.rotate(-45)
+	WorldManager.grid.prop_layer.add_child(projectile)
+	
+	var tween = create_tween()
+	tween.tween_property(projectile, "position", WorldManager.grid.map_to_local(target_map_position) + target_offset, 0.3)
+	await tween.finished.connect(func():
+		projectile.queue_free()
+	)
+	await Util.wait(0.4)

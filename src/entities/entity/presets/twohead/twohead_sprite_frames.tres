@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://c15entj0nngfd"]
 
-[ext_resource type="Texture2D" uid="uid://8pfemuwhfb8" path="res://assets/Two-body-sheet.png" id="1_k2lel"]
+[ext_resource type="Texture2D" uid="uid://8pfemuwhfb8" path="res://assets/characters/nightmares/Two-body-sheet.png" id="1_k2lel"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vanii"]
 atlas = ExtResource("1_k2lel")

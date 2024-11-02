@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gqucc2a5kwcs"
-path="res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"
+uid="uid://5uuu2vodlt5u"
+path="res://.godot/imported/crossbow-bolt.png-4177dcce8c1b425b519d41228bbdee16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/etc/civilian.png"
-dest_files=["res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"]
+source_file="res://assets/fx/crossbow-bolt.png"
+dest_files=["res://.godot/imported/crossbow-bolt.png-4177dcce8c1b425b519d41228bbdee16.ctex"]
 
 [params]
 

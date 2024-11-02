@@ -89,8 +89,8 @@ func _physics_process(delta: float) -> void:
 	if target_position != null and path.size() > 0 and play_animation:
 		move(delta)
 
-func _play_animation():
-	move_to_selected_tile(target_position)
+func _play_animation(target_map_position:Vector2i):
+	move_to_selected_tile(target_map_position)
 	play_animation = true
 	await host.move_end
 	

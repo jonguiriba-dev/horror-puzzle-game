@@ -50,7 +50,7 @@ func _ready() -> void:
 	
 func use(target_map_position:Vector2i):
 	if is_valid_target(target_map_position):
-		await _play_animation()
+		await _play_animation(target_map_position)
 		
 		var direction = Util.get_direction(host.map_position,target_map_position)
 		
@@ -86,7 +86,7 @@ func apply_effect(target):
 			
 	applied.emit()
 
-func _play_animation():
+func _play_animation(target_map_position:Vector2i):
 	await Util.wait(0.3)
 		
 func set_state(_state:STATE):

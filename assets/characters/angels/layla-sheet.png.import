@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gqucc2a5kwcs"
-path="res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"
+uid="uid://2armrhn1jc2y"
+path="res://.godot/imported/layla-sheet.png-1769780512d7fc52ad241229ea3e77db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/etc/civilian.png"
-dest_files=["res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"]
+source_file="res://assets/characters/angels/layla-sheet.png"
+dest_files=["res://.godot/imported/layla-sheet.png-1769780512d7fc52ad241229ea3e77db.ctex"]
 
 [params]
 

@@ -6,11 +6,10 @@ enum STATE{
 	SELECTING_TARGET
 }
 
-@onready var ability_container := $AbilityContainer
+@onready var ability_container := $Action/AbilityContainer
 @onready var undo_move := $UndoMove
 @onready var end_turn := $EndTurn
 @onready var debug_label := $Debug/Label
-@onready var test_button := $TestButton
 @onready var portrait_container := $Portrait
 @onready var portrait := $Portrait/image
 @onready var display_name := $Portrait/name
@@ -24,7 +23,6 @@ signal end_turn_pressed
 signal undo_move_pressed
 
 func _ready() -> void:
-	test_button.pressed.connect(Debug._on_test_button_pressed)
 	game_start_overlay.hide()
 	victory_overlay.hide()
 	
@@ -59,7 +57,8 @@ func set_context(_context:Entity):
 		
 func clear_context():
 	hide_portrait()
-
+	hide_ability_icons()
+	
 func hide_portrait():
 	portrait_container.hide()
 func show_portrait():

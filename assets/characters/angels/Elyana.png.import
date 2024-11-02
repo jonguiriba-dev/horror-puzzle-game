@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gqucc2a5kwcs"
-path="res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"
+uid="uid://dwm6h5uagpl7n"
+path="res://.godot/imported/Elyana.png-ec0f24e318336ab240634cf32c8600a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/etc/civilian.png"
-dest_files=["res://.godot/imported/civilian.png-74a5080e3c6abfb141435fc926b447c5.ctex"]
+source_file="res://assets/characters/angels/Elyana.png"
+dest_files=["res://.godot/imported/Elyana.png-ec0f24e318336ab240634cf32c8600a1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://npx2xkrowarf"
-path="res://.godot/imported/elyana-sheet.png-d7d74c0bb95ddf4b8e7c7af9a6fbbdf9.ctex"
+uid="uid://dc6rto06dirr5"
+path="res://.godot/imported/Bloat-sheet.png-49be18e0a6a3c7be5fe672fbab64aa1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/etc/elyana-sheet.png"
-dest_files=["res://.godot/imported/elyana-sheet.png-d7d74c0bb95ddf4b8e7c7af9a6fbbdf9.ctex"]
+source_file="res://assets/characters/nightmares/Bloat-sheet.png"
+dest_files=["res://.godot/imported/Bloat-sheet.png-49be18e0a6a3c7be5fe672fbab64aa1c.ctex"]
 
 [params]
 

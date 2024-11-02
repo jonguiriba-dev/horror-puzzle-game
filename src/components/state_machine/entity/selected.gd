@@ -17,6 +17,7 @@ func _on_configured():
 	
 	WorldManager.viewport_ready.connect(_on_scenetree_ready)
 	host.selected.connect(_on_host_selected)
+	
 func _on_scenetree_ready():
 	WorldManager.grid.tile_selected.connect(_on_tile_selected)
 

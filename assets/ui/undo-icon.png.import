@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2armrhn1jc2y"
-path="res://.godot/imported/layla-sheet.png-154a1d1e895c7ff9f8537ac2280863c0.ctex"
+uid="uid://bqy81dqbk7f8k"
+path="res://.godot/imported/undo-icon.png-d96b3d40017567470ad242b639e8d16b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/etc/layla-sheet.png"
-dest_files=["res://.godot/imported/layla-sheet.png-154a1d1e895c7ff9f8537ac2280863c0.ctex"]
+source_file="res://assets/ui/undo-icon.png"
+dest_files=["res://.godot/imported/undo-icon.png-d96b3d40017567470ad242b639e8d16b.ctex"]
 
 [params]
 

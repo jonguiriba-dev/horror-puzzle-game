@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwm6h5uagpl7n"
-path="res://.godot/imported/Elyana.png-826d4cc68aff8a19f2ab436f2d3be327.ctex"
+uid="uid://bwmvl40671v1q"
+path="res://.godot/imported/undo-icon.png-15fd711f37a01564bd034d5957b97b79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/etc/Elyana.png"
-dest_files=["res://.godot/imported/Elyana.png-826d4cc68aff8a19f2ab436f2d3be327.ctex"]
+source_file="res://assets/etc/undo-icon.png"
+dest_files=["res://.godot/imported/undo-icon.png-15fd711f37a01564bd034d5957b97b79.ctex"]
 
 [params]
 

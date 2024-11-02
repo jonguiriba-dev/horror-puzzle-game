@@ -1,16 +1,23 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bpcqw3ux8t2hk"]
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bpcqw3ux8t2hk"]
 
-[ext_resource type="Texture2D" uid="uid://ckk7ttjtj4kkw" path="res://assets/etc/emma.png" id="1_8t361"]
+[ext_resource type="Texture2D" uid="uid://21i6j6nh11qw" path="res://assets/characters/npc/peasant-sheet.png" id="1_0aixy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y46r3"]
-atlas = ExtResource("1_8t361")
+[sub_resource type="AtlasTexture" id="AtlasTexture_myxn2"]
+atlas = ExtResource("1_0aixy")
 region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i6lx"]
+atlas = ExtResource("1_0aixy")
+region = Rect2(36, 0, 36, 40)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y46r3")
+"texture": SubResource("AtlasTexture_myxn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6i6lx")
 }],
 "loop": true,
 "name": &"idle",

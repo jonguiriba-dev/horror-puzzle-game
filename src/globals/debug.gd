@@ -4,10 +4,12 @@ var is_enabled = true
 var show_enemy_ai_tile_values = false
 var show_move_path_highlight = false
 var highlight_enemy_target = false
+var play_game_start_sequence = false
 
 func _physics_process(delta: float) -> void:
 	if is_enabled:
 		var text = ""
+		text += "\nmouse_pos: %s"%WorldManager.grid.get_grid_local_mouse_position()
 		text += "\ninput_enabled: %s"%WorldManager.input_enabled
 		
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)

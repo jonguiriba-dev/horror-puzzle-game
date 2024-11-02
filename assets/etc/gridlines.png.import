@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8pfemuwhfb8"
-path="res://.godot/imported/Two-body-sheet.png-26b1a077d7e7b4bf8dc379a6b0189a91.ctex"
+uid="uid://bp5xcc7tasnjl"
+path="res://.godot/imported/gridlines.png-b0780a9a68fb06b2b1d93716537753cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Two-body-sheet.png"
-dest_files=["res://.godot/imported/Two-body-sheet.png-26b1a077d7e7b4bf8dc379a6b0189a91.ctex"]
+source_file="res://assets/etc/gridlines.png"
+dest_files=["res://.godot/imported/gridlines.png-b0780a9a68fb06b2b1d93716537753cd.ctex"]
 
 [params]
 

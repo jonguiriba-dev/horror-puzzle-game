@@ -39,7 +39,8 @@ func _start_player_turn():
 		player_entities.turn_start.emit()
 
 func game_start():
-	await UIManager.play_game_start_sequence()
+	if Debug.play_game_start_sequence:
+		await UIManager.play_game_start_sequence()
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
 	
@@ -96,33 +97,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
 		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		
-		print(">>> 1")
 		if targetting_ability and !input_waiting_on_ability:
-			print(">>> 2")
 			input_waiting_on_ability = true
 			targetting_ability.stopped_targetting.connect(func():
 				input_waiting_on_ability = false
 			,ConnectFlags.CONNECT_ONE_SHOT)
 			targetting_ability.use(mouse_map_position)
 			if !targetting_ability.is_valid_target(mouse_map_position):
-				print(">>> 3")
 				grid.tile_selected.emit(mouse_map_position)
 				if is_instance_valid(hovered_entity):
-					print(">>> 4")
 					hovered_entity.selected.emit()
+					
 		elif is_instance_valid(hovered_entity):
-			print(">>> 5")
 			hovered_entity.selected.emit()
+			grid.tile_selected.emit(mouse_map_position)
 		else:
-			print(">>> 6")
 			grid.tile_selected.emit(mouse_map_position)
 			UIManager.ui.clear_context()
-		#var has_entity_in_tile = false
-		#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-			#var entity_map_pos = WorldManager.grid.local_to_map(entity.position)
-			#if entity_map_pos == mouse_map_position:
-				#has_entity_in_tile = true
-	#
+			
 		print("*Tile Position: ",mouse_map_position)
 
 func _on_undo_move_pressed():
