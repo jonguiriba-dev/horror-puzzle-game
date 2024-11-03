@@ -63,6 +63,14 @@ func hide_portrait():
 	portrait_container.hide()
 func show_portrait():
 	portrait_container.show()
+	
+func enable_undo_move_button():
+	undo_move.disabled = false
+	undo_move.modulate = Color.GREEN
+	
+func disable_undo_move_button():
+	undo_move.disabled = true
+	undo_move.modulate = Color(180,180,180)
 
 func _on_end_turn_pressed() -> void:
 	print("end turn pressed")

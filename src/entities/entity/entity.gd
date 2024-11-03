@@ -186,6 +186,6 @@ func _on_selected():
 	else:
 		UIManager.ui.clear_context()
 func _on_ability_used():
-	WorldManager.entity_moved_history.clear()
+	WorldManager.clear_entity_moved_history()
 	action_counter -= 1
 	move_counter = 0

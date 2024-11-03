@@ -39,6 +39,7 @@ func _start_player_turn():
 		player_entities.turn_start.emit()
 
 func game_start():
+	WorldManager.clear_entity_moved_history()
 	if Debug.play_game_start_sequence:
 		await UIManager.play_game_start_sequence()
 	team_turn = turn_order[0]
@@ -47,6 +48,10 @@ func game_start():
 func check_player_victory():
 	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
 		UIManager.show_victory_overlay()
+
+func clear_entity_moved_history():
+	entity_moved_history.clear()
+	UIManager.ui.disable_undo_move_button()
 
 func _on_scenetree_ready():
 	viewport_ready.emit()
@@ -121,3 +126,6 @@ func _on_undo_move_pressed():
 	if entity_moved_history.size() > 0:
 		var history = entity_moved_history.pop_front() as Dictionary
 		history["entity"].undo_move(history["prev_map_position"])
+		
+		if entity_moved_history.size() == 0:
+			WorldManager.clear_entity_moved_history()

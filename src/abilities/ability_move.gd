@@ -119,3 +119,4 @@ func show_path_highlight():
 func _on_ability_used():
 	if host.team == C.TEAM.PLAYER:
 		WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})
+		UIManager.ui.enable_undo_move_button()
