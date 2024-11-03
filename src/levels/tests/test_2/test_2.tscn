@@ -34,7 +34,7 @@ sources/0 = SubResource("TileSetAtlasSource_7arvf")
 script = ExtResource("1_3plys")
 
 [node name="Grid" type="Node2D" parent="."]
-position = Vector2(320, 164)
+position = Vector2(298, 164)
 script = ExtResource("2_sshcj")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Grid"]

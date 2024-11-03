@@ -24,6 +24,7 @@ UIManager="*res://src/globals/ui_manager.gd"
 Util="*res://src/globals/util.gd"
 Debug="*res://src/globals/debug.gd"
 TilePattern="*res://src/globals/tile_pattern.gd"
+DialogueManager="*res://src/globals/dialogue_manager.gd"
 
 [debug]
 

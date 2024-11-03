@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
-[ext_resource type="Texture2D" uid="uid://bevicnwmcacam" path="res://assets/portraits/eliana-portrait.png" id="4_1ngw0"]
+[ext_resource type="Texture2D" uid="uid://cfx0dke2yjkbj" path="res://assets/characters/angels/layla-halfbody2.png" id="4_2vyus"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
-[ext_resource type="Texture2D" uid="uid://tu3bu5pwlhs3" path="res://assets/characters/angels/talia-halfbody.png" id="6_87awy"]
 [ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
 [ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
+[ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="8_rfbs1"]
 
 [sub_resource type="Gradient" id="Gradient_nepuh"]
 colors = PackedColorArray(0.178604, 0.410124, 1, 1, 1, 1, 1, 1)
@@ -39,9 +39,9 @@ texture = ExtResource("7_nuuhx")
 [node name="AbilityContainer" type="HBoxContainer" parent="Action"]
 layout_mode = 0
 offset_left = 150.0
-offset_top = 61.0
+offset_top = 59.0
 offset_right = 310.0
-offset_bottom = 102.0
+offset_bottom = 100.0
 
 [node name="Popularity" type="HBoxContainer" parent="."]
 visible = false
@@ -68,10 +68,10 @@ vertical_alignment = 1
 
 [node name="Debug" type="Label" parent="."]
 layout_mode = 2
-offset_left = 516.0
-offset_top = 2.0
-offset_right = 571.0
-offset_bottom = 25.0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 71.0
+offset_bottom = 36.0
 text = "DEBUG"
 
 [node name="Label" type="Label" parent="Debug"]
@@ -102,39 +102,53 @@ offset_bottom = 262.0
 
 [node name="ColorRect" type="ColorRect" parent="Portrait"]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 27.0
-offset_right = 229.0
-offset_bottom = 29.0
+offset_left = 53.0
+offset_top = 11.0
+offset_right = 233.0
+offset_bottom = 13.0
 
 [node name="name" type="Label" parent="Portrait"]
 layout_mode = 0
-offset_left = 59.0
-offset_right = 124.0
-offset_bottom = 23.0
+offset_left = 61.0
+offset_top = -8.0
+offset_right = 126.0
+offset_bottom = 15.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "Talya"
 
 [node name="image" type="Sprite2D" parent="Portrait"]
-visible = false
-position = Vector2(33, 5)
-texture = ExtResource("4_1ngw0")
+position = Vector2(26, 23)
+texture = ExtResource("4_2vyus")
 
 [node name="frame" type="Sprite2D" parent="Portrait"]
 visible = false
 position = Vector2(33, 5)
 texture = ExtResource("5_kf4q6")
 
-[node name="Sprite2D" type="Sprite2D" parent="Portrait"]
-position = Vector2(24, 30)
-texture = ExtResource("6_87awy")
+[node name="DialogueBg" type="ColorRect" parent="Portrait"]
+offset_left = 53.0
+offset_top = 14.0
+offset_right = 234.0
+offset_bottom = 98.0
+mouse_filter = 1
+color = Color(0, 0, 0, 0.231373)
+
+[node name="Dialogue" type="Label" parent="Portrait"]
+offset_left = 62.0
+offset_top = 19.0
+offset_right = 232.0
+offset_bottom = 99.0
+theme_override_constants/line_spacing = -1
+theme_override_font_sizes/font_size = 10
+text = "Dialogue text goes here"
+autowrap_mode = 3
 
 [node name="UndoMove" type="Button" parent="."]
 layout_mode = 0
-offset_left = 297.0
+offset_left = 277.0
 offset_top = -2.0
-offset_right = 337.0
+offset_right = 317.0
 offset_bottom = 38.0
 icon = ExtResource("7_l2n6i")
 flat = true
@@ -207,6 +221,51 @@ position = Vector2(319.749, 180.226)
 rotation = 1.57094
 scale = Vector2(5.63069, 10.0212)
 texture = SubResource("GradientTexture2D_fryhh")
+
+[node name="NpcPortrait" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="NpcPortrait"]
+offset_left = 395.0
+offset_top = 44.0
+offset_right = 575.0
+offset_bottom = 46.0
+
+[node name="name" type="Label" parent="NpcPortrait"]
+offset_left = 401.0
+offset_top = 25.0
+offset_right = 572.0
+offset_bottom = 48.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Bloat"
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="NpcPortrait"]
+position = Vector2(607, 56)
+texture = ExtResource("8_rfbs1")
+
+[node name="DialogueBg" type="ColorRect" parent="NpcPortrait"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 47.0
+offset_right = 576.0
+offset_bottom = 131.0
+mouse_filter = 1
+color = Color(0, 0, 0, 0.231373)
+
+[node name="Dialogue" type="Label" parent="NpcPortrait"]
+layout_mode = 0
+offset_left = 399.0
+offset_top = 55.0
+offset_right = 570.0
+offset_bottom = 123.0
+theme_override_constants/line_spacing = -1
+theme_override_font_sizes/font_size = 10
+text = "Dialogue text goes here"
+autowrap_mode = 3
 
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="UndoMove" to="." method="_on_undo_move_pressed"]
