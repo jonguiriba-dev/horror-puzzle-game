@@ -4,6 +4,12 @@ var ui: UI
 signal initialized
 
 
+func _ready() -> void:
+	WorldManager.viewport_ready.connect(_on_viewport_ready)
+
+func _on_viewport_ready():
+	initialize()
+
 func initialize():
 	ui = preload("res://src/components/ui/Ui.tscn").instantiate()
 	get_tree().get_current_scene().add_child(ui)

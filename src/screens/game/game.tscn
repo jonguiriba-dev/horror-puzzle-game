@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://byh4m2vm2s5a7"]
+[gd_scene load_steps=3 format=3 uid="uid://byh4m2vm2s5a7"]
 
-[ext_resource type="PackedScene" uid="uid://dgnb5agqhm5k2" path="res://levels/Level1.tscn" id="1_us54y"]
+[ext_resource type="PackedScene" uid="uid://d00v1mllkpgc0" path="res://src/levels/tests/test/test.tscn" id="1_7kr4w"]
+[ext_resource type="Script" path="res://src/screens/game/game.gd" id="1_p2aic"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_p2aic")
 
-[node name="Level1" parent="." instance=ExtResource("1_us54y")]
+[node name="Test" parent="." instance=ExtResource("1_7kr4w")]

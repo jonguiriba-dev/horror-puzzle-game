@@ -126,24 +126,6 @@ visible = false
 position = Vector2(33, 5)
 texture = ExtResource("5_kf4q6")
 
-[node name="DialogueBg" type="ColorRect" parent="Portrait"]
-offset_left = 53.0
-offset_top = 14.0
-offset_right = 234.0
-offset_bottom = 98.0
-mouse_filter = 1
-color = Color(0, 0, 0, 0.231373)
-
-[node name="Dialogue" type="Label" parent="Portrait"]
-offset_left = 62.0
-offset_top = 19.0
-offset_right = 232.0
-offset_bottom = 99.0
-theme_override_constants/line_spacing = -1
-theme_override_font_sizes/font_size = 10
-text = "Dialogue text goes here"
-autowrap_mode = 3
-
 [node name="UndoMove" type="Button" parent="."]
 layout_mode = 0
 offset_left = 277.0
@@ -223,17 +205,20 @@ scale = Vector2(5.63069, 10.0212)
 texture = SubResource("GradientTexture2D_fryhh")
 
 [node name="NpcPortrait" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="NpcPortrait"]
+layout_mode = 0
 offset_left = 395.0
 offset_top = 44.0
 offset_right = 575.0
 offset_bottom = 46.0
 
 [node name="name" type="Label" parent="NpcPortrait"]
+layout_mode = 0
 offset_left = 401.0
 offset_top = 25.0
 offset_right = 572.0

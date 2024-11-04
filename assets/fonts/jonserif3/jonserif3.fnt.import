@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://bf2yjgny77xn5"
+path="res://.godot/imported/jonserif3.fnt-3c36394ed186493fd11a89f864d4a0d8.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/jonserif3/jonserif3.fnt"
+dest_files=["res://.godot/imported/jonserif3.fnt-3c36394ed186493fd11a89f864d4a0d8.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=1
