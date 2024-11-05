@@ -1,7 +1,9 @@
-[gd_scene load_steps=23 format=4 uid="uid://d00v1mllkpgc0"]
+[gd_scene load_steps=21 format=4 uid="uid://d00v1mllkpgc0"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_5d3ta"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_3u602"]
+[ext_resource type="Script" path="res://src/scripts/dialogue/dialogue.gd" id="2_662s5"]
+[ext_resource type="Resource" uid="uid://cbijqyp5b4qxj" path="res://src/scripts/dialogue/etc/intro.tres" id="3_kgcsg"]
 [ext_resource type="TileSet" uid="uid://ytuuouvf4sl2" path="res://src/components/grid/tilesets/offroad_tiles_tileset.tres" id="3_tm4uh"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_vij2k"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="5_3w48l"]
@@ -16,8 +18,6 @@
 [ext_resource type="Resource" uid="uid://wdlgggc2ynf0" path="res://src/entities/entity/presets/twohead/twohead_preset.tres" id="14_wsg25"]
 [ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="15_447bq"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
-[ext_resource type="PackedScene" uid="uid://58u328ljpias" path="res://src/components/dialogue/speech_bubble/SpeechBubble.tscn" id="17_mrkf0"]
-[ext_resource type="Texture2D" uid="uid://d3dfuobrrflld" path="res://assets/ui/dialogue-balloon.png" id="17_qv48v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7arvf"]
 texture = ExtResource("4_vij2k")
@@ -32,16 +32,9 @@ tile_offset_axis = 1
 tile_size = Vector2i(32, 16)
 sources/0 = SubResource("TileSetAtlasSource_7arvf")
 
-[sub_resource type="LabelSettings" id="LabelSettings_74igg"]
-font_size = 800
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_qq25o"]
-font_size = 8
-font_color = Color(0, 0, 0, 1)
-
 [node name="Test" type="Node2D"]
 script = ExtResource("1_5d3ta")
+dialogues = Array[ExtResource("2_662s5")]([ExtResource("3_kgcsg")])
 
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2(298, 164)
@@ -111,35 +104,3 @@ preset = ExtResource("15_447bq")
 z_index = -99
 texture = ExtResource("16_v42j1")
 centered = false
-
-[node name="SpeechBubble" parent="." instance=ExtResource("17_mrkf0")]
-position = Vector2(305, 69)
-
-[node name="Label" type="Label" parent="."]
-z_index = 102
-offset_left = 306.0
-offset_top = 26.0
-offset_right = 6481.0
-offset_bottom = 3383.0
-scale = Vector2(0.01, 0.01)
-text = "font size 800
-scale 0.1
-size 6175 x 3357"
-label_settings = SubResource("LabelSettings_74igg")
-
-[node name="Label2" type="Label" parent="."]
-z_index = 101
-offset_left = 391.0
-offset_top = 25.0
-offset_right = 463.0
-offset_bottom = 48.0
-text = "default label size 8"
-label_settings = SubResource("LabelSettings_qq25o")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(322, 49)
-texture = ExtResource("17_qv48v")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(441, 43)
-texture = ExtResource("17_qv48v")

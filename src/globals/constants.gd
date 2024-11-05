@@ -27,6 +27,11 @@ enum STATE{
 	AI_IDLE,
 }
 
+enum DIALOGUE_TRIGGERS{
+	ON_START
+}
+
+
 var ABILITY_target_type = {
 	TILE = "target_type_tile"
 }

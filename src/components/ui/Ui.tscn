@@ -137,7 +137,6 @@ flat = true
 icon_alignment = 1
 
 [node name="Overlays" type="Control" parent="."]
-visible = false
 z_index = 99
 anchors_preset = 0
 offset_right = 40.0

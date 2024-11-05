@@ -73,7 +73,6 @@ func disable_undo_move_button():
 	undo_move.modulate = Color(180,180,180)
 
 func _on_end_turn_pressed() -> void:
-	print("end turn pressed")
 	end_turn_pressed.emit()
 
 

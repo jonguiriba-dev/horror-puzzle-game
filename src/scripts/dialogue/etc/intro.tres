@@ -4,3 +4,6 @@
 
 [resource]
 script = ExtResource("1_1ls77")
+title = "intro"
+trigger = 0
+content_file = "res://src/scripts/dialogue/etc/intro.txt"

@@ -4,7 +4,7 @@ var is_enabled = true
 var show_enemy_ai_tile_values = false
 var show_move_path_highlight = false
 var highlight_enemy_target = false
-var play_game_start_sequence = false
+var play_game_start_sequence = true
 
 func _physics_process(delta: float) -> void:
 	if is_enabled:
