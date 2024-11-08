@@ -8,8 +8,8 @@ GDD Outline - Save the Day!
 
 Story - Save the Day! 
 - Bunch of super heroes trying to save the day
+- 3 Angels saving humanity from Karma. Entropy shakes God -> Entropy unlocks Dream -> Dream unlocks Karma -> Karma unlocks Evil/Blasphemy?. The Turning point is a Scorned Father losing his daughter. The Father is already sadistic and hateful against humanity, the girl was his light. The Father is a (Calamity? opposite of Paragon) 
 (current)
-- 3 Angels saving humanity from Karma.
 - The World is in repeated state of reincarnation starting from the Turning Point
 -The Turning point is ???
 
@@ -31,13 +31,34 @@ Selaphiel: A traditional angelic name, meaning "prayer of God," it connects well
 
 Ideas
 - Eliana-leader-impartial
+SKILLS:
+  - Sanctuary - takes all damage in an area +> takes all damage in a far away area
+  - Taunt - Redirect attack from a nearby unit +> 
+  - Strength(Passive) - Units under her command has 10% chance to negate damage
 - Layla-assassin-severe
+SKILLS:
+  - Overwhelm - take control of an allied unit, but leaves them with 1 hp on exit +> take control of an enemy unit, leave them with 1 hp on exit, exits on death
+  - Decisiveness(Passive) - Units under her command has 10% chance to deal double damage
 - Talia-archer-soft
+SKILLS:
+  - Stun Arrow - stun a unit 1 turn
+  - Empathy(Passive) - Units under her command has 10% chance to heal nearby units when moving near them
+  - Magic??
+
 - cat in tree
 - truck crash
 - goons
 - smart leader
 - citizens with different quirks
+
+MECHANICS
+- 3 Main Angels under player control cannot kill enemies
+- Units fall under the Main Angels, they can kill enemies but are not under player control. The game is all about influencing and protecting them
+
+WORLD COMPONENTS
+MAP - region level
+HUB - Upgrades and selection
+
 
 
 Heroes

@@ -25,21 +25,24 @@ signal undo_move_pressed
 func _ready() -> void:
 	game_start_overlay.hide()
 	victory_overlay.hide()
-	
+	clear_context()
+
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
-		child.queue_free()
-		
+		var conns = child.get_signal_connection_list("pressed")
+		for conn in conns:
+			child.pressed.disconnect(conn["callable"])
+		for child2 in child.get_children():
+			child2.queue_free()
+	
+	var i = 1
 	for ability in abilities:
 		if ability.has_ui:
-			var control = Control.new()
-			control.custom_minimum_size = Vector2(64,48)
 			var clickable_sprite:ClickableSprite = load("res://src/components/ui/clickable_sprite/ClickableSprite.tscn").instantiate()
 			clickable_sprite.texture = ability.texture
 			clickable_sprite.connect("pressed",func():ability.target_select.emit())
-			control.add_child(clickable_sprite)
-			ability_container.add_child(control)
-
+			ability_container.get_node("AbilityFrame%s"%[i]).add_child(clickable_sprite)
+			i+=1
 
 func show_ability_icons():
 	ability_container.show()

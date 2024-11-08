@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=13 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
+[ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="3_i27ym"]
+[ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/components/ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
 [ext_resource type="Texture2D" uid="uid://cfx0dke2yjkbj" path="res://assets/characters/angels/layla-halfbody2.png" id="4_2vyus"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
 [ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
@@ -36,12 +38,37 @@ visible = false
 position = Vector2(183, 45.5)
 texture = ExtResource("7_nuuhx")
 
-[node name="AbilityContainer" type="HBoxContainer" parent="Action"]
+[node name="AbilityContainer_Z" type="HBoxContainer" parent="Action"]
 layout_mode = 0
 offset_left = 150.0
 offset_top = 59.0
 offset_right = 310.0
 offset_bottom = 100.0
+
+[node name="AbilityContainer" type="Control" parent="Action"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AbilityFrame1" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+position = Vector2(145, 54)
+texture = ExtResource("3_i27ym")
+
+[node name="AbilityFrame2" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+position = Vector2(172, 27)
+texture = ExtResource("3_i27ym")
+
+[node name="AbilityFrame3" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+position = Vector2(199, 54)
+texture = ExtResource("3_i27ym")
+
+[node name="AbilityFrame4" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+position = Vector2(226, 27)
+texture = ExtResource("3_i27ym")
+
+[node name="AbilityFrame5" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+position = Vector2(253, 53)
+texture = ExtResource("3_i27ym")
 
 [node name="Popularity" type="HBoxContainer" parent="."]
 visible = false
@@ -102,17 +129,17 @@ offset_bottom = 262.0
 
 [node name="ColorRect" type="ColorRect" parent="Portrait"]
 layout_mode = 0
-offset_left = 53.0
-offset_top = 11.0
-offset_right = 233.0
-offset_bottom = 13.0
+offset_left = 55.0
+offset_top = 7.0
+offset_right = 235.0
+offset_bottom = 9.0
 
 [node name="name" type="Label" parent="Portrait"]
 layout_mode = 0
-offset_left = 61.0
-offset_top = -8.0
-offset_right = 126.0
-offset_bottom = 15.0
+offset_left = 59.0
+offset_top = -12.0
+offset_right = 124.0
+offset_bottom = 11.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "Talya"

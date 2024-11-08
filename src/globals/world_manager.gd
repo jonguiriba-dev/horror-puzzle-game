@@ -48,11 +48,12 @@ func game_start():
 	if Debug.play_game_start_sequence:
 		await UIManager.play_game_start_sequence()
 	
-	for dialogue in world.dialogues:
-		if dialogue.trigger == C.DIALOGUE_TRIGGERS.ON_START:
-			current_dialogue = dialogue
-			current_dialogue.input_waiting.connect(_on_dialogue_input_waiting)
-			await current_dialogue.play(get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
+	if Debug.play_game_start_dialogue:
+		for dialogue in world.dialogues:
+			if dialogue.trigger == C.DIALOGUE_TRIGGERS.ON_START:
+				current_dialogue = dialogue
+				current_dialogue.input_waiting.connect(_on_dialogue_input_waiting)
+				await current_dialogue.play(get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
 	current_dialogue = null
 	
 	team_turn = turn_order[0]
