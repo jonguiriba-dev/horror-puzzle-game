@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
 [ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="3_i27ym"]
 [ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/components/ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
-[ext_resource type="Texture2D" uid="uid://cfx0dke2yjkbj" path="res://assets/characters/angels/layla-halfbody2.png" id="4_2vyus"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
+[ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="6_0rxox"]
 [ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
 [ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
@@ -127,15 +127,17 @@ offset_top = 262.0
 offset_right = 7.0
 offset_bottom = 262.0
 
-[node name="ColorRect" type="ColorRect" parent="Portrait"]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 7.0
-offset_right = 235.0
-offset_bottom = 9.0
+[node name="image" type="Sprite2D" parent="Portrait"]
+position = Vector2(33, -15)
+scale = Vector2(0.261194, 0.261194)
+texture = ExtResource("6_0rxox")
+
+[node name="frame" type="Sprite2D" parent="Portrait"]
+visible = false
+position = Vector2(33, 5)
+texture = ExtResource("5_kf4q6")
 
 [node name="name" type="Label" parent="Portrait"]
-layout_mode = 0
 offset_left = 59.0
 offset_top = -12.0
 offset_right = 124.0
@@ -144,14 +146,12 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "Talya"
 
-[node name="image" type="Sprite2D" parent="Portrait"]
-position = Vector2(26, 23)
-texture = ExtResource("4_2vyus")
-
-[node name="frame" type="Sprite2D" parent="Portrait"]
-visible = false
-position = Vector2(33, 5)
-texture = ExtResource("5_kf4q6")
+[node name="ColorRect" type="ColorRect" parent="Portrait"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 7.0
+offset_right = 235.0
+offset_bottom = 9.0
 
 [node name="UndoMove" type="Button" parent="."]
 layout_mode = 0

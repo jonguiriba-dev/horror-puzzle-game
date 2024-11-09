@@ -2,7 +2,7 @@ extends Ability
 class_name AbilitySpearStab
 func _ready() -> void:
 	super()
-	texture = preload("res://assets/ui/ability_frame_spear.png")
+	texture = preload("res://assets/ui/ability_frame_spear_stab.png")
 	ability_name = "spear_stab"
 	ability_range = 2
 	knockback_distance = 1

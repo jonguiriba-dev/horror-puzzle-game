@@ -11,7 +11,7 @@ Story - Save the Day!
 - 3 Angels saving humanity from Karma. Entropy shakes God -> Entropy unlocks Dream -> Dream unlocks Karma -> Karma unlocks Evil/Blasphemy?. The Turning point is a Scorned Father losing his daughter. The Father is already sadistic and hateful against humanity, the girl was his light. The Father is a (Calamity? opposite of Paragon) 
 (current)
 - The World is in repeated state of reincarnation starting from the Turning Point
--The Turning point is ???
+-The Turning point is when The Scorned Father interacts with Blasphemy
 
 Names:
 -Gabriella: God is my strength
@@ -45,57 +45,31 @@ SKILLS:
   - Empathy(Passive) - Units under her command has 10% chance to heal nearby units when moving near them
   - Magic??
 
-- cat in tree
-- truck crash
-- goons
-- smart leader
-- citizens with different quirks
-
 MECHANICS
 - 3 Main Angels under player control cannot kill enemies
 - Units fall under the Main Angels, they can kill enemies but are not under player control. The game is all about influencing and protecting them
+- Paragons, units that are special (buffs?) something good happens when you save them. Calamities, units that have negative effects when you fail to save them.
 
 WORLD COMPONENTS
 MAP - region level
 HUB - Upgrades and selection
 
 
-
-Heroes
-- Psychic - Pushes stuff around 
-- Math - Requires to line up stuff numerically; friendly fire if wrong but near global reach
-- Samurai - dashes around; gains buff if only using abilities
-- Pirate - dreams of the sea; strong near water; ships; likes playing pirate! ( canon, ships, treasure, eyepatch, sword)
+Villains
+- Karma - Believes its humanity's fault either way and deserves their punishment,
+- Entropy - Did what he did because he always prefers a change of state.
+- Cult Leader - Human that believes this is the coming of their worshipped god. Represents when humans turn to "faith" on hard times
+- Blasphemy - Opposite of God which is destruction and desolation of everything.
+- Dream - Entity with portion of God's powers. God's effort to communicate with mankind. Reason for the Nightmares
+- God - Created everything but has no control over them. He himself acknwoledges the lack of control
+- Scorned Father - The start of the current ongoing problem. A Calamity, opposite of Paragon. 
+  Was already hateful towards mankind, but set aside his ideals in change of taking care of his daughter. Daughter dies and he turns into the Catalyst, a huge final boss inheriting previous bosses.
 
 Entity Types
--Environment Objects
--Civilians
--Enemies
--Heroes
-
-Concepts
-*heroes
--Speedster
--Strongman
--Brainiac
-
-Locations
--Downtown
-
-*enemies
--Goon
--Main Villain wants to block out the Sun (Hence Save The Day; get it? get it?)
+-Nightmare - basic enemy and also the general term for them. Holds you in place
+-Twohead - Multiple laser with weird pattern. Offense variation
+-Blob - Heavy enemy
 
 Quotes:
 -"Always wanting more, do you ever have enough?"
 
-
-
-TODO:
-- environment
-
-Done:
--Enemy can now attack target within range
--Astar movement
--Enemy movement and attack (needs improvment later)
--Civilian; highlights on hover
