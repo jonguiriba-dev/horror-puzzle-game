@@ -18,7 +18,6 @@ signal viewport_ready
 
 func _ready() -> void:
 	get_viewport().ready.connect(_on_scenetree_ready)
-	UIManager.initialized.connect(_on_ui_manager_initalized)
 	turn_start.connect(_on_turn_start)
 
 func register_entity(entity:Entity):
@@ -63,6 +62,7 @@ var input_waiting_on_ability = false
 var input_waiting_on_dialogue = false
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") :
+		print("World Manager click ")
 		if input_waiting_on_dialogue:
 			current_dialogue.input_recieved.emit()
 			input_waiting_on_dialogue = false
@@ -75,6 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
 		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
 		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
+		print("hovered_entity ",hovered_entity)
 		
 		if targetting_ability and !input_waiting_on_ability:
 			input_waiting_on_ability = true
@@ -108,14 +109,11 @@ func clear_entity_moved_history():
 	UIManager.ui.disable_undo_move_button()
 
 func _on_scenetree_ready():
+	UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
+	UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
-	
-func _on_ui_manager_initalized():
-	UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
-	UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
-	UIManager.ui.hide_portrait()
 
 func _on_end_turn_pressed():
 	UIManager.ui.end_turn.disabled = true

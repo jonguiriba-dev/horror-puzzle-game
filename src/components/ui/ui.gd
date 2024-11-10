@@ -26,7 +26,8 @@ func _ready() -> void:
 	game_start_overlay.hide()
 	victory_overlay.hide()
 	clear_context()
-
+	UIManager.registerUI(self)
+	
 func generate_ability_icons(abilities:Array[Ability]):
 	for child in ability_container.get_children():
 		var conns = child.get_signal_connection_list("pressed")

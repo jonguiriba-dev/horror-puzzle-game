@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=14 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
@@ -11,6 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
 [ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="8_rfbs1"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_3uust"]
+font_size = 49
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Gradient" id="Gradient_nepuh"]
 colors = PackedColorArray(0.178604, 0.410124, 1, 1, 1, 1, 1, 1)
 
@@ -21,53 +26,56 @@ fill_to = Vector2(0, 0)
 
 [node name="UI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_0ibs7")
 
 [node name="Action" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -80.0
-offset_top = 255.0
-offset_right = -80.0
-offset_bottom = 255.0
+offset_left = 250.0
+offset_top = 780.0
+offset_right = 250.0
+offset_bottom = 780.0
+mouse_filter = 1
 
 [node name="Bg" type="Sprite2D" parent="Action"]
 visible = false
 position = Vector2(183, 45.5)
 texture = ExtResource("7_nuuhx")
 
-[node name="AbilityContainer_Z" type="HBoxContainer" parent="Action"]
-layout_mode = 0
-offset_left = 150.0
-offset_top = 59.0
-offset_right = 310.0
-offset_bottom = 100.0
-
 [node name="AbilityContainer" type="Control" parent="Action"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 24.0
+offset_top = -12.0
+offset_right = 64.0
+offset_bottom = 28.0
 
 [node name="AbilityFrame1" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
-position = Vector2(145, 54)
+position = Vector2(120, 126)
+scale = Vector2(3, 3)
 texture = ExtResource("3_i27ym")
 
 [node name="AbilityFrame2" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
-position = Vector2(172, 27)
+position = Vector2(207, 44)
+scale = Vector2(3, 3)
 texture = ExtResource("3_i27ym")
 
 [node name="AbilityFrame3" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
-position = Vector2(199, 54)
+position = Vector2(291, 125)
+scale = Vector2(3, 3)
 texture = ExtResource("3_i27ym")
 
 [node name="AbilityFrame4" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
-position = Vector2(226, 27)
+position = Vector2(375, 44)
+scale = Vector2(3, 3)
 texture = ExtResource("3_i27ym")
 
 [node name="AbilityFrame5" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
-position = Vector2(253, 53)
+position = Vector2(459, 125)
+scale = Vector2(3, 3)
 texture = ExtResource("3_i27ym")
 
 [node name="Popularity" type="HBoxContainer" parent="."]
@@ -113,10 +121,11 @@ theme_override_font_sizes/font_size = 8
 z_index = 99
 z_as_relative = false
 layout_mode = 0
-offset_left = 563.0
-offset_top = 298.0
-offset_right = 640.0
-offset_bottom = 360.0
+offset_left = 1757.0
+offset_top = 940.0
+offset_right = 1835.0
+offset_bottom = 1002.0
+mouse_filter = 1
 text = "End Turn"
 flat = true
 
@@ -126,10 +135,11 @@ offset_left = 7.0
 offset_top = 262.0
 offset_right = 7.0
 offset_bottom = 262.0
+mouse_filter = 1
 
 [node name="image" type="Sprite2D" parent="Portrait"]
-position = Vector2(33, -15)
-scale = Vector2(0.261194, 0.261194)
+position = Vector2(208, 467)
+scale = Vector2(0.789179, 0.789179)
 texture = ExtResource("6_0rxox")
 
 [node name="frame" type="Sprite2D" parent="Portrait"]
@@ -138,20 +148,20 @@ position = Vector2(33, 5)
 texture = ExtResource("5_kf4q6")
 
 [node name="name" type="Label" parent="Portrait"]
-offset_left = 59.0
-offset_top = -12.0
-offset_right = 124.0
-offset_bottom = 11.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
+layout_mode = 0
+offset_left = 387.0
+offset_top = 442.0
+offset_right = 512.0
+offset_bottom = 511.0
 text = "Talya"
+label_settings = SubResource("LabelSettings_3uust")
 
 [node name="ColorRect" type="ColorRect" parent="Portrait"]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 7.0
-offset_right = 235.0
-offset_bottom = 9.0
+offset_left = 378.0
+offset_top = 503.0
+offset_right = 932.0
+offset_bottom = 513.0
 
 [node name="UndoMove" type="Button" parent="."]
 layout_mode = 0
@@ -168,6 +178,7 @@ z_index = 99
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="GameStart" type="Sprite2D" parent="Overlays"]
 texture = ExtResource("6_wi4k2")
@@ -235,6 +246,7 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="ColorRect" type="ColorRect" parent="NpcPortrait"]
 layout_mode = 0

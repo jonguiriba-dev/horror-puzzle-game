@@ -157,6 +157,7 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)
 
 func _on_area_2d_mouse_entered() -> void:
+	print("HOVERED > ", self)
 	add_to_group(C.GROUPS_HOVERED_ENTITIES)
 
 func _on_area_2d_mouse_exited() -> void:
@@ -181,6 +182,7 @@ func _on_death() -> void:
 
 func _on_selected():
 	if team == C.TEAM.PLAYER:
+		print(">>>>> ")
 		UIManager.ui.set_context(self)
 		WorldManager.input_waiting_on_ability = false
 	else:

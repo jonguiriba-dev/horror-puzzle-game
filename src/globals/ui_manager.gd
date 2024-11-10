@@ -1,20 +1,7 @@
 
 extends Node
 var ui: UI
-signal initialized
 
-
-func _ready() -> void:
-	WorldManager.viewport_ready.connect(_on_viewport_ready)
-
-func _on_viewport_ready():
-	initialize()
-
-func initialize():
-	ui = preload("res://src/components/ui/Ui.tscn").instantiate()
-	get_tree().get_current_scene().add_child(ui)
-	initialized.emit()
-	
 func info(text:String):
 	if ui:
 		ui.debug_label.text = text
@@ -26,3 +13,6 @@ func play_game_start_sequence():
 
 func show_victory_overlay():
 	ui.victory_overlay.show()
+
+func registerUI(_ui:UI):
+	ui = _ui
