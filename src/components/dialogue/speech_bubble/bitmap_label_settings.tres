@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://be4klofwdq2ua"]
+
+[ext_resource type="FontFile" uid="uid://cvmsx3ipd0guu" path="res://assets/fonts/jonserif2/jonserif2.fnt" id="1_6rj40"]
+
+[resource]
+font = ExtResource("1_6rj40")
+font_size = 12
+font_color = Color(0, 0, 0, 1)

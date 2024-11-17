@@ -32,12 +32,13 @@ tile_offset_axis = 1
 tile_size = Vector2i(32, 16)
 sources/0 = SubResource("TileSetAtlasSource_7arvf")
 
-[node name="Test" type="Node2D"]
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_5d3ta")
 dialogues = Array[ExtResource("2_662s5")]([ExtResource("3_kgcsg")])
 
 [node name="Grid" type="Node2D" parent="."]
-position = Vector2(298, 164)
 script = ExtResource("2_3u602")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
@@ -103,4 +104,3 @@ preset = ExtResource("15_447bq")
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99
 texture = ExtResource("16_v42j1")
-centered = false

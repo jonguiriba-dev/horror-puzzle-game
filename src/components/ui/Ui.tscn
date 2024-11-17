@@ -31,14 +31,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_0ibs7")
 
 [node name="Action" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 250.0
-offset_top = 780.0
-offset_right = 250.0
-offset_bottom = 780.0
+offset_left = 251.0
+offset_top = 1154.0
+offset_right = 251.0
+offset_bottom = 1154.0
 mouse_filter = 1
 
 [node name="Bg" type="Sprite2D" parent="Action"]
@@ -131,10 +132,10 @@ flat = true
 
 [node name="Portrait" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 7.0
-offset_top = 262.0
-offset_right = 7.0
-offset_bottom = 262.0
+offset_left = 8.0
+offset_top = 636.0
+offset_right = 8.0
+offset_bottom = 636.0
 mouse_filter = 1
 
 [node name="image" type="Sprite2D" parent="Portrait"]
@@ -165,10 +166,11 @@ offset_bottom = 513.0
 
 [node name="UndoMove" type="Button" parent="."]
 layout_mode = 0
-offset_left = 277.0
-offset_top = -2.0
-offset_right = 317.0
-offset_bottom = 38.0
+offset_left = 1164.0
+offset_top = 10.0
+offset_right = 1204.0
+offset_bottom = 50.0
+scale = Vector2(4, 4)
 icon = ExtResource("7_l2n6i")
 flat = true
 icon_alignment = 1
@@ -178,6 +180,7 @@ z_index = 99
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(4, 4)
 mouse_filter = 2
 
 [node name="GameStart" type="Sprite2D" parent="Overlays"]
@@ -186,8 +189,8 @@ centered = false
 
 [node name="Victory" type="Control" parent="Overlays"]
 anchors_preset = 0
-offset_right = 638.0
-offset_bottom = 359.0
+offset_right = 640.0
+offset_bottom = 360.0
 
 [node name="VictoryLabel" type="Label" parent="Overlays/Victory"]
 layout_mode = 1

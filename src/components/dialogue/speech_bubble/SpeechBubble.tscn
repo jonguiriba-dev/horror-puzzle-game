@@ -1,13 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://58u328ljpias"]
+[gd_scene load_steps=7 format=3 uid="uid://58u328ljpias"]
 
 [ext_resource type="Script" path="res://src/components/dialogue/speech_bubble/speech_bubble.gd" id="1_mrj6e"]
 [ext_resource type="Texture2D" uid="uid://d3dfuobrrflld" path="res://assets/ui/dialogue-balloon.png" id="2_q4ek5"]
-[ext_resource type="FontFile" uid="uid://cvmsx3ipd0guu" path="res://assets/fonts/jonserif2/jonserif2.fnt" id="3_8eeb0"]
 [ext_resource type="Texture2D" uid="uid://cbwgi3bkbm6t1" path="res://assets/ui/dialogue-arrow.png" id="4_fuful"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_8smog"]
-font = ExtResource("3_8eeb0")
-font_size = 12
+[sub_resource type="LabelSettings" id="LabelSettings_vye53"]
+font_size = 8
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gdq5h"]
@@ -43,7 +41,7 @@ offset_top = 3.0
 offset_right = 113.0
 offset_bottom = 32.0
 text = "A long text goes a long way. Winner"
-label_settings = SubResource("LabelSettings_8smog")
+label_settings = SubResource("LabelSettings_vye53")
 autowrap_mode = 3
 
 [node name="FlashingPrompt" type="AnimatedSprite2D" parent="."]
