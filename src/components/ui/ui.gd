@@ -15,6 +15,7 @@ enum STATE{
 @onready var display_name := $Portrait/name
 @onready var game_start_overlay := $Overlays/GameStart
 @onready var victory_overlay := $Overlays/Victory
+@onready var overlays := $Overlays
 
 var state := STATE.INACTIVE
 var context
@@ -23,8 +24,10 @@ signal end_turn_pressed
 signal undo_move_pressed
 
 func _ready() -> void:
+	
 	game_start_overlay.hide()
 	victory_overlay.hide()
+	overlays.visible = true
 	clear_context()
 	UIManager.registerUI(self)
 	

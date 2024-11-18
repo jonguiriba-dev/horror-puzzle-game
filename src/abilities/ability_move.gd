@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
 	var navigatable_tiles:Array[Vector2i]= []
-	var possible_tiles = WorldManager.grid.get_possible_tiles(3)
+	var possible_tiles = WorldManager.grid.get_possible_tiles(7)
 	var queued_tiles = [map_pos]
 	
 	var step = 0

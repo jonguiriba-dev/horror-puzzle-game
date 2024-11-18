@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=15 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/components/ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
 [ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="6_0rxox"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="6_ekjn1"]
 [ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
 [ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
@@ -122,11 +123,13 @@ theme_override_font_sizes/font_size = 8
 z_index = 99
 z_as_relative = false
 layout_mode = 0
-offset_left = 1757.0
-offset_top = 940.0
-offset_right = 1835.0
-offset_bottom = 1002.0
+offset_left = 2224.0
+offset_top = 1268.0
+offset_right = 2505.0
+offset_bottom = 1370.0
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("6_ekjn1")
+theme_override_font_sizes/font_size = 72
 text = "End Turn"
 flat = true
 
@@ -176,6 +179,7 @@ flat = true
 icon_alignment = 1
 
 [node name="Overlays" type="Control" parent="."]
+visible = false
 z_index = 99
 anchors_preset = 0
 offset_right = 40.0

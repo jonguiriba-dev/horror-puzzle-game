@@ -16,3 +16,4 @@ func show_victory_overlay():
 
 func registerUI(_ui:UI):
 	ui = _ui
+	ui.visible = true
