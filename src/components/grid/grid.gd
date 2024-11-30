@@ -21,9 +21,7 @@ enum HIGHLIGHT_COLORS{
 @onready var threat_highlight_layer :TileMapLayer= $ThreatHighlightLayer
 @onready var debug_highlight_layer :TileMapLayer= $DebugHighlightLayer
 @onready var cursor_layer :TileMapLayer= $CursorLayer
-@onready var prop_layer :TileMapLayer= $PropLayer1
-@onready var prop_layer2 :TileMapLayer= $PropLayer2
-@onready var prop_layer3 :TileMapLayer= $PropLayer3
+@onready var prop_layer :TileMapLayer= $PropLayer
 @onready var astar_grid = AStarGrid2D.new()
 
 var threat_tiles:Array[Vector2i]= []

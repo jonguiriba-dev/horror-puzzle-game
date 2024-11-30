@@ -43,6 +43,7 @@ position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]
+visible = false
 offset_left = -8.0
 offset_top = -33.0
 offset_right = 8.0

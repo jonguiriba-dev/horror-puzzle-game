@@ -27,6 +27,7 @@ focus_mode = 2
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 physics_object_picking = true
 size = Vector2i(1280, 720)
 size_2d_override = Vector2i(640, 360)
