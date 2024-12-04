@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca1xgnpj38nil"
-path="res://.godot/imported/peasant.png-603d25628f04f2ca1933fe9dc0fece67.ctex"
+uid="uid://b2ir8nbkofioj"
+path="res://.godot/imported/Hound.png-33b3300657518717808ce260caa58dd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets2/drafts/peasant.png"
-dest_files=["res://.godot/imported/peasant.png-603d25628f04f2ca1933fe9dc0fece67.ctex"]
+source_file="res://assets/characters/nightmares/Hound.png"
+dest_files=["res://.godot/imported/Hound.png-33b3300657518717808ce260caa58dd1.ctex"]
 
 [params]
 

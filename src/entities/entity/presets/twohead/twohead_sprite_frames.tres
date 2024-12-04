@@ -1,23 +1,19 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://c15entj0nngfd"]
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c15entj0nngfd"]
 
-[ext_resource type="Texture2D" uid="uid://8pfemuwhfb8" path="res://assets/characters/nightmares/Two-body-sheet.png" id="1_k2lel"]
+[ext_resource type="Texture2D" uid="uid://d3xsmxjcv2jhk" path="res://assets/characters/nightmares/Two-Body.png" id="1_6c87c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vanii"]
-atlas = ExtResource("1_k2lel")
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5qi0"]
+atlas = ExtResource("1_6c87c")
 region = Rect2(0, 0, 36, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_twl44"]
-atlas = ExtResource("1_k2lel")
-region = Rect2(36, 0, 36, 40)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vanii")
+"texture": SubResource("AtlasTexture_c5qi0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twl44")
+"texture": SubResource("AtlasTexture_c5qi0")
 }],
 "loop": true,
 "name": &"idle",

@@ -43,7 +43,7 @@ func _ready() -> void:
 	selected.connect(_on_selected)
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
-		sprite.set_modulate(Color.RED)
+		#sprite.set_modulate(Color.RED)
 	else:
 		add_to_group(C.GROUPS_TARGETS)
 		if team == C.TEAM.PLAYER:
