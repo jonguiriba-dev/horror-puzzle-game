@@ -2,7 +2,7 @@ extends Resource
 class_name Dialogue
 
 @export var title:String
-@export var trigger:C.DIALOGUE_TRIGGERS=C.DIALOGUE_TRIGGERS.ON_START
+@export var trigger:C.DIALOGUE_TRIGGER=C.DIALOGUE_TRIGGER.ON_START
 @export_file("*.txt") var content_file
 var content
 var speech_bubble_tscn = preload("res://src/components/dialogue/speech_bubble/SpeechBubble.tscn")

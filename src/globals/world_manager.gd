@@ -4,30 +4,38 @@ var grid: Grid
 var team_turn:C.TEAM
 var turn_order:=[C.TEAM.ENEMY, C.TEAM.PLAYER]
 var enemy_turn_queue = []
-
 var entity_moved_history:=[]
-
 var input_enabled = false
 var world:World
 var current_dialogue:Dialogue
+var entity_register_queue := []
+
 signal turn_changed
 signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
 signal viewport_ready
-
 
 func _ready() -> void:
 	get_viewport().ready.connect(_on_scenetree_ready)
 	turn_start.connect(_on_turn_start)
 
 func register_entity(entity:Entity):
+	if !world:
+		entity_register_queue.push_front(entity)
+		return
+		
 	if entity.team == C.TEAM.ENEMY:
 		entity.turn_end.connect(_on_enemy_unit_turn_end)
-
+	
+	entity.set_orientation(world.orientation == C.ORIENTATION.VERTICAL) 
+	entity.threat_updated.connect(_on_entity_threat_updated)
 func register_world(_world:World):
 	world = _world
-
-
+	
+	for entity in entity_register_queue:
+		register_entity(entity)
+	
+	entity_register_queue = []
 func end_turn():
 	turn_changed.emit()
 	turn_end.emit(team_turn)
@@ -43,13 +51,15 @@ func _start_player_turn():
 		player_entities.turn_start.emit()
 
 func game_start():
+	if !UIManager.ui:
+		return
 	WorldManager.clear_entity_moved_history()
 	if Debug.play_game_start_sequence:
 		await UIManager.play_game_start_sequence()
 	
 	if Debug.play_game_start_dialogue:
 		for dialogue in world.dialogues:
-			if dialogue.trigger == C.DIALOGUE_TRIGGERS.ON_START:
+			if dialogue.trigger == C.DIALOGUE_TRIGGER.ON_START:
 				current_dialogue = dialogue
 				current_dialogue.input_waiting.connect(_on_dialogue_input_waiting)
 				await current_dialogue.play(get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
@@ -60,6 +70,7 @@ func game_start():
 
 var input_waiting_on_ability = false
 var input_waiting_on_dialogue = false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") :
 		print("World Manager click ")
@@ -106,11 +117,13 @@ func check_player_victory():
 
 func clear_entity_moved_history():
 	entity_moved_history.clear()
-	UIManager.ui.disable_undo_move_button()
+	if UIManager.ui:
+		UIManager.ui.disable_undo_move_button()
 
 func _on_scenetree_ready():
-	UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
-	UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
+	if UIManager.ui:
+		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
+		UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
@@ -154,3 +167,6 @@ func _on_undo_move_pressed():
 		
 		if entity_moved_history.size() == 0:
 			WorldManager.clear_entity_moved_history()
+
+func _on_entity_threat_updated():
+	grid.highlight_threats()

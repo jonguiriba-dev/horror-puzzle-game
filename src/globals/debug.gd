@@ -8,6 +8,8 @@ var play_game_start_sequence = true
 var play_game_start_dialogue = true
 
 func _physics_process(delta: float) -> void:
+	if !WorldManager.grid:
+		return
 	if is_enabled:
 		var text = ""
 		text += "\nmouse_pos: %s"%WorldManager.grid.get_grid_local_mouse_position()

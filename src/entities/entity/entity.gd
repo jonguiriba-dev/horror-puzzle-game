@@ -23,14 +23,17 @@ var max_action_counter = 1
 var map_position:Vector2i:
 	get:
 		return WorldManager.grid.local_to_map(position)
+var flip_h:=false
 
 signal hit(damage:int)
 signal knockback(distance:int,source_pos:Vector2)
+signal knockback_animation_finished(distance:int,source_pos:Vector2)
 signal death
 signal move_end
 signal turn_end
 signal turn_start
 signal selected
+signal threat_updated
 
 func _ready() -> void:
 	load_preset(preset)
@@ -146,18 +149,21 @@ func _on_mouse_exited() -> void:
 
 	
 func _on_knockback(distance:int, source_map_pos:Vector2i):
-	var direction = Util.get_direction(source_map_pos,WorldManager.grid.local_to_map(position))
+	var direction = Util.get_direction(source_map_pos,map_position)
 	#change direction to away from the source 
-	var target_pos = WorldManager.grid.local_to_map(position) + direction * distance 
+	var target_pos = map_position + direction * distance 
 	if !WorldManager.grid.is_within_bounds(target_pos):
 		return
 	if !WorldManager.grid.get_possible_tiles().has(target_pos):
 		return
 	var tween = create_tween()
 	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)
-
+	await tween.finished.connect(func():
+		knockback_animation_finished.emit(distance,source_map_pos)
+	)
+	
+	
 func _on_area_2d_mouse_entered() -> void:
-	print("HOVERED > ", self)
 	add_to_group(C.GROUPS_HOVERED_ENTITIES)
 
 func _on_area_2d_mouse_exited() -> void:
@@ -182,12 +188,15 @@ func _on_death() -> void:
 
 func _on_selected():
 	if team == C.TEAM.PLAYER:
-		print(">>>>> ")
 		UIManager.ui.set_context(self)
 		WorldManager.input_waiting_on_ability = false
 	else:
 		UIManager.ui.clear_context()
+		
 func _on_ability_used():
 	WorldManager.clear_entity_moved_history()
 	action_counter -= 1
 	move_counter = 0
+
+func set_orientation(vertical:bool):
+	sprite.flip_h = vertical

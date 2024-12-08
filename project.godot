@@ -25,6 +25,7 @@ Util="*res://src/globals/util.gd"
 Debug="*res://src/globals/debug.gd"
 TilePattern="*res://src/globals/tile_pattern.gd"
 DialogueManager="*res://src/globals/dialogue_manager.gd"
+VfxManager="*res://src/globals/vfx_manager.gd"
 
 [debug]
 

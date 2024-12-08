@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://ch1lafdhe08gt"]
+[gd_scene load_steps=37 format=4 uid="uid://ch1lafdhe08gt"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_8nlld"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_yv8tv"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://chihmnl6y46ny" path="res://assets/etc/light.png" id="19_mdew6"]
 [ext_resource type="Texture2D" uid="uid://c045pp86mh33s" path="res://assets/etc/shadow.png" id="19_vsdqm"]
 [ext_resource type="Texture2D" uid="uid://cc1jgrnvkjtt3" path="res://assets/etc/Cathedral.png" id="21_i5w4q"]
+[ext_resource type="Texture2D" uid="uid://xrdmix847ld2" path="res://assets/etc/Cathedral-torchl.png" id="24_tqrsc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7tt8x"]
 texture = ExtResource("4_m6nmw")
@@ -88,6 +89,42 @@ sources/2 = SubResource("TileSetAtlasSource_ijiuh")
 sources/3 = SubResource("TileSetAtlasSource_5pbad")
 sources/0 = SubResource("TileSetAtlasSource_wl2pk")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4qkp"]
+atlas = ExtResource("24_tqrsc")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlinn"]
+atlas = ExtResource("24_tqrsc")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_111vk"]
+atlas = ExtResource("24_tqrsc")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbfg3"]
+atlas = ExtResource("24_tqrsc")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8navn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4qkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlinn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_111vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbfg3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Demo" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -100,6 +137,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8nlld")
+orientation = 1
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("2_yv8tv")
@@ -134,20 +172,29 @@ tile_set = ExtResource("5_r28hx")
 y_sort_enabled = true
 tile_set = SubResource("TileSet_jgmbd")
 
+[node name="Sprite2D" type="Sprite2D" parent="Grid/PropLayer"]
+position = Vector2(128, -103)
+texture = ExtResource("21_i5w4q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Grid/PropLayer/Sprite2D"]
+sprite_frames = SubResource("SpriteFrames_8navn")
+autoplay = "default"
+frame_progress = 0.00820035
+
 [node name="Entity" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(0, -32)
+position = Vector2(63, -15)
 preset = ExtResource("9_bcic4")
 
 [node name="Entity2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(-33, -16)
+position = Vector2(-33, -78)
 preset = ExtResource("10_6yhsf")
 
 [node name="Entity3" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(-64, 0)
+position = Vector2(208, 39)
 preset = ExtResource("11_622yi")
 
 [node name="Entity4" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(151, 23)
+position = Vector2(97, 112)
 preset = ExtResource("12_xjvlj")
 
 [node name="Entity5" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
@@ -159,7 +206,7 @@ position = Vector2(63, 48)
 preset = ExtResource("13_nrbp3")
 
 [node name="Entity8" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(81, 24)
+position = Vector2(-157, -16)
 preset = ExtResource("13_nrbp3")
 
 [node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
@@ -167,22 +214,31 @@ position = Vector2(36, 81)
 preset = ExtResource("14_4gbdr")
 
 [node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(32, -16)
-preset = ExtResource("15_en746")
+position = Vector2(178, 56)
+preset = ExtResource("19_abomj")
 
-[node name="Entity12" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="civilian1" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(-82, 8)
 preset = ExtResource("15_en746")
 
+[node name="civilian2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(180, 89)
+preset = ExtResource("15_en746")
+
+[node name="civilian3" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(1, 2)
+preset = ExtResource("15_en746")
+
 [node name="Entity10" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(-16, 40)
+position = Vector2(78, 9)
 preset = ExtResource("19_abomj")
 
 [node name="Entity11" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(79, -9)
+position = Vector2(-49, -56)
 preset = ExtResource("19_abomj")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.172833, 0.172833, 0.172833, 1)
 z_index = -99
 position = Vector2(38, -18)
@@ -205,7 +261,3 @@ color = Color(1, 0.783333, 0.48, 1)
 shadow_enabled = true
 texture = ExtResource("19_mdew6")
 metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(128, -103)
-texture = ExtResource("21_i5w4q")

@@ -51,4 +51,10 @@ func get_pathfinding_distance(a:Vector2,b:Vector2):
 	var path = WorldManager.grid.astar_grid.get_id_path(a, b)
 	return path.size()
 
-	
+func get_global_from_local(position:Vector2,source_node:Node2D):
+	var node = Node2D.new()
+	node.position = position
+	source_node.add_child( node )
+	var global_pos = node.global_position
+	node.queue_free()
+	return global_pos

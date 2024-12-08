@@ -7,6 +7,7 @@ var threat
 var tile_labels:Array = []
 var to_idle = false
 
+
 func _ready() -> void:
 	super()
 	state_id = C.STATE.AI_ATTACK
@@ -14,7 +15,7 @@ func _ready() -> void:
 func _on_configured():
 	host.move_end.connect(_on_host_move_end)
 	host.death.connect(_on_host_death)
-
+	host.knockback_animation_finished.connect(_on_knockback_animation_finished)
 func _enter_state(old_state, new_state):
 	print("attack start")
 	to_idle = false
@@ -77,9 +78,7 @@ func apply_threat():
 		for valid_target in valid_targets:
 			if target_found:
 				return
-			threat = {"tile":valid_target.map_position, "ability":ability, "target":valid_target}
-			WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.RED,Grid.HIGHLIGHT_LAYERS.THREAT)
-			WorldManager.grid.threat_tiles.push_front(threat.tile)
+			set_threat(valid_target.map_position, ability, valid_target)
 			target_found = true
 			
 		#for target in get_tree().get_nodes_in_group(C.GROUPS_EN):
@@ -194,12 +193,25 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		value -= 15
 	return value
 
-
+func set_threat(map_position:Vector2i,ability:Ability,valid_target):
+	threat = {"tile":valid_target.map_position, "ability":ability, "target":valid_target}
+	WorldManager.grid.threat_tiles.push_front(threat.tile)
+	host.threat_updated.emit()
+	
 func _get_location_score(target_map_pos:Vector2i)->int: 
 	var boundary_rect:Rect2i = WorldManager.grid.tiles_layer.get_used_rect()
 	var distance_from_center = target_map_pos.distance_to(((boundary_rect.position + boundary_rect.size) / 2))
 	return (distance_from_center / 2) * -1
 
+
 func _on_host_death():
 	if threat:
 		WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.NONE,Grid.HIGHLIGHT_LAYERS.THREAT)
+
+func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i):
+	if threat:
+		var direction = Util.get_direction(source_map_pos,host.map_position)
+		WorldManager.grid.threat_tiles.erase(threat.tile)
+		threat.tile += direction * distance 
+		WorldManager.grid.threat_tiles.push_front(threat.tile)
+		host.threat_updated.emit()

@@ -175,3 +175,7 @@ func populate_entity_tiles():
 		elif entity.team == WorldManager.team_turn:
 			ally_tiles.push_front(entity.map_position)
 		
+func highlight_threats():
+	threat_highlight_layer.clear()
+	for tile_position in threat_tiles:
+		set_highlight(tile_position,HIGHLIGHT_COLORS.RED,HIGHLIGHT_LAYERS.THREAT)
