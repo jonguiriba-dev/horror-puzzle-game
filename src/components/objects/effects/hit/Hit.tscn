@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://n63qfcpn1k26"]
+
+[ext_resource type="Script" path="res://src/components/objects/effects/vfx.gd" id="1_y4taq"]
+[ext_resource type="Texture2D" uid="uid://bxrbns8hfs4fl" path="res://assets/fx/particles/hit.png" id="2_8ii02"]
+
+[sub_resource type="Curve" id="Curve_ovcte"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498258, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_01ix4"]
+curve = SubResource("Curve_ovcte")
+
+[sub_resource type="Curve" id="Curve_7rnk6"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.324042, 100), 0.0, 0.0, 0, 0, Vector2(0.554007, 12.6591), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dn3sb"]
+curve = SubResource("Curve_7rnk6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6f7kf"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 5.0
+emission_ring_radius = 5.0
+emission_ring_inner_radius = 0.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 1.49998
+radial_velocity_curve = SubResource("CurveTexture_dn3sb")
+gravity = Vector3(0, 0, 0)
+color = Color(0.995333, 1, 0.86, 1)
+alpha_curve = SubResource("CurveTexture_01ix4")
+
+[node name="Hit" type="Node2D"]
+script = ExtResource("1_y4taq")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 7
+process_material = SubResource("ParticleProcessMaterial_6f7kf")
+texture = ExtResource("2_8ii02")
+lifetime = 0.5
+speed_scale = 0.5
+explosiveness = 1.0
+randomness = 1.0

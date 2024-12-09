@@ -17,3 +17,7 @@ func _ready() -> void:
 			AbilityAction.ACTION_TYPES.KNOCKBACK
 		)
 	]
+
+func _play_animation(target_map_position:Vector2i):
+	SfxManager.play("hit-crunch-1")
+	await Util.wait(0.1)

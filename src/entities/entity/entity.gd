@@ -176,6 +176,17 @@ func _on_hit(damage:int) -> void:
 	if health <= 0:
 		health = 0
 		death.emit()
+	
+	
+	var hit_effect = VfxManager.spawn("hit")
+	get_parent().add_child(hit_effect)
+	hit_effect.particles.one_shot = true
+	hit_effect.particles.restart()
+	hit_effect.position = position
+	hit_effect.position += Vector2(randi_range(-1,1),randi_range(-8,8))
+	hit_effect.z_index = 99
+	await hit_effect.particles.finished
+	hit_effect.queue_free()
 
 func _on_death() -> void:
 	for group in get_groups():

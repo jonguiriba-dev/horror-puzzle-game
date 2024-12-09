@@ -35,6 +35,7 @@ func _play_animation(target_map_position:Vector2i):
 			#projectile.rotate(-45)
 	#WorldManager.grid.prop_layer.add_child(projectile)
 	#
+	SfxManager.play("charge-4")
 	var charge_in_vfx = VfxManager.spawn("charge_in")
 	host.get_parent().add_child( charge_in_vfx )
 	var source_offset = Vector2(-15,-8)
@@ -52,6 +53,8 @@ func _play_animation(target_map_position:Vector2i):
 	
 	laser.start(global_position)
 	await laser.finished
+	SfxManager.play("hit-2")
+
 	#var tween = create_tween()
 	
 	#tween.tween_property(projectile, "position", WorldManager.grid.map_to_local(target_map_position) + target_offset, 0.3)

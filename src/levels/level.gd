@@ -6,6 +6,7 @@ class_name World
 
 func _ready() -> void:
 	WorldManager.viewport_ready.connect(_on_viewport_ready)
-
+	
 func _on_viewport_ready():
 	WorldManager.register_world(self)
+	#MusicManager.play("bg-music-battle-1")

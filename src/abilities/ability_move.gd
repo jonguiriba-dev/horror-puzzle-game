@@ -92,6 +92,7 @@ func _physics_process(delta: float) -> void:
 func _play_animation(target_map_position:Vector2i):
 	move_to_selected_tile(target_map_position)
 	play_animation = true
+	SfxManager.play("step-2")
 	await host.move_end
 	
 func move(delta: float)->void:

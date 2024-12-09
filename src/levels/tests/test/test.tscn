@@ -1,22 +1,15 @@
-[gd_scene load_steps=21 format=4 uid="uid://d00v1mllkpgc0"]
+[gd_scene load_steps=14 format=4 uid="uid://d00v1mllkpgc0"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_5d3ta"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_3u602"]
-[ext_resource type="Script" path="res://src/scripts/dialogue/dialogue.gd" id="2_662s5"]
-[ext_resource type="Resource" uid="uid://cbijqyp5b4qxj" path="res://src/scripts/dialogue/etc/intro.tres" id="3_kgcsg"]
 [ext_resource type="TileSet" uid="uid://ytuuouvf4sl2" path="res://src/components/grid/tilesets/offroad_tiles_tileset.tres" id="3_tm4uh"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_vij2k"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="5_3w48l"]
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_ujolu"]
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_fxkov"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_va4h4"]
-[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/elyana/elyana_preset.tres" id="9_pbi8r"]
 [ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/talya/talya_preset.tres" id="10_l5ksg"]
-[ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/layla/layla_preset.tres" id="11_dxey2"]
 [ext_resource type="Resource" uid="uid://dmdpdt2ttqdwo" path="res://src/entities/entity/presets/bloat/bloat_preset.tres" id="12_q38pd"]
-[ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/nightmare/nightmare_preset.tres" id="13_xc7hd"]
-[ext_resource type="Resource" uid="uid://wdlgggc2ynf0" path="res://src/entities/entity/presets/twohead/twohead_preset.tres" id="14_wsg25"]
-[ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="15_447bq"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
@@ -36,7 +29,6 @@ sources/0 = SubResource("TileSetAtlasSource_7gmc3")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5d3ta")
-dialogues = Array[ExtResource("2_662s5")]([ExtResource("3_kgcsg")])
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("2_3u602")
@@ -73,33 +65,13 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAAAP//AQAAAAAAAAD+/wQAAQABAAAAAAAAAAEAAQABAAAAAAABAP3/AQABAAAAAAD8//3/AQABAAAAAAA=")
 tile_set = ExtResource("7_fxkov")
 
-[node name="Entity" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(0, -32)
-preset = ExtResource("9_pbi8r")
-
 [node name="Entity2" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-33, -16)
+position = Vector2(63, 16)
 preset = ExtResource("10_l5ksg")
 
-[node name="Entity3" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-64, 0)
-preset = ExtResource("11_dxey2")
-
-[node name="Entity4" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(80, 24)
-preset = ExtResource("12_q38pd")
-
-[node name="Entity5" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(48, 40)
-preset = ExtResource("13_xc7hd")
-
 [node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(31, 49)
-preset = ExtResource("14_wsg25")
-
-[node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(32, -16)
-preset = ExtResource("15_447bq")
+position = Vector2(13, 40)
+preset = ExtResource("12_q38pd")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99
