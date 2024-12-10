@@ -1,5 +1,11 @@
 extends Node
 
+var DIRECTIONS = {
+	"NORTH"=Vector2i(0,-1),
+	"WEST"=Vector2i(-1,0),
+	"EAST"=Vector2i(1,0),
+	"SOUTH"=Vector2i(0,1)
+}
 
 func wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout
@@ -51,10 +57,10 @@ func get_pathfinding_distance(a:Vector2,b:Vector2):
 	var path = WorldManager.grid.astar_grid.get_id_path(a, b)
 	return path.size()
 
-func get_global_from_local(position:Vector2,source_node:Node2D):
+func get_global_from_local(local_position:Vector2,source_node:Node2D):
 	var node = Node2D.new()
-	node.position = position
 	source_node.add_child( node )
+	node.position = local_position
 	var global_pos = node.global_position
 	node.queue_free()
 	return global_pos

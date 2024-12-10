@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://beqys42spx325"]
+
+[ext_resource type="Script" path="res://src/components/objects/effects/vfx.gd" id="1_jpknf"]
+[ext_resource type="Texture2D" uid="uid://dixrh8a1l6txa" path="res://assets/fx/sword-slashes/spear-stab.png" id="2_fc4yh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mrbx"]
+atlas = ExtResource("2_fc4yh")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7da2t"]
+atlas = ExtResource("2_fc4yh")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6aygl"]
+atlas = ExtResource("2_fc4yh")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oieqi"]
+atlas = ExtResource("2_fc4yh")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntunr"]
+atlas = ExtResource("2_fc4yh")
+region = Rect2(384, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihjth"]
+atlas = ExtResource("2_fc4yh")
+region = Rect2(448, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vk8kc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mrbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7da2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6aygl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oieqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntunr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihjth")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SpearStab" type="Node2D"]
+script = ExtResource("1_jpknf")
+is_directional = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 99
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_vk8kc")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0

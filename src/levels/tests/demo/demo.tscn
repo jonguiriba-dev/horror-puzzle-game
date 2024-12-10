@@ -185,8 +185,8 @@ frame_progress = 0.00820035
 position = Vector2(63, -15)
 preset = ExtResource("9_bcic4")
 
-[node name="Entity2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(-33, -78)
+[node name="Talya" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(-49, -25)
 preset = ExtResource("10_6yhsf")
 
 [node name="Entity3" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]

@@ -8,8 +8,8 @@
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_ujolu"]
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_fxkov"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_va4h4"]
+[ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/nightmare/nightmare_preset.tres" id="10_7wjwg"]
 [ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/talya/talya_preset.tres" id="10_l5ksg"]
-[ext_resource type="Resource" uid="uid://dmdpdt2ttqdwo" path="res://src/entities/entity/presets/bloat/bloat_preset.tres" id="12_q38pd"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
@@ -71,7 +71,7 @@ preset = ExtResource("10_l5ksg")
 
 [node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
 position = Vector2(13, 40)
-preset = ExtResource("12_q38pd")
+preset = ExtResource("10_7wjwg")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99

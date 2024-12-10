@@ -36,7 +36,7 @@ func _play_animation(target_map_position:Vector2i):
 	#WorldManager.grid.prop_layer.add_child(projectile)
 	#
 	SfxManager.play("charge-4")
-	var charge_in_vfx = VfxManager.spawn("charge_in")
+	var charge_in_vfx = VfxManager.get_vfx_node("charge_in")
 	host.get_parent().add_child( charge_in_vfx )
 	var source_offset = Vector2(-15,-8)
 	charge_in_vfx.position = host.position + source_offset
@@ -44,7 +44,7 @@ func _play_animation(target_map_position:Vector2i):
 	charge_in_vfx.particles.restart()
 	await charge_in_vfx.particles.finished
 	
-	var laser = VfxManager.spawn("laser")
+	var laser = VfxManager.get_vfx_node("laser")
 	laser.position = host.position + source_offset
 	host.get_parent().add_child( laser )
 	

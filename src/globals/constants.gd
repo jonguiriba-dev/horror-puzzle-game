@@ -10,6 +10,7 @@ var GROUPS_HIGHLIGHT_TEXT = "highlight_text"
 var GROUPS_ENEMIES = "enemies"
 var GROUPS_SELECTED = "selected"
 var GROUPS_PLAYER_ENTITIES = "player_entities"
+var GROUPS_ANIMATING_ENTITIES = "animating_entities"
 
 enum TEAM{
 	PLAYER,

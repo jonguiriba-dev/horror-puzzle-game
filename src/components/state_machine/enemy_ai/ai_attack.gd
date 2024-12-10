@@ -16,6 +16,7 @@ func _on_configured():
 	host.move_end.connect(_on_host_move_end)
 	host.death.connect(_on_host_death)
 	host.knockback_animation_finished.connect(_on_knockback_animation_finished)
+	
 func _enter_state(old_state, new_state):
 	print("attack start")
 	to_idle = false
@@ -23,7 +24,9 @@ func _enter_state(old_state, new_state):
 	var team_turn = WorldManager.team_turn
 	if threat:
 		await attack_target()
-		
+		if WorldManager.animation_counter != 0:
+			await WorldManager.animation_counter_cleared
+			
 	if team_turn == host.team:
 		
 		for l in tile_labels:
@@ -52,48 +55,32 @@ func show_tile_values(scored_tiles:Array):
 func _transition():
 	if to_idle:
 		return C.STATE.AI_IDLE
-		
-func _on_host_move_end():
-	print("_on_host_move_end ")
-	apply_threat()
-	host.hide_all_details()
-	host.turn_end.emit()
-	to_idle = true
-	
 	
 func apply_threat():
 	var target_found = false
 	print("apply_threat: ",host.entity_name)
 	for ability in host.get_abilities():
+		if target_found:
+			return
 		if !ability.can_target_entities:
 			return
+			
 		print("ability ",ability.ability_name)
 		var valid_targets = ability.get_valid_targets()
 		print("valid_targets ",valid_targets)
 		
-		if target_found:
-			return
-		
-		
-		for valid_target in valid_targets:
-			if target_found:
-				return
-			set_threat(valid_target.map_position, ability, valid_target)
+		if valid_targets.size() > 0:
 			target_found = true
+			var valid_target = valid_targets[0]
+			set_threat(valid_target.map_position, ability)
+	if !target_found:
+		threat = null
 			
-		#for target in get_tree().get_nodes_in_group(C.GROUPS_EN):
-			#if reachable_tiles.has(target.map_position):
-				#print("reach")
-				#threat = {"tile":target.map_position, "ability":ability, "target":target}
-				#WorldManager.grid.set_highlight(target.map_position,Grid.HIGHLIGHT_COLORS.RED,Grid.HIGHLIGHT_LAYERS.THREAT)
-				#WorldManager.grid.threat_tiles.push_front(threat.tile)
-				#target_count += 1
-				#if ability.target_count == target_count:
-					#return
+
 func attack_target():
 	print(">>> attack_target ")
 	await threat.ability.use(threat.tile) 
-	WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.NONE,Grid.HIGHLIGHT_LAYERS.THREAT)
+	clear_threat_tiles(host.map_position,threat.tile)
 	threat = null
 	
 func analyze_tile_scores():
@@ -193,25 +180,43 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		value -= 15
 	return value
 
-func set_threat(map_position:Vector2i,ability:Ability,valid_target):
-	threat = {"tile":valid_target.map_position, "ability":ability, "target":valid_target}
-	WorldManager.grid.threat_tiles.push_front(threat.tile)
-	host.threat_updated.emit()
-	
+func set_threat(target_map_position:Vector2i,ability:Ability):
+	threat = {"tile":target_map_position, "ability":ability}
+	add_threat_tiles(host.map_position,threat.tile)
+
 func _get_location_score(target_map_pos:Vector2i)->int: 
 	var boundary_rect:Rect2i = WorldManager.grid.tiles_layer.get_used_rect()
 	var distance_from_center = target_map_pos.distance_to(((boundary_rect.position + boundary_rect.size) / 2))
 	return (distance_from_center / 2) * -1
 
+func clear_threat_tiles(source_map_pos:Vector2i,target_map_pos:Vector2i):
+	var threat_tiles = threat.ability.get_threat_tiles(source_map_pos,target_map_pos)
+	for threat_tile in threat_tiles:
+		WorldManager.grid.threat_tiles.erase(threat_tile)
+	host.threat_updated.emit()
 
+func add_threat_tiles(source_map_pos:Vector2i,target_map_pos:Vector2i):
+	var threat_tiles = threat.ability.get_threat_tiles(source_map_pos,target_map_pos)
+	for threat_tile in threat_tiles:
+		WorldManager.grid.threat_tiles.push_front(threat_tile)
+	host.threat_updated.emit()
+		
+func _on_host_move_end():
+	print("_on_host_move_end ")
+	apply_threat()
+	host.hide_all_details()
+	host.turn_end.emit()
+	to_idle = true
+	
 func _on_host_death():
 	if threat:
-		WorldManager.grid.set_highlight(threat.tile,Grid.HIGHLIGHT_COLORS.NONE,Grid.HIGHLIGHT_LAYERS.THREAT)
+		clear_threat_tiles(host.map_position,threat.tile)
 
-func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i):
+func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i, prev_position:Vector2i):
 	if threat:
 		var direction = Util.get_direction(source_map_pos,host.map_position)
-		WorldManager.grid.threat_tiles.erase(threat.tile)
+		clear_threat_tiles(prev_position,threat.tile)
+
 		threat.tile += direction * distance 
-		WorldManager.grid.threat_tiles.push_front(threat.tile)
-		host.threat_updated.emit()
+		
+		add_threat_tiles(host.map_position,threat.tile)

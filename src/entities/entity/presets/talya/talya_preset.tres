@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_5ramq")
 entity_name = "Talya"
-max_health = 2
+max_health = 99
 move_range = 3
 team = 0
 ability_1 = "res://src/abilities/ability_move.gd"

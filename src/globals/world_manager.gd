@@ -9,11 +9,14 @@ var input_enabled = false
 var world:World
 var current_dialogue:Dialogue
 var entity_register_queue := []
+var animation_counter := 0
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
 signal viewport_ready
+signal animation_counter_updated(val:int)
+signal animation_counter_cleared
 
 func _ready() -> void:
 	get_viewport().ready.connect(_on_scenetree_ready)
@@ -36,6 +39,7 @@ func register_world(_world:World):
 		register_entity(entity)
 	
 	entity_register_queue = []
+	
 func end_turn():
 	turn_changed.emit()
 	turn_end.emit(team_turn)
@@ -43,9 +47,6 @@ func end_turn():
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
 	
-	if team_turn == C.TEAM.PLAYER:
-		_start_player_turn()
-		
 func _start_player_turn():
 	for player_entities in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
 		player_entities.turn_start.emit()
@@ -120,6 +121,13 @@ func clear_entity_moved_history():
 	if UIManager.ui:
 		UIManager.ui.disable_undo_move_button()
 
+func increment_animation_counter(val: int):
+	print("increment_animation_counter ", val)
+	animation_counter += val
+	animation_counter_updated.emit(animation_counter)
+	if animation_counter == 0:
+		animation_counter_cleared.emit()
+		
 func _on_scenetree_ready():
 	if UIManager.ui:
 		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
@@ -134,9 +142,12 @@ func _on_end_turn_pressed():
 	
 func _on_turn_start(turn:C.TEAM):
 	if turn == C.TEAM.ENEMY:
-		_on_enemy_turn_start()
+		_start_enemy_turn()
+	elif turn == C.TEAM.PLAYER:
+		print("starting player turn")
+		_start_player_turn()
 		
-func _on_enemy_turn_start():
+func _start_enemy_turn():
 	grid.threat_tiles = []
 	enemy_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 	

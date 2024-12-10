@@ -11,15 +11,16 @@ var move_speed = 55
 
 var portrait_image
 var entity_name := ""
-var max_health = 1
-var health = 1
+var max_health := 1
+var health := 1
 var team :C.TEAM = C.TEAM.PLAYER
-var move_range = 3
+var move_range := 3
 var can_move := false
-var move_counter = 1
-var action_counter = 1
-var max_move_counter = 1
-var max_action_counter = 1
+var move_counter := 1
+var action_counter := 1
+var max_move_counter := 1
+var max_action_counter := 1
+var animation_counter := 0
 var map_position:Vector2i:
 	get:
 		return WorldManager.grid.local_to_map(position)
@@ -27,7 +28,7 @@ var flip_h:=false
 
 signal hit(damage:int)
 signal knockback(distance:int,source_pos:Vector2)
-signal knockback_animation_finished(distance:int,source_pos:Vector2)
+signal knockback_animation_finished(distance:int,source_map_pos:Vector2i,prev_map_position:Vector2i)
 signal death
 signal move_end
 signal turn_end
@@ -44,6 +45,7 @@ func _ready() -> void:
 	turn_end.connect(_on_turn_end)
 	turn_start.connect(_on_turn_start)
 	selected.connect(_on_selected)
+	
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
 		#sprite.set_modulate(Color.RED)
@@ -149,6 +151,11 @@ func _on_mouse_exited() -> void:
 
 	
 func _on_knockback(distance:int, source_map_pos:Vector2i):
+	if health == 0:
+		return
+		
+	
+	var prev_position = map_position
 	var direction = Util.get_direction(source_map_pos,map_position)
 	#change direction to away from the source 
 	var target_pos = map_position + direction * distance 
@@ -156,10 +163,14 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 		return
 	if !WorldManager.grid.get_possible_tiles().has(target_pos):
 		return
+	
+	WorldManager.increment_animation_counter(1) 
 	var tween = create_tween()
 	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)
 	await tween.finished.connect(func():
-		knockback_animation_finished.emit(distance,source_map_pos)
+		knockback_animation_finished.emit(distance,source_map_pos,prev_position)
+		animation_counter -= 1
+		WorldManager.increment_animation_counter(-1) 
 	)
 	
 	
@@ -177,26 +188,23 @@ func _on_hit(damage:int) -> void:
 		health = 0
 		death.emit()
 	
+	VfxManager.flash(sprite,Color.DARK_RED,0.15)
+	VfxManager.spawn("hit-spark-1",self,{"offset":Vector2(randi_range(-12,12),randi_range(-12,4))})
 	
-	var hit_effect = VfxManager.spawn("hit")
-	get_parent().add_child(hit_effect)
-	hit_effect.particles.one_shot = true
-	hit_effect.particles.restart()
-	hit_effect.position = position
-	hit_effect.position += Vector2(randi_range(-1,1),randi_range(-8,8))
-	hit_effect.z_index = 99
-	await hit_effect.particles.finished
-	hit_effect.queue_free()
-
+	
 func _on_death() -> void:
 	for group in get_groups():
 		remove_from_group(group)
 		
-	queue_free()
-		
 	if team == C.TEAM.ENEMY:
 		WorldManager.check_player_victory()
 
+	print("animation_counter ", animation_counter)
+	if animation_counter != 0:
+		WorldManager.increment_animation_counter(animation_counter * -1)
+		
+	queue_free()
+		
 func _on_selected():
 	if team == C.TEAM.PLAYER:
 		UIManager.ui.set_context(self)

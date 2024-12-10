@@ -176,6 +176,7 @@ func populate_entity_tiles():
 			ally_tiles.push_front(entity.map_position)
 		
 func highlight_threats():
-	threat_highlight_layer.clear()
+	clear_all_highlights(HIGHLIGHT_LAYERS.THREAT)
+	print(">>>: ",threat_tiles)
 	for tile_position in threat_tiles:
 		set_highlight(tile_position,HIGHLIGHT_COLORS.RED,HIGHLIGHT_LAYERS.THREAT)

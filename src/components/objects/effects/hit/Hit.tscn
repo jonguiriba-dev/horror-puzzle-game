@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://n63qfcpn1k26"]
 
 [ext_resource type="Script" path="res://src/components/objects/effects/vfx.gd" id="1_y4taq"]
-[ext_resource type="Texture2D" uid="uid://bxrbns8hfs4fl" path="res://assets/fx/particles/hit.png" id="2_8ii02"]
+[ext_resource type="Texture2D" uid="uid://npj0tn3np3ro" path="res://assets/fx/particles/hit2.png" id="2_qfh3k"]
 
 [sub_resource type="Curve" id="Curve_ovcte"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498258, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -23,11 +23,11 @@ particle_flag_align_y = true
 particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(1, 1, 1)
-emission_ring_height = 5.0
-emission_ring_radius = 5.0
-emission_ring_inner_radius = 0.0
-radial_velocity_min = 0.999978
-radial_velocity_max = 1.49998
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 24.0
+radial_velocity_min = 2.99998
+radial_velocity_max = 2.99998
 radial_velocity_curve = SubResource("CurveTexture_dn3sb")
 gravity = Vector3(0, 0, 0)
 color = Color(0.995333, 1, 0.86, 1)
@@ -39,8 +39,8 @@ script = ExtResource("1_y4taq")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 7
 process_material = SubResource("ParticleProcessMaterial_6f7kf")
-texture = ExtResource("2_8ii02")
-lifetime = 0.5
+texture = ExtResource("2_qfh3k")
+lifetime = 0.1
 speed_scale = 0.5
 explosiveness = 1.0
 randomness = 1.0
