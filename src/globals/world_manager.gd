@@ -2,8 +2,8 @@ extends Node
 
 var grid: Grid
 var team_turn:C.TEAM
-var turn_order:=[C.TEAM.ENEMY, C.TEAM.PLAYER]
-var enemy_turn_queue = []
+var turn_order:=[C.TEAM.ENEMY, C.TEAM.ALLY, C.TEAM.PLAYER]
+var ai_turn_queue = []
 var entity_moved_history:=[]
 var input_enabled = false
 var world:World
@@ -27,11 +27,12 @@ func register_entity(entity:Entity):
 		entity_register_queue.push_front(entity)
 		return
 		
-	if entity.team == C.TEAM.ENEMY:
-		entity.turn_end.connect(_on_enemy_unit_turn_end)
+	if entity.team == C.TEAM.ENEMY or entity.team == C.TEAM.ALLY:
+		entity.turn_end.connect(_on_ai_unit_turn_end)
 	
 	entity.set_orientation(world.orientation == C.ORIENTATION.VERTICAL) 
 	entity.threat_updated.connect(_on_entity_threat_updated)
+	
 func register_world(_world:World):
 	world = _world
 	
@@ -48,9 +49,25 @@ func end_turn():
 	turn_start.emit(team_turn)
 	
 func _start_player_turn():
-	for player_entities in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
-		player_entities.turn_start.emit()
-
+	for player_entity in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
+		player_entity.turn_start.emit()
+	
+func _start_ally_turn():
+	grid.threat_tiles = []
+	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ALLIES)
+	print("ai_turn_queue: ",ai_turn_queue.map(func (e): return e.entity_name))
+	if ai_turn_queue.size() > 0:
+		var entity = ai_turn_queue.pop_front()
+		entity.turn_start.emit()
+		
+func _start_enemy_turn():
+	grid.threat_tiles = []
+	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
+	
+	if ai_turn_queue.size() > 0:
+		var entity = ai_turn_queue.pop_front()
+		entity.turn_start.emit()
+		
 func game_start():
 	if !UIManager.ui:
 		return
@@ -122,7 +139,6 @@ func clear_entity_moved_history():
 		UIManager.ui.disable_undo_move_button()
 
 func increment_animation_counter(val: int):
-	print("increment_animation_counter ", val)
 	animation_counter += val
 	animation_counter_updated.emit(animation_counter)
 	if animation_counter == 0:
@@ -144,25 +160,22 @@ func _on_turn_start(turn:C.TEAM):
 	if turn == C.TEAM.ENEMY:
 		_start_enemy_turn()
 	elif turn == C.TEAM.PLAYER:
-		print("starting player turn")
 		_start_player_turn()
-		
-func _start_enemy_turn():
-	grid.threat_tiles = []
-	enemy_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
-	
-	if enemy_turn_queue.size() > 0:
-		var enemy = enemy_turn_queue.pop_front()
-		enemy.turn_start.emit()
-			
-func _on_enemy_unit_turn_end():
-	if enemy_turn_queue.size() == 0 and team_turn == C.TEAM.ENEMY:
-		_on_all_enemy_done()
-	var enemy = enemy_turn_queue.pop_front()
-	if is_instance_valid(enemy):
-		enemy.turn_start.emit()
+	elif turn == C.TEAM.ALLY:
+		_start_ally_turn()
 
-func _on_all_enemy_done():
+			
+func _on_ai_unit_turn_end():
+	if ai_turn_queue.size() == 0 and (team_turn == C.TEAM.ENEMY or team_turn == C.TEAM.ALLY):
+		_on_all_ai_done()
+		return
+		
+	var ai_entity = ai_turn_queue.pop_front()
+	print("my turn: ", ai_entity.entity_name)
+	if is_instance_valid(ai_entity):
+		ai_entity.turn_start.emit()
+
+func _on_all_ai_done():
 	UIManager.ui.end_turn.disabled = false
 	end_turn()
 	input_enabled = true

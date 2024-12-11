@@ -48,11 +48,12 @@ func _ready() -> void:
 	
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
-		#sprite.set_modulate(Color.RED)
 	else:
 		add_to_group(C.GROUPS_TARGETS)
 		if team == C.TEAM.PLAYER:
 			add_to_group(C.GROUPS_PLAYER_ENTITIES)
+		elif team == C.TEAM.ALLY:
+			add_to_group(C.GROUPS_ALLIES)
 	
 	if sprite:
 		sprite.play("idle")
@@ -125,11 +126,22 @@ func hide_all_details():
 func get_enemies()->Array[Entity]:
 	var enemies:Array[Entity] = []
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		if entity.team == C.TEAM.ENEMY and team == C.TEAM.PLAYER:
+		if entity.team != team:
+			if C.ALLIED_TEAMS[C.TEAM.keys()[team]].has(entity.team):
+				continue
 			enemies.push_front(entity as Entity)
-		elif entity.team != C.TEAM.ENEMY and team == C.TEAM.ENEMY:
-			enemies.push_front(entity as Entity)
+				
+
 	return enemies 
+	
+func get_allies()->Array[Entity]:
+	var allies:Array[Entity] = []
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		if entity.team == team:
+			allies.push_front(entity as Entity)
+		elif C.ALLIED_TEAMS[C.TEAM.keys()[team]].has(entity.team):
+			allies.push_front(entity as Entity)
+	return allies 
 	
 func undo_move(initial_position:Vector2):
 	WorldManager.grid.set_map_cursor(initial_position)
@@ -165,6 +177,7 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 		return
 	
 	WorldManager.increment_animation_counter(1) 
+	animation_counter+=1
 	var tween = create_tween()
 	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)
 	await tween.finished.connect(func():

@@ -166,14 +166,15 @@ func populate_entity_tiles():
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		entity_tiles.push_front(entity.map_position)
-		if entity.team == C.TEAM.ENEMY and WorldManager.team_turn == C.TEAM.PLAYER:
-			enemy_tiles.push_front(entity.map_position)
-		elif entity.team != C.TEAM.ENEMY and WorldManager.team_turn == C.TEAM.ENEMY:
-			enemy_tiles.push_front(entity.map_position)
-		elif entity.team == C.TEAM.CITIZEN and WorldManager.team_turn == C.TEAM.PLAYER:
-			ally_tiles.push_front(entity.map_position)
-		elif entity.team == WorldManager.team_turn:
-			ally_tiles.push_front(entity.map_position)
+		if (WorldManager.team_turn == entity.team and 
+			(ally_tiles.size() == 0 or enemy_tiles.size() == 0)
+		):
+			entity.get_enemies().map(func (e):
+				enemy_tiles.push_front(e.map_position)
+			)
+			entity.get_allies().map(func (e):
+				ally_tiles.push_front(e.map_position)
+			)
 		
 func highlight_threats():
 	clear_all_highlights(HIGHLIGHT_LAYERS.THREAT)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://d00v1mllkpgc0"]
+[gd_scene load_steps=15 format=4 uid="uid://d00v1mllkpgc0"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_5d3ta"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_3u602"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_va4h4"]
 [ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/nightmare/nightmare_preset.tres" id="10_7wjwg"]
 [ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/talya/talya_preset.tres" id="10_l5ksg"]
+[ext_resource type="Resource" uid="uid://clywh0svuxrk4" path="res://src/entities/entity/presets/knight/knight_preset.tres" id="11_r0s7v"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
@@ -72,6 +73,10 @@ preset = ExtResource("10_l5ksg")
 [node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
 position = Vector2(13, 40)
 preset = ExtResource("10_7wjwg")
+
+[node name="Entity7" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(45, 7)
+preset = ExtResource("11_r0s7v")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99

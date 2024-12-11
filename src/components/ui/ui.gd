@@ -80,7 +80,8 @@ func disable_undo_move_button():
 	undo_move.modulate = Color(180,180,180)
 
 func _on_end_turn_pressed() -> void:
-	end_turn_pressed.emit()
+	if WorldManager.team_turn == C.TEAM.PLAYER:
+		end_turn_pressed.emit()
 
 
 func _on_undo_move_pressed() -> void:

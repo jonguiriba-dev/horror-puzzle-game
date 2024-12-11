@@ -69,6 +69,8 @@ func move_to_selected_tile(target_pos:Vector2i):
 			team_group = C.GROUPS_PLAYER_ENTITIES
 		elif WorldManager.team_turn == C.TEAM.ENEMY:
 			team_group = C.GROUPS_ENEMIES
+		elif WorldManager.team_turn == C.TEAM.ALLY:
+			team_group = C.GROUPS_ALLIES
 			
 		path = path.filter(func(e):
 			for ally in get_tree().get_nodes_in_group(team_group):

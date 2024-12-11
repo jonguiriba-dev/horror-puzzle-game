@@ -25,6 +25,7 @@ func _enter_state(old_state, new_state):
 	if threat:
 		await attack_target()
 		if WorldManager.animation_counter != 0:
+			print("Waiting on animation...")
 			await WorldManager.animation_counter_cleared
 			
 	if team_turn == host.team:
@@ -34,7 +35,9 @@ func _enter_state(old_state, new_state):
 		tile_labels = []
 		
 		var scored_tiles = analyze_tile_scores()
-		if scored_tiles.size()  == 0:
+		scored_tiles = scored_tiles.filter(func (e): return e.value != 0)
+		if scored_tiles.size() == 0:
+			finalize_turn()
 			return
 	
 		if Debug.show_enemy_ai_tile_values:
@@ -95,8 +98,7 @@ func analyze_tile_scores():
 	
 	var scored_tiles = []
 	var targets = host.get_enemies()
-	print("analyze_tile_scores ",get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
-
+	print(host.entity_name, " targets ", targets.map(func (e):return e.entity_name))
 	if targets.size() == 0:
 		return scored_tiles
 	
@@ -118,6 +120,7 @@ func analyze_tile_scores():
 	if !nearest:
 		return scored_tiles
 	
+	print("targets> ",targets)
 	target = nearest
 	print(host.entity_name, " is targeting ", nearest.entity_name)
 	
@@ -142,12 +145,18 @@ func analyze_tile_scores():
 		)
 	
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
+	moveable_tiles.push_front(host.map_position)
 	for tile in moveable_tiles:
 		scored_tiles.push_front({
 			"position": tile,
 			"value": get_tile_value(tile)
 		})
-		
+	
+	var current_tile_value = get_tile_value(host.map_position)
+	
+	scored_tiles = scored_tiles.filter(func (e):
+		return e.value > current_tile_value
+	)
 	scored_tiles.sort_custom(
 		func(a,b):
 			return a.value > b.value
@@ -202,12 +211,16 @@ func add_threat_tiles(source_map_pos:Vector2i,target_map_pos:Vector2i):
 	host.threat_updated.emit()
 		
 func _on_host_move_end():
-	print("_on_host_move_end ")
+	finalize_turn()
+	
+func finalize_turn():
+	print("finalize_turn: ", host.entity_name)
 	apply_threat()
 	host.hide_all_details()
 	host.turn_end.emit()
 	to_idle = true
-	
+
+
 func _on_host_death():
 	if threat:
 		clear_threat_tiles(host.map_position,threat.tile)

@@ -1,6 +1,7 @@
 extends Node
 
 var GROUPS_ENTITIES = "entities"
+var GROUPS_ALLIES = "allies"
 var GROUPS_UNITS= "units"
 var GROUPS_CIVILIANS= "civilians"
 var GROUPS_TARGETTING_ABILITY = "targetting_ability"
@@ -12,11 +13,13 @@ var GROUPS_SELECTED = "selected"
 var GROUPS_PLAYER_ENTITIES = "player_entities"
 var GROUPS_ANIMATING_ENTITIES = "animating_entities"
 
+
 enum TEAM{
 	PLAYER,
 	ENEMY,
 	CITIZEN,
-	GUEST
+	GUEST,
+	ALLY
 }
 
 enum STATE{
@@ -40,4 +43,11 @@ enum DIALOGUE_TRIGGER{
 
 var ABILITY_target_type = {
 	TILE = "target_type_tile"
+}
+
+var ALLIED_TEAMS = {
+	PLAYER = [C.TEAM.PLAYER, C.TEAM.ALLY, C.TEAM.CITIZEN],	
+	ALLY = [C.TEAM.PLAYER, C.TEAM.ALLY, C.TEAM.CITIZEN],	
+	CITIZEN = [C.TEAM.PLAYER, C.TEAM.ALLY, C.TEAM.CITIZEN],	
+	ENEMY = [],	
 }
