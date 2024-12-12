@@ -13,6 +13,7 @@ enum HIGHLIGHT_COLORS{
 	ORANGE = 1,
 	BLUE = 2,
 	RED = 3,
+	PURPLE = 4,
 	NONE = 99,
 }
 
@@ -24,7 +25,8 @@ enum HIGHLIGHT_COLORS{
 @onready var prop_layer :TileMapLayer= $PropLayer
 @onready var astar_grid = AStarGrid2D.new()
 
-var threat_tiles:Array[Vector2i]= []
+var enemy_threat_tiles:Array[Vector2i]= []
+var ally_threat_tiles:Array[Vector2i]= []
 var highlight_tiles: Array[Vector2i]= []
 var entity_tiles: Array[Vector2i]= []
 var enemy_tiles: Array[Vector2i]= []
@@ -176,8 +178,23 @@ func populate_entity_tiles():
 				ally_tiles.push_front(e.map_position)
 			)
 		
-func highlight_threats():
+
+func highlight_threat_tiles():
 	clear_all_highlights(HIGHLIGHT_LAYERS.THREAT)
-	print(">>>: ",threat_tiles)
-	for tile_position in threat_tiles:
-		set_highlight(tile_position,HIGHLIGHT_COLORS.RED,HIGHLIGHT_LAYERS.THREAT)
+	for tile_position in enemy_threat_tiles:
+		var color = HIGHLIGHT_COLORS.RED
+		if ally_threat_tiles.has(tile_position):
+			color = HIGHLIGHT_COLORS.PURPLE
+		set_highlight(tile_position,color,HIGHLIGHT_LAYERS.THREAT)
+		
+	for tile_position in ally_threat_tiles:
+		var color = HIGHLIGHT_COLORS.BLUE
+		if enemy_threat_tiles.has(tile_position):
+			color = HIGHLIGHT_COLORS.PURPLE
+		set_highlight(tile_position,color,HIGHLIGHT_LAYERS.THREAT)
+
+func get_entity_on_tile(map_pos:Vector2i):
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		if entity.map_position == map_pos:
+			return entity
+	return null

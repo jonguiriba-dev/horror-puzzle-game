@@ -67,7 +67,7 @@ tile_map_data = PackedByteArray("AAAAAP//AQAAAAAAAAD+/wQAAQABAAAAAAAAAAEAAQABAAA
 tile_set = ExtResource("7_fxkov")
 
 [node name="Entity2" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(63, 16)
+position = Vector2(-16, -9)
 preset = ExtResource("10_l5ksg")
 
 [node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
@@ -75,7 +75,7 @@ position = Vector2(13, 40)
 preset = ExtResource("10_7wjwg")
 
 [node name="Entity7" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(45, 7)
+position = Vector2(62, 15)
 preset = ExtResource("11_r0s7v")
 
 [node name="WorldBg" type="Sprite2D" parent="."]

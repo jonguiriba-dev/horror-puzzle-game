@@ -133,16 +133,16 @@ func get_valid_targets(map_pos:Vector2i=Vector2i.ZERO)->Array[Entity]:
 	return targets
 	
 
-func get_threat_tiles(source_map_pos:Vector2i=Vector2i.ZERO,target_map_pos:Vector2i=Vector2i.ZERO)->Array:
+func get_enemy_threat_tiles(source_map_pos:Vector2i=Vector2i.ZERO,target_map_pos:Vector2i=Vector2i.ZERO)->Array:
 	var direction = Util.get_direction(source_map_pos,target_map_pos)
-	var threat_tiles = []
+	var enemy_threat_tiles = []
 	
 	var prev_tile = source_map_pos
 	for i in range(ability_range):
 		prev_tile += direction
-		threat_tiles.push_front(prev_tile)
+		enemy_threat_tiles.push_front(prev_tile)
 	
-	return threat_tiles	
+	return enemy_threat_tiles	
 
 func is_valid_target(map_pos:Vector2i):
 	var target_tiles = get_target_tiles(host.map_position,ability_range)

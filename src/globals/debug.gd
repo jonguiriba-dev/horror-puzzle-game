@@ -1,7 +1,7 @@
 extends Node
 
 var is_enabled = true
-var show_enemy_ai_tile_values = true
+var show_enemy_ai_tile_values = false
 var show_move_path_highlight = false
 var highlight_enemy_target = false
 var play_game_start_sequence = false
@@ -22,6 +22,7 @@ func _physics_process(delta: float) -> void:
 			UIManager.info(text)
 			return 
 		var entity = node as Entity
+		text += "\nhealth: %s"%entity.health
 		if entity.has_node("PlayerEntityStateMachine"):
 			var state_machine = entity.get_node("PlayerEntityStateMachine")
 			var state = state_machine.get_state() as State

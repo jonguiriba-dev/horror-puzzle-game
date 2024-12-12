@@ -10,6 +10,8 @@ var world:World
 var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
+var counter_attack_groups:Array= []
+var counter_attack_icons:Dictionary = {}
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -53,7 +55,7 @@ func _start_player_turn():
 		player_entity.turn_start.emit()
 	
 func _start_ally_turn():
-	grid.threat_tiles = []
+	grid.enemy_threat_tiles = []
 	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ALLIES)
 	print("ai_turn_queue: ",ai_turn_queue.map(func (e): return e.entity_name))
 	if ai_turn_queue.size() > 0:
@@ -61,7 +63,7 @@ func _start_ally_turn():
 		entity.turn_start.emit()
 		
 func _start_enemy_turn():
-	grid.threat_tiles = []
+	grid.enemy_threat_tiles = []
 	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 	
 	if ai_turn_queue.size() > 0:
@@ -143,6 +145,26 @@ func increment_animation_counter(val: int):
 	animation_counter_updated.emit(animation_counter)
 	if animation_counter == 0:
 		animation_counter_cleared.emit()
+
+func draw_counter_attack_groups():
+	for group in counter_attack_groups:
+		var center_position = (group[0].entity.position + group[1].entity.position)/2
+		var sprite = Sprite2D.new()
+		WorldManager.grid.prop_layer.add_child(sprite)
+		sprite.position = center_position + Vector2(0,-32)
+		sprite.texture = load('res://assets/fx/combat.png')
+		var group_hash = group[0].entity.position + group[1].entity.position
+		print("123--> ", group_hash)
+		counter_attack_icons[group_hash] = sprite
+
+func clear_counter_attack_icons(group):
+	var group_hash = group[0].entity.position + group[1].entity.position
+	print(456, group_hash)
+	
+	var sprite = counter_attack_icons.get(group_hash)
+	if sprite:
+		sprite.queue_free()
+		counter_attack_icons.erase(group_hash)
 		
 func _on_scenetree_ready():
 	if UIManager.ui:
@@ -193,4 +215,4 @@ func _on_undo_move_pressed():
 			WorldManager.clear_entity_moved_history()
 
 func _on_entity_threat_updated():
-	grid.highlight_threats()
+	grid.highlight_threat_tiles()

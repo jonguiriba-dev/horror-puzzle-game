@@ -6,7 +6,7 @@ var target
 var threat
 var tile_labels:Array = []
 var to_idle = false
-
+var grid_tiles
 
 func _ready() -> void:
 	super()
@@ -18,6 +18,10 @@ func _on_configured():
 	host.knockback_animation_finished.connect(_on_knockback_animation_finished)
 	
 func _enter_state(old_state, new_state):
+	grid_tiles = WorldManager.grid.enemy_threat_tiles
+	if WorldManager.team_turn == C.TEAM.ALLY:
+		grid_tiles = WorldManager.grid.ally_threat_tiles
+		
 	print("attack start")
 	to_idle = false
 	
@@ -82,10 +86,43 @@ func apply_threat():
 
 func attack_target():
 	print(">>> attack_target ")
-	await threat.ability.use(threat.tile) 
+	var targetted_entity = WorldManager.grid.get_entity_on_tile(threat.tile)
+	var counter_attack_threat = check_counter_attack(targetted_entity)
+	var counter_attack_group = [
+		{
+			"entity":host,
+			"threat":threat,
+		},
+		{
+			"entity":targetted_entity,
+			"threat":counter_attack_threat,
+		}
+	]
+	
+	await threat.ability.use(threat.tile)
+	if counter_attack_threat:
+		await counter_attack_threat.ability.use(host.map_position)
+		targetted_entity.set_meta("threat",null)
+		WorldManager.clear_counter_attack_icons(counter_attack_group)
+		
 	clear_threat_tiles(host.map_position,threat.tile)
 	threat = null
-	
+
+func check_counter_attack(targetted_entity:Entity):
+	var targetted_entity_threat
+	if (
+		targetted_entity and 
+		targetted_entity.team != host.team and 
+		targetted_entity.has_meta("threat")
+	):
+		targetted_entity_threat = targetted_entity.get_meta("threat")
+		if (
+			targetted_entity_threat and 
+			targetted_entity_threat.tile == host.map_position
+		):
+				return targetted_entity_threat
+	return null
+
 func analyze_tile_scores():
 	if Debug.highlight_enemy_target and is_instance_valid(target):
 		WorldManager.grid.set_highlight(
@@ -112,7 +149,7 @@ func analyze_tile_scores():
 	)
 	
 	for _target in targets:
-		if WorldManager.grid.threat_tiles.has(_target.map_position):
+		if grid_tiles.has(_target.map_position):
 			targets.erase(_target)
 			targets.push_back(_target)
 		
@@ -174,7 +211,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		
 		for _target in ability.get_valid_targets(tile_pos):
 			print("found valid target at ", _target.map_position)
-			if WorldManager.grid.threat_tiles.has(_target.map_position):
+			if grid_tiles.has(_target.map_position):
 				value += 5
 			else:
 				value += 10
@@ -185,29 +222,48 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		value += 5 + host_map_pos.distance_to(tile_pos)
 		
 	#decrement by already threatened tiles
-	if WorldManager.grid.threat_tiles.has(tile_pos):
+	if grid_tiles.has(tile_pos):
 		value -= 15
 	return value
 
 func set_threat(target_map_position:Vector2i,ability:Ability):
 	threat = {"tile":target_map_position, "ability":ability}
+	host.set_meta("threat",threat)
 	add_threat_tiles(host.map_position,threat.tile)
-
+	
+	var targetted_entity = WorldManager.grid.get_entity_on_tile(threat.tile)
+	var counter_attack_threat = check_counter_attack(targetted_entity)
+	
+	if counter_attack_threat:
+		var counter_attack_group = [
+			{
+				"entity":host,
+				"threat":threat,
+			},
+			{
+				"entity":targetted_entity,
+				"threat":counter_attack_threat,
+			}
+		]
+				
+		if !WorldManager.counter_attack_groups.has(counter_attack_group):
+			WorldManager.counter_attack_groups.push_front(counter_attack_group)
+			WorldManager.draw_counter_attack_groups()
 func _get_location_score(target_map_pos:Vector2i)->int: 
 	var boundary_rect:Rect2i = WorldManager.grid.tiles_layer.get_used_rect()
 	var distance_from_center = target_map_pos.distance_to(((boundary_rect.position + boundary_rect.size) / 2))
 	return (distance_from_center / 2) * -1
 
 func clear_threat_tiles(source_map_pos:Vector2i,target_map_pos:Vector2i):
-	var threat_tiles = threat.ability.get_threat_tiles(source_map_pos,target_map_pos)
-	for threat_tile in threat_tiles:
-		WorldManager.grid.threat_tiles.erase(threat_tile)
+	var enemy_threat_tiles = threat.ability.get_enemy_threat_tiles(source_map_pos,target_map_pos)
+	for threat_tile in enemy_threat_tiles:
+		grid_tiles.erase(threat_tile)
 	host.threat_updated.emit()
 
 func add_threat_tiles(source_map_pos:Vector2i,target_map_pos:Vector2i):
-	var threat_tiles = threat.ability.get_threat_tiles(source_map_pos,target_map_pos)
-	for threat_tile in threat_tiles:
-		WorldManager.grid.threat_tiles.push_front(threat_tile)
+	var enemy_threat_tiles = threat.ability.get_enemy_threat_tiles(source_map_pos,target_map_pos)
+	for threat_tile in enemy_threat_tiles:
+		grid_tiles.push_front(threat_tile)
 	host.threat_updated.emit()
 		
 func _on_host_move_end():

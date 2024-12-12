@@ -21,7 +21,6 @@ func spawn(vfx_name:String,host:Node2D,options:Dictionary={}):
 	host.get_parent().add_child(node)
 	node.position = host.position 
 	if options.has("offset"):
-		print(123,options)
 		node.position += options.offset 
 	
 	node.animated_sprite.play()
