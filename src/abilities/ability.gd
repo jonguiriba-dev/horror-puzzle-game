@@ -48,27 +48,31 @@ func _ready() -> void:
 	target_select.connect(_on_target_select)
 	stopped_targetting.connect(_on_ability_stopped_targetting)
 	
-func use(target_map_position:Vector2i):
-	if is_valid_target(target_map_position):
-		await _play_animation(target_map_position)
+func use(target_map_position:Vector2i, options:Dictionary={}):
+	if !is_valid_target(target_map_position) and !options.get('absolute',false):
+		stopped_targetting.emit()
+		print("%s.%s[host.ability.use()]: no valid target found for pos %s"%[host.entity_name,ability_name,target_map_position])
+		return
 		
-		var direction = Util.get_direction(host.map_position,target_map_position)
-		
-		var origin = target_map_position
-		
-		if use_host_as_origin:
-			origin = host.map_position + direction
-			
-		var affected_tiles = aoe_pattern.call(origin,ability_range,direction)
-		for affected_tile in affected_tiles:
-			var target_entity = _get_tile_target(affected_tile)
-			if is_instance_valid(target_entity):
-				apply_effect(target_entity)
-		
-		used.emit()
-		
-	stopped_targetting.emit()
+	await _play_animation(target_map_position)
 	
+	var direction = Util.get_direction(host.map_position,target_map_position)
+	
+	var origin = target_map_position
+	
+	if use_host_as_origin:
+		origin = host.map_position + direction
+		
+	var affected_tiles = aoe_pattern.call(origin,ability_range,direction)
+	for affected_tile in affected_tiles:
+		var target_entity = _get_tile_target(affected_tile)
+		if is_instance_valid(target_entity):
+			apply_effect(target_entity)
+	
+	used.emit()
+	
+	stopped_targetting.emit()
+
 func _get_tile_target(map_pos:Vector2i):
 	var entities = get_tree().get_nodes_in_group(C.GROUPS_ENTITIES).filter(func(e):
 		return e.map_position == map_pos
@@ -133,16 +137,16 @@ func get_valid_targets(map_pos:Vector2i=Vector2i.ZERO)->Array[Entity]:
 	return targets
 	
 
-func get_enemy_threat_tiles(source_map_pos:Vector2i=Vector2i.ZERO,target_map_pos:Vector2i=Vector2i.ZERO)->Array:
+func get_threat_tiles(source_map_pos:Vector2i=Vector2i.ZERO,target_map_pos:Vector2i=Vector2i.ZERO)->Array:
 	var direction = Util.get_direction(source_map_pos,target_map_pos)
-	var enemy_threat_tiles = []
+	var threat_tiles = []
 	
 	var prev_tile = source_map_pos
 	for i in range(ability_range):
 		prev_tile += direction
-		enemy_threat_tiles.push_front(prev_tile)
+		threat_tiles.push_front(prev_tile)
 	
-	return enemy_threat_tiles	
+	return threat_tiles	
 
 func is_valid_target(map_pos:Vector2i):
 	var target_tiles = get_target_tiles(host.map_position,ability_range)

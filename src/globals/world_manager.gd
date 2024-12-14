@@ -2,7 +2,7 @@ extends Node
 
 var grid: Grid
 var team_turn:C.TEAM
-var turn_order:=[C.TEAM.ENEMY, C.TEAM.ALLY, C.TEAM.PLAYER]
+var turn_order:=[C.TEAM.ENEMY,  C.TEAM.PLAYER, C.TEAM.ALLY]
 var ai_turn_queue = []
 var entity_moved_history:=[]
 var input_enabled = false
@@ -10,8 +10,6 @@ var world:World
 var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
-var counter_attack_groups:Array= []
-var counter_attack_icons:Dictionary = {}
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -55,17 +53,13 @@ func _start_player_turn():
 		player_entity.turn_start.emit()
 	
 func _start_ally_turn():
-	grid.enemy_threat_tiles = []
 	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ALLIES)
-	print("ai_turn_queue: ",ai_turn_queue.map(func (e): return e.entity_name))
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
 		
 func _start_enemy_turn():
-	grid.enemy_threat_tiles = []
 	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
-	
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
@@ -146,39 +140,64 @@ func increment_animation_counter(val: int):
 	if animation_counter == 0:
 		animation_counter_cleared.emit()
 
-func draw_counter_attack_groups():
-	for group in counter_attack_groups:
-		var center_position = (group[0].entity.position + group[1].entity.position)/2
-		var sprite = Sprite2D.new()
-		WorldManager.grid.prop_layer.add_child(sprite)
-		sprite.position = center_position + Vector2(0,-32)
-		sprite.texture = load('res://assets/fx/combat.png')
-		var group_hash = group[0].entity.position + group[1].entity.position
-		print("123--> ", group_hash)
-		counter_attack_icons[group_hash] = sprite
+var order_labels = []
+func show_turn_order():
+	print("show_turn_order")
+	var i=1
+	for enemy in get_tree().get_nodes_in_group(C.GROUPS_ENEMIES):
+		var label = Label.new()
+		enemy.add_child(label)
+		label.position = Vector2(8,-32)
+		label.text = str(i)
+		label.set('theme_override_colors/font_color',Color('#cc2f44'))
+		label.set('theme_override_colors/font_outline_color',Color('#121212'))
+		label.set('theme_override_constants/outline_size',12)
+		label.set('theme_override_font_sizes/font_size',10)
+		i+=1
+		order_labels.push_front(label)
 
-func clear_counter_attack_icons(group):
-	var group_hash = group[0].entity.position + group[1].entity.position
-	print(456, group_hash)
-	
-	var sprite = counter_attack_icons.get(group_hash)
-	if sprite:
-		sprite.queue_free()
-		counter_attack_icons.erase(group_hash)
-		
+	i=1
+	for enemy in get_tree().get_nodes_in_group(C.GROUPS_ALLIES):
+		var label = Label.new()
+		enemy.add_child(label)
+		label.position = Vector2(8,-32)
+		label.text = str(i)
+		label.set('theme_override_colors/font_color',Color('#2fb7cc'))
+		label.set('theme_override_colors/font_outline_color',Color('#121212'))
+		label.set('theme_override_constants/outline_size',12)
+		label.set('theme_override_font_sizes/font_size',10)
+		i+=1
+		order_labels.push_front(label)
+func hide_turn_order():
+	print("hide_turn_order")
+	for i in range(order_labels.size()):
+		order_labels.pop_front().queue_free()
+
 func _on_scenetree_ready():
 	if UIManager.ui:
 		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
 		UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
+		UIManager.ui.turn_order_pressed.connect(_on_turn_order_pressed)
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
 
 func _on_end_turn_pressed():
-	UIManager.ui.end_turn.disabled = true
-	end_turn()
+	if team_turn == C.TEAM.PLAYER:
+		UIManager.ui.end_turn.disabled = true
+		end_turn()
+
+func _on_turn_order_pressed():
+	if team_turn == C.TEAM.PLAYER:
+		print("TURN ORDER")
+		if order_labels.size()>0:
+			hide_turn_order()
+		else:
+			show_turn_order()
 	
 func _on_turn_start(turn:C.TEAM):
+	await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
+	
 	if turn == C.TEAM.ENEMY:
 		_start_enemy_turn()
 	elif turn == C.TEAM.PLAYER:
@@ -215,4 +234,16 @@ func _on_undo_move_pressed():
 			WorldManager.clear_entity_moved_history()
 
 func _on_entity_threat_updated():
-	grid.highlight_threat_tiles()
+	grid.highlight_threat_tiles(
+		get_team_group_threat_tiles(C.GROUPS_ENEMIES),
+		get_team_group_threat_tiles(C.GROUPS_ALLIES)
+	)
+
+func get_team_group_threat_tiles(group:String):
+	var tiles = []
+	for entity in get_tree().get_nodes_in_group(group):
+		if !entity.threat: continue
+		var threat_tiles = entity.threat.ability.get_threat_tiles(entity.map_position,entity.threat.tile)
+		for threat_tile in threat_tiles:
+			tiles.push_front(threat_tile)
+	return tiles

@@ -50,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #func _on_move_target_set(map_position:Vector2i)->void:
 	#move_to_selected_tile(map_position)
 
-func use(target_map_position:Vector2i):
+func use(target_map_position:Vector2i, options:Dictionary={}):
 	initial_position = host.position
 	if target_map_position == host.map_position:
 		host.move_end.emit()

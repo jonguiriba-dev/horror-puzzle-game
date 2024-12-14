@@ -11,7 +11,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 script = ExtResource("1_p2aic")
-game_scene = "res://src/levels/tests/test/test.tscn"
+game_scene = "res://src/levels/tests/demo/demo.tscn"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -45,10 +45,8 @@ alignment = 1
 
 [node name="UI" parent="." instance=ExtResource("3_tor8p")]
 layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -1278.0
-offset_bottom = -718.0
+offset_right = -640.0
+offset_bottom = -360.0
 mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

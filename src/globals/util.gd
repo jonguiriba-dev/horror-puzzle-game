@@ -10,6 +10,9 @@ var DIRECTIONS = {
 func wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout
 
+func sysprint(source_text:String,info_text:String):
+	print_rich("[color=#ad9842]"+source_text+"[/color] : [color=#cec465]"+info_text+"[/color]")
+
 func get_nearest(pos:Vector2,nodes:Array):
 	nodes.filter(func(e):
 		if is_instance_valid(e):

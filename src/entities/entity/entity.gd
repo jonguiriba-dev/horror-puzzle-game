@@ -25,6 +25,7 @@ var map_position:Vector2i:
 	get:
 		return WorldManager.grid.local_to_map(position)
 var flip_h:=false
+var threat = null
 
 signal hit(damage:int)
 signal knockback(distance:int,source_pos:Vector2)

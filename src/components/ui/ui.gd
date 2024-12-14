@@ -9,12 +9,16 @@ enum STATE{
 @onready var ability_container := $Action/AbilityContainer
 @onready var undo_move := $UndoMove
 @onready var end_turn := $EndTurn
+@onready var turn_order := $TurnOrder
 @onready var debug_label := $Debug/Label
 @onready var portrait_container := $Portrait
 @onready var portrait := $Portrait/image
 @onready var display_name := $Portrait/name
 @onready var game_start_overlay := $Overlays/GameStart
 @onready var victory_overlay := $Overlays/Victory
+@onready var turn_start_overlay := $Overlays/TurnStart
+@onready var turn_start_overlay_background := $Overlays/TurnStart/Background
+@onready var turn_start_overlay_label := $Overlays/TurnStart/Label
 @onready var overlays := $Overlays
 
 var state := STATE.INACTIVE
@@ -22,9 +26,9 @@ var context
 
 signal end_turn_pressed
 signal undo_move_pressed
+signal turn_order_pressed
 
 func _ready() -> void:
-	
 	game_start_overlay.hide()
 	victory_overlay.hide()
 	overlays.visible = true
@@ -47,6 +51,7 @@ func generate_ability_icons(abilities:Array[Ability]):
 			clickable_sprite.connect("pressed",func():ability.target_select.emit())
 			ability_container.get_node("AbilityFrame%s"%[i]).add_child(clickable_sprite)
 			i+=1
+
 
 func show_ability_icons():
 	ability_container.show()
@@ -74,15 +79,29 @@ func show_portrait():
 func enable_undo_move_button():
 	undo_move.disabled = false
 	undo_move.modulate = Color.GREEN
+
+func present_turn_start_overlay(team:String):
+	turn_start_overlay_label.text = team + " Start".to_upper()
+	turn_start_overlay.show()
+	turn_start_overlay.modulate.a = 0
+	var _modulate = turn_start_overlay.modulate
+	var tween = create_tween()
+	tween.tween_property(turn_start_overlay,'modulate',Color(_modulate.r,_modulate.g,_modulate.b,1),0.15)
+	await Util.wait(0.5)
+	var tween2 = create_tween()
+	tween2.tween_property(turn_start_overlay,'modulate',Color(_modulate.r,_modulate.g,_modulate.b,0),0.3)
+	await Util.wait(0.3)
+	turn_start_overlay.hide()
 	
 func disable_undo_move_button():
 	undo_move.disabled = true
 	undo_move.modulate = Color(180,180,180)
 
 func _on_end_turn_pressed() -> void:
-	if WorldManager.team_turn == C.TEAM.PLAYER:
-		end_turn_pressed.emit()
+	end_turn_pressed.emit()
 
-
+func _on_turn_order_pressed() -> void:
+	turn_order_pressed.emit()
+		
 func _on_undo_move_pressed() -> void:
 	undo_move_pressed.emit()

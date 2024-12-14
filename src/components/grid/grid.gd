@@ -25,8 +25,8 @@ enum HIGHLIGHT_COLORS{
 @onready var prop_layer :TileMapLayer= $PropLayer
 @onready var astar_grid = AStarGrid2D.new()
 
-var enemy_threat_tiles:Array[Vector2i]= []
-var ally_threat_tiles:Array[Vector2i]= []
+#var enemy_threat_tiles:Array[Vector2i]= []
+#var ally_threat_tiles:Array[Vector2i]= []
 var highlight_tiles: Array[Vector2i]= []
 var entity_tiles: Array[Vector2i]= []
 var enemy_tiles: Array[Vector2i]= []
@@ -179,8 +179,10 @@ func populate_entity_tiles():
 			)
 		
 
-func highlight_threat_tiles():
+func highlight_threat_tiles(enemy_threat_tiles,ally_threat_tiles):
 	clear_all_highlights(HIGHLIGHT_LAYERS.THREAT)
+	Util.sysprint("grid.highlight_threat_tiles()|enemy_threat_tiles",str(enemy_threat_tiles))
+	Util.sysprint("grid.highlight_threat_tiles()|ally_threat_tiles",str(ally_threat_tiles))
 	for tile_position in enemy_threat_tiles:
 		var color = HIGHLIGHT_COLORS.RED
 		if ally_threat_tiles.has(tile_position):

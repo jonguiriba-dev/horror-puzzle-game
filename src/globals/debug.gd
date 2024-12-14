@@ -13,6 +13,7 @@ func _physics_process(delta: float) -> void:
 	if is_enabled:
 		var text = ""
 		text += "\nmouse_pos: %s"%WorldManager.grid.get_grid_local_mouse_position()
+		text += "\nmouse_map_pos: %s"%WorldManager.grid.get_map_mouse_position()
 		text += "\ninput_enabled: %s"%WorldManager.input_enabled
 		text += "\nanimation_counter: %s"%WorldManager.animation_counter
 		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.team_turn]
