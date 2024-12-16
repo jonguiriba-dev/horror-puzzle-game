@@ -14,14 +14,14 @@
 [ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/elyana/elyana_preset.tres" id="9_bcic4"]
 [ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/talya/talya_preset.tres" id="10_6yhsf"]
 [ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/layla/layla_preset.tres" id="11_622yi"]
-[ext_resource type="Resource" uid="uid://dmdpdt2ttqdwo" path="res://src/entities/entity/presets/bloat/bloat_preset.tres" id="12_xjvlj"]
-[ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/nightmare/nightmare_preset.tres" id="13_nrbp3"]
-[ext_resource type="Resource" uid="uid://wdlgggc2ynf0" path="res://src/entities/entity/presets/twohead/twohead_preset.tres" id="14_4gbdr"]
 [ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="15_en746"]
+[ext_resource type="Resource" uid="uid://y68iwe3dy48k" path="res://src/entities/entity/presets/monsters/gore/gore.tres" id="18_qrlem"]
 [ext_resource type="Texture2D" uid="uid://tftvtkxipog8" path="res://assets/bgs/black.png" id="18_xd61l"]
 [ext_resource type="Resource" uid="uid://clywh0svuxrk4" path="res://src/entities/entity/presets/knight/knight_preset.tres" id="19_abomj"]
 [ext_resource type="Texture2D" uid="uid://chihmnl6y46ny" path="res://assets/etc/light.png" id="19_mdew6"]
 [ext_resource type="Texture2D" uid="uid://c045pp86mh33s" path="res://assets/etc/shadow.png" id="19_vsdqm"]
+[ext_resource type="Resource" uid="uid://dslk1ursehvik" path="res://src/entities/entity/presets/monsters/watcher/watcher.tres" id="20_18cam"]
+[ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost.tres" id="20_em8l2"]
 [ext_resource type="Texture2D" uid="uid://cc1jgrnvkjtt3" path="res://assets/etc/Cathedral.png" id="21_i5w4q"]
 [ext_resource type="Texture2D" uid="uid://xrdmix847ld2" path="res://assets/etc/Cathedral-torchl.png" id="24_tqrsc"]
 
@@ -141,6 +141,7 @@ script = ExtResource("1_8nlld")
 orientation = 1
 
 [node name="Grid" type="Node2D" parent="."]
+position = Vector2(-48, 28)
 script = ExtResource("2_yv8tv")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
@@ -182,39 +183,55 @@ sprite_frames = SubResource("SpriteFrames_8navn")
 autoplay = "default"
 frame_progress = 0.00820035
 
-[node name="Entity" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Elyana" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(63, -15)
 preset = ExtResource("9_bcic4")
 
 [node name="Talya" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(-49, -25)
+position = Vector2(-18, -56)
 preset = ExtResource("10_6yhsf")
 
-[node name="Entity3" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(208, 39)
+[node name="Layla" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(158, 32)
 preset = ExtResource("11_622yi")
 
-[node name="Entity4" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Watcher2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(97, 112)
-preset = ExtResource("12_xjvlj")
+preset = ExtResource("20_18cam")
 
-[node name="Entity5" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Gore" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(-16, 71)
-preset = ExtResource("13_nrbp3")
+preset = ExtResource("18_qrlem")
 
-[node name="Entity7" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Ghost2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(63, 48)
-preset = ExtResource("13_nrbp3")
+preset = ExtResource("20_em8l2")
 
-[node name="Entity8" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Gore2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(-157, -16)
-preset = ExtResource("13_nrbp3")
+preset = ExtResource("18_qrlem")
 
-[node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
-position = Vector2(36, 81)
-preset = ExtResource("14_4gbdr")
+[node name="Ghost3" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(-110, -41)
+preset = ExtResource("20_em8l2")
 
-[node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Ghost4" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(-30, 34)
+preset = ExtResource("20_em8l2")
+
+[node name="Ghost" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(112, 73)
+preset = ExtResource("20_em8l2")
+
+[node name="Ghost5" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(145, 88)
+preset = ExtResource("20_em8l2")
+
+[node name="Watcher" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+position = Vector2(-95, 31)
+preset = ExtResource("20_18cam")
+
+[node name="Knight2" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(178, 56)
 preset = ExtResource("19_abomj")
 
@@ -230,16 +247,15 @@ preset = ExtResource("15_en746")
 position = Vector2(1, 2)
 preset = ExtResource("15_en746")
 
-[node name="Entity10" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Knight" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(78, 9)
 preset = ExtResource("19_abomj")
 
-[node name="Entity11" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
+[node name="Knight3" parent="Grid/PropLayer" instance=ExtResource("8_1ow0j")]
 position = Vector2(-49, -56)
 preset = ExtResource("19_abomj")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(0.172833, 0.172833, 0.172833, 1)
 z_index = -99
 position = Vector2(38, -18)

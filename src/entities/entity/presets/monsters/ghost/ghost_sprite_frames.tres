@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://dwailbo8shdd0"]
+
+[ext_resource type="Texture2D" uid="uid://ug1i48lm2k3o" path="res://assets/characters/nightmares/Ghost.png" id="1_f3u60"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpwin"]
+atlas = ExtResource("1_f3u60")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpu78"]
+atlas = ExtResource("1_f3u60")
+region = Rect2(36, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpwin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpu78")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

@@ -20,6 +20,11 @@ enum STATE{
 @onready var turn_start_overlay_background := $Overlays/TurnStart/Background
 @onready var turn_start_overlay_label := $Overlays/TurnStart/Label
 @onready var overlays := $Overlays
+@onready var context_menu := $ContextMenu
+@onready var context_menu_name_container := $ContextMenu/Name
+@onready var context_menu_name := $ContextMenu/Name/Label
+@onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
+@onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
 
 var state := STATE.INACTIVE
 var context
@@ -61,21 +66,52 @@ func hide_ability_icons():
 
 func set_context(_context:Entity):
 	context = _context
-	display_name.text = context.entity_name
-	show_ability_icons()
-	generate_ability_icons(context.get_abilities())
-	portrait.texture = context.portrait_image
-	show_portrait()
+	show_context_menu(context)
+	#display_name.text = context.entity_name
+	#show_ability_icons()
+	#generate_ability_icons(context.get_abilities())
+	#portrait.texture = context.portrait_image
+	#show_portrait()
 		
 func clear_context():
 	hide_portrait()
+	hide_context_menu()
 	hide_ability_icons()
 	
 func hide_portrait():
 	portrait_container.hide()
 func show_portrait():
-	portrait_container.show()
+	pass
+	#portrait_container.show()
+
+func show_context_menu(host:Entity):
+	context_menu_name.text = host.entity_name
+	for child in context_menu_ability_list.get_children():
+		child.queue_free()
 	
+	var ability_count = 0
+	for ability in host.get_abilities():
+		if ability.ability_name == "move":
+			continue
+		ability_count+=1
+		var ability_node = preload("res://src/components/ui/context_menu/context_menu_abilty.tscn").instantiate()
+		context_menu_ability_list.add_child(ability_node)
+		ability_node.label.text = ability.ability_name
+		ability_node.ability = ability
+	
+	context_menu.global_position = (host.global_position * 2) + Vector2(52,-230)
+	context_menu_ability_bar.size = Vector2(3,100)
+	context_menu_ability_bar.size += Vector2(0,70 * (ability_count - 1))
+	context_menu_name_container.position = Vector2(16,180)
+	context_menu_name_container.position += Vector2(0,-70 * (ability_count - 1))
+	context_menu.show()
+
+func hide_context_menu():
+	context_menu.hide()
+
+func move_context_menu(entity_global_position:Vector2):
+	context_menu.global_position = (entity_global_position * 2) + Vector2(52,-230) 
+
 func enable_undo_move_button():
 	undo_move.disabled = false
 	undo_move.modulate = Color.GREEN

@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://b0nvqdmmju3hj"]
+
+[ext_resource type="Texture2D" uid="uid://bourgfvq4gk6s" path="res://assets/characters/nightmares/Watcher.png" id="1_s0yi0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0tio"]
+atlas = ExtResource("1_s0yi0")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhv3j"]
+atlas = ExtResource("1_s0yi0")
+region = Rect2(36, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0tio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhv3j")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

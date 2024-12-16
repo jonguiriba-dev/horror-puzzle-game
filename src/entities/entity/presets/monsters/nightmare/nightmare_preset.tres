@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://ccmseiu3uh44q"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_2ieuu"]
-[ext_resource type="SpriteFrames" uid="uid://bjuo7701mc5ax" path="res://src/entities/entity/presets/nightmare/nightmare_sprite_frames.tres" id="2_f8img"]
+[ext_resource type="SpriteFrames" uid="uid://bjuo7701mc5ax" path="res://src/entities/entity/presets/monsters/nightmare/nightmare_sprite_frames.tres" id="2_f8img"]
 
 [resource]
 script = ExtResource("1_2ieuu")

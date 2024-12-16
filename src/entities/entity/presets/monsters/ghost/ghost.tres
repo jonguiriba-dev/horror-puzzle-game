@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://bv0od6fwjqnkm"]
+
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_o65vx"]
+[ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="2_yf5t5"]
+
+[resource]
+script = ExtResource("1_o65vx")
+entity_name = "Ghost"
+max_health = 1
+move_range = 3
+team = 1
+ability_1 = "res://src/abilities/ability_move.gd"
+ability_2 = "res://src/abilities/ability_strike.gd"
+ability_3 = null
+ability_4 = null
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+sprite_frames = ExtResource("2_yf5t5")
+portrait_image = "res://assets/portraits/layla-portrait.png"

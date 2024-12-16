@@ -3,7 +3,7 @@ class_name AbilityShoot
 func _ready() -> void:
 	super()
 	texture = preload("res://assets/ui/ability_frame_crossbow_shoot.png")
-	ability_name = "shoot"
+	ability_name = "Shoot"
 	ability_range = 5
 	knockback_distance = 1
 	damage = 1

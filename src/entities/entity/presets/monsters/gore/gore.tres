@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://y68iwe3dy48k"]
+
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_ef1yf"]
+[ext_resource type="SpriteFrames" uid="uid://jcy5fw848v25" path="res://src/entities/entity/presets/monsters/gore/gore_sprite_frames.tres" id="2_5qki6"]
+
+[resource]
+script = ExtResource("1_ef1yf")
+entity_name = "Gore"
+max_health = 5
+move_range = 3
+team = 1
+ability_1 = "res://src/abilities/ability_move.gd"
+ability_2 = "res://src/abilities/ability_strike.gd"
+ability_3 = null
+ability_4 = null
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+sprite_frames = ExtResource("2_5qki6")
+portrait_image = "res://assets/portraits/layla-portrait.png"

@@ -1,6 +1,7 @@
 
 extends Node
 var ui: UI
+var ability_hovered:Ability
 
 func info(text:String):
 	if ui:
@@ -17,3 +18,4 @@ func show_victory_overlay():
 func registerUI(_ui:UI):
 	ui = _ui
 	ui.visible = true
+	ui.clear_context()

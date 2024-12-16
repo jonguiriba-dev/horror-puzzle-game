@@ -2,7 +2,7 @@ extends Node
 
 var grid: Grid
 var team_turn:C.TEAM
-var turn_order:=[C.TEAM.ENEMY,  C.TEAM.PLAYER, C.TEAM.ALLY]
+var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER, C.TEAM.ENEMY]
 var ai_turn_queue = []
 var entity_moved_history:=[]
 var input_enabled = false
@@ -29,8 +29,17 @@ func register_entity(entity:Entity):
 		
 	if entity.team == C.TEAM.ENEMY or entity.team == C.TEAM.ALLY:
 		entity.turn_end.connect(_on_ai_unit_turn_end)
+		
+	if entity.team == C.TEAM.PLAYER or entity.team == C.TEAM.ALLY or entity.team == C.TEAM.CITIZEN:
+		entity.set_orientation(world.orientation == C.ORIENTATION.VERTICAL) 
+
+	if entity.team == C.TEAM.ENEMY:
+		if world.orientation == C.ORIENTATION.VERTICAL:
+			entity.set_orientation(world.orientation == C.ORIENTATION.HORIZONTAL)
+		else:
+			entity.set_orientation(world.orientation == C.ORIENTATION.VERTICAL)
+			
 	
-	entity.set_orientation(world.orientation == C.ORIENTATION.VERTICAL) 
 	entity.threat_updated.connect(_on_entity_threat_updated)
 	
 func register_world(_world:World):
@@ -91,9 +100,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		if input_waiting_on_dialogue:
 			current_dialogue.input_recieved.emit()
 			input_waiting_on_dialogue = false
+		
+		if UIManager.ability_hovered:
+			UIManager.ability_hovered.target_select.emit()	
+			
+		if UIManager.ui.context_menu.visible:
+			UIManager.ui.context_menu.hide()	
 			
 		if !input_enabled:
 			return
+			
 		if input_waiting_on_ability:
 			return
 			

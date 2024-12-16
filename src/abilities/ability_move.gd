@@ -103,7 +103,8 @@ func move(delta: float)->void:
 	var new_position = host.position.lerp(next_local_pos,0.4)
 
 	host.position += (new_position - host.position) * delta * 45
-	
+	UIManager.ui.move_context_menu(host.global_position)
+
 	var distance = host.position - new_position
 	if abs(distance.x) < 0.1 and abs(distance.y) < 0.1:
 		host.position = next_local_pos

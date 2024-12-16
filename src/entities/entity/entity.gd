@@ -38,6 +38,7 @@ signal selected
 signal threat_updated
 
 func _ready() -> void:
+	
 	load_preset(preset)
 	add_to_group(C.GROUPS_ENTITIES)
 	death.connect(_on_death)
@@ -65,7 +66,6 @@ func _ready() -> void:
 		ability.used.connect(_on_ability_used)
 	
 	WorldManager.register_entity(self)
-	
 	
 	
 func load_preset(_preset:EntityPreset):

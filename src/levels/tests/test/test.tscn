@@ -8,7 +8,7 @@
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_ujolu"]
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_fxkov"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_va4h4"]
-[ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/nightmare/nightmare_preset.tres" id="10_7wjwg"]
+[ext_resource type="Resource" uid="uid://ccmseiu3uh44q" path="res://src/entities/entity/presets/monsters/nightmare/nightmare_preset.tres" id="10_7wjwg"]
 [ext_resource type="Resource" uid="uid://clywh0svuxrk4" path="res://src/entities/entity/presets/knight/knight_preset.tres" id="11_r0s7v"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
 

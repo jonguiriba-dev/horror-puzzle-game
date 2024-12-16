@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bdyj54t0jqvu3"]
+
+[ext_resource type="FontFile" uid="uid://8gdkd54tdmd0" path="res://assets/fonts/CrimsonText-Italic.ttf" id="1_l7yrx"]
+
+[resource]
+font = ExtResource("1_l7yrx")
+font_size = 40
+outline_size = 12
+outline_color = Color(0.219501, 0.219501, 0.219501, 1)

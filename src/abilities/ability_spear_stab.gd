@@ -3,7 +3,7 @@ class_name AbilitySpearStab
 func _ready() -> void:
 	super()
 	texture = preload("res://assets/ui/ability_frame_spear_stab.png")
-	ability_name = "spear_stab"
+	ability_name = "Spear Stab"
 	ability_range = 2
 	knockback_distance = 1
 	damage = 1

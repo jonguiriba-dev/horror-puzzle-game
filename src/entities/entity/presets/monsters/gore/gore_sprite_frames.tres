@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://jcy5fw848v25"]
+
+[ext_resource type="Texture2D" uid="uid://c4l83svee25wb" path="res://assets/characters/nightmares/Gore.png" id="1_cwhw6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrh55"]
+atlas = ExtResource("1_cwhw6")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8kjn"]
+atlas = ExtResource("1_cwhw6")
+region = Rect2(36, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrh55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8kjn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

@@ -1,9 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=22 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
+[ext_resource type="LabelSettings" uid="uid://bf72murbmcpy6" path="res://src/components/ui/outlined-name-text.tres" id="2_0o8hc"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
 [ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="3_i27ym"]
 [ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/components/ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
+[ext_resource type="PackedScene" uid="uid://b54pikonv1bo6" path="res://src/components/ui/context_menu/context_menu_abilty.tscn" id="3_tinj4"]
+[ext_resource type="LabelSettings" uid="uid://bdyj54t0jqvu3" path="res://src/components/ui/outlined-italic-text.tres" id="3_v3x38"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
 [ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="6_0rxox"]
 [ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="6_ekjn1"]
@@ -11,6 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
 [ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="8_rfbs1"]
+
+[sub_resource type="Gradient" id="Gradient_ir4x0"]
+colors = PackedColorArray(0.956181, 0.955964, 0.95537, 0.796078, 0.16, 0.12528, 0.0112, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sjkx4"]
+gradient = SubResource("Gradient_ir4x0")
 
 [sub_resource type="LabelSettings" id="LabelSettings_3uust"]
 font = ExtResource("6_ekjn1")
@@ -44,7 +53,173 @@ grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_0ibs7")
 
+[node name="ContextMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Name" type="Control" parent="ContextMenu"]
+anchors_preset = 0
+offset_left = 6.0
+offset_top = 215.0
+offset_right = 206.0
+offset_bottom = 291.0
+
+[node name="ColorRect" type="ColorRect" parent="ContextMenu/Name"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="ContextMenu/Name"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -22.0
+offset_right = 16.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Layla
+"
+label_settings = ExtResource("2_0o8hc")
+vertical_alignment = 1
+
+[node name="AbilityList" type="Control" parent="ContextMenu"]
+anchors_preset = 0
+offset_left = 4.0
+offset_right = 4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContextMenu/AbilityList"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -32.0
+offset_right = 404.0
+offset_bottom = 334.0
+alignment = 2
+
+[node name="Control" parent="ContextMenu/AbilityList/VBoxContainer" instance=ExtResource("3_tinj4")]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="ContextMenu/AbilityList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ContextMenu/AbilityList/VBoxContainer/Control2"]
+position = Vector2(161, 36)
+scale = Vector2(5.03125, 1)
+texture = SubResource("GradientTexture2D_sjkx4")
+
+[node name="Label" type="Label" parent="ContextMenu/AbilityList/VBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Slash"
+label_settings = ExtResource("3_v3x38")
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="ContextMenu/AbilityList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ContextMenu/AbilityList/VBoxContainer/Control3"]
+position = Vector2(161, 36)
+scale = Vector2(5.03125, 1)
+texture = SubResource("GradientTexture2D_sjkx4")
+
+[node name="Label" type="Label" parent="ContextMenu/AbilityList/VBoxContainer/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Slash"
+label_settings = ExtResource("3_v3x38")
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="ContextMenu/AbilityList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ContextMenu/AbilityList/VBoxContainer/Control4"]
+position = Vector2(161, 36)
+scale = Vector2(5.03125, 1)
+texture = SubResource("GradientTexture2D_sjkx4")
+
+[node name="Label" type="Label" parent="ContextMenu/AbilityList/VBoxContainer/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Slash"
+label_settings = ExtResource("3_v3x38")
+vertical_alignment = 1
+
+[node name="Control5" type="Control" parent="ContextMenu/AbilityList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ContextMenu/AbilityList/VBoxContainer/Control5"]
+position = Vector2(161, 36)
+scale = Vector2(5.03125, 1)
+texture = SubResource("GradientTexture2D_sjkx4")
+
+[node name="Label" type="Label" parent="ContextMenu/AbilityList/VBoxContainer/Control5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Slash"
+label_settings = ExtResource("3_v3x38")
+vertical_alignment = 1
+
+[node name="Frame" type="Control" parent="ContextMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Bar" type="ColorRect" parent="ContextMenu/Frame"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 366.0
+offset_right = -3.0
+offset_bottom = 436.0
+rotation = 3.14159
+
+[node name="Line2D" type="Line2D" parent="ContextMenu/Frame"]
+position = Vector2(-26, 362)
+points = PackedVector2Array(-34, 28, 20, 2)
+width = 3.0
+sharp_limit = 10.0
+round_precision = 32
+antialiased = true
+
 [node name="Action" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 251.0
 offset_top = 1154.0
@@ -113,6 +288,7 @@ text = "100%"
 vertical_alignment = 1
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 1992.0
 offset_top = 22.0
@@ -157,6 +333,7 @@ text = "Turn Order"
 flat = true
 
 [node name="Portrait" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 636.0
