@@ -6,22 +6,29 @@ enum STATE{
 	TARGET_SELECT
 }
 
-
 @onready var host:Entity = get_parent()
-var ability_name = "ability_name"
-var texture = preload("res://assets/ui/ability_frame.png")
-var ability_range = 0
-var damage = 0
-var state = STATE.INACTIVE
-var actions:Array[AbilityAction]
-var has_ui = true
-var highlight_color = Color.ORANGE
-var is_enemy_obstacle = false
-var target_count = 1
-var knockback_distance = 0
-var range_pattern:Callable=TilePattern.generate_diamond_pattern
-var aoe_pattern:Callable = TilePattern.point
-var use_host_as_origin = false
+
+@export var ability_name = "ability_name"
+@export var texture = preload("res://assets/ui/ability_frame.png")
+@export var ability_range = 0
+@export var damage = 0
+@export var state = STATE.INACTIVE
+@export var actions:Array[AbilityAction]
+@export var has_ui = true
+@export var highlight_color = Color.ORANGE
+@export var is_enemy_obstacle = false
+@export var target_count = 1
+@export var knockback_distance = 0
+@export var range_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.DIAMOND
+@export var aoe_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.POINT
+@export var use_host_as_origin = false
+@export var charges:=0
+@export var max_charges:=0
+@export var action_cost:=1
+@export var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
+@export var tile_exclude_self:=false
+@export var is_action:=true
+
 var can_target_entities:bool:
 	get:
 		for action in actions:
@@ -42,11 +49,13 @@ var can_target_tiles:bool:
 signal target_select
 signal stopped_targetting
 signal applied(ability:Ability)
-signal used
+signal used(ability:Ability)
 
 func _ready() -> void:
 	target_select.connect(_on_target_select)
-	stopped_targetting.connect(_on_ability_stopped_targetting)
+	stopped_targetting.connect(_on_stopped_targetting)
+	used.connect(_on_used)
+	refresh_charges()
 	
 func use(target_map_position:Vector2i, options:Dictionary={}):
 	if !is_valid_target(target_map_position) and !options.get('absolute',false):
@@ -63,13 +72,13 @@ func use(target_map_position:Vector2i, options:Dictionary={}):
 	if use_host_as_origin:
 		origin = host.map_position + direction
 		
-	var affected_tiles = aoe_pattern.call(origin,ability_range,direction)
+	var affected_tiles = TilePattern.get_callable(aoe_pattern).call(origin,ability_range,direction)
 	for affected_tile in affected_tiles:
 		var target_entity = _get_tile_target(affected_tile)
 		if is_instance_valid(target_entity):
 			apply_effect(target_entity)
 	
-	used.emit()
+	used.emit(self)
 	
 	stopped_targetting.emit()
 
@@ -112,12 +121,17 @@ func highlight_target_tiles():
 			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.GREEN,Grid.HIGHLIGHT_LAYERS.ABILITY)
 
 
-func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
+func get_target_tiles(
+	map_pos:Vector2i=host.map_position,
+	_range:int=ability_range,
+)->Array[Vector2i]:
 	var possible_tiles = WorldManager.grid.get_possible_tiles(
-		Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES + Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_ALLIES
+		tile_exclude_flag
 	)
-	
-	var tiles = range_pattern.call(map_pos,_range).filter(func(e):
+	if tile_exclude_self:
+		possible_tiles.erase(map_pos)
+		
+	var tiles = TilePattern.get_callable(range_pattern).call(map_pos,_range).filter(func(e):
 		return possible_tiles.has(e)	
 	)
 	
@@ -154,6 +168,15 @@ func is_valid_target(map_pos:Vector2i):
 		return true
 	return false
 
+func is_usable():
+	if max_charges == 0:
+		return true
+	elif charges > 0:
+		return true
+	return false
+
+func refresh_charges():
+	charges = max_charges
 	
 func _on_target_select() -> void:
 	if host.action_counter == 0:
@@ -163,9 +186,14 @@ func _on_target_select() -> void:
 	WorldManager.grid.is_ability_select = true
 	highlight_target_tiles()
 
-func _on_ability_stopped_targetting() -> void:
+func _on_stopped_targetting() -> void:
 	remove_from_group(C.GROUPS_TARGETTING_ABILITY)
 	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	state = STATE.INACTIVE
 	WorldManager.grid.is_ability_select = false
+
+func _on_used(ability:Ability):
+	if charges < 0:
+		return
+	charges -=1
 	

@@ -48,6 +48,10 @@ enum TILE_EXCLUDE_FLAGS{
 	EXCLUDE_OBSTACLES = 1,
 	EXCLUDE_ENEMIES = 2,
 	EXCLUDE_ALLIES = 4,
+	EXCLUDE_OBSTACLES_ALLIES = 5,
+	EXCLUDE_ALL = 7,
+	EXCLUDE_EMPTY = 8,
+	EXCLUDE_OBSTACLES_EMPTY = 9,
 }
 
 var possible_tiles_cache:Dictionary = {}
@@ -71,8 +75,18 @@ func get_possible_tiles(exclude_flags:int=7)->Array[Vector2i]:
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_ALLIES) != 0:
 		for ally_pos in ally_tiles:
 			tiles.erase(ally_pos)
+		
+	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_EMPTY) != 0:
+		for tile in tiles.duplicate():
+			if (
+				!enemy_tiles.has(tile) and
+				!ally_tiles.has(tile) and
+				!props.has(tile) 
+			):
+				tiles.erase(tile)
 	
 	return tiles
+
 
 func get_all_tiles()->Array[Vector2i]:
 	return tiles_layer.get_used_cells()
@@ -101,8 +115,6 @@ func set_highlight_area(
 		else:
 			highlight_tiles.push_front(map_position)
 			highlight_layer.set_cell(map_position,0,Vector2i(color,0))
-
-
 		
 func clear_all_highlights(layer:HIGHLIGHT_LAYERS):
 	var highlight_layer = get_highlight_layer(layer)
@@ -200,3 +212,18 @@ func get_entity_on_tile(map_pos:Vector2i):
 		if entity.map_position == map_pos:
 			return entity
 	return null
+
+func is_empty_tile(map_pos:Vector2i):
+	populate_entity_tiles()
+	
+	var tiles = tiles_layer.get_used_cells()
+	var props = prop_layer.get_used_cells()
+	
+	if (
+		!enemy_tiles.has(map_pos) and
+		!ally_tiles.has(map_pos) and
+		!props.has(map_pos) and 
+		tiles.has(map_pos)
+	):
+		return true
+	return false

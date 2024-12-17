@@ -10,6 +10,7 @@ var world:World
 var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
+var selected_entity:Entity
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -17,6 +18,69 @@ signal turn_end(team: C.TEAM)
 signal viewport_ready
 signal animation_counter_updated(val:int)
 signal animation_counter_cleared
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click") :
+		print("World Manager click ")
+		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
+		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
+		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
+		if hovered_entity:
+			Util.sysprint("WorldManager._unhandled_input()","entity hovered: %s"%[hovered_entity.entity_name])
+		
+		if targetting_ability:
+			Util.sysprint("WorldManager._unhandled_input()","targetting ability: %s"%[targetting_ability.ability_name])
+		
+		if input_waiting_on_ability:
+			print(">input_waiting_on_ability return")
+			return
+		if !input_enabled:
+			return
+			
+		if selected_entity and !targetting_ability:
+			print(">selected_entity and !targetting_ability")
+			selected_entity.clear_sprite_material()
+			selected_entity = null
+		
+		if input_waiting_on_dialogue:
+			current_dialogue.input_recieved.emit()
+			input_waiting_on_dialogue = false
+		
+		if UIManager.ability_hovered:
+			UIManager.ability_hovered.target_select.emit()	
+			
+		if targetting_ability and !input_waiting_on_ability:		
+			print(">targetting_ability and !input_waiting_on_ability")
+			if selected_entity and targetting_ability.ability_name != "move":
+				selected_entity.clear_sprite_material()
+				selected_entity = null
+			input_waiting_on_ability = true
+			targetting_ability.stopped_targetting.connect(func():
+				input_waiting_on_ability = false
+			,ConnectFlags.CONNECT_ONE_SHOT)
+			targetting_ability.use(mouse_map_position)
+			if !targetting_ability.is_valid_target(mouse_map_position):
+				if selected_entity:
+					selected_entity.clear_sprite_material()
+					selected_entity = null
+					UIManager.ui.clear_context()
+				grid.tile_selected.emit(mouse_map_position)
+				if is_instance_valid(hovered_entity) and hovered_entity.team == team_turn:
+					hovered_entity.selected.emit()
+					
+		elif is_instance_valid(hovered_entity):
+			print(">is_instance_valid(hovered_entity)")
+			if hovered_entity.team == team_turn:
+				hovered_entity.selected.emit()
+			grid.tile_selected.emit(mouse_map_position)
+		else:
+			print(">else")
+			grid.tile_selected.emit(mouse_map_position)
+			UIManager.ui.clear_context()
+			if selected_entity:
+				selected_entity.clear_sprite_material()
+				selected_entity = null
+		print("*Tile Position: ",mouse_map_position)
 
 func _ready() -> void:
 	get_viewport().ready.connect(_on_scenetree_ready)
@@ -38,9 +102,11 @@ func register_entity(entity:Entity):
 			entity.set_orientation(world.orientation == C.ORIENTATION.HORIZONTAL)
 		else:
 			entity.set_orientation(world.orientation == C.ORIENTATION.VERTICAL)
-			
 	
 	entity.threat_updated.connect(_on_entity_threat_updated)
+	
+	entity.sprite.speed_scale = SystemManager.idle_animation_speed
+	entity.position = grid.map_to_local(entity.map_position)
 	
 func register_world(_world:World):
 	world = _world
@@ -56,6 +122,7 @@ func end_turn():
 	turn_order.push_front(turn_order.pop_back())
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
+	input_waiting_on_ability = false
 	
 func _start_player_turn():
 	for player_entity in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
@@ -66,12 +133,16 @@ func _start_ally_turn():
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
+	else:
+		end_turn()
 		
 func _start_enemy_turn():
 	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ENEMIES)
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
+	else:
+		end_turn()
 		
 func game_start():
 	if !UIManager.ui:
@@ -94,49 +165,6 @@ func game_start():
 var input_waiting_on_ability = false
 var input_waiting_on_dialogue = false
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click") :
-		print("World Manager click ")
-		if input_waiting_on_dialogue:
-			current_dialogue.input_recieved.emit()
-			input_waiting_on_dialogue = false
-		
-		if UIManager.ability_hovered:
-			UIManager.ability_hovered.target_select.emit()	
-			
-		if UIManager.ui.context_menu.visible:
-			UIManager.ui.context_menu.hide()	
-			
-		if !input_enabled:
-			return
-			
-		if input_waiting_on_ability:
-			return
-			
-		var mouse_map_position = WorldManager.grid.local_to_map(WorldManager.grid.prop_layer.get_local_mouse_position())
-		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
-		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
-		print("hovered_entity ",hovered_entity)
-		
-		if targetting_ability and !input_waiting_on_ability:
-			input_waiting_on_ability = true
-			targetting_ability.stopped_targetting.connect(func():
-				input_waiting_on_ability = false
-			,ConnectFlags.CONNECT_ONE_SHOT)
-			targetting_ability.use(mouse_map_position)
-			if !targetting_ability.is_valid_target(mouse_map_position):
-				grid.tile_selected.emit(mouse_map_position)
-				if is_instance_valid(hovered_entity):
-					hovered_entity.selected.emit()
-					
-		elif is_instance_valid(hovered_entity):
-			hovered_entity.selected.emit()
-			grid.tile_selected.emit(mouse_map_position)
-		else:
-			grid.tile_selected.emit(mouse_map_position)
-			UIManager.ui.clear_context()
-			
-		print("*Tile Position: ",mouse_map_position)
 
 func _on_dialogue_input_waiting():
 	input_waiting_on_dialogue = true
@@ -184,10 +212,20 @@ func show_turn_order():
 		label.set('theme_override_font_sizes/font_size',10)
 		i+=1
 		order_labels.push_front(label)
+		
 func hide_turn_order():
 	print("hide_turn_order")
 	for i in range(order_labels.size()):
 		order_labels.pop_front().queue_free()
+
+func get_team_group_threat_tiles(group:String):
+	var tiles = []
+	for entity in get_tree().get_nodes_in_group(group):
+		if !entity.threat: continue
+		var threat_tiles = entity.threat.ability.get_threat_tiles(entity.map_position,entity.threat.tile)
+		for threat_tile in threat_tiles:
+			tiles.push_front(threat_tile)
+	return tiles
 
 func _on_scenetree_ready():
 	if UIManager.ui:
@@ -254,12 +292,3 @@ func _on_entity_threat_updated():
 		get_team_group_threat_tiles(C.GROUPS_ENEMIES),
 		get_team_group_threat_tiles(C.GROUPS_ALLIES)
 	)
-
-func get_team_group_threat_tiles(group:String):
-	var tiles = []
-	for entity in get_tree().get_nodes_in_group(group):
-		if !entity.threat: continue
-		var threat_tiles = entity.threat.ability.get_threat_tiles(entity.map_position,entity.threat.tile)
-		for threat_tile in threat_tiles:
-			tiles.push_front(threat_tile)
-	return tiles

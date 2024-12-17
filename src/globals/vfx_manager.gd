@@ -52,5 +52,7 @@ func flash(item:CanvasItem, color:Color, time:float):
 	var tween = create_tween()
 	tween.tween_property(item, "modulate", color, time)
 	tween.tween_property(item, "modulate", prev_modulate, time)
+	tween.tween_property(item, "modulate", color, time)
+	tween.tween_property(item, "modulate", prev_modulate, time)
 	
 	

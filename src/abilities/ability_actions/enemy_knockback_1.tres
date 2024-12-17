@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityAction" load_steps=2 format=3 uid="uid://3vuy8ogwr8cc"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_actions/ability_action.gd" id="1_7uo8p"]
+
+[resource]
+script = ExtResource("1_7uo8p")
+target_type = 1
+action_type = 1
+value = 1

@@ -7,8 +7,7 @@ func _ready() -> void:
 	ability_range = 2
 	knockback_distance = 1
 	damage = 1
-	target_count = 2
-	aoe_pattern = TilePattern.generate_directional_line_pattern
+	aoe_pattern = TilePattern.PATTERNS.DIRECTIONAL_LINE
 	actions = [
 		AbilityAction.new(
 			AbilityAction.TARGET_TYPES.ENEMY,
@@ -19,7 +18,7 @@ func _ready() -> void:
 			AbilityAction.ACTION_TYPES.KNOCKBACK
 		)
 	]
-	range_pattern = TilePattern.generate_line_pattern
+	range_pattern = TilePattern.PATTERNS.LINE
 	use_host_as_origin = true
 
 func _play_animation(target_map_position:Vector2i):
@@ -35,4 +34,5 @@ func _play_animation(target_map_position:Vector2i):
 		"target_position":target_map_position,
 	}
 	VfxManager.spawn("spear-stab-1",node,options)
+	node.queue_free()
 	SfxManager.play("hit-crunch-1")

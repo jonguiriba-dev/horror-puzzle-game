@@ -20,8 +20,8 @@ func _ready() -> void:
 			AbilityAction.ACTION_TYPES.MOVE
 		)
 	]
-	used.connect(_on_ability_used)
-
+	is_action = false
+	
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
 	var navigatable_tiles:Array[Vector2i]= []
 	var possible_tiles = WorldManager.grid.get_possible_tiles(7)
@@ -51,6 +51,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	#move_to_selected_tile(map_position)
 
 func use(target_map_position:Vector2i, options:Dictionary={}):
+	if !is_valid_target(target_map_position) and !options.get('absolute',false):
+		stopped_targetting.emit()
+		print("%s.%s[host.ability.use()]: no valid target found for pos %s"%[host.entity_name,ability_name,target_map_position])
+		return
+	
 	initial_position = host.position
 	if target_map_position == host.map_position:
 		host.move_end.emit()
@@ -86,7 +91,6 @@ func move_to_selected_tile(target_pos:Vector2i):
 		show_path_highlight()
 
 
-
 func _physics_process(delta: float) -> void:
 	if target_position != null and path.size() > 0 and play_animation:
 		move(delta)
@@ -120,7 +124,8 @@ func show_path_highlight():
 	for tile in path:
 		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.DEBUG)
 	
-func _on_ability_used():
+func _on_used(ability:Ability):
+	super(ability)
 	if host.team == C.TEAM.PLAYER:
 		WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})
 		UIManager.ui.enable_undo_move_button()

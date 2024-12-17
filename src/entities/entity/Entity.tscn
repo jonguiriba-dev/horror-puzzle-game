@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cybb46stuffbp"]
+[gd_scene load_steps=11 format=3 uid="uid://cybb46stuffbp"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity.gd" id="1_t518p"]
 [ext_resource type="Texture2D" uid="uid://uw1gg7rmh15v" path="res://assets/etc/player.png" id="2_4c15u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4pa8rvba3ac5" path="res://assets/ui/healthbar/health-over.png" id="5_70vys"]
 [ext_resource type="Texture2D" uid="uid://bwp1lkqnpimga" path="res://assets/ui/healthbar/health_progress.png" id="6_mvoms"]
 [ext_resource type="Script" path="res://src/entities/entity/healthbar.gd" id="7_v71x7"]
+[ext_resource type="Texture2D" uid="uid://ct74uc6bwpimb" path="res://assets/etc/tile-shadow.png" id="8_wyal1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy7hk"]
 atlas = ExtResource("2_4c15u")
@@ -25,6 +26,11 @@ animations = [{
 
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_t518p")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.454902)
+position = Vector2(0, -3)
+texture = ExtResource("8_wyal1")
 
 [node name="EntitySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)

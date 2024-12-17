@@ -14,5 +14,7 @@ ability_2 = "res://src/abilities/ability_strike.gd"
 ability_3 = null
 ability_4 = null
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(2, -2)
 sprite_frames = ExtResource("2_3f1yr")
 portrait_image = "res://assets/characters/angels/elyana-body.png"

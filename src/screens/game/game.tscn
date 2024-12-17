@@ -67,3 +67,11 @@ max_polyphony = 10
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 max_polyphony = 10
+
+[node name="ColorGrading" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+color = Color(1, 0.253333, 0.2, 0.0313726)

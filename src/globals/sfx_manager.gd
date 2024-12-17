@@ -37,6 +37,8 @@ func play(_name:String):
 		"charge-4":
 			sound = preload("res://assets/audio/sfx/sfx-charge-in-4.wav")
 			audio_player.volume_db = 2
+		"grunt-girl-1":
+			sound = preload("res://assets/audio/sfx/sfx-grunt-girl-1.wav")
 	
 	audio_player.set_stream(sound)
 	audio_player.play()

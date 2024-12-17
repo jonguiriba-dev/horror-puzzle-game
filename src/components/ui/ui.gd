@@ -40,22 +40,22 @@ func _ready() -> void:
 	clear_context()
 	UIManager.registerUI(self)
 	
-func generate_ability_icons(abilities:Array[Ability]):
-	for child in ability_container.get_children():
-		var conns = child.get_signal_connection_list("pressed")
-		for conn in conns:
-			child.pressed.disconnect(conn["callable"])
-		for child2 in child.get_children():
-			child2.queue_free()
-	
-	var i = 1
-	for ability in abilities:
-		if ability.has_ui:
-			var clickable_sprite:ClickableSprite = load("res://src/components/ui/clickable_sprite/ClickableSprite.tscn").instantiate()
-			clickable_sprite.texture = ability.texture
-			clickable_sprite.connect("pressed",func():ability.target_select.emit())
-			ability_container.get_node("AbilityFrame%s"%[i]).add_child(clickable_sprite)
-			i+=1
+#func generate_ability_icons(abilities:Array[Ability]):
+	#for child in ability_container.get_children():
+		#var conns = child.get_signal_connection_list("pressed")
+		#for conn in conns:
+			#child.pressed.disconnect(conn["callable"])
+		#for child2 in child.get_children():
+			#child2.queue_free()
+	#
+	#var i = 1
+	#for ability in abilities:
+		#if ability.has_ui:
+			#var clickable_sprite:ClickableSprite = load("res://src/components/ui/clickable_sprite/ClickableSprite.tscn").instantiate()
+			#clickable_sprite.texture = ability.texture
+			#clickable_sprite.connect("pressed",func():ability.target_select.emit())
+			#ability_container.get_node("AbilityFrame%s"%[i]).add_child(clickable_sprite)
+			#i+=1
 
 
 func show_ability_icons():
@@ -98,12 +98,19 @@ func show_context_menu(host:Entity):
 		context_menu_ability_list.add_child(ability_node)
 		ability_node.label.text = ability.ability_name
 		ability_node.ability = ability
-	
-	context_menu.global_position = (host.global_position * 2) + Vector2(52,-230)
+		if ability.max_charges != 0:
+			ability_node.charges.text = str(ability.charges)
+		else:
+			ability_node.charges.text = ""
+		if !ability.is_usable():
+			ability_node.bg.texture = preload("res://src/components/ui/context_menu/context_menu_abilty_gradient_unusable.tres")
+
+	context_menu.global_position = (host.global_position * 2) + Vector2(36,-240)
 	context_menu_ability_bar.size = Vector2(3,100)
 	context_menu_ability_bar.size += Vector2(0,70 * (ability_count - 1))
 	context_menu_name_container.position = Vector2(16,180)
 	context_menu_name_container.position += Vector2(0,-70 * (ability_count - 1))
+	context_menu.animate()
 	context_menu.show()
 
 func hide_context_menu():
@@ -122,8 +129,8 @@ func present_turn_start_overlay(team:String):
 	turn_start_overlay.modulate.a = 0
 	var _modulate = turn_start_overlay.modulate
 	var tween = create_tween()
-	tween.tween_property(turn_start_overlay,'modulate',Color(_modulate.r,_modulate.g,_modulate.b,1),0.15)
-	await Util.wait(0.5)
+	tween.tween_property(turn_start_overlay,'modulate',Color(_modulate.r,_modulate.g,_modulate.b,1),0.5)
+	await Util.wait(1)
 	var tween2 = create_tween()
 	tween2.tween_property(turn_start_overlay,'modulate',Color(_modulate.r,_modulate.g,_modulate.b,0),0.3)
 	await Util.wait(0.3)

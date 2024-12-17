@@ -2,6 +2,7 @@ extends Node2D
 class_name Entity
 # use shader https://godotshaders.com/shader/highlight-canvasitem/ for highlighting icons
 @onready var sprite :AnimatedSprite2D= $EntitySprite
+@onready var shadow :Sprite2D= $Shadow
 @onready var rescue_text := $EntitySprite/RescueText
 @onready var healthbar := $Healthbar
 
@@ -38,7 +39,6 @@ signal selected
 signal threat_updated
 
 func _ready() -> void:
-	
 	load_preset(preset)
 	add_to_group(C.GROUPS_ENTITIES)
 	death.connect(_on_death)
@@ -86,6 +86,9 @@ func load_preset(_preset:EntityPreset):
 	
 	if preset.portrait_image:
 		portrait_image = load(preset.portrait_image)
+	
+	sprite.position += _preset.sprite_offset
+	shadow.position += _preset.shadow_offset
 	
 func set_max_health(_max_health:int):
 	max_health = _max_health
@@ -221,15 +224,23 @@ func _on_death() -> void:
 		
 func _on_selected():
 	if team == C.TEAM.PLAYER:
-		UIManager.ui.set_context(self)
+		WorldManager.selected_entity = self
+		#UIManager.ui.set_context(self)
 		WorldManager.input_waiting_on_ability = false
+		sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 	else:
+		print("sprite.material = null")
+		clear_sprite_material()
 		UIManager.ui.clear_context()
+
+func clear_sprite_material():
+	sprite.material = null
 		
-func _on_ability_used():
+func _on_ability_used(ability:Ability):
 	WorldManager.clear_entity_moved_history()
-	action_counter -= 1
-	move_counter = 0
+	action_counter -= ability.action_cost
+	if ability.is_action:
+		move_counter = 0
 
 func set_orientation(vertical:bool):
 	sprite.flip_h = vertical

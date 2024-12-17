@@ -29,8 +29,11 @@ func _state_logic(delta:float):
 func _enter_state(old_state, new_state):
 	to_done = false
 	to_idle = false
+	UIManager.ui.set_context(host)
+
 	#UIManager.ui.set_context(host)
 	if host.move_counter > 0 and host.action_counter > 0:
+		Util.sysprint("EntitySelectedState._enter_state"," host.move_counter(%s) > 1, starting move"%[host.move_counter])
 		host.get_ability("move").target_select.emit()
 	
 func _on_tile_selected(map_pos:Vector2i):

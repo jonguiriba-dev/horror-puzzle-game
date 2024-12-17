@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cq6mqrvfoschd" path="res://assets/tiles/village/iso_tile_export.png" id="1_mvuj8"]
 [ext_resource type="Texture2D" uid="uid://b7al7k2qqnjpk" path="res://assets/tiles/black_tile.png" id="1_ujl1i"]
 [ext_resource type="Texture2D" uid="uid://b5ywm1ou2h5tt" path="res://assets/tiles/village/iso_tile_export-sheet2.png" id="1_wervk"]
-[ext_resource type="Texture2D" uid="uid://bri1m2dek0hre" path="res://assets/tiles/village/tileset.png" id="4_yl432"]
+[ext_resource type="Texture2D" uid="uid://c2mygfdmxs4s2" path="res://assets/tiles/village/tileset-sheet.png" id="5_oravl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gc06"]
 texture = ExtResource("1_wervk")
@@ -43,11 +43,12 @@ texture_region_size = Vector2i(32, 32)
 5:5/0 = 0
 5:5/0/texture_origin = Vector2i(0, -10)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33jiv"]
-texture = ExtResource("4_yl432")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_acl8o"]
+texture = ExtResource("5_oravl")
 texture_region_size = Vector2i(32, 32)
+0:1/0 = 0
 0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 2)
+1:0/0 = 0
 
 [resource]
 tile_shape = 1
@@ -57,4 +58,4 @@ tile_size = Vector2i(32, 16)
 sources/2 = SubResource("TileSetAtlasSource_hkhkp")
 sources/1 = SubResource("TileSetAtlasSource_cgrmg")
 sources/0 = SubResource("TileSetAtlasSource_3gc06")
-sources/3 = SubResource("TileSetAtlasSource_33jiv")
+sources/5 = SubResource("TileSetAtlasSource_acl8o")

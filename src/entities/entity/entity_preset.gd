@@ -24,7 +24,9 @@ enum STATE_LISTS{
 ## States
 @export_file() var state_machine
 
-
+@export_group("Visual")
+@export() var shadow_offset:Vector2
+@export() var sprite_offset:Vector2
 
 @export_group("Etc")
 @export var sprite_frames:SpriteFrames

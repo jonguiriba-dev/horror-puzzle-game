@@ -1,12 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=24 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
+[ext_resource type="Script" path="res://src/components/ui/context_menu.gd" id="2_0mq18"]
 [ext_resource type="LabelSettings" uid="uid://bf72murbmcpy6" path="res://src/components/ui/outlined-name-text.tres" id="2_0o8hc"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
 [ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="3_i27ym"]
 [ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/components/ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
 [ext_resource type="PackedScene" uid="uid://b54pikonv1bo6" path="res://src/components/ui/context_menu/context_menu_abilty.tscn" id="3_tinj4"]
 [ext_resource type="LabelSettings" uid="uid://bdyj54t0jqvu3" path="res://src/components/ui/outlined-italic-text.tres" id="3_v3x38"]
+[ext_resource type="Texture2D" uid="uid://cl32n3o03nq5" path="res://src/components/ui/context_menu/context_menu_abilty_gradient_active.tres" id="4_g6hts"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
 [ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="6_0rxox"]
 [ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="6_ekjn1"]
@@ -57,6 +59,7 @@ script = ExtResource("1_0ibs7")
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_0mq18")
 
 [node name="Name" type="Control" parent="ContextMenu"]
 anchors_preset = 0
@@ -116,7 +119,7 @@ layout_mode = 2
 [node name="Sprite2D" type="Sprite2D" parent="ContextMenu/AbilityList/VBoxContainer/Control2"]
 position = Vector2(161, 36)
 scale = Vector2(5.03125, 1)
-texture = SubResource("GradientTexture2D_sjkx4")
+texture = ExtResource("4_g6hts")
 
 [node name="Label" type="Label" parent="ContextMenu/AbilityList/VBoxContainer/Control2"]
 layout_mode = 1
@@ -211,9 +214,10 @@ offset_bottom = 436.0
 rotation = 3.14159
 
 [node name="Line2D" type="Line2D" parent="ContextMenu/Frame"]
-position = Vector2(-26, 362)
+position = Vector2(-16.8833, 363.656)
+scale = Vector2(0.516667, 0.656249)
 points = PackedVector2Array(-34, 28, 20, 2)
-width = 3.0
+width = 4.0
 sharp_limit = 10.0
 round_precision = 32
 antialiased = true
@@ -288,7 +292,6 @@ text = "100%"
 vertical_alignment = 1
 
 [node name="Debug" type="Label" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 1992.0
 offset_top = 22.0

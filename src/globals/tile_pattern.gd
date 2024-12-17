@@ -1,5 +1,19 @@
 extends Node
 
+enum PATTERNS{
+	DIRECTIONAL_LINE,
+	LINE,
+	DIAMOND,
+	POINT
+}
+
+func get_callable(pattern:PATTERNS):
+	match pattern:
+		PATTERNS.DIRECTIONAL_LINE: return generate_directional_line_pattern
+		PATTERNS.LINE: return generate_line_pattern
+		PATTERNS.DIAMOND: return generate_diamond_pattern
+		PATTERNS.POINT: return generate_point_pattern
+
 func generate_directional_line_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO):
 	var tiles:Array[Vector2i]= []
 	
@@ -31,5 +45,5 @@ func generate_diamond_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vec
 
 	return tiles
 
-func point(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
+func generate_point_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
 	return [map_pos]

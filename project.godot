@@ -28,6 +28,8 @@ DialogueManager="*res://src/globals/dialogue_manager.gd"
 VfxManager="*res://src/globals/vfx_manager.gd"
 MusicManager="*res://src/globals/music_manager.gd"
 SfxManager="*res://src/globals/sfx_manager.gd"
+SystemManager="*res://src/globals/system_manager.gd"
+AnimationManager="*res://src/globals/animation_manager.gd"
 
 [debug]
 

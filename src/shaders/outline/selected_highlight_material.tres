@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bhrqc5yfg153v"]
+
+[ext_resource type="Shader" path="res://src/shaders/outline/selected_highlight.gdshader" id="1_fpud1"]
+
+[resource]
+shader = ExtResource("1_fpud1")
+shader_parameter/color = Color(1, 0.783333, 0, 0.819608)
+shader_parameter/width = 1.5
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = false
+shader_parameter/number_of_images = Vector2(2, 1)

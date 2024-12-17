@@ -7,12 +7,14 @@
 script = ExtResource("1_o65vx")
 entity_name = "Ghost"
 max_health = 1
-move_range = 3
+move_range = 5
 team = 1
 ability_1 = "res://src/abilities/ability_move.gd"
 ability_2 = "res://src/abilities/ability_strike.gd"
 ability_3 = null
 ability_4 = null
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
 sprite_frames = ExtResource("2_yf5t5")
 portrait_image = "res://assets/portraits/layla-portrait.png"

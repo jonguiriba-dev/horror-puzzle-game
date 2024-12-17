@@ -17,7 +17,7 @@ func _ready() -> void:
 			AbilityAction.ACTION_TYPES.KNOCKBACK
 		)
 	]
-	range_pattern = TilePattern.generate_line_pattern
+	range_pattern = TilePattern.PATTERNS.LINE
 
 func _play_animation(target_map_position:Vector2i):
 	#var projectile = Sprite2D.new()

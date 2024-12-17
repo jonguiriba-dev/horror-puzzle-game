@@ -1,4 +1,4 @@
-extends Object
+extends Resource
 class_name AbilityAction
 
 enum ACTION_TYPES{
@@ -13,8 +13,9 @@ enum TARGET_TYPES{
 	TILE = 1 << 2,
 }
 
-var target_type:TARGET_TYPES=TARGET_TYPES.ENEMY
-var action_type:ACTION_TYPES
+@export var target_type:TARGET_TYPES=TARGET_TYPES.ENEMY
+@export var action_type:ACTION_TYPES
+@export var value := 0
 
 func _init(_target_type:TARGET_TYPES,_action_type:ACTION_TYPES) -> void:
 	target_type = _target_type
