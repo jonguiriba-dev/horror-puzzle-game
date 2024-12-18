@@ -30,6 +30,7 @@ MusicManager="*res://src/globals/music_manager.gd"
 SfxManager="*res://src/globals/sfx_manager.gd"
 SystemManager="*res://src/globals/system_manager.gd"
 AnimationManager="*res://src/globals/animation_manager.gd"
+EntityManager="*res://src/globals/entity_manager.gd"
 
 [debug]
 

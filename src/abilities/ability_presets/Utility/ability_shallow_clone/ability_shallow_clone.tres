@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityProps" load_steps=4 format=3 uid="uid://cyhsxwmpsv1rp"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_rrklm"]
+[ext_resource type="Resource" uid="uid://qh4f5so5hchb" path="res://src/abilities/ability_effect/summon_dark_orb.tres" id="2_5gha4"]
+[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="3_tav6r"]
+
+[resource]
+script = ExtResource("3_tav6r")
+ability_name = "Shallow Clone"
+ability_range = 1
+effects = Array[ExtResource("1_rrklm")]([ExtResource("2_5gha4")])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
+custom_ability_script = null

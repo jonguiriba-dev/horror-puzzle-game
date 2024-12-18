@@ -173,6 +173,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 	for ability in host.get_abilities():
 		if !ability.can_target_entities:
 			continue
+		print("tile value ",ability.ability_name)
 		for _target in ability.get_valid_targets(tile_pos):
 			print("found valid target at ", _target.map_position)
 			#reduced score for an already targetted tile
@@ -193,6 +194,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 
 func set_threat(target_map_position:Vector2i,ability:Ability):
 	var threat = {"tile":target_map_position, "ability":ability}
+	Util.sysprint("%s.ai_attack.set_threat"%[host.entity_name],"ability:%s tile:%s"%[threat.ability.ability_name,str(threat.tile)])
 	host.threat = threat
 	host.threat_updated.emit()
 	var targetted_entity = WorldManager.grid.get_entity_on_tile(host.threat.tile)

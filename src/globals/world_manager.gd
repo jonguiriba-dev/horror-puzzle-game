@@ -148,6 +148,8 @@ func game_start():
 	if !UIManager.ui:
 		return
 	WorldManager.clear_entity_moved_history()
+	UIManager.ui.turn_start_overlay.hide()
+
 	if Debug.play_game_start_sequence:
 		await UIManager.play_game_start_sequence()
 	
@@ -186,7 +188,6 @@ func increment_animation_counter(val: int):
 
 var order_labels = []
 func show_turn_order():
-	print("show_turn_order")
 	var i=1
 	for enemy in get_tree().get_nodes_in_group(C.GROUPS_ENEMIES):
 		var label = Label.new()
@@ -214,7 +215,6 @@ func show_turn_order():
 		order_labels.push_front(label)
 		
 func hide_turn_order():
-	print("hide_turn_order")
 	for i in range(order_labels.size()):
 		order_labels.pop_front().queue_free()
 
@@ -243,14 +243,14 @@ func _on_end_turn_pressed():
 
 func _on_turn_order_pressed():
 	if team_turn == C.TEAM.PLAYER:
-		print("TURN ORDER")
 		if order_labels.size()>0:
 			hide_turn_order()
 		else:
 			show_turn_order()
 	
 func _on_turn_start(turn:C.TEAM):
-	await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
+	if Debug.show_turn_card:
+		await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
 	
 	if turn == C.TEAM.ENEMY:
 		_start_enemy_turn()

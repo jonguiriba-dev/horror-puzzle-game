@@ -13,6 +13,15 @@ var GROUPS_SELECTED = "selected"
 var GROUPS_PLAYER_ENTITIES = "player_entities"
 var GROUPS_ANIMATING_ENTITIES = "animating_entities"
 
+enum COLORS{
+	GREEN,
+	BLUE,
+	CYAN,
+	RED,
+	ORANGE,
+	YELLOW,
+	PURPLE
+}
 
 enum TEAM{
 	PLAYER,
@@ -40,6 +49,9 @@ enum DIALOGUE_TRIGGER{
 	ON_START
 }
 
+enum STATUS{
+	HASTE
+}
 
 var ABILITY_target_type = {
 	TILE = "target_type_tile"

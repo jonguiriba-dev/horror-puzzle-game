@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityEffect" load_steps=3 format=3 uid="uid://t6gu5uijvn83"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_1bveo"]
+[ext_resource type="Resource" uid="uid://cb70jx4rjfda3" path="res://src/components/objects/status/haste/haste.tres" id="2_nd6qw"]
+
+[resource]
+script = ExtResource("1_1bveo")
+effect_type = 4
+value = 2
+status_prop = ExtResource("2_nd6qw")
+entity_type = 0

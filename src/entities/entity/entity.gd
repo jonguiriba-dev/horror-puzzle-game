@@ -5,6 +5,7 @@ class_name Entity
 @onready var shadow :Sprite2D= $Shadow
 @onready var rescue_text := $EntitySprite/RescueText
 @onready var healthbar := $Healthbar
+@onready var status_bar := $StatusBar
 
 @export var preset:EntityPreset
 
@@ -27,10 +28,12 @@ var map_position:Vector2i:
 		return WorldManager.grid.local_to_map(position)
 var flip_h:=false
 var threat = null
+var status_effects:Array[Status] = []
 
 signal hit(damage:int)
 signal knockback(distance:int,source_pos:Vector2)
 signal knockback_animation_finished(distance:int,source_map_pos:Vector2i,prev_map_position:Vector2i)
+signal apply_status(status:Status)
 signal death
 signal move_end
 signal turn_end
@@ -47,6 +50,7 @@ func _ready() -> void:
 	turn_end.connect(_on_turn_end)
 	turn_start.connect(_on_turn_start)
 	selected.connect(_on_selected)
+	apply_status.connect(_on_apply_status)
 	
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
@@ -76,6 +80,7 @@ func load_preset(_preset:EntityPreset):
 	team = _preset.team
 	move_range = _preset.move_range
 	
+	print("ABILITIES ",_preset.get_abilities())
 	for ability in _preset.get_abilities():
 		add_child(ability)
 	
@@ -152,6 +157,12 @@ func undo_move(initial_position:Vector2):
 	position = initial_position
 	move_counter = 1
 	
+func clear_sprite_material():
+	sprite.material = null
+	
+func set_orientation(vertical:bool):
+	sprite.flip_h = vertical
+
 func _on_turn_start():
 	move_counter = max_move_counter
 	action_counter = max_action_counter
@@ -169,7 +180,6 @@ func _on_mouse_exited() -> void:
 func _on_knockback(distance:int, source_map_pos:Vector2i):
 	if health == 0:
 		return
-		
 	
 	var prev_position = map_position
 	var direction = Util.get_direction(source_map_pos,map_position)
@@ -233,8 +243,6 @@ func _on_selected():
 		clear_sprite_material()
 		UIManager.ui.clear_context()
 
-func clear_sprite_material():
-	sprite.material = null
 		
 func _on_ability_used(ability:Ability):
 	WorldManager.clear_entity_moved_history()
@@ -242,5 +250,10 @@ func _on_ability_used(ability:Ability):
 	if ability.is_action:
 		move_counter = 0
 
-func set_orientation(vertical:bool):
-	sprite.flip_h = vertical
+func _on_apply_status(status:Status):
+	Util.sysprint("%s.Entity._on_apply_status"%[entity_name],"applying status: %s"%[status.status_props.status_name])
+	status_effects.push_front(status)
+	status.register_entity(self)
+	status.status_finished.connect(func (e):
+		status_effects.erase(e)
+	,CONNECT_ONE_SHOT)

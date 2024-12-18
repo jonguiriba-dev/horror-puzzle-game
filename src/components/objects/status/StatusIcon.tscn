@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuhepf85w4a15"]
+
+[ext_resource type="Script" path="res://src/components/objects/status/status_icon.gd" id="1_3vwa4"]
+[ext_resource type="SpriteFrames" uid="uid://d0tdm15k28md0" path="res://src/components/objects/status/haste/haste_sprite_frames.tres" id="1_ailsf"]
+[ext_resource type="FontFile" uid="uid://cc8ua4ay28ent" path="res://assets/fonts/VeniceClassic.ttf" id="3_xnr1x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ur8me"]
+font = ExtResource("3_xnr1x")
+font_size = 10
+font_color = Color(0.08367, 1, 0.222915, 1)
+outline_size = 2
+outline_color = Color(0.0475391, 0.230469, 0.142554, 1)
+
+[node name="StatusIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3vwa4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(26, 8)
+sprite_frames = ExtResource("1_ailsf")
+autoplay = "default"
+speed_scale = 0.25
+
+[node name="Duration" type="Label" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = -1.0
+offset_right = 24.0
+offset_bottom = 11.0
+text = "2	"
+label_settings = SubResource("LabelSettings_ur8me")

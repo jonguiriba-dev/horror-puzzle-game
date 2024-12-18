@@ -9,7 +9,7 @@
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_fxkov"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_va4h4"]
 [ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost.tres" id="9_5nblp"]
-[ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/layla/layla_preset.tres" id="10_hnjue"]
+[ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/main_characters/layla/layla_preset.tres" id="10_hnjue"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
@@ -67,18 +67,6 @@ tile_set = ExtResource("7_fxkov")
 
 [node name="Entity6" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
 position = Vector2(-34, 16)
-preset = ExtResource("9_5nblp")
-
-[node name="Entity8" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-17, 8)
-preset = ExtResource("9_5nblp")
-
-[node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-51, 25)
-preset = ExtResource("9_5nblp")
-
-[node name="Entity10" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-66, 32)
 preset = ExtResource("9_5nblp")
 
 [node name="Entity7" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityProps" load_steps=3 format=3 uid="uid://dcrknter06kkf"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_yngcm"]
+[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="2_y5b6s"]
+
+[resource]
+script = ExtResource("2_y5b6s")
+ability_name = "Shared Vision"
+ability_range = 5
+effects = Array[ExtResource("1_yngcm")]([])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
+custom_ability_script = null

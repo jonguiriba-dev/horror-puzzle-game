@@ -49,6 +49,7 @@ MECHANICS
 - 3 Main Angels under player control cannot kill enemies
 - Units fall under the Main Angels, they can kill enemies but are not under player control. The game is all about influencing and protecting them
 - Paragons, units that are special (buffs?) something good happens when you save them. Calamities, units that have negative effects when you fail to save them.
+-Formations: skills that require an organized pattern
 
 WORLD COMPONENTS
 MAP - region level
@@ -73,6 +74,11 @@ Entity Types
 -Eyeball - 
 -Zombie
 -JellyFish
+-Stone Assassin - stone right arm, scythe like on the left, cool dr doom pose
+
+
+
+
 Quotes:
 -"Always wanting more, do you ever have enough?"
 -"I look forward to my death, knowing i've lived"

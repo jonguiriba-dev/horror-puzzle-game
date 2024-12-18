@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://d0tdm15k28md0"]
+
+[ext_resource type="Texture2D" uid="uid://bcfyfe30wl276" path="res://assets/fx/status/haste-sheet.png" id="1_ufvuu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flmw3"]
+atlas = ExtResource("1_ufvuu")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlerr"]
+atlas = ExtResource("1_ufvuu")
+region = Rect2(10, 0, 10, 10)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flmw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlerr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]

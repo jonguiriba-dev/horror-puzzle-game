@@ -109,7 +109,7 @@ func show_context_menu(host:Entity):
 	context_menu_ability_bar.size = Vector2(3,100)
 	context_menu_ability_bar.size += Vector2(0,70 * (ability_count - 1))
 	context_menu_name_container.position = Vector2(16,180)
-	context_menu_name_container.position += Vector2(0,-70 * (ability_count - 1))
+	context_menu_name_container.position += Vector2(0,-72 * (ability_count - 1))
 	context_menu.animate()
 	context_menu.show()
 

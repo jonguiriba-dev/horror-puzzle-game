@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityProps" load_steps=5 format=3 uid="uid://ca6k8754tx2hw"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="2_lbtsf"]
+[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="3_4nvh5"]
+[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="4_765a6"]
+[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="5_msy45"]
+
+[resource]
+script = ExtResource("5_msy45")
+ability_name = "Shoot"
+ability_range = 5
+effects = Array[ExtResource("2_lbtsf")]([ExtResource("3_4nvh5"), ExtResource("4_765a6")])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
+custom_ability_script = null

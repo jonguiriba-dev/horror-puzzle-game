@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://dslk1ursehvik"]
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://dslk1ursehvik"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_50mq2"]
+[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_u3s7m"]
 [ext_resource type="SpriteFrames" uid="uid://b0nvqdmmju3hj" path="res://src/entities/entity/presets/monsters/watcher/watcher_sprite_frames.tres" id="2_3jjid"]
+[ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_gwhfx"]
+[ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_e5shx"]
 
 [resource]
 script = ExtResource("1_50mq2")
@@ -9,10 +12,7 @@ entity_name = "Watcher"
 max_health = 3
 move_range = 3
 team = 1
-ability_1 = "res://src/abilities/ability_move.gd"
-ability_2 = "res://src/abilities/ability_strike.gd"
-ability_3 = null
-ability_4 = null
+ability_props = Array[ExtResource("1_u3s7m")]([ExtResource("2_gwhfx"), ExtResource("3_e5shx")])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 3)
 sprite_offset = Vector2(0, 0)

@@ -8,39 +8,36 @@ enum STATE{
 
 @onready var host:Entity = get_parent()
 
-@export var ability_name = "ability_name"
-@export var texture = preload("res://assets/ui/ability_frame.png")
-@export var ability_range = 0
-@export var damage = 0
-@export var state = STATE.INACTIVE
-@export var actions:Array[AbilityAction]
-@export var has_ui = true
-@export var highlight_color = Color.ORANGE
-@export var is_enemy_obstacle = false
-@export var target_count = 1
-@export var knockback_distance = 0
-@export var range_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.DIAMOND
-@export var aoe_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.POINT
-@export var use_host_as_origin = false
-@export var charges:=0
-@export var max_charges:=0
-@export var action_cost:=1
-@export var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
-@export var tile_exclude_self:=false
-@export var is_action:=true
+var ability_name = "ability_name"
+var texture = preload("res://assets/ui/ability_frame.png")
+var ability_range = 0
+var damage = 0
+var state = STATE.INACTIVE
+var effects:Array[AbilityEffect]
+var has_ui = true
+var highlight_color := Grid.HIGHLIGHT_COLORS.GREEN
+var is_enemy_obstacle = false
+var target_count = 1
+var range_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.DIAMOND
+var aoe_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.POINT
+var use_host_as_origin = false
+var charges:=0
+var max_charges:=0
+var action_cost:=1
+var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
+var tile_exclude_self:=false
+var is_action:=true
+var animation_script
+var ability_props:AbilityProps
 
 var can_target_entities:bool:
 	get:
-		for action in actions:
-			match action.target_type:
-				1:
-					return true
-				2:
-					return true
-		return false
+		if tile_exclude_flag == Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_ALL_PROPS:
+			return false
+		return true
 var can_target_tiles:bool:
 	get:
-		for action in actions:
+		for action in effects:
 			match action.target_type:
 				4:
 					return true
@@ -56,7 +53,9 @@ func _ready() -> void:
 	stopped_targetting.connect(_on_stopped_targetting)
 	used.connect(_on_used)
 	refresh_charges()
-	
+	if ability_props:
+		ability_props.apply(self)
+
 func use(target_map_position:Vector2i, options:Dictionary={}):
 	if !is_valid_target(target_map_position) and !options.get('absolute',false):
 		stopped_targetting.emit()
@@ -91,34 +90,37 @@ func _get_tile_target(map_pos:Vector2i):
 	return null
 
 func apply_effect(target):
-	for action in actions:
-		if action.action_type == AbilityAction.ACTION_TYPES.DAMAGE:
-			target.hit.emit(damage)
-		if action.action_type == AbilityAction.ACTION_TYPES.KNOCKBACK:
-			target.knockback.emit(knockback_distance, WorldManager.grid.local_to_map(host.position))
-			
+	for effect in effects:
+		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
+			target.hit.emit(effect.value)
+		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
+			target.knockback.emit(effect.value, WorldManager.grid.local_to_map(host.position))
+		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:
+			var status = Status.new(effect.status_prop,effect.value)
+			target.apply_status.emit(status)
 	applied.emit()
 
 func _play_animation(target_map_position:Vector2i):
-	await Util.wait(0.3)
-		
+	if animation_script:
+		await load(animation_script).play(host,target_map_position)
+	else:	
+		await Util.wait(0.3)
+
+
 func set_state(_state:STATE):
 	if _state == state:
 		return
 	if state == STATE.TARGET_SELECT:
 		target_select.emit()
 	
-	
 	state = _state
+	
 func highlight_target_tiles():
 	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	var target_tiles = get_target_tiles()
 	
 	for pos in target_tiles:
-		if highlight_color == Color.ORANGE:
-			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.ABILITY)
-		else:
-			WorldManager.grid.set_highlight(pos,Grid.HIGHLIGHT_COLORS.GREEN,Grid.HIGHLIGHT_LAYERS.ABILITY)
+		WorldManager.grid.set_highlight(pos,highlight_color,Grid.HIGHLIGHT_LAYERS.ABILITY)
 
 
 func get_target_tiles(

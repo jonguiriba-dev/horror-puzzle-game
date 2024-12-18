@@ -16,10 +16,7 @@ enum STATE_LISTS{
 
 @export_group("Nodes")
 ## Ability script file name
-@export_file() var ability_1
-@export_file() var ability_2
-@export_file() var ability_3
-@export_file() var ability_4
+@export var ability_props:Array[AbilityProps]
 
 ## States
 @export_file() var state_machine
@@ -35,9 +32,14 @@ enum STATE_LISTS{
 
 func get_abilities()->Array:
 	var abilities = []
-	for ability in [ability_1,ability_2,ability_3,ability_4]:
-		if ability:
-			abilities.push_front(load(ability).new())
+	for ability_prop in ability_props:
+		var ability_node 
+		if ability_prop.custom_ability_script:
+			ability_node = load(ability_prop.custom_ability_script).new()
+		else:
+			ability_node = Ability.new()
+		ability_node.ability_props = ability_prop
+		abilities.push_front(ability_node)
 	return abilities 
 
 func get_state_machine()->StateMachine:

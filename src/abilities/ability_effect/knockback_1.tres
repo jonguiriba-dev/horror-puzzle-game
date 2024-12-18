@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityEffect" load_steps=2 format=3 uid="uid://3vuy8ogwr8cc"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_7uo8p"]
+
+[resource]
+script = ExtResource("1_7uo8p")
+effect_type = 1
+value = 1
+entity_type = 0
