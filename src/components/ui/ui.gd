@@ -10,6 +10,7 @@ enum STATE{
 @onready var undo_move := $UndoMove
 @onready var end_turn := $EndTurn
 @onready var turn_order := $TurnOrder
+@onready var debug := $Debug
 @onready var debug_label := $Debug/Label
 @onready var portrait_container := $Portrait
 @onready var portrait := $Portrait/image
@@ -25,9 +26,12 @@ enum STATE{
 @onready var context_menu_name := $ContextMenu/Name/Label
 @onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
 @onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
-
+@onready var strategy_container := $Strategy/VBoxContainer
+@onready var strategy_dropdown_button := $Strategy/VBoxContainer/StrategyDropDown
 var state := STATE.INACTIVE
 var context
+
+
 
 signal end_turn_pressed
 signal undo_move_pressed
@@ -39,7 +43,13 @@ func _ready() -> void:
 	overlays.visible = true
 	clear_context()
 	UIManager.registerUI(self)
+	hide_strategies()
 	
+	for child in strategy_container.get_children():
+		if child == strategy_dropdown_button:
+			continue
+		child.pressed.connect(_on_strategy_selected.bind(child.strategy))
+		
 #func generate_ability_icons(abilities:Array[Ability]):
 	#for child in ability_container.get_children():
 		#var conns = child.get_signal_connection_list("pressed")
@@ -140,6 +150,30 @@ func disable_undo_move_button():
 	undo_move.disabled = true
 	undo_move.modulate = Color(180,180,180)
 
+var is_strategies_showing := false
+
+func hide_strategies():
+	for child in strategy_container.get_children():
+		if child == strategy_dropdown_button:
+			continue	
+		child.hide()
+	is_strategies_showing = false
+	
+func show_strategies():
+	for child in strategy_container.get_children():
+		child.show()
+	is_strategies_showing = true
+
+func _on_strategy_selected(strategy:C.STRATEGIES):
+	WorldManager.selected_strategy = strategy
+	strategy_dropdown_button.button_label.text = C.STRATEGIES.keys()[WorldManager.selected_strategy]
+	hide_strategies()
+	
+func _on_strategy_drop_down_pressed():
+	if !is_strategies_showing:
+		show_strategies()
+	else:
+		hide_strategies()
 func _on_end_turn_pressed() -> void:
 	end_turn_pressed.emit()
 
@@ -148,3 +182,10 @@ func _on_turn_order_pressed() -> void:
 		
 func _on_undo_move_pressed() -> void:
 	undo_move_pressed.emit()
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("console"):
+		if debug.visible:
+			debug.hide()
+		else:
+			debug.show()

@@ -51,17 +51,18 @@ func _state_logic(delta):
 
 func _exit_state(old_state, new_state):
 	states[state]._exit_state(old_state, new_state)
+	states[state].events_active = false
 
 
 func _enter_state(old_state, new_state):
 	states[state]._enter_state(old_state, new_state )
+	states[state].events_active = true
 
 func _update_sprite():
 	states[state]._update_sprite()
 
 func _transition():
 	var next_state = states[state]._transition()
-	
 	return next_state
 
 func get_state():

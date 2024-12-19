@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://chihmnl6y46ny" path="res://assets/etc/light.png" id="19_mdew6"]
 [ext_resource type="Texture2D" uid="uid://c045pp86mh33s" path="res://assets/etc/shadow.png" id="19_vsdqm"]
 [ext_resource type="Resource" uid="uid://dslk1ursehvik" path="res://src/entities/entity/presets/monsters/watcher/watcher.tres" id="20_18cam"]
-[ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost.tres" id="20_em8l2"]
+[ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="20_em8l2"]
 [ext_resource type="Texture2D" uid="uid://cc1jgrnvkjtt3" path="res://assets/etc/Cathedral.png" id="21_i5w4q"]
 [ext_resource type="Texture2D" uid="uid://xrdmix847ld2" path="res://assets/etc/Cathedral-torchl.png" id="24_tqrsc"]
 
@@ -291,6 +291,7 @@ texture = ExtResource("19_vsdqm")
 visible = false
 position = Vector2(158, 70)
 color = Color(1, 0.783333, 0.48, 1)
+energy = 1.31
 shadow_enabled = true
 texture = ExtResource("19_mdew6")
 texture_scale = 0.2

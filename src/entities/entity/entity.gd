@@ -47,11 +47,12 @@ func _ready() -> void:
 	death.connect(_on_death)
 	hit.connect(_on_hit)
 	knockback.connect(_on_knockback)
+	knockback_animation_finished.connect(_on_knockback_animation_finished)
 	turn_end.connect(_on_turn_end)
 	turn_start.connect(_on_turn_start)
 	selected.connect(_on_selected)
 	apply_status.connect(_on_apply_status)
-	
+
 	if team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
 	else:
@@ -162,10 +163,15 @@ func clear_sprite_material():
 	
 func set_orientation(vertical:bool):
 	sprite.flip_h = vertical
-
+	
+func clear_threat():
+	threat = null
+	threat_updated.emit()
+	
 func _on_turn_start():
 	move_counter = max_move_counter
 	action_counter = max_action_counter
+	Util.sysprint("%s.Entity._on_turn_start"%[entity_name],"counter refresh done")
 	
 func _on_turn_end():
 	pass
@@ -229,7 +235,8 @@ func _on_death() -> void:
 	print("animation_counter ", animation_counter)
 	if animation_counter != 0:
 		WorldManager.increment_animation_counter(animation_counter * -1)
-		
+	
+	clear_threat()
 	queue_free()
 		
 func _on_selected():
@@ -257,3 +264,10 @@ func _on_apply_status(status:Status):
 	status.status_finished.connect(func (e):
 		status_effects.erase(e)
 	,CONNECT_ONE_SHOT)
+
+func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i, prev_position:Vector2i):
+	if threat:
+		var direction = Util.get_direction(source_map_pos,map_position)
+		threat.tile += direction * distance 
+		threat_updated.emit()
+		

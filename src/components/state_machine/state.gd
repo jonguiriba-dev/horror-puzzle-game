@@ -7,6 +7,7 @@ signal exited
 
 var host
 var state_id :C.STATE
+var events_active = false
 
 @onready var _SM:StateMachine = get_parent()
 func _init():

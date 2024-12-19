@@ -1,7 +1,7 @@
 extends Node
 
 var is_enabled = true
-var show_enemy_ai_tile_values = false
+var show_enemy_ai_tile_values = true
 var show_move_path_highlight = false
 var show_turn_card = false
 var highlight_enemy_target = false
@@ -18,6 +18,7 @@ func _physics_process(delta: float) -> void:
 		text += "\ninput_enabled: %s"%WorldManager.input_enabled
 		text += "\nanimation_counter: %s"%WorldManager.animation_counter
 		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.team_turn]
+		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.selected_strategy]
 		
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:

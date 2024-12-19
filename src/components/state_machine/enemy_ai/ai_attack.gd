@@ -13,12 +13,10 @@ func _ready() -> void:
 	
 func _on_configured():
 	host.move_end.connect(_on_host_move_end)
-	host.death.connect(_on_host_death)
-	host.knockback_animation_finished.connect(_on_knockback_animation_finished)
 	
 func _enter_state(old_state, new_state):
 	to_idle = false
-	
+	Util.sysprint("%s.ai_attack._enter_state"%[host.entity_name],"Entered attack state: %s"%[host.entity_name])
 	var team_turn = WorldManager.team_turn
 	if host.threat:
 		await attack_target()
@@ -26,9 +24,7 @@ func _enter_state(old_state, new_state):
 			print("Waiting on animation...")
 			await WorldManager.animation_counter_cleared
 			
-		
 	if team_turn == host.team:
-		
 		for l in tile_labels:
 			l.queue_free()
 		tile_labels = []
@@ -75,7 +71,7 @@ func find_threat():
 			set_threat(valid_target.map_position, ability)
 			
 	if !target_found:
-		clear_threat()
+		host.clear_threat()
 			
 
 func attack_target():
@@ -84,7 +80,7 @@ func attack_target():
 	var targetted_entity = WorldManager.grid.get_entity_on_tile(host.threat.tile)
 	
 	await host.threat.ability.use(host.threat.tile)
-	clear_threat()
+	host.clear_threat()
 	
 func analyze_tile_scores():
 	if Debug.highlight_enemy_target and is_instance_valid(target):
@@ -173,9 +169,8 @@ func get_tile_value(tile_pos:Vector2i)->int:
 	for ability in host.get_abilities():
 		if !ability.can_target_entities:
 			continue
-		print("tile value ",ability.ability_name)
 		for _target in ability.get_valid_targets(tile_pos):
-			print("found valid target at ", _target.map_position)
+			print(host.entity_name, " found valid target at ", _target.map_position, " ", _target.entity_name)
 			#reduced score for an already targetted tile
 			if threat_tiles.has(_target.map_position):
 				value += 5
@@ -199,38 +194,28 @@ func set_threat(target_map_position:Vector2i,ability:Ability):
 	host.threat_updated.emit()
 	var targetted_entity = WorldManager.grid.get_entity_on_tile(host.threat.tile)
 
-func clear_threat():
-	host.threat = null
-	host.threat_updated.emit()
+
 	
 func get_threat_tiles():
 	var threat_grid_tiles = WorldManager.get_team_group_threat_tiles(C.GROUPS_ENEMIES)
 	if host.team == C.TEAM.ALLY:
 		threat_grid_tiles = WorldManager.get_team_group_threat_tiles(C.GROUPS_ALLIES)
 	return threat_grid_tiles
+
 func _get_location_score(target_map_pos:Vector2i)->int: 
 	var boundary_rect:Rect2i = WorldManager.grid.tiles_layer.get_used_rect()
 	var distance_from_center = target_map_pos.distance_to(((boundary_rect.position + boundary_rect.size) / 2))
 	return (distance_from_center / 2) * -1
 
-func _on_host_move_end():
-	finalize_turn()
-	
 func finalize_turn():
 	print("finalize_turn: ", host.entity_name)
-	find_threat()
-	host.hide_all_details()
-	host.turn_end.emit()
+	await find_threat()
+	await host.hide_all_details()
 	to_idle = true
-
-
-func _on_host_death():
-	if host.threat:
-		clear_threat()
-
-func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i, prev_position:Vector2i):
-	if host.threat:
-		var direction = Util.get_direction(source_map_pos,host.map_position)
-		host.threat.tile += direction * distance 
-		host.threat_updated.emit()
+	host.turn_end.emit()
+	
+func _on_host_move_end():
+	if !events_active:
+		return
 		
+	finalize_turn()

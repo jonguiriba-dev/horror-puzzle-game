@@ -11,6 +11,7 @@ var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
 var selected_entity:Entity
+var selected_strategy:=C.STRATEGIES.NEAREST
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -133,6 +134,7 @@ func _start_ally_turn():
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
+		Util.sysprint("WorldManager._start_ally_turn","entity turn start: %s"%[entity.entity_name])
 	else:
 		end_turn()
 		
@@ -141,6 +143,7 @@ func _start_enemy_turn():
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
+		Util.sysprint("WorldManager._start_enemy_turn","entity turn start: %s"%[entity.entity_name])
 	else:
 		end_turn()
 		
@@ -251,7 +254,7 @@ func _on_turn_order_pressed():
 func _on_turn_start(turn:C.TEAM):
 	if Debug.show_turn_card:
 		await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
-	
+	Util.sysprint("WorldManager._on_turn_start","turn start: %s"%[C.TEAM.keys()[turn]])
 	if turn == C.TEAM.ENEMY:
 		_start_enemy_turn()
 	elif turn == C.TEAM.PLAYER:
@@ -261,13 +264,14 @@ func _on_turn_start(turn:C.TEAM):
 
 			
 func _on_ai_unit_turn_end():
+	print("_on_ai_unit_turn_end")
 	if ai_turn_queue.size() == 0 and (team_turn == C.TEAM.ENEMY or team_turn == C.TEAM.ALLY):
 		_on_all_ai_done()
 		return
 		
 	var ai_entity = ai_turn_queue.pop_front()
-	print("my turn: ", ai_entity.entity_name)
 	if is_instance_valid(ai_entity):
+		print("my turn: ", ai_entity.entity_name)
 		ai_entity.turn_start.emit()
 
 func _on_all_ai_done():

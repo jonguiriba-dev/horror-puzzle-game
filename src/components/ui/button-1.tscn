@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://141sftgeowqw"]
+
+[ext_resource type="Script" path="res://src/components/ui/button_1.gd" id="1_pct5f"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="1_yvgsx"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="3_e62gv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d8mpl"]
+font = ExtResource("3_e62gv")
+font_size = 59
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)
+
+[node name="Button1" type="Button"]
+custom_minimum_size = Vector2(0, 96)
+offset_right = 8.0
+offset_bottom = 96.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+flat = true
+script = ExtResource("1_pct5f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.484028, 0.6125)
+texture = ExtResource("1_yvgsx")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 261.0
+offset_bottom = 96.0
+text = "Strategy"
+label_settings = SubResource("LabelSettings_d8mpl")
+horizontal_alignment = 1
+vertical_alignment = 1
