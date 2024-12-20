@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=4 format=3 uid="uid://cxchgrvtv0mfv"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_wpbp2"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_cr1mx"]
+[ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="5_45rtx"]
+
+[resource]
+script = ExtResource("4_cr1mx")
+entity_name = "Dummy"
+max_health = 99
+move_range = 5
+team = 1
+ability_props = Array[ExtResource("1_wpbp2")]([])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = ExtResource("5_45rtx")
+portrait_image = "res://assets/portraits/layla-portrait.png"

@@ -29,6 +29,9 @@ func _enter_state(old_state, new_state):
 			l.queue_free()
 		tile_labels = []
 		
+		if !host.get_ability("move"):
+			finalize_turn()
+			return
 		var scored_tiles = analyze_tile_scores()
 		scored_tiles = scored_tiles.filter(func (e): return e.value != 0)
 		if scored_tiles.size() == 0:
@@ -132,8 +135,9 @@ func analyze_tile_scores():
 	var current_tile_value = get_tile_value(host.map_position)
 	
 	#remove less than the current standing tile value (preferr to stay on the same tile)
-	scored_tiles = scored_tiles.filter(func (e):
-		return e.value > current_tile_value
+	scored_tiles.map(func (e):
+		if e.value <= current_tile_value:
+			e.value = 0
 	)
 	scored_tiles.sort_custom(
 		func(a,b):

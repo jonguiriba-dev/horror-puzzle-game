@@ -9,8 +9,8 @@
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_fxkov"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_va4h4"]
 [ext_resource type="Resource" uid="uid://clywh0svuxrk4" path="res://src/entities/entity/presets/allies/knight/knight_preset.tres" id="9_bm5gs"]
-[ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="10_8ry5x"]
 [ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/main_characters/layla/layla_preset.tres" id="10_hnjue"]
+[ext_resource type="Resource" uid="uid://cxchgrvtv0mfv" path="res://src/entities/entity/presets/monsters/dummy/dummy_preset.tres" id="11_00i3j"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="16_v42j1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
@@ -66,24 +66,29 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD+/wQAAQABAAAAAAABAP3/AQABAAAAAAD8//3/AQABAAAAAAA=")
 tile_set = ExtResource("7_fxkov")
 
-[node name="Entity8" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-2, 33)
-preset = ExtResource("10_8ry5x")
-
-[node name="Entity10" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(16, 24)
-preset = ExtResource("10_8ry5x")
-
-[node name="Entity11" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(32, 17)
-preset = ExtResource("10_8ry5x")
-
 [node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-19, 39)
+position = Vector2(-1, 17)
 preset = ExtResource("9_bm5gs")
 
 [node name="Entity7" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(-76, -8)
 preset = ExtResource("10_hnjue")
+
+[node name="Dummy1" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(62, -17)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(-48, 40)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(-62, -18)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy4" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(49, 40)
+preset = ExtResource("11_00i3j")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99

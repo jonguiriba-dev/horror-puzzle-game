@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 		text += "\nanimation_counter: %s"%WorldManager.animation_counter
 		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.team_turn]
 		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.selected_strategy]
+		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.starting_position]
 		
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:
@@ -40,6 +41,10 @@ func _physics_process(delta: float) -> void:
 			text += "\n %s"%[C.STATE.keys()[state.state_id]]
 			text += "\nmove_counter: %s"%entity.move_counter
 			text += "\naction_counter: %s"%entity.action_counter
+			if entity.has_meta("distance_to_bounds"):
+				text += "\ndistance_to_bounds: %s"%entity.get_meta("distance_to_bounds")
+			if entity.has_meta("distance_to_host"):
+				text += "\ndistance_to_host: %s"%entity.get_meta("distance_to_host")
 		UIManager.info(text)
 
 func _on_test_button_pressed():

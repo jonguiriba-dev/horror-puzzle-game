@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_retreat.gd" id="1_uf243"]
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_attack.gd" id="2_poxe3"]
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_idle.gd" id="3_uiwsi"]
-[ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_furthest.gd" id="5_3be2y"]
+[ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_forward.gd" id="5_3be2y"]
 
 [node name="EnemyAiStateMachine" type="Node"]
 script = ExtResource("1_hs25x")

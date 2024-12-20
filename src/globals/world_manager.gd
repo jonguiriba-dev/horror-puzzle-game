@@ -11,7 +11,7 @@ var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
 var selected_entity:Entity
-var selected_strategy := C.STRATEGIES.NEAREST
+var selected_strategy := C.STRATEGIES.FORWARD
 var starting_position := C.DIRECTION.NORTH
 
 signal turn_changed
