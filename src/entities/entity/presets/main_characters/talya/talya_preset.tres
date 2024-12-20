@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_ky2vi"]
 [ext_resource type="SpriteFrames" uid="uid://jc3proaf3kq0" path="res://src/entities/entity/presets/main_characters/talya/talya_sprite_frames.tres" id="2_gn7xq"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_w5s8k"]
-[ext_resource type="Resource" uid="uid://cjj6k47ibjfig" path="res://src/abilities/ability_presets/Offense/ability_calculated_shot/ability_calculated_shot.tres" id="4_3ri0d"]
 [ext_resource type="Resource" uid="uid://bphejklwgk8d8" path="res://src/abilities/ability_presets/Support/ability_frost_shot/ability_frost_shot.tres" id="5_lf5bs"]
 [ext_resource type="Resource" uid="uid://p6i5jib3t2gt" path="res://src/abilities/ability_presets/Support/ability_heal_shot/ability_heal_shot.tres" id="6_njpdv"]
+[ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="7_eygvi"]
 [ext_resource type="Resource" uid="uid://dcrknter06kkf" path="res://src/abilities/ability_presets/Support/ability_shared_vision/ability_shared_vision.tres" id="7_xh74m"]
 [ext_resource type="Resource" uid="uid://d1kf70lom66fp" path="res://src/abilities/ability_presets/Support/ability_tailwind/ability_tailwind.tres" id="8_12ytw"]
 
@@ -16,7 +16,7 @@ entity_name = "Talya"
 max_health = 2
 move_range = 3
 team = 0
-ability_props = Array[ExtResource("1_ky2vi")]([ExtResource("2_w5s8k"), ExtResource("4_3ri0d"), ExtResource("5_lf5bs"), ExtResource("6_njpdv"), ExtResource("7_xh74m"), ExtResource("8_12ytw")])
+ability_props = Array[ExtResource("1_ky2vi")]([ExtResource("2_w5s8k"), ExtResource("5_lf5bs"), ExtResource("6_njpdv"), ExtResource("7_xh74m"), ExtResource("8_12ytw"), ExtResource("7_eygvi")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

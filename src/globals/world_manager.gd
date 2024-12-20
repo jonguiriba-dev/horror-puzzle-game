@@ -11,7 +11,8 @@ var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
 var selected_entity:Entity
-var selected_strategy:=C.STRATEGIES.NEAREST
+var selected_strategy := C.STRATEGIES.NEAREST
+var starting_position := C.DIRECTION.NORTH
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -229,6 +230,9 @@ func get_team_group_threat_tiles(group:String):
 		for threat_tile in threat_tiles:
 			tiles.push_front(threat_tile)
 	return tiles
+
+func get_world_bounds():
+	return grid.tiles_layer.get_used_rect()
 
 func _on_scenetree_ready():
 	if UIManager.ui:

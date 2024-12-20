@@ -70,6 +70,14 @@ tile_set = ExtResource("7_fxkov")
 position = Vector2(-2, 33)
 preset = ExtResource("10_8ry5x")
 
+[node name="Entity10" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(16, 24)
+preset = ExtResource("10_8ry5x")
+
+[node name="Entity11" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(32, 17)
+preset = ExtResource("10_8ry5x")
+
 [node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
 position = Vector2(-19, 39)
 preset = ExtResource("9_bm5gs")

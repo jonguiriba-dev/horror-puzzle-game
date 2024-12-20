@@ -94,32 +94,12 @@ func analyze_tile_scores():
 	
 	var scored_tiles = []
 	var targets = host.get_enemies()
-	print(host.entity_name, " targets ", targets.map(func (e):return e.entity_name))
-	
 	if targets.size() == 0:
 		return scored_tiles
-	
-	targets.map(func (e:Node):
-		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position)
-		e.set_meta("distance_to_host",distance)
-	)
-	
-	targets.sort_custom(func(target1, target2):
-		return target1.get_meta("distance_to_host") <= target2.get_meta("distance_to_host") 
-	)
-	var threat_tiles = get_threat_tiles()
-	for _target in targets:
-		if threat_tiles.has(_target.map_position):
-			targets.erase(_target)
-			targets.push_back(_target)
 		
-	var nearest = targets[0]
-	if !nearest:
-		return scored_tiles
-	
 	print("targets> ",targets)
-	target = nearest
-	print(host.entity_name, " is targeting ", nearest.entity_name)
+	target = find_target()
+	print(host.entity_name, " is targeting ", target.entity_name)
 	
 	if Debug.highlight_enemy_target:
 		WorldManager.grid.set_highlight(
@@ -130,14 +110,14 @@ func analyze_tile_scores():
 	
 	path_to_nearest_target = WorldManager.grid.get_nearest_path(
 		WorldManager.grid.local_to_map(host.position), 
-		WorldManager.grid.local_to_map(nearest.position)
+		WorldManager.grid.local_to_map(target.position)
 	)
 	
 	#if no path, then try to get as close as possbile by disregarding obstacles 
 	if path_to_nearest_target.size() == 0:
 		path_to_nearest_target = WorldManager.grid.get_nearest_path(
 			WorldManager.grid.local_to_map(host.position), 
-			WorldManager.grid.local_to_map(nearest.position),
+			WorldManager.grid.local_to_map(target.position),
 			false
 		)
 	
@@ -160,7 +140,7 @@ func analyze_tile_scores():
 			return a.value > b.value
 	)
 	return scored_tiles
-	
+
 func get_tile_value(tile_pos:Vector2i)->int:
 	var value = 0
 	
@@ -213,6 +193,30 @@ func finalize_turn():
 	await host.hide_all_details()
 	to_idle = true
 	host.turn_end.emit()
+
+func find_target():
+	return get_nearest_target()	
+	
+func get_nearest_target():
+	var targets = host.get_enemies()
+	print(host.entity_name, " targets ", targets.map(func (e):return e.entity_name))
+	
+	targets.map(func (e:Node):
+		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position)
+		e.set_meta("distance_to_host",distance)
+	)
+	
+	targets.sort_custom(func(target1, target2):
+		return target1.get_meta("distance_to_host") <= target2.get_meta("distance_to_host") 
+	)
+	var threat_tiles = get_threat_tiles()
+	for _target in targets:
+		if threat_tiles.has(_target.map_position):
+			targets.erase(_target)
+			targets.push_back(_target)
+		
+	var nearest = targets[0]
+	return nearest
 	
 func _on_host_move_end():
 	if !events_active:

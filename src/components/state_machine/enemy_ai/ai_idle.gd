@@ -16,6 +16,12 @@ func _enter_state(old_state, new_state):
 func _transition():
 	if (
 		to_attack 
+		and WorldManager.selected_strategy == C.STRATEGIES.FARTHEST
+		and host.team == C.TEAM.ALLY
+	):
+		return C.STATE.AI_FARTHEST
+	elif (
+		to_attack 
 		and WorldManager.selected_strategy == C.STRATEGIES.RETREAT
 		and host.team == C.TEAM.ALLY
 	):

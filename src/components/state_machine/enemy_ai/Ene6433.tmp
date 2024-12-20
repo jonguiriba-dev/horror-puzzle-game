@@ -18,5 +18,5 @@ script = ExtResource("2_poxe3")
 [node name="AIRetreatState" type="Node" parent="."]
 script = ExtResource("1_uf243")
 
-[node name="AIFarthest" type="Node" parent="."]
+[node name="AIFurthest" type="Node" parent="."]
 script = ExtResource("5_3be2y")

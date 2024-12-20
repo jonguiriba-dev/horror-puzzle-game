@@ -109,10 +109,25 @@ func get_heat_map():
 func get_tile_value(tile_pos:Vector2i)->int:
 	var value = 0
 	
-	value += Util.get_manhattan_distance(host.map_position,tile_pos) * 5
+	var direction = Util.get_direction(host.map_position,tile_pos)
+	
+	var bounds = WorldManager.get_world_bounds()
+	
+	match(WorldManager.starting_position):
+		C.DIRECTION.NORTH:
+			value += abs((tile_pos.y-bounds.position.y) - bounds.size.y) * 6 
+		C.DIRECTION.SOUTH:
+			value += tile_pos.y * 6 
+		C.DIRECTION.WEST:
+			value += abs((tile_pos.x-bounds.position.x) - bounds.size.x) * 6 
+		C.DIRECTION.EAST:
+			value += tile_pos.x * 6 
+			
+	value += Util.get_manhattan_distance(host.map_position,tile_pos) * 4
 	
 	for entry in heatmap:
 		if entry.tile == tile_pos:
 			value += entry.value
-		
+			break
+			
 	return value
