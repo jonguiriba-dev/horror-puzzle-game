@@ -30,7 +30,7 @@ func _transition():
 		elif (
 			WorldManager.selected_strategy == C.STRATEGIES.TOGETHER
 		):
-			return C.STATE.AI_SPREAD
+			return C.STATE.AI_TOGETHER
 	elif to_attack:
 		return  C.STATE.AI_ATTACK
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1m61om70coef"]
+[gd_scene load_steps=8 format=3 uid="uid://d1m61om70coef"]
 
 [ext_resource type="Script" path="res://src/components/state_machine/state_machine.gd" id="1_hs25x"]
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_retreat.gd" id="1_uf243"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_idle.gd" id="3_uiwsi"]
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_forward.gd" id="5_3be2y"]
 [ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_spread.gd" id="6_aqdlh"]
+[ext_resource type="Script" path="res://src/components/state_machine/enemy_ai/ai_together.gd" id="7_6i7aa"]
 
 [node name="EnemyAiStateMachine" type="Node"]
 script = ExtResource("1_hs25x")
@@ -24,3 +25,6 @@ script = ExtResource("5_3be2y")
 
 [node name="AISpread" type="Node" parent="."]
 script = ExtResource("6_aqdlh")
+
+[node name="AITogether" type="Node" parent="."]
+script = ExtResource("7_6i7aa")

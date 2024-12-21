@@ -1,7 +1,7 @@
 extends Node
 
 var is_enabled = true
-var show_enemy_ai_tile_values = true
+var show_enemy_ai_tile_values = false
 var show_move_path_highlight = false
 var show_turn_card = false
 var highlight_enemy_target = false

@@ -1,12 +1,14 @@
 extends AIAttackState
-class_name AIRetreatState
+class_name AITogether
 
 var heatmap = []
+var heatmap_tile_labels:Array = []
 
 func _ready() -> void:
 	super()
-	state_id = C.STATE.AI_RETREAT
-	
+	state_id = C.STATE.AI_TOGETHER
+	tile_value_factors.is_target_enabled = false
+
 func analyze_tile_scores():
 	if Debug.highlight_enemy_target and is_instance_valid(target):
 		WorldManager.grid.set_highlight(
@@ -30,7 +32,7 @@ func analyze_tile_scores():
 	)
 	
 	targets.sort_custom(func(target1, target2):
-		return target1.get_meta("distance_to_host") <= target2.get_meta("distance_to_host") 
+		return target1.get_meta("distance_to_host") >= target2.get_meta("distance_to_host") 
 	)
 	var threat_tiles = get_threat_tiles()
 	for _target in targets:
@@ -86,20 +88,22 @@ func analyze_tile_scores():
 			return a.value > b.value
 	)
 	return scored_tiles
-
+	
 func get_heat_map():
 	var _heatmap = []
 	
-	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENEMIES):
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		if entity.team == C.TEAM.ENEMY or entity.team == C.TEAM.CITIZEN:
+			continue
 		if entity == host:
 			continue
-		for x in range(-3,3):
-			for y in range(-3,3):
+		for x in range(-3,4):
+			for y in range(-3,4):
 				var value
 				if abs(x) > abs(y):
-					value = (abs((x * 10))  - 40) * 0.2
+					value = abs(abs((x * 10))  - 40) * 0.3
 				else:
-					value = (abs((y * 10))  - 40) * 0.2
+					value = abs(abs((y * 10))  - 40) * 0.3
 					
 				var new_map_pos = entity.map_position + Vector2i(x,y)
 				var entry = _heatmap.filter(func (e):return e.tile == new_map_pos)
@@ -112,26 +116,23 @@ func get_heat_map():
 							"value": value 
 						}
 					)
+	print("HEATMAP > ", _heatmap)
+	#
+	#if Debug.show_enemy_ai_tile_values:
+		#for t in _heatmap:
+			#var l = Label.new()
+			#l.z_index=98
+			#l.text = str(t.value)
+			#WorldManager.grid.prop_layer.add_child(l)
+			#l.position = WorldManager.grid.map_to_local(t.tile) + Vector2(-8,-8)
+			#l.set("theme_override_font_sizes/font_size", 10)
+			#l.modulate = Color.RED
+			#heatmap_tile_labels.push_front(l)
+			
 	return _heatmap
 	
 func get_tile_value(tile_pos:Vector2i)->int:
-	var value = 0
-	
-	var direction = Util.get_direction(host.map_position,tile_pos)
-	
-	var bounds = WorldManager.get_world_bounds()
-	
-	match(WorldManager.starting_position):
-		C.DIRECTION.NORTH:
-			value += abs((tile_pos.y-bounds.position.y) - bounds.size.y) * 8 
-		C.DIRECTION.SOUTH:
-			value += tile_pos.y * 8 
-		C.DIRECTION.WEST:
-			value += abs((tile_pos.x-bounds.position.x) - bounds.size.x) * 8 
-		C.DIRECTION.EAST:
-			value += tile_pos.x * 8 
-			
-	value += Util.get_manhattan_distance(host.map_position,tile_pos) * 4
+	var value = super(tile_pos)
 	
 	for entry in heatmap:
 		if entry.tile == tile_pos:

@@ -204,7 +204,10 @@ func finalize_turn():
 	#for l in tile_labels:
 		#l.queue_free()
 	#tile_labels = []
-	
+	if get("heatmap_tile_labels"):
+		for l in get("heatmap_tile_labels"):
+			l.queue_free()
+		set("heatmap_tile_labels",[])
 	host.turn_end.emit()
 func find_target():
 	return get_nearest_target()	

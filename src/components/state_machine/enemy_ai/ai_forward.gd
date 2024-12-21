@@ -1,8 +1,6 @@
 extends AIAttackState
 class_name AIForward
 
-var heatmap = []
-
 func _ready() -> void:
 	super()
 	state_id = C.STATE.AI_FORWARD
@@ -40,11 +38,9 @@ func get_farthest_target():
 				host.map_position.y
 			)
 	
-	print(">bound_pos ",bound_pos)
 	targets.map(func (e:Node):
 		var distance = Util.get_manhattan_distance(e.map_position,bound_pos)
 		e.set_meta("distance_to_bounds",distance)
-		print(">>>>>> >distance ",distance)
 	)
 	
 	targets.sort_custom(func(target1, target2):

@@ -90,7 +90,7 @@ func analyze_tile_scores():
 	return scored_tiles
 	
 func get_heat_map():
-	var heat_map = []
+	var _heatmap = []
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		if entity.team == C.TEAM.ENEMY or entity.team == C.TEAM.CITIZEN:
@@ -101,19 +101,25 @@ func get_heat_map():
 			for y in range(-3,4):
 				var value
 				if abs(x) > abs(y):
-					value = (abs((x * 10))  - 40) * 0.8
+					value = (abs((x * 10))  - 40) * 0.5
 				else:
-					value = (abs((y * 10))  - 40) * 0.8
-				heat_map.push_front(
-					{
-						"tile": entity.map_position + Vector2i(x,y),
-						"value": value 
-					}
-				)
-	print("HEATMAP > ", heatmap)
+					value = (abs((y * 10))  - 40) * 0.5
+					
+				var new_map_pos = entity.map_position + Vector2i(x,y)
+				var entry = _heatmap.filter(func (e):return e.tile == new_map_pos)
+				if entry.size() > 0:
+					entry[0].value += value
+				else:
+					_heatmap.push_front(
+						{
+							"tile": new_map_pos,
+							"value": value 
+						}
+					)
+	print("HEATMAP > ", _heatmap)
 	#
 	#if Debug.show_enemy_ai_tile_values:
-		#for t in heat_map:
+		#for t in _heatmap:
 			#var l = Label.new()
 			#l.z_index=98
 			#l.text = str(t.value)
@@ -123,12 +129,10 @@ func get_heat_map():
 			#l.modulate = Color.RED
 			#heatmap_tile_labels.push_front(l)
 			
-	return heat_map
+	return _heatmap
 	
 func get_tile_value(tile_pos:Vector2i)->int:
 	var value = super(tile_pos)
-	
-	value += Util.get_manhattan_distance(host.map_position,tile_pos) * 4
 	
 	for entry in heatmap:
 		if entry.tile == tile_pos:
