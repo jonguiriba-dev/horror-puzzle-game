@@ -6,6 +6,9 @@ var target
 var tile_labels:Array = []
 var to_idle = false
 
+var tile_value_factors := {
+	"is_target_enabled":true
+}
 
 func _ready() -> void:
 	super()
@@ -40,8 +43,9 @@ func _enter_state(old_state, new_state):
 	
 		if Debug.show_enemy_ai_tile_values:
 			show_tile_values(scored_tiles)
-		
+			
 		host.get_ability("move").use(scored_tiles[0].position)
+
 
 func show_tile_values(scored_tiles:Array):
 	for t in scored_tiles:
@@ -162,9 +166,10 @@ func get_tile_value(tile_pos:Vector2i)->int:
 				value += 10
 	
 	#increment by pathfinding to target
-	if path_to_nearest_target.has(tile_pos):
-		var host_map_pos = WorldManager.grid.local_to_map(host.position)
-		value += 5 + host_map_pos.distance_to(tile_pos)
+	if tile_value_factors.is_target_enabled:
+		if path_to_nearest_target.has(tile_pos):
+			var host_map_pos = WorldManager.grid.local_to_map(host.position)
+			value += 5 + host_map_pos.distance_to(tile_pos)
 		
 	#decrement by already threatened tiles
 	if threat_tiles.has(tile_pos):
@@ -196,8 +201,11 @@ func finalize_turn():
 	await find_threat()
 	await host.hide_all_details()
 	to_idle = true
+	#for l in tile_labels:
+		#l.queue_free()
+	#tile_labels = []
+	
 	host.turn_end.emit()
-
 func find_target():
 	return get_nearest_target()	
 	

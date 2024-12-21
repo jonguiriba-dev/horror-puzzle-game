@@ -66,28 +66,60 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD+/wQAAQABAAAAAAABAP3/AQABAAAAAAD8//3/AQABAAAAAAA=")
 tile_set = ExtResource("7_fxkov")
 
-[node name="Entity9" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-1, 17)
+[node name="knight" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(14, 25)
+preset = ExtResource("9_bm5gs")
+
+[node name="knight3" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(47, 8)
+preset = ExtResource("9_bm5gs")
+
+[node name="knight2" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(-19, 8)
+preset = ExtResource("9_bm5gs")
+
+[node name="knight4" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(16, -9)
 preset = ExtResource("9_bm5gs")
 
 [node name="Entity7" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
 position = Vector2(-76, -8)
 preset = ExtResource("10_hnjue")
 
-[node name="Dummy1" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(62, -17)
-preset = ExtResource("11_00i3j")
-
-[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-48, 40)
-preset = ExtResource("11_00i3j")
-
-[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(-62, -18)
-preset = ExtResource("11_00i3j")
-
 [node name="Dummy4" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
-position = Vector2(49, 40)
+position = Vector2(-18, 25)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy7" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(-50, 6)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy5" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(18, 7)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy8" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(-17, -8)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy10" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(17, -25)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy11" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(49, -10)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy12" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(81, 6)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy9" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(45, 23)
+preset = ExtResource("11_00i3j")
+
+[node name="Dummy6" parent="Grid/PropLayer" instance=ExtResource("8_va4h4")]
+position = Vector2(17, 41)
 preset = ExtResource("11_00i3j")
 
 [node name="WorldBg" type="Sprite2D" parent="."]

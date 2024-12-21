@@ -14,18 +14,23 @@ func _enter_state(old_state, new_state):
 	to_attack = false
 	
 func _transition():
-	if (
-		to_attack 
-		and WorldManager.selected_strategy == C.STRATEGIES.FORWARD
-		and host.team == C.TEAM.ALLY
-	):
-		return C.STATE.AI_FORWARD
-	elif (
-		to_attack 
-		and WorldManager.selected_strategy == C.STRATEGIES.RETREAT
-		and host.team == C.TEAM.ALLY
-	):
-		return C.STATE.AI_RETREAT
+	if host.team == C.TEAM.ALLY and to_attack:
+		if (
+			WorldManager.selected_strategy == C.STRATEGIES.FORWARD
+		):
+			return C.STATE.AI_FORWARD
+		elif (
+			WorldManager.selected_strategy == C.STRATEGIES.RETREAT
+		):
+			return C.STATE.AI_RETREAT
+		elif (
+			WorldManager.selected_strategy == C.STRATEGIES.SPREAD
+		):
+			return C.STATE.AI_SPREAD
+		elif (
+			WorldManager.selected_strategy == C.STRATEGIES.TOGETHER
+		):
+			return C.STATE.AI_SPREAD
 	elif to_attack:
 		return  C.STATE.AI_ATTACK
 
