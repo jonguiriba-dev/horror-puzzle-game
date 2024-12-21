@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=31 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Script" path="res://src/components/ui/context_menu.gd" id="2_0mq18"]
@@ -16,15 +16,27 @@
 [ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
 [ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="8_rfbs1"]
-[ext_resource type="LabelSettings" uid="uid://clg78kn1ev7s8" path="res://src/components/ui/general_text.tres" id="17_nn5vl"]
+[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/components/ui/sprite_button_label_settings.tres" id="13_mvkux"]
+[ext_resource type="Script" path="res://src/components/ui/strategy.gd" id="18_2exhv"]
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="18_gcsod"]
-[ext_resource type="Script" path="res://src/components/ui/button_1.gd" id="18_ot327"]
+[ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/components/ui/SpriteButton.tscn" id="19_mg8vx"]
 
 [sub_resource type="Gradient" id="Gradient_ir4x0"]
 colors = PackedColorArray(0.956181, 0.955964, 0.95537, 0.796078, 0.16, 0.12528, 0.0112, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sjkx4"]
 gradient = SubResource("Gradient_ir4x0")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s3w84"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gfcfi"]
+font = ExtResource("6_ekjn1")
+font_size = 38
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3o4f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3uust"]
 font = ExtResource("6_ekjn1")
@@ -47,13 +59,6 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_6ql6o"]
 font = ExtResource("6_ekjn1")
 font_size = 43
-
-[sub_resource type="LabelSettings" id="LabelSettings_d8mpl"]
-font = ExtResource("6_ekjn1")
-font_size = 59
-font_color = Color(0.184314, 0.168627, 0.0980392, 1)
-outline_size = 8
-outline_color = Color(0.59, 0.55755, 0.413, 1)
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -318,33 +323,62 @@ offset_right = 52.0
 offset_bottom = 47.0
 theme_override_font_sizes/font_size = 40
 
-[node name="EndTurn" type="Button" parent="."]
-z_index = 99
-z_as_relative = false
+[node name="Endturn" type="Button" parent="."]
+custom_minimum_size = Vector2(254, 96)
 layout_mode = 0
-offset_left = 2224.0
+offset_left = 2144.0
 offset_top = 1268.0
-offset_right = 2505.0
-offset_bottom = 1370.0
+offset_right = 2398.0
+offset_bottom = 1364.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
-theme_override_fonts/font = ExtResource("6_ekjn1")
-theme_override_font_sizes/font_size = 45
-text = "End Turn"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s3w84")
 flat = true
 
-[node name="TurnOrder" type="Button" parent="."]
-z_index = 99
-z_as_relative = false
+[node name="Sprite2D" type="Sprite2D" parent="Endturn"]
+position = Vector2(24, 6)
+scale = Vector2(0.395125, 0.5)
+texture = ExtResource("18_gcsod")
+centered = false
+
+[node name="Label" type="Label" parent="Endturn"]
 layout_mode = 0
-offset_left = 1862.0
+offset_right = 261.0
+offset_bottom = 96.0
+text = "End Turn"
+label_settings = SubResource("LabelSettings_gfcfi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnOrder" type="Button" parent="."]
+custom_minimum_size = Vector2(254, 96)
+layout_mode = 0
+offset_left = 1878.0
 offset_top = 1268.0
-offset_right = 2143.0
-offset_bottom = 1370.0
+offset_right = 2132.0
+offset_bottom = 1364.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 1
-theme_override_fonts/font = ExtResource("6_ekjn1")
-theme_override_font_sizes/font_size = 45
-text = "Turn Order"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c3o4f")
 flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="TurnOrder"]
+position = Vector2(24, 6)
+scale = Vector2(0.395125, 0.5)
+texture = ExtResource("18_gcsod")
+centered = false
+
+[node name="Label" type="Label" parent="TurnOrder"]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 259.0
+offset_bottom = 96.0
+text = "Turn Order"
+label_settings = ExtResource("13_mvkux")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Portrait" type="Control" parent="."]
 visible = false
@@ -601,154 +635,32 @@ offset_bottom = 160.0
 text = "• Prevent enemies from getting in the Cathedral"
 label_settings = SubResource("LabelSettings_6ql6o")
 
-[node name="Strategy" type="Control" parent="."]
+[node name="StrategyMenu" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 102.0
-offset_top = 996.0
-offset_right = 382.0
-offset_bottom = 1358.0
+offset_left = 1184.0
+offset_top = 814.0
+offset_right = 1464.0
+offset_bottom = 1256.0
 mouse_filter = 1
+script = ExtResource("18_2exhv")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Strategy"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StrategyMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -144.0
-offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="StrategyDropDown1" type="Button" parent="Strategy/VBoxContainer"]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-flat = true
-script = ExtResource("18_ot327")
-strategy = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="Strategy/VBoxContainer/StrategyDropDown1"]
-scale = Vector2(0.484028, 0.6125)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="Strategy/VBoxContainer/StrategyDropDown1"]
+[node name="StrategyDropDown" parent="StrategyMenu" instance=ExtResource("19_mg8vx")]
 layout_mode = 0
-offset_right = 261.0
-offset_bottom = 96.0
-text = "Forward"
-label_settings = SubResource("LabelSettings_d8mpl")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 32.0
+offset_top = 460.0
+offset_right = 246.0
+offset_bottom = 540.0
 
-[node name="StrategyDropDown2" type="Button" parent="Strategy/VBoxContainer"]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-flat = true
-script = ExtResource("18_ot327")
-strategy = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Strategy/VBoxContainer/StrategyDropDown2"]
-scale = Vector2(0.484028, 0.6125)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="Strategy/VBoxContainer/StrategyDropDown2"]
-layout_mode = 0
-offset_right = 261.0
-offset_bottom = 96.0
-text = "Retreat"
-label_settings = SubResource("LabelSettings_d8mpl")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrategyDropDown3" type="Button" parent="Strategy/VBoxContainer"]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-flat = true
-script = ExtResource("18_ot327")
-strategy = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="Strategy/VBoxContainer/StrategyDropDown3"]
-scale = Vector2(0.484028, 0.6125)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="Strategy/VBoxContainer/StrategyDropDown3"]
-layout_mode = 0
-offset_right = 261.0
-offset_bottom = 96.0
-text = "Together"
-label_settings = SubResource("LabelSettings_d8mpl")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrategyDropDown4" type="Button" parent="Strategy/VBoxContainer"]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-flat = true
-script = ExtResource("18_ot327")
-strategy = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Strategy/VBoxContainer/StrategyDropDown4"]
-scale = Vector2(0.484028, 0.6125)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="Strategy/VBoxContainer/StrategyDropDown4"]
-layout_mode = 0
-offset_right = 261.0
-offset_bottom = 96.0
-text = "Spread"
-label_settings = SubResource("LabelSettings_d8mpl")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrategyDropDown" type="Button" parent="Strategy/VBoxContainer"]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-flat = true
-script = ExtResource("18_ot327")
-
-[node name="Sprite2D" type="Sprite2D" parent="Strategy/VBoxContainer/StrategyDropDown"]
-scale = Vector2(0.484028, 0.6125)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="Strategy/VBoxContainer/StrategyDropDown"]
-layout_mode = 0
-offset_right = 261.0
-offset_bottom = 96.0
-text = "Nearest"
-label_settings = SubResource("LabelSettings_d8mpl")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Strategy"]
-layout_mode = 0
-offset_left = 42.0
-offset_top = 350.0
-offset_right = 235.0
-offset_bottom = 429.0
-text = "Strategy"
-label_settings = ExtResource("17_nn5vl")
-
-[connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="Endturn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="TurnOrder" to="." method="_on_turn_order_pressed"]
 [connection signal="pressed" from="UndoMove" to="." method="_on_undo_move_pressed"]
-[connection signal="pressed" from="Strategy/VBoxContainer/StrategyDropDown" to="." method="_on_strategy_drop_down_pressed"]
+[connection signal="pressed" from="StrategyMenu/StrategyDropDown" to="." method="_on_strategy_drop_down_pressed"]

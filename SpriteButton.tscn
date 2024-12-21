@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsbux63fk1mlf"]
+
+[ext_resource type="Script" path="res://src/components/ui/sprite_button.gd" id="1_v7ykk"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_xr1if"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="3_kav1b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dhy7t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d8mpl"]
+font = ExtResource("3_kav1b")
+font_size = 38
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)
+
+[node name="SpriteButton" type="Button"]
+custom_minimum_size = Vector2(214, 80)
+offset_right = 214.0
+offset_bottom = 80.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dhy7t")
+flat = true
+script = ExtResource("1_v7ykk")
+strategy = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.396296, 0.5)
+texture = ExtResource("2_xr1if")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Forward"
+label_settings = SubResource("LabelSettings_d8mpl")
+horizontal_alignment = 1
+vertical_alignment = 1

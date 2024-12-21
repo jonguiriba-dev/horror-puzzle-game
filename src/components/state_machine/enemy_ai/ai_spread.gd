@@ -44,9 +44,7 @@ func analyze_tile_scores():
 	if !nearest:
 		return scored_tiles
 	
-	print("targets> ",targets)
 	target = nearest
-	print(host.entity_name, " is targeting ", nearest.entity_name)
 	
 	if Debug.highlight_enemy_target:
 		WorldManager.grid.set_highlight(
@@ -68,7 +66,6 @@ func analyze_tile_scores():
 			false
 		)
 	heatmap = get_heat_map()
-	print("heat_map ",heatmap)
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
 	moveable_tiles.push_front(host.map_position)
 	for tile in moveable_tiles:

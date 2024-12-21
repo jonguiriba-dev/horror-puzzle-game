@@ -8,7 +8,7 @@ enum STATE{
 
 @onready var ability_container := $Action/AbilityContainer
 @onready var undo_move := $UndoMove
-@onready var end_turn := $EndTurn
+@onready var end_turn := $Endturn
 @onready var turn_order := $TurnOrder
 @onready var debug := $Debug
 @onready var debug_label := $Debug/Label
@@ -26,16 +26,16 @@ enum STATE{
 @onready var context_menu_name := $ContextMenu/Name/Label
 @onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
 @onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
-@onready var strategy_container := $Strategy/VBoxContainer
-@onready var strategy_dropdown_button := $Strategy/VBoxContainer/StrategyDropDown
+@onready var strategy_container := $StrategyMenu/VBoxContainer
+@onready var strategy_dropdown_button := $StrategyMenu/StrategyDropDown
 var state := STATE.INACTIVE
 var context
-
 
 
 signal end_turn_pressed
 signal undo_move_pressed
 signal turn_order_pressed
+signal strategy_changed
 
 func _ready() -> void:
 	game_start_overlay.hide()
@@ -46,9 +46,7 @@ func _ready() -> void:
 	hide_strategies()
 	
 	for child in strategy_container.get_children():
-		if child == strategy_dropdown_button:
-			continue
-		child.pressed.connect(_on_strategy_selected.bind(child.strategy))
+		child.pressed.connect(_on_strategy_selected.bind(child.get_meta("strategy")))
 		
 #func generate_ability_icons(abilities:Array[Ability]):
 	#for child in ability_container.get_children():
@@ -165,10 +163,13 @@ func show_strategies():
 	is_strategies_showing = true
 
 func _on_strategy_selected(strategy:C.STRATEGIES):
-	WorldManager.selected_strategy = strategy
-	strategy_dropdown_button.button_label.text = C.STRATEGIES.keys()[WorldManager.selected_strategy]
+	if strategy != WorldManager.strategy:
+		strategy_changed.emit()
+		
+	WorldManager.strategy = strategy
+	strategy_dropdown_button.button_label.text = C.STRATEGIES.keys()[WorldManager.strategy].to_pascal_case()
 	hide_strategies()
-	
+		
 func _on_strategy_drop_down_pressed():
 	if !is_strategies_showing:
 		show_strategies()

@@ -66,7 +66,6 @@ func analyze_tile_scores():
 			false
 		)
 	heatmap = get_heat_map()
-	print("heat_map ",heatmap)
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
 	moveable_tiles.push_front(host.map_position)
 	for tile in moveable_tiles:

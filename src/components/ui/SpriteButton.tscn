@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://141sftgeowqw"]
+
+[ext_resource type="Script" path="res://src/components/ui/sprite_button.gd" id="1_r5ck1"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_ucxcl"]
+[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/components/ui/sprite_button_label_settings.tres" id="3_23hna"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgurw"]
+
+[node name="SpriteButton" type="Button"]
+custom_minimum_size = Vector2(214, 76)
+offset_right = 214.0
+offset_bottom = 80.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bgurw")
+flat = true
+script = ExtResource("1_r5ck1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.396296, 0.5)
+texture = ExtResource("2_ucxcl")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Strategy"
+label_settings = ExtResource("3_23hna")
+horizontal_alignment = 1
+vertical_alignment = 1

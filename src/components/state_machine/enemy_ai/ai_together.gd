@@ -116,7 +116,6 @@ func get_heat_map():
 							"value": value 
 						}
 					)
-	print("HEATMAP > ", _heatmap)
 	#
 	#if Debug.show_enemy_ai_tile_values:
 		#for t in _heatmap:

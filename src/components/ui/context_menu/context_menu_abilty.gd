@@ -2,7 +2,7 @@ extends Control
 class_name ContextMenuAbility
 
 @onready var bg := $Bg
-@onready var label := $HBoxContainer/Label
+@onready var label := $HBoxContainer/AbilityName
 @onready var charges := $HBoxContainer/Control/Charges
 var ability:Ability
 	

@@ -7,10 +7,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_lg5ed"]
 font = ExtResource("3_fc1nl")
-font_size = 40
-font_color = Color(0.451732, 0.537812, 0.89, 1)
-outline_size = 9
-outline_color = Color(0.0576, 0.08496, 0.24, 1)
+font_size = 36
+font_color = Color(0.488281, 0.475276, 0.145383, 1)
+outline_size = 12
+outline_color = Color(0.939994, 0.95, 0.664475, 1)
 
 [node name="ContextMenuAbility" type="Control"]
 custom_minimum_size = Vector2(0, 70)
@@ -41,7 +41,7 @@ offset_top = 9.0
 offset_right = 294.0
 offset_bottom = 73.0
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="AbilityName" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Fireball"

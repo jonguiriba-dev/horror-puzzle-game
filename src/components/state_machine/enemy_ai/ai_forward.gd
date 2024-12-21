@@ -11,7 +11,6 @@ func find_target():
 	
 func get_farthest_target():
 	var targets = host.get_enemies()
-	print(host.entity_name, " targets ", targets.map(func (e):return e.entity_name))
 	
 	var bounds = WorldManager.get_world_bounds()
 	var bound_pos

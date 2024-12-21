@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://pt8dsvwp6slh"]
+
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="1_fwvy4"]
+
+[resource]
+font = ExtResource("1_fwvy4")
+font_size = 38
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)

@@ -11,7 +11,8 @@ var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
 var selected_entity:Entity
-var selected_strategy := C.STRATEGIES.TOGETHER
+var strategy := C.STRATEGIES.NEAREST
+var strategy_changed := false
 var starting_position := C.DIRECTION.NORTH
 
 signal turn_changed
@@ -87,7 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	get_viewport().ready.connect(_on_scenetree_ready)
 	turn_start.connect(_on_turn_start)
-
+	
 func register_entity(entity:Entity):
 	if !world:
 		entity_register_queue.push_front(entity)
@@ -131,6 +132,14 @@ func _start_player_turn():
 		player_entity.turn_start.emit()
 	
 func _start_ally_turn():
+	
+	if strategy_changed:
+		var random_ally = get_tree().get_nodes_in_group(C.GROUPS_ALLIES).pick_random()
+		DialogueManager.speak(random_ally.global_position,
+		DialogueManager.get_scenario_text("to_strategy_%s"%[C.STRATEGIES.keys()[strategy].to_lower()])
+		,1)
+		strategy_changed = false
+		
 	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ALLIES)
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
@@ -239,6 +248,10 @@ func _on_scenetree_ready():
 		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
 		UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
 		UIManager.ui.turn_order_pressed.connect(_on_turn_order_pressed)
+		UIManager.ui.strategy_changed.connect(func ():
+			strategy_changed = true
+		)
+		
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
