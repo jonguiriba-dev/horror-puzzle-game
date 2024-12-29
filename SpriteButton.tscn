@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsbux63fk1mlf"]
 
-[ext_resource type="Script" path="res://src/components/ui/sprite_button.gd" id="1_v7ykk"]
+[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="1_v7ykk"]
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_xr1if"]
 [ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="3_kav1b"]
 

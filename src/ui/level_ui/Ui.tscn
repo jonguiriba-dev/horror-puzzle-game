@@ -1,31 +1,46 @@
-[gd_scene load_steps=31 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=36 format=3 uid="uid://de11wfnraklxo"]
 
-[ext_resource type="Script" path="res://src/components/ui/ui.gd" id="1_0ibs7"]
-[ext_resource type="Script" path="res://src/components/ui/context_menu.gd" id="2_0mq18"]
-[ext_resource type="LabelSettings" uid="uid://bf72murbmcpy6" path="res://src/components/ui/outlined-name-text.tres" id="2_0o8hc"]
+[ext_resource type="Script" path="res://src/ui/level_ui/ui.gd" id="1_0ibs7"]
+[ext_resource type="Script" path="res://src/ui/level_ui/context_menu.gd" id="2_0mq18"]
+[ext_resource type="LabelSettings" uid="uid://bf72murbmcpy6" path="res://src/ui/level_ui/outlined-name-text.tres" id="2_0o8hc"]
 [ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
 [ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="3_i27ym"]
-[ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/components/ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
-[ext_resource type="PackedScene" uid="uid://b54pikonv1bo6" path="res://src/components/ui/context_menu/context_menu_abilty.tscn" id="3_tinj4"]
-[ext_resource type="LabelSettings" uid="uid://bdyj54t0jqvu3" path="res://src/components/ui/outlined-italic-text.tres" id="3_v3x38"]
-[ext_resource type="Texture2D" uid="uid://cl32n3o03nq5" path="res://src/components/ui/context_menu/context_menu_abilty_gradient_active.tres" id="4_g6hts"]
+[ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/ui/level_ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
+[ext_resource type="PackedScene" uid="uid://b54pikonv1bo6" path="res://src/ui/level_ui/context_menu/context_menu_abilty.tscn" id="3_tinj4"]
+[ext_resource type="LabelSettings" uid="uid://bdyj54t0jqvu3" path="res://src/ui/level_ui/outlined-italic-text.tres" id="3_v3x38"]
+[ext_resource type="Texture2D" uid="uid://cl32n3o03nq5" path="res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_active.tres" id="4_g6hts"]
 [ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
 [ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="6_0rxox"]
 [ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="6_ekjn1"]
 [ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
 [ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
+[ext_resource type="FontFile" uid="uid://sfmk3hf8i5ir" path="res://assets/fonts/CrimsonText-SemiBoldItalic.ttf" id="8_7yv3f"]
 [ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="8_rfbs1"]
-[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/components/ui/sprite_button_label_settings.tres" id="13_mvkux"]
-[ext_resource type="Script" path="res://src/components/ui/strategy.gd" id="18_2exhv"]
+[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/ui/level_ui/sprite_button_label_settings.tres" id="13_mvkux"]
+[ext_resource type="Script" path="res://src/ui/level_ui/strategy.gd" id="18_2exhv"]
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="18_gcsod"]
-[ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/components/ui/SpriteButton.tscn" id="19_mg8vx"]
+[ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/ui/level_ui/SpriteButton.tscn" id="19_mg8vx"]
+[ext_resource type="PackedScene" uid="uid://df3drhl7cxiip" path="res://src/shaders/speedlines/sample.tscn" id="22_4mp75"]
 
-[sub_resource type="Gradient" id="Gradient_ir4x0"]
+[sub_resource type="Gradient" id="Gradient_t4rwf"]
+offsets = PackedFloat32Array(0.330532, 1)
+colors = PackedColorArray(0.0829914, 0.0859375, 0.0748647, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_orn50"]
+gradient = SubResource("Gradient_t4rwf")
+
+[sub_resource type="LabelSettings" id="LabelSettings_vrnde"]
+font = ExtResource("8_7yv3f")
+font_size = 42
+font_color = Color(0.91388, 0.93, 0.8556, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_24wvc"]
 colors = PackedColorArray(0.956181, 0.955964, 0.95537, 0.796078, 0.16, 0.12528, 0.0112, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sjkx4"]
-gradient = SubResource("Gradient_ir4x0")
+gradient = SubResource("Gradient_24wvc")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s3w84"]
 
@@ -60,7 +75,7 @@ font_size = 30
 font = ExtResource("6_ekjn1")
 font_size = 43
 
-[node name="UI" type="Control"]
+[node name="LevelUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,6 +85,79 @@ grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 mouse_filter = 1
 script = ExtResource("1_0ibs7")
+
+[node name="SubActions" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1058.0
+offset_top = 636.0
+offset_right = 1058.0
+offset_bottom = 636.0
+
+[node name="Bar" type="ColorRect" parent="SubActions"]
+layout_mode = 0
+offset_left = -39.0
+offset_top = 89.0
+offset_right = -36.0
+offset_bottom = 159.0
+rotation = 3.14159
+
+[node name="Line2D" type="Line2D" parent="SubActions"]
+position = Vector2(-24, 2.00002)
+scale = Vector2(0.516667, 0.656249)
+points = PackedVector2Array(-34, 28, 20, 2)
+width = 4.0
+sharp_limit = 10.0
+round_precision = 32
+antialiased = true
+
+[node name="AbilityList" type="Control" parent="SubActions"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_right = 4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubActions/AbilityList"]
+layout_direction = 3
+layout_mode = 0
+offset_left = 53.0
+offset_top = 20.0
+offset_right = 379.0
+offset_bottom = 283.0
+
+[node name="Control" type="Control" parent="SubActions/AbilityList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Bg" type="Sprite2D" parent="SubActions/AbilityList/VBoxContainer/Control"]
+position = Vector2(161, 36)
+scale = Vector2(5.03125, 1)
+texture = SubResource("GradientTexture2D_orn50")
+flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="SubActions/AbilityList/VBoxContainer/Control"]
+visible = false
+layout_mode = 0
+offset_top = 4.0
+offset_right = 322.0
+offset_bottom = 68.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubActions/AbilityList/VBoxContainer/Control"]
+modulate = Color(0.93, 0.93, 0.93, 1)
+layout_mode = 0
+offset_left = 29.0
+offset_top = 5.0
+offset_right = 294.0
+offset_bottom = 69.0
+
+[node name="AbilityName" type="Label" parent="SubActions/AbilityList/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Priority↑"
+label_settings = SubResource("LabelSettings_vrnde")
+vertical_alignment = 1
 
 [node name="ContextMenu" type="Control" parent="."]
 anchors_preset = 0
@@ -660,6 +748,11 @@ offset_top = 460.0
 offset_right = 246.0
 offset_bottom = 540.0
 
+[node name="TEST" parent="." instance=ExtResource("22_4mp75")]
+visible = false
+
+[connection signal="mouse_entered" from="SubActions/AbilityList/VBoxContainer/Control" to="SubActions/AbilityList/VBoxContainer/Control" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SubActions/AbilityList/VBoxContainer/Control" to="SubActions/AbilityList/VBoxContainer/Control" method="_on_mouse_exited"]
 [connection signal="pressed" from="Endturn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="TurnOrder" to="." method="_on_turn_order_pressed"]
 [connection signal="pressed" from="UndoMove" to="." method="_on_undo_move_pressed"]

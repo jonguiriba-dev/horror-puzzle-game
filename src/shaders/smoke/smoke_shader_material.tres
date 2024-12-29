@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cjpeonn401xvt"]
+
+[ext_resource type="Shader" path="res://src/shaders/smoke/smoke.gdshader" id="1_3q56x"]
+[ext_resource type="Texture2D" uid="uid://p0q7a5khg8ge" path="res://assets/etc/noise.png" id="2_bgm0w"]
+
+[resource]
+shader = ExtResource("1_3q56x")
+shader_parameter/smoke_color = Color(0.683594, 0.683594, 0.683594, 1)
+shader_parameter/distortion_speed = 0.0
+shader_parameter/noise_texture = ExtResource("2_bgm0w")

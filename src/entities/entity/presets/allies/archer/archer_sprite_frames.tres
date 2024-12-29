@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bik6xlmkjtmhy"]
+
+[ext_resource type="Texture2D" uid="uid://b2ir8nbkofioj" path="res://assets/characters/nightmares/Hound.png" id="1_os3n6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1266m"]
+atlas = ExtResource("1_os3n6")
+region = Rect2(0, 0, 36, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1266m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

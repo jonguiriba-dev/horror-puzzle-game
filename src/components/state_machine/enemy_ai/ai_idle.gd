@@ -16,21 +16,25 @@ func _enter_state(old_state, new_state):
 func _transition():
 	if host.team == C.TEAM.ALLY and to_attack:
 		if (
-			WorldManager.strategy == C.STRATEGIES.FORWARD
+			WorldManager.level.strategy == C.STRATEGIES.FORWARD
 		):
 			return C.STATE.AI_FORWARD
 		elif (
-			WorldManager.strategy == C.STRATEGIES.RETREAT
+			WorldManager.level.strategy == C.STRATEGIES.RETREAT
 		):
 			return C.STATE.AI_RETREAT
 		elif (
-			WorldManager.strategy == C.STRATEGIES.SPREAD
+			WorldManager.level.strategy == C.STRATEGIES.SPREAD
 		):
 			return C.STATE.AI_SPREAD
 		elif (
-			WorldManager.strategy == C.STRATEGIES.TOGETHER
+			WorldManager.level.strategy == C.STRATEGIES.TOGETHER
 		):
 			return C.STATE.AI_TOGETHER
+		elif (
+			WorldManager.level.strategy == C.STRATEGIES.NEAREST
+		):
+			return C.STATE.AI_ATTACK
 	elif to_attack:
 		return  C.STATE.AI_ATTACK
 

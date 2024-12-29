@@ -35,6 +35,7 @@ var ally_tiles: Array[Vector2i]= []
 var is_ability_select = false
 
 signal tile_selected(map_pos: Vector2i)
+@onready var world := get_parent()
 
 func _ready() -> void:
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
@@ -42,7 +43,6 @@ func _ready() -> void:
 	astar_grid.region = tiles_layer.get_used_rect()
 	astar_grid.update()
 	tile_selected.connect(_on_tile_selected)
-	WorldManager.grid = self
 
 enum TILE_EXCLUDE_FLAGS{
 	EXCLUDE_OBSTACLES = 1,
@@ -146,7 +146,7 @@ func map_to_local(map_pos:Vector2i)->Vector2:
 	
 func get_nearest_path(source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
 	get_possible_tiles( 1 if include_obstacles else 3)
-	var path = WorldManager.grid.astar_grid.get_id_path(source, target)
+	var path = astar_grid.get_id_path(source, target)
 	if path.size() > 0:
 		path.remove_at(0)
 	return path
@@ -181,7 +181,7 @@ func populate_entity_tiles():
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		entity_tiles.push_front(entity.map_position)
-		if (WorldManager.team_turn == entity.team and 
+		if (world.team_turn == entity.team and 
 			(ally_tiles.size() == 0 or enemy_tiles.size() == 0)
 		):
 			entity.get_enemies().map(func (e):

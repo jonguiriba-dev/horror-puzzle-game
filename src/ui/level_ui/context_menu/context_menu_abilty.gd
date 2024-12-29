@@ -8,12 +8,12 @@ var ability:Ability
 	
 func _on_mouse_entered() -> void:
 	if ability.is_usable():
-		bg.texture = preload("res://src/components/ui/context_menu/context_menu_abilty_gradient_active.tres")
+		bg.texture = preload("res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_active.tres")
 		UIManager.ability_hovered = ability
 	
 func _on_mouse_exited() -> void:
 	if ability.is_usable():
-		bg.texture = preload("res://src/components/ui/context_menu/context_menu_abilty_gradient_inactive.tres")
+		bg.texture = preload("res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_inactive.tres")
 		UIManager.ability_hovered = null
 
 func _gui_input(event: InputEvent) -> void:

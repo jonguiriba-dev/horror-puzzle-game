@@ -20,12 +20,12 @@ func _on_configured():
 func _enter_state(old_state, new_state):
 	to_idle = false
 	Util.sysprint("%s.ai_attack._enter_state"%[host.entity_name],"Entered attack state: %s"%[host.entity_name])
-	var team_turn = WorldManager.team_turn
+	var team_turn = WorldManager.level.team_turn
 	if host.threat:
 		await attack_target()
-		if WorldManager.animation_counter != 0:
+		if WorldManager.level.animation_counter != 0:
 			print("Waiting on animation...")
-			await WorldManager.animation_counter_cleared
+			await WorldManager.level.animation_counter_cleared
 			
 	if team_turn == host.team:
 		for l in tile_labels:
@@ -52,8 +52,8 @@ func show_tile_values(scored_tiles:Array):
 		var l = Label.new()
 		l.z_index=98
 		l.text = str(t.value)
-		WorldManager.grid.prop_layer.add_child(l)
-		l.position = WorldManager.grid.map_to_local(t.position) + Vector2(-8,-8)
+		WorldManager.level.grid.prop_layer.add_child(l)
+		l.position = WorldManager.level.grid.map_to_local(t.position) + Vector2(-8,-8)
 		l.set("theme_override_font_sizes/font_size", 10)
 		tile_labels.push_front(l)
 
@@ -84,14 +84,14 @@ func find_threat():
 func attack_target():
 	print("%s.%s[host.node.attack_target()]: -"%[host.entity_name,'ai_attack'])
 
-	var targetted_entity = WorldManager.grid.get_entity_on_tile(host.threat.tile)
+	var targetted_entity = WorldManager.level.grid.get_entity_on_tile(host.threat.tile)
 	
 	await host.threat.ability.use(host.threat.tile)
 	host.clear_threat()
 	
 func analyze_tile_scores():
 	if Debug.highlight_enemy_target and is_instance_valid(target):
-		WorldManager.grid.set_highlight(
+		WorldManager.level.grid.set_highlight(
 			target.map_position,
 			Grid.HIGHLIGHT_COLORS.NONE,
 			Grid.HIGHLIGHT_LAYERS.DEBUG
@@ -109,22 +109,22 @@ func analyze_tile_scores():
 	print(host.entity_name, " is targeting ", target.entity_name)
 	
 	if Debug.highlight_enemy_target:
-		WorldManager.grid.set_highlight(
+		WorldManager.level.grid.set_highlight(
 			target.map_position,
 			Grid.HIGHLIGHT_COLORS.BLUE,
 			Grid.HIGHLIGHT_LAYERS.DEBUG
 		)
 	
-	path_to_nearest_target = WorldManager.grid.get_nearest_path(
-		WorldManager.grid.local_to_map(host.position), 
-		WorldManager.grid.local_to_map(target.position)
+	path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+		WorldManager.level.grid.local_to_map(host.position), 
+		WorldManager.level.grid.local_to_map(target.position)
 	)
 	
 	#if no path, then try to get as close as possbile by disregarding obstacles 
 	if path_to_nearest_target.size() == 0:
-		path_to_nearest_target = WorldManager.grid.get_nearest_path(
-			WorldManager.grid.local_to_map(host.position), 
-			WorldManager.grid.local_to_map(target.position),
+		path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+			WorldManager.level.grid.local_to_map(host.position), 
+			WorldManager.level.grid.local_to_map(target.position),
 			false
 		)
 	
@@ -168,7 +168,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 	#increment by pathfinding to target
 	if tile_value_factors.is_target_enabled:
 		if path_to_nearest_target.has(tile_pos):
-			var host_map_pos = WorldManager.grid.local_to_map(host.position)
+			var host_map_pos = WorldManager.level.grid.local_to_map(host.position)
 			value += 5 + host_map_pos.distance_to(tile_pos)
 		
 	#decrement by already threatened tiles
@@ -181,34 +181,36 @@ func set_threat(target_map_position:Vector2i,ability:Ability):
 	Util.sysprint("%s.ai_attack.set_threat"%[host.entity_name],"ability:%s tile:%s"%[threat.ability.ability_name,str(threat.tile)])
 	host.threat = threat
 	host.threat_updated.emit()
-	var targetted_entity = WorldManager.grid.get_entity_on_tile(host.threat.tile)
+	var targetted_entity = WorldManager.level.grid.get_entity_on_tile(host.threat.tile)
 
 
 	
 func get_threat_tiles():
-	var threat_grid_tiles = WorldManager.get_team_group_threat_tiles(C.GROUPS_ENEMIES)
+	var threat_grid_tiles = WorldManager.level.get_team_group_threat_tiles(C.GROUPS_ENEMIES)
 	if host.team == C.TEAM.ALLY:
-		threat_grid_tiles = WorldManager.get_team_group_threat_tiles(C.GROUPS_ALLIES)
+		threat_grid_tiles = WorldManager.level.get_team_group_threat_tiles(C.GROUPS_ALLIES)
 	return threat_grid_tiles
 
 func _get_location_score(target_map_pos:Vector2i)->int: 
-	var boundary_rect:Rect2i = WorldManager.grid.tiles_layer.get_used_rect()
+	var boundary_rect:Rect2i = WorldManager.level.grid.tiles_layer.get_used_rect()
 	var distance_from_center = target_map_pos.distance_to(((boundary_rect.position + boundary_rect.size) / 2))
 	return (distance_from_center / 2) * -1
 
 func finalize_turn():
-	print("finalize_turn: ", host.entity_name)
-	await find_threat()
-	await host.hide_all_details()
+	Util.sysprint("%s:finalize_turn"%[host.entity_name], "start")
+	find_threat()
 	to_idle = true
-	#for l in tile_labels:
-		#l.queue_free()
-	#tile_labels = []
+	free_debug()
+	host.turn_end.emit()
+	Util.sysprint("%s:finalize_turn"%[host.entity_name], "end")
+
+func free_debug():
 	if get("heatmap_tile_labels"):
 		for l in get("heatmap_tile_labels"):
 			l.queue_free()
 		set("heatmap_tile_labels",[])
-	host.turn_end.emit()
+		
+
 func find_target():
 	return get_nearest_target()	
 	
@@ -217,7 +219,7 @@ func get_nearest_target():
 	print(host.entity_name, " targets ", targets.map(func (e):return e.entity_name))
 	
 	targets.map(func (e:Node):
-		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position)
+		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position, WorldManager.level.grid)
 		e.set_meta("distance_to_host",distance)
 	)
 	

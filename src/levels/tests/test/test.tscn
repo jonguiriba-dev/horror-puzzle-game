@@ -124,5 +124,4 @@ preset = ExtResource("11_00i3j")
 
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99
-position = Vector2(-4, 5)
 texture = ExtResource("16_v42j1")

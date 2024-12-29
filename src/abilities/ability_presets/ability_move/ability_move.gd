@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
 	var navigatable_tiles:Array[Vector2i]= []
-	var possible_tiles = WorldManager.grid.get_possible_tiles(tile_exclude_flag)
+	var possible_tiles = WorldManager.level.grid.get_possible_tiles(tile_exclude_flag)
 	var queued_tiles = [map_pos]
 	
 	var step = 0
@@ -31,7 +31,7 @@ func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_rang
 			for pending_tile in pending_tiles:
 				var next_tile = pending_tile + direction
 				if possible_tiles.has(next_tile) and !navigatable_tiles.has(next_tile):
-					if host.map_position != next_tile and !WorldManager.grid.ally_tiles.has(next_tile):
+					if host.map_position != next_tile and !WorldManager.level.grid.ally_tiles.has(next_tile):
 						navigatable_tiles.push_front(next_tile)
 					queued_tiles.push_front(next_tile)
 		step += 1
@@ -41,7 +41,7 @@ func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_rang
 
 func _unhandled_input(event: InputEvent) -> void:
 	if(event.is_action_pressed("click") and state == STATE.TARGET_SELECT):
-		target_position = WorldManager.grid.get_map_mouse_position()
+		target_position = WorldManager.level.grid.get_map_mouse_position()
 		
 #func _on_move_target_set(map_position:Vector2i)->void:
 	#move_to_selected_tile(map_position)
@@ -60,22 +60,22 @@ func use(target_map_position:Vector2i, options:Dictionary={}):
 		super(target_map_position)
 		
 func move_to_selected_tile(target_pos:Vector2i):
-	var curr_tile = WorldManager.grid.local_to_map(host.position)
-	path = WorldManager.grid.astar_grid.get_id_path(curr_tile, target_pos)
+	var curr_tile = WorldManager.level.grid.local_to_map(host.position)
+	path = WorldManager.level.grid.astar_grid.get_id_path(curr_tile, target_pos)
 	if path.size() > 0:
 		path.remove_at(0)
 		
 		var team_group
-		if WorldManager.team_turn == C.TEAM.PLAYER:
+		if WorldManager.level.team_turn == C.TEAM.PLAYER:
 			team_group = C.GROUPS_PLAYER_ENTITIES
-		elif WorldManager.team_turn == C.TEAM.ENEMY:
+		elif WorldManager.level.team_turn == C.TEAM.ENEMY:
 			team_group = C.GROUPS_ENEMIES
-		elif WorldManager.team_turn == C.TEAM.ALLY:
+		elif WorldManager.level.team_turn == C.TEAM.ALLY:
 			team_group = C.GROUPS_ALLIES
 			
 		path = path.filter(func(e):
 			for ally in get_tree().get_nodes_in_group(team_group):
-				if WorldManager.grid.local_to_map(ally.position) == e:
+				if WorldManager.level.grid.local_to_map(ally.position) == e:
 					return false
 			return true
 		)
@@ -98,8 +98,8 @@ func _play_animation(target_map_position:Vector2i):
 	await host.move_end
 	
 func move(delta: float)->void:
-	var curr_tile = WorldManager.grid.local_to_map(host.position)
-	var next_local_pos = WorldManager.grid.map_to_local(path[0])
+	var curr_tile = WorldManager.level.grid.local_to_map(host.position)
+	var next_local_pos = WorldManager.level.grid.map_to_local(path[0])
 	var new_position = host.position.lerp(next_local_pos,0.4)
 
 	host.position += (new_position - host.position) * delta * 45
@@ -109,7 +109,7 @@ func move(delta: float)->void:
 	if abs(distance.x) < 0.1 and abs(distance.y) < 0.1:
 		host.position = next_local_pos
 	if host.position == next_local_pos:
-		WorldManager.grid.set_map_cursor(curr_tile)
+		WorldManager.level.grid.set_map_cursor(curr_tile)
 		path.remove_at(0)
 	if path.size() == 0:
 		target_position = null
@@ -118,10 +118,10 @@ func move(delta: float)->void:
 		
 func show_path_highlight():
 	for tile in path:
-		WorldManager.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.DEBUG)
+		WorldManager.level.grid.set_highlight(tile, Grid.HIGHLIGHT_COLORS.ORANGE,Grid.HIGHLIGHT_LAYERS.DEBUG)
 	
 func _on_used(ability:Ability):
 	super(ability)
 	if host.team == C.TEAM.PLAYER:
-		WorldManager.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})
+		WorldManager.level.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})
 		UIManager.ui.enable_undo_move_button()

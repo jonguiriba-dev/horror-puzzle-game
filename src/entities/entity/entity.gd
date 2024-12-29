@@ -10,7 +10,6 @@ class_name Entity
 @export var preset:EntityPreset
 
 var move_speed = 55
-
 var portrait_image
 var entity_name := ""
 var max_health := 1
@@ -25,7 +24,7 @@ var max_action_counter := 1
 var animation_counter := 0
 var map_position:Vector2i:
 	get:
-		return WorldManager.grid.local_to_map(position)
+		return WorldManager.level.grid.local_to_map(position)
 var flip_h:=false
 var threat = null
 var status_effects:Array[Status] = []
@@ -70,7 +69,7 @@ func _ready() -> void:
 			continue
 		ability.used.connect(_on_ability_used)
 	
-	WorldManager.register_entity(self)
+	WorldManager.level.register_entity(self)
 	
 	
 func load_preset(_preset:EntityPreset):
@@ -108,11 +107,10 @@ func show_detail(detail_name:String):
 		rescue_text.show()
 	
 func check_overlap(map_pos:Vector2i):
-	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		if entity is Civilian:
-			var civilian_tile_pos = WorldManager.grid.local_to_map(entity.position)
-			if civilian_tile_pos == map_pos:
-				entity.rescued.emit()
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_CIVILIANS):
+		var civilian_tile_pos = WorldManager.level.grid.local_to_map(entity.position)
+		if civilian_tile_pos == map_pos:
+			entity.rescued.emit()
 
 
 func get_abilities()->Array[Ability]:
@@ -154,7 +152,7 @@ func get_allies()->Array[Entity]:
 	return allies 
 	
 func undo_move(initial_position:Vector2):
-	WorldManager.grid.set_map_cursor(initial_position)
+	WorldManager.level.grid.set_map_cursor(initial_position)
 	position = initial_position
 	move_counter = 1
 	
@@ -191,19 +189,19 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 	var direction = Util.get_direction(source_map_pos,map_position)
 	#change direction to away from the source 
 	var target_pos = map_position + direction * distance 
-	if !WorldManager.grid.is_within_bounds(target_pos):
+	if !WorldManager.level.grid.is_within_bounds(target_pos):
 		return
-	if !WorldManager.grid.get_possible_tiles().has(target_pos):
+	if !WorldManager.level.grid.get_possible_tiles().has(target_pos):
 		return
 	
-	WorldManager.increment_animation_counter(1) 
+	WorldManager.level.increment_animation_counter(1) 
 	animation_counter+=1
 	var tween = create_tween()
-	tween.tween_property(self, "position", WorldManager.grid.map_to_local(target_pos), 0.3)
+	tween.tween_property(self, "position", WorldManager.level.grid.map_to_local(target_pos), 0.3)
 	await tween.finished.connect(func():
 		knockback_animation_finished.emit(distance,source_map_pos,prev_position)
 		animation_counter -= 1
-		WorldManager.increment_animation_counter(-1) 
+		WorldManager.level.increment_animation_counter(-1) 
 	)
 	
 	
@@ -230,20 +228,20 @@ func _on_death() -> void:
 		remove_from_group(group)
 		
 	if team == C.TEAM.ENEMY:
-		WorldManager.check_player_victory()
+		WorldManager.level.check_player_victory()
 
 	print("animation_counter ", animation_counter)
 	if animation_counter != 0:
-		WorldManager.increment_animation_counter(animation_counter * -1)
+		WorldManager.level.increment_animation_counter(animation_counter * -1)
 	
 	clear_threat()
 	queue_free()
 		
 func _on_selected():
 	if team == C.TEAM.PLAYER:
-		WorldManager.selected_entity = self
+		WorldManager.level.selected_entity = self
 		#UIManager.ui.set_context(self)
-		WorldManager.input_waiting_on_ability = false
+		WorldManager.level.input_waiting_on_ability = false
 		sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 	else:
 		print("sprite.material = null")
@@ -252,7 +250,7 @@ func _on_selected():
 
 		
 func _on_ability_used(ability:Ability):
-	WorldManager.clear_entity_moved_history()
+	WorldManager.level.clear_entity_moved_history()
 	action_counter -= ability.action_cost
 	if ability.is_action:
 		move_counter = 0

@@ -14,7 +14,7 @@ static func play(host:Entity,target_map_position:Vector2i):
 	laser.position = host.position + source_offset
 	host.get_parent().add_child( laser )
 	
-	var local_position = WorldManager.grid.map_to_local(target_map_position) + Vector2(0,-16)
+	var local_position = WorldManager.level.grid.map_to_local(target_map_position) + Vector2(0,-16)
 	var global_position = Util.get_global_from_local(local_position,host.get_parent())
 	
 	laser.start(global_position)

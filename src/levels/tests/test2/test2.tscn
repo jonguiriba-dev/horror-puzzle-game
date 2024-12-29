@@ -1,0 +1,95 @@
+[gd_scene load_steps=16 format=4 uid="uid://cs01m16vvh2vk"]
+
+[ext_resource type="Script" path="res://src/levels/level.gd" id="1_ufvuu"]
+[ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_dxwwt"]
+[ext_resource type="TileSet" uid="uid://bsk21efd8hrce" path="res://src/components/grid/village_tileset.tres" id="3_4aa0e"]
+[ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_6xqer"]
+[ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="5_0vs47"]
+[ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_kt5py"]
+[ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_3jos5"]
+[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_2kexs"]
+[ext_resource type="Resource" uid="uid://cnxebyxdvjec6" path="res://src/entities/entity/presets/allies/archer/archer_preset.tres" id="9_53klh"]
+[ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/main_characters/talya/talya_preset.tres" id="9_ko3e7"]
+[ext_resource type="Resource" uid="uid://dbsqmmhlp60lk" path="res://src/entities/entity/presets/allies/mage/mage_preset.tres" id="10_aqhve"]
+[ext_resource type="Resource" uid="uid://cxchgrvtv0mfv" path="res://src/entities/entity/presets/monsters/dummy/dummy_preset.tres" id="11_xbhhf"]
+[ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="12_vevov"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
+texture = ExtResource("4_6xqer")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSet" id="TileSet_pllfd"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_7gmc3")
+
+[node name="Test2" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ufvuu")
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource("2_dxwwt")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAADAAQABQAAAAEAAAADAAMABQAAAAEAAAADAAIABQAAAAEAAAADAAEABQAAAAEAAAADAAAABQAAAAEAAAADAP//BQAAAAEAAAADAP7/BQAAAAEAAAADAP3/BQAAAAEAAAABAP3/BQAAAAAAAAAAAP3/BQAAAAAAAAD///3/BQAAAAEAAAD+//3/BQAAAAEAAAD8//3/BQABAAAAAAD8/wMABQABAAAAAAD8/wQABQABAAAAAAABAAQABQAAAAAAAAAAAAQABQAAAAAAAAD//wQABQAAAAEAAAD+/wQABQAAAAEAAAD9/wEABQABAAAAAAD9/wAABQABAAAAAAD+//7/BQAAAAEAAAD+////BQAAAAEAAAD+/wAABQAAAAEAAAD+/wEABQAAAAEAAAD+/wIABQAAAAEAAAD+/wMABQAAAAEAAAD//wMABQAAAAEAAAD//wIABQAAAAEAAAD//wEABQAAAAEAAAD//wAABQAAAAEAAAD/////BQAAAAEAAAD///7/BQAAAAEAAAAAAP7/BQAAAAAAAAAAAP//BQAAAAAAAAAAAAAABQAAAAAAAAAAAAEABQAAAAAAAAAAAAIABQAAAAAAAAAAAAMABQAAAAAAAAABAAMABQAAAAAAAAABAAIABQAAAAAAAAABAAEABQAAAAAAAAABAAAABQAAAAAAAAABAP//BQAAAAAAAAABAP7/BQAAAAAAAAACAAQABQABAAAAAAACAAMABQABAAAAAAACAAIABQABAAAAAAACAAEABQABAAAAAAACAAAABQABAAAAAAACAP//BQABAAAAAAACAP7/BQABAAAAAAACAP3/BQABAAAAAAD9/wQABQABAAAAAAD9/wMABQABAAAAAAD8/wIABQABAAAAAAD9/wIABQABAAAAAAD8/wEABQABAAAAAAD8/wAABQABAAAAAAD8////BQABAAAAAAD8//7/BQABAAAAAAD9////BQABAAAAAAD9//7/BQABAAAAAAD9//3/BQABAAAAAAA=")
+tile_set = ExtResource("3_4aa0e")
+
+[node name="GridLineLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAADAAQAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD8////AAAAAAAAAAD8//7/AAAAAAAAAAD8//3/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_pllfd")
+
+[node name="ThreatHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_set = ExtResource("5_0vs47")
+
+[node name="AbilityHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_set = ExtResource("5_0vs47")
+
+[node name="CursorLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_set = ExtResource("6_kt5py")
+
+[node name="DebugHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_set = ExtResource("5_0vs47")
+
+[node name="PropLayer" type="TileMapLayer" parent="Grid"]
+z_index = 1
+y_sort_enabled = true
+tile_set = ExtResource("7_3jos5")
+
+[node name="Talya" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+position = Vector2(-49, -25)
+preset = ExtResource("9_ko3e7")
+
+[node name="Archer2" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+position = Vector2(-46, -8)
+preset = ExtResource("9_53klh")
+
+[node name="Mage" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+position = Vector2(-17, -24)
+preset = ExtResource("10_aqhve")
+
+[node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+position = Vector2(-1, 16)
+preset = ExtResource("11_xbhhf")
+
+[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+position = Vector2(31, 0)
+preset = ExtResource("11_xbhhf")
+
+[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+position = Vector2(15, 8)
+preset = ExtResource("11_xbhhf")
+
+[node name="WorldBg" type="Sprite2D" parent="."]
+z_index = -99
+texture = ExtResource("12_vevov")

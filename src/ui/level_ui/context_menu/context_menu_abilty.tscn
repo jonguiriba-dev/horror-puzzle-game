@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b54pikonv1bo6"]
 
-[ext_resource type="LabelSettings" uid="uid://bdyj54t0jqvu3" path="res://src/components/ui/outlined-italic-text.tres" id="1_ca81i"]
-[ext_resource type="Script" path="res://src/components/ui/context_menu/context_menu_abilty.gd" id="1_ehc8h"]
-[ext_resource type="Texture2D" uid="uid://g2mrm0d3p6px" path="res://src/components/ui/context_menu/context_menu_abilty_gradient_inactive.tres" id="2_kehuo"]
+[ext_resource type="LabelSettings" uid="uid://bdyj54t0jqvu3" path="res://src/ui/level_ui/outlined-italic-text.tres" id="1_ca81i"]
+[ext_resource type="Script" path="res://src/ui/level_ui/context_menu/context_menu_abilty.gd" id="1_ehc8h"]
+[ext_resource type="Texture2D" uid="uid://g2mrm0d3p6px" path="res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_inactive.tres" id="2_kehuo"]
 [ext_resource type="FontFile" uid="uid://8gdkd54tdmd0" path="res://assets/fonts/CrimsonText-Italic.ttf" id="3_fc1nl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lg5ed"]

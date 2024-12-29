@@ -6,7 +6,7 @@ class_name Dialogue
 @export_file("*.txt") var content_file
 var content
 var speech_bubble_tscn = preload("res://src/components/dialogue/speech_bubble/SpeechBubble.tscn")
-
+var level
 signal input_waiting
 signal input_recieved
 	
@@ -22,7 +22,7 @@ func play(entities:Array[Node]):
 			return e.entity_name == entity_name
 		)[0]
 		var speech_bubble = speech_bubble_tscn.instantiate()
-		WorldManager.grid.prop_layer.add_child(speech_bubble)
+		level.grid.prop_layer.add_child(speech_bubble)
 		speech_bubble.set_text(text)
 		var offset = Vector2(0,-70)
 		speech_bubble.position = actor.position + offset

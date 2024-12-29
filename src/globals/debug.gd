@@ -9,17 +9,17 @@ var play_game_start_sequence = false
 var play_game_start_dialogue = false
 
 func _physics_process(delta: float) -> void:
-	if !WorldManager.grid:
+	if !WorldManager.level or !WorldManager.level.grid:
 		return
 	if is_enabled:
 		var text = ""
-		text += "\nmouse_pos: %s"%WorldManager.grid.get_grid_local_mouse_position()
-		text += "\nmouse_map_pos: %s"%WorldManager.grid.get_map_mouse_position()
-		text += "\ninput_enabled: %s"%WorldManager.input_enabled
-		text += "\nanimation_counter: %s"%WorldManager.animation_counter
-		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.team_turn]
-		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.strategy]
-		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.starting_position]
+		text += "\nmouse_pos: %s"%WorldManager.level.grid.get_grid_local_mouse_position()
+		text += "\nmouse_map_pos: %s"%WorldManager.level.grid.get_map_mouse_position()
+		text += "\ninput_enabled: %s"%WorldManager.level.input_enabled
+		text += "\nanimation_counter: %s"%WorldManager.level.animation_counter
+		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.level.team_turn]
+		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.level.strategy]
+		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.level.starting_position]
 		
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:

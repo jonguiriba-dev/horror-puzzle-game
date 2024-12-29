@@ -42,29 +42,12 @@ func _ready() -> void:
 	victory_overlay.hide()
 	overlays.visible = true
 	clear_context()
-	UIManager.registerUI(self)
 	hide_strategies()
 	
 	for child in strategy_container.get_children():
 		child.pressed.connect(_on_strategy_selected.bind(child.get_meta("strategy")))
-		
-#func generate_ability_icons(abilities:Array[Ability]):
-	#for child in ability_container.get_children():
-		#var conns = child.get_signal_connection_list("pressed")
-		#for conn in conns:
-			#child.pressed.disconnect(conn["callable"])
-		#for child2 in child.get_children():
-			#child2.queue_free()
-	#
-	#var i = 1
-	#for ability in abilities:
-		#if ability.has_ui:
-			#var clickable_sprite:ClickableSprite = load("res://src/components/ui/clickable_sprite/ClickableSprite.tscn").instantiate()
-			#clickable_sprite.texture = ability.texture
-			#clickable_sprite.connect("pressed",func():ability.target_select.emit())
-			#ability_container.get_node("AbilityFrame%s"%[i]).add_child(clickable_sprite)
-			#i+=1
-
+	
+	UIManager.registerUI(self)
 
 func show_ability_icons():
 	ability_container.show()
@@ -75,11 +58,6 @@ func hide_ability_icons():
 func set_context(_context:Entity):
 	context = _context
 	show_context_menu(context)
-	#display_name.text = context.entity_name
-	#show_ability_icons()
-	#generate_ability_icons(context.get_abilities())
-	#portrait.texture = context.portrait_image
-	#show_portrait()
 		
 func clear_context():
 	hide_portrait()
@@ -102,7 +80,7 @@ func show_context_menu(host:Entity):
 		if ability.ability_name == "move":
 			continue
 		ability_count+=1
-		var ability_node = preload("res://src/components/ui/context_menu/context_menu_abilty.tscn").instantiate()
+		var ability_node = preload("res://src/ui/level_ui/context_menu/context_menu_abilty.tscn").instantiate()
 		context_menu_ability_list.add_child(ability_node)
 		ability_node.label.text = ability.ability_name
 		ability_node.ability = ability
@@ -111,7 +89,7 @@ func show_context_menu(host:Entity):
 		else:
 			ability_node.charges.text = ""
 		if !ability.is_usable():
-			ability_node.bg.texture = preload("res://src/components/ui/context_menu/context_menu_abilty_gradient_unusable.tres")
+			ability_node.bg.texture = preload("res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_unusable.tres")
 
 	context_menu.global_position = (host.global_position * 2) + Vector2(36,-240)
 	context_menu_ability_bar.size = Vector2(3,100)
@@ -163,11 +141,11 @@ func show_strategies():
 	is_strategies_showing = true
 
 func _on_strategy_selected(strategy:C.STRATEGIES):
-	if strategy != WorldManager.strategy:
+	if strategy != WorldManager.level.strategy:
 		strategy_changed.emit()
 		
-	WorldManager.strategy = strategy
-	strategy_dropdown_button.button_label.text = C.STRATEGIES.keys()[WorldManager.strategy].to_pascal_case()
+	WorldManager.level.strategy = strategy
+	strategy_dropdown_button.button_label.text = C.STRATEGIES.keys()[WorldManager.level.strategy].to_pascal_case()
 	hide_strategies()
 		
 func _on_strategy_drop_down_pressed():
@@ -176,6 +154,7 @@ func _on_strategy_drop_down_pressed():
 	else:
 		hide_strategies()
 func _on_end_turn_pressed() -> void:
+	Util.sysprint("UI.end_turn","pressed")
 	end_turn_pressed.emit()
 
 func _on_turn_order_pressed() -> void:

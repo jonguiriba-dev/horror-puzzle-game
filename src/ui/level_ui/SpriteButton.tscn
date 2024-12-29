@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://141sftgeowqw"]
 
-[ext_resource type="Script" path="res://src/components/ui/sprite_button.gd" id="1_r5ck1"]
+[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="1_r5ck1"]
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_ucxcl"]
-[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/components/ui/sprite_button_label_settings.tres" id="3_23hna"]
+[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/ui/level_ui/sprite_button_label_settings.tres" id="3_23hna"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgurw"]
 

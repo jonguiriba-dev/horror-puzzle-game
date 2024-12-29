@@ -1,7 +1,15 @@
 
 extends Node
+
+enum UI_TYPE{
+	LEVEL
+}
+
+var ui_container
 var ui: UI
 var ability_hovered:Ability
+
+var level_ui = preload("res://src/ui/level_ui/Ui.tscn").instantiate()
 
 func info(text:String):
 	if ui:
@@ -19,3 +27,19 @@ func registerUI(_ui:UI):
 	ui = _ui
 	ui.visible = true
 	ui.clear_context()
+
+func set_ui(ui_type:UI_TYPE):
+	if !ui_container:
+		return
+	
+	if ui_container.get_child_count() > 0:
+		ui_container.get_children()[0].queue_free()
+		
+	var ui_node
+	match ui_type:
+		UI_TYPE.LEVEL: ui_node = level_ui
+	
+	ui_container.add_child(ui_node)
+	ui = ui_node
+	return ui
+	

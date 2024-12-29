@@ -25,7 +25,7 @@ func analyze_tile_scores():
 		return scored_tiles
 	
 	targets.map(func (e:Node):
-		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position)
+		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position, WorldManager.level.grid)
 		e.set_meta("distance_to_host",distance)
 	)
 	

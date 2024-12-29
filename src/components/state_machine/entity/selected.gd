@@ -15,11 +15,11 @@ func _on_configured():
 	for ally in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
 		ally.selected.connect(_on_other_entity_selected)
 	
-	WorldManager.viewport_ready.connect(_on_scenetree_ready)
+	WorldManager.level.viewport_ready.connect(_on_scenetree_ready)
 	host.selected.connect(_on_host_selected)
 	
 func _on_scenetree_ready():
-	WorldManager.grid.tile_selected.connect(_on_tile_selected)
+	WorldManager.level.grid.tile_selected.connect(_on_tile_selected)
 
 
 func _state_logic(delta:float):

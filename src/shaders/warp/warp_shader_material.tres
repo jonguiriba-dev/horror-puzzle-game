@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dbnivjo04g5c"]
+
+[ext_resource type="Shader" path="res://src/shaders/warp/warp.gdshader" id="1_fdjrx"]
+
+[resource]
+shader = ExtResource("1_fdjrx")
+shader_parameter/intensity = 19.867
+shader_parameter/time = 0.0
+shader_parameter/radius = 1.0

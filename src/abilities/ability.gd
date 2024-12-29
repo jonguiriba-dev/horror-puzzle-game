@@ -94,7 +94,7 @@ func apply_effect(target):
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
 			target.hit.emit(effect.value)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
-			target.knockback.emit(effect.value, WorldManager.grid.local_to_map(host.position))
+			target.knockback.emit(effect.value, WorldManager.level.grid.local_to_map(host.position))
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:
 			var status = Status.new(effect.status_prop,effect.value)
 			target.apply_status.emit(status)
@@ -116,18 +116,18 @@ func set_state(_state:STATE):
 	state = _state
 	
 func highlight_target_tiles():
-	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
+	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	var target_tiles = get_target_tiles()
 	
 	for pos in target_tiles:
-		WorldManager.grid.set_highlight(pos,highlight_color,Grid.HIGHLIGHT_LAYERS.ABILITY)
+		WorldManager.level.grid.set_highlight(pos,highlight_color,Grid.HIGHLIGHT_LAYERS.ABILITY)
 
 
 func get_target_tiles(
 	map_pos:Vector2i=host.map_position,
 	_range:int=ability_range,
 )->Array[Vector2i]:
-	var possible_tiles = WorldManager.grid.get_possible_tiles(
+	var possible_tiles = WorldManager.level.grid.get_possible_tiles(
 		tile_exclude_flag
 	)
 	if tile_exclude_self:
@@ -185,14 +185,14 @@ func _on_target_select() -> void:
 		return 
 	set_state(STATE.TARGET_SELECT)
 	add_to_group(C.GROUPS_TARGETTING_ABILITY)
-	WorldManager.grid.is_ability_select = true
+	WorldManager.level.grid.is_ability_select = true
 	highlight_target_tiles()
 
 func _on_stopped_targetting() -> void:
 	remove_from_group(C.GROUPS_TARGETTING_ABILITY)
-	WorldManager.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
+	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	state = STATE.INACTIVE
-	WorldManager.grid.is_ability_select = false
+	WorldManager.level.grid.is_ability_select = false
 
 func _on_used(ability:Ability):
 	if charges < 0:

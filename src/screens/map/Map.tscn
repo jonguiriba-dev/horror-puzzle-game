@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://de725xpg1lps6"]
+
+[ext_resource type="Script" path="res://src/screens/map/map.gd" id="1_mkf4a"]
+[ext_resource type="Texture2D" uid="uid://cbiiv0achhftf" path="res://assets/map/map.png" id="1_olvll"]
+[ext_resource type="LabelSettings" uid="uid://cxmoa2sbp616c" path="res://src/screens/map/map_label_settings.tres" id="3_a2uu1"]
+[ext_resource type="PackedScene" uid="uid://cu1gi05ajx8h4" path="res://src/screens/map/map_location.tscn" id="4_mxdcs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wope"]
+atlas = ExtResource("1_olvll")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rups3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wope")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mkf4a")
+
+[node name="Map" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rups3")
+
+[node name="ShopTown" type="Area2D" parent="Map"]
+position = Vector2(-116, -89)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/ShopTown"]
+visible = false
+polygon = PackedVector2Array(29, 59, 45, 61, 52, 55, 62, 37, 59, 19, 56, -2, 48, -9, 53, -21, 79, -49, 82, -63, 49, -56, 32, -56, 13, -59, -12, -56, -35, -55, -59, -40, -74, -3, -80, 8, -91, 22, -53, 49, -38, 52, -2, 52, 10, 57)
+
+[node name="Label" type="Label" parent="Map/ShopTown"]
+offset_left = -25.0
+offset_top = 39.0
+offset_right = 43.0
+offset_bottom = 61.333
+text = "Shop Town"
+label_settings = ExtResource("3_a2uu1")
+
+[node name="Side1" parent="Map/ShopTown" instance=ExtResource("4_mxdcs")]
+offset_left = -107.0
+offset_top = 2.0
+offset_right = 3.0
+offset_bottom = 85.0
+location_name = "Caves of Fuckery"
+
+[node name="Side2" parent="Map/ShopTown" instance=ExtResource("4_mxdcs")]
+offset_left = -98.0
+offset_top = -57.0
+offset_right = 12.0
+offset_bottom = 26.0
+location_name = "Beach of Funtimes"
+
+[node name="Side3" parent="Map/ShopTown" instance=ExtResource("4_mxdcs")]
+offset_left = -41.0
+offset_top = -19.0
+offset_right = 69.0
+offset_bottom = 64.0
+location_name = "Heart of the Region"
+
+[node name="Side4" parent="Map/ShopTown" instance=ExtResource("4_mxdcs")]
+offset_left = -6.0
+offset_top = 26.0
+offset_right = 104.0
+offset_bottom = 109.0
+location_name = "Bandit Road"
