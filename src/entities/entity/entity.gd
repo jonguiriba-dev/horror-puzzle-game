@@ -69,7 +69,7 @@ func _ready() -> void:
 			continue
 		ability.used.connect(_on_ability_used)
 	
-	WorldManager.level.register_entity(self)
+	#WorldManager.level.register_entity(self)
 	
 	
 func load_preset(_preset:EntityPreset):

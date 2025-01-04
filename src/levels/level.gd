@@ -260,7 +260,7 @@ func _on_scenetree_ready():
 	
 	
 	print("entity_register_queue",entity_register_queue)
-	for entity in entity_register_queue:
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		register_entity(entity)
 	entity_register_queue = []
 	viewport_ready.emit()

@@ -13,9 +13,12 @@ signal state_changed(state_id:String)
 
 func _ready() -> void:
 	host.ready.connect(_on_host_ready)
-
+	
 #the first state is set as initial current state
 func _on_host_ready():
+	if !host.get("level"):
+		Util.sysprint("StateMachine","No level found for host disabling StateMachine")
+		return
 	for child in get_children():
 		add_state(child)
 		if state == null:

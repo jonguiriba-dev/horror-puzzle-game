@@ -1,0 +1,306 @@
+[gd_scene load_steps=15 format=3 uid="uid://2hkv4xg7vv6r"]
+
+[ext_resource type="Script" path="res://src/screens/manage_roster/manage_roster.gd" id="1_2af76"]
+[ext_resource type="PackedScene" uid="uid://b1nklre06x1x4" path="res://src/components/grid/Grid.tscn" id="1_b8sl2"]
+[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="2_d0bkh"]
+[ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/main_characters/layla/layla_preset.tres" id="3_q6ltb"]
+[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres" id="4_lv2ry"]
+[ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/main_characters/talya/talya_preset.tres" id="5_xww0w"]
+[ext_resource type="Resource" uid="uid://clywh0svuxrk4" path="res://src/entities/entity/presets/allies/knight/knight_preset.tres" id="6_8bglm"]
+[ext_resource type="LabelSettings" uid="uid://pohtyfrp5ww1" path="res://src/screens/manage_roster/unit_details_label_settings.tres" id="7_ge3kq"]
+[ext_resource type="LabelSettings" uid="uid://bvxclt427koii" path="res://src/screens/manage_roster/section_label_settings.tres" id="8_vbvyv"]
+[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="9_jqa2a"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="10_qiokh"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="11_51ncu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xnq00"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fm36n"]
+font = ExtResource("11_51ncu")
+font_size = 12
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)
+
+[node name="ManageRoster" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2af76")
+
+[node name="Anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Anchor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4375, 0.402115, 0.323676, 1)
+
+[node name="Grid" parent="Anchor" instance=ExtResource("1_b8sl2")]
+position = Vector2(-280, -158)
+
+[node name="Entity" parent="Anchor/Grid/PropLayer" index="0" instance=ExtResource("2_d0bkh")]
+position = Vector2(33, 33)
+preset = ExtResource("3_q6ltb")
+
+[node name="Entity2" parent="Anchor/Grid/PropLayer" index="1" instance=ExtResource("2_d0bkh")]
+position = Vector2(65, 17)
+preset = ExtResource("4_lv2ry")
+
+[node name="Entity3" parent="Anchor/Grid/PropLayer" index="2" instance=ExtResource("2_d0bkh")]
+position = Vector2(1, 48)
+preset = ExtResource("5_xww0w")
+
+[node name="Entity4" parent="Anchor/Grid/PropLayer" index="3" instance=ExtResource("2_d0bkh")]
+position = Vector2(-16, 40)
+preset = ExtResource("6_8bglm")
+
+[node name="Entity5" parent="Anchor/Grid/PropLayer" index="4" instance=ExtResource("2_d0bkh")]
+position = Vector2(-33, 33)
+preset = ExtResource("6_8bglm")
+
+[node name="Entity6" parent="Anchor/Grid/PropLayer" index="5" instance=ExtResource("2_d0bkh")]
+position = Vector2(15, 25)
+preset = ExtResource("6_8bglm")
+
+[node name="Details" type="Control" parent="Anchor"]
+anchors_preset = 0
+offset_left = 145.0
+offset_top = -147.0
+offset_right = 299.0
+offset_bottom = 171.0
+
+[node name="Bg" type="ColorRect" parent="Anchor/Details"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.761719, 0.695913, 0.546743, 1)
+
+[node name="Label" type="Label" parent="Anchor/Details"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 146.0
+offset_bottom = 98.0
+text = "Knight
+
+HP: 10/10
+"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="Items" type="Control" parent="Anchor/Details"]
+anchors_preset = 0
+offset_left = -5.0
+offset_right = -5.0
+
+[node name="ColorRect" type="ColorRect" parent="Anchor/Details/Items"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 133.0
+offset_right = 47.0
+offset_bottom = 165.0
+color = Color(0.734375, 0.291011, 0.269087, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Anchor/Details/Items"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 133.0
+offset_right = 102.0
+offset_bottom = 165.0
+color = Color(0.734375, 0.291011, 0.269087, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Anchor/Details/Items"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 133.0
+offset_right = 151.0
+offset_bottom = 165.0
+color = Color(0.734375, 0.291011, 0.269087, 1)
+
+[node name="ItemsLabel" type="Label" parent="Anchor/Details/Items"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 105.0
+offset_right = 63.0
+offset_bottom = 128.0
+text = "Items:"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="Skills" type="Control" parent="Anchor/Details"]
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 179.0
+offset_right = 50.0
+offset_bottom = 219.0
+
+[node name="Label" type="Label" parent="Anchor/Details/Skills"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 22.3333
+text = "Skills:"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Anchor/Details/Skills"]
+layout_mode = 0
+offset_top = 22.0
+offset_right = 49.0
+offset_bottom = 62.0
+
+[node name="Label2" type="Label" parent="Anchor/Details/Skills/VBoxContainer"]
+layout_mode = 2
+text = "Sanctuary"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="Label3" type="Label" parent="Anchor/Details/Skills/VBoxContainer"]
+layout_mode = 2
+text = "Vault"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="Label4" type="Label" parent="Anchor/Details/Skills/VBoxContainer"]
+layout_mode = 2
+text = "Earth Splitter"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="Label5" type="Label" parent="Anchor/Details/Skills/VBoxContainer"]
+layout_mode = 2
+text = "Lightning Call"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="Label6" type="Label" parent="Anchor/Details/Skills/VBoxContainer"]
+layout_mode = 2
+text = "Arrow Shot"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="SectionLabel" type="Label" parent="Anchor/Details"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -8.0
+offset_right = 73.0
+offset_bottom = 6.0
+text = "Unit Details"
+label_settings = ExtResource("8_vbvyv")
+
+[node name="Inventory" type="Control" parent="Anchor"]
+anchors_preset = 0
+offset_left = -294.0
+offset_top = -147.0
+offset_right = -294.0
+offset_bottom = -147.0
+
+[node name="ColorRect" type="ColorRect" parent="Anchor/Inventory"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = 159.0
+offset_right = 147.0
+offset_bottom = 318.0
+color = Color(0, 0, 0, 0.627451)
+
+[node name="SectionLabel" type="Label" parent="Anchor/Inventory"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 47.0
+offset_bottom = 172.333
+text = "Inventory"
+label_settings = ExtResource("8_vbvyv")
+
+[node name="GridContainer" type="GridContainer" parent="Anchor/Inventory"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 170.0
+offset_right = 137.0
+offset_bottom = 307.0
+columns = 4
+
+[node name="ColorRect" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="Anchor/Inventory/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="MapButton" type="Button" parent="Anchor"]
+offset_left = -307.0
+offset_top = -164.0
+offset_right = -257.0
+offset_bottom = -142.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xnq00")
+flat = true
+script = ExtResource("9_jqa2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anchor/MapButton"]
+scale = Vector2(0.0925926, 0.1375)
+texture = ExtResource("10_qiokh")
+centered = false
+
+[node name="Label" type="Label" parent="Anchor/MapButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Map"
+label_settings = SubResource("LabelSettings_fm36n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Anchor/MapButton" to="." method="_on_map_button_pressed"]
+
+[editable path="Anchor/Grid"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://byh4m2vm2s5a7"]
 
-[ext_resource type="Script" path="res://src/screens/game/game.gd" id="1_p2aic"]
-[ext_resource type="Script" path="res://src/screens/game/sub_viewport.gd" id="3_evypx"]
-[ext_resource type="Script" path="res://src/screens/game/ui_container.gd" id="3_ven42"]
+[ext_resource type="Script" path="res://src/screens/game/game.gd" id="1_jtsqk"]
+[ext_resource type="Script" path="res://src/screens/game/sub_viewport.gd" id="2_646e1"]
+[ext_resource type="Script" path="res://src/screens/game/ui_container.gd" id="3_oas52"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -10,8 +10,8 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
-script = ExtResource("1_p2aic")
-game_scene = "res://src/screens/map/Map.tscn"
+script = ExtResource("1_jtsqk")
+game_scene = "res://src/screens/manage_roster/ManageRoster.tscn"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -33,7 +33,7 @@ size = Vector2i(1280, 720)
 size_2d_override = Vector2i(640, 360)
 size_2d_override_stretch = true
 render_target_update_mode = 4
-script = ExtResource("3_evypx")
+script = ExtResource("2_646e1")
 
 [node name="Root" type="BoxContainer" parent="SubViewportContainer/SubViewport"]
 anchors_preset = 15
@@ -47,7 +47,7 @@ alignment = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("3_ven42")
+script = ExtResource("3_oas52")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
