@@ -12,10 +12,10 @@ func find_target():
 func get_farthest_target():
 	var targets = host.get_enemies()
 	
-	var bounds = WorldManager.get_world_bounds()
+	var bounds = WorldManager.level.get_world_bounds()
 	var bound_pos
 	
-	match(WorldManager.starting_position):
+	match(WorldManager.level.starting_position):
 		C.DIRECTION.NORTH:
 			bound_pos = Vector2i(
 				host.map_position.x,

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func analyze_tile_scores():
 	if Debug.highlight_enemy_target and is_instance_valid(target):
-		WorldManager.grid.set_highlight(
+		WorldManager.level.grid.set_highlight(
 			target.map_position,
 			Grid.HIGHLIGHT_COLORS.NONE,
 			Grid.HIGHLIGHT_LAYERS.DEBUG
@@ -49,22 +49,22 @@ func analyze_tile_scores():
 	print(host.entity_name, " is targeting ", nearest.entity_name)
 	
 	if Debug.highlight_enemy_target:
-		WorldManager.grid.set_highlight(
+		WorldManager.level.grid.set_highlight(
 			target.map_position,
 			Grid.HIGHLIGHT_COLORS.BLUE,
 			Grid.HIGHLIGHT_LAYERS.DEBUG
 		)
 	
-	path_to_nearest_target = WorldManager.grid.get_nearest_path(
-		WorldManager.grid.local_to_map(host.position), 
-		WorldManager.grid.local_to_map(nearest.position)
+	path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+		WorldManager.level.grid.local_to_map(host.position), 
+		WorldManager.level.grid.local_to_map(nearest.position)
 	)
 	
 	#if no path, then try to get as close as possbile by disregarding obstacles 
 	if path_to_nearest_target.size() == 0:
-		path_to_nearest_target = WorldManager.grid.get_nearest_path(
-			WorldManager.grid.local_to_map(host.position), 
-			WorldManager.grid.local_to_map(nearest.position),
+		path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+			WorldManager.level.grid.local_to_map(host.position), 
+			WorldManager.level.grid.local_to_map(nearest.position),
 			false
 		)
 	heatmap = get_heat_map()
@@ -122,8 +122,8 @@ func get_heat_map():
 			#var l = Label.new()
 			#l.z_index=98
 			#l.text = str(t.value)
-			#WorldManager.grid.prop_layer.add_child(l)
-			#l.position = WorldManager.grid.map_to_local(t.tile) + Vector2(-8,-8)
+			#WorldManager.level.grid.prop_layer.add_child(l)
+			#l.position = WorldManager.level.grid.map_to_local(t.tile) + Vector2(-8,-8)
 			#l.set("theme_override_font_sizes/font_size", 10)
 			#l.modulate = Color.RED
 			#heatmap_tile_labels.push_front(l)

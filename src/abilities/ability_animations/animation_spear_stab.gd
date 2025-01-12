@@ -5,7 +5,7 @@ static func play(host:Entity,target_map_position:Vector2i):
 	host.get_parent().add_child(node)
 	
 	var direction = Util.get_direction(host.map_position,target_map_position)
-	node.position = WorldManager.grid.map_to_local(host.map_position + direction) 
+	node.position = WorldManager.level.grid.map_to_local(host.map_position + direction) 
 	
 	var options = {
 		"source_position":host.map_position,

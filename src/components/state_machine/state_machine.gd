@@ -16,8 +16,8 @@ func _ready() -> void:
 	
 #the first state is set as initial current state
 func _on_host_ready():
-	if !host.get("level"):
-		Util.sysprint("StateMachine","No level found for host disabling StateMachine")
+	if !WorldManager.get("level"):
+		Util.sysprint("StateMachine","No level found for WorldManager disabling StateMachine")
 		return
 	for child in get_children():
 		add_state(child)

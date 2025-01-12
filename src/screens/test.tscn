@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbv44242g66dy"]
+
+[ext_resource type="Script" path="res://src/screens/test.gd" id="1_smsql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5npf"]
+size = Vector2(347, 196)
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_smsql")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(226, 154)
+shape = SubResource("RectangleShape2D_e5npf")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

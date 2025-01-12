@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://mw3ih8kba5sd"]
+
+[ext_resource type="Script" path="res://src/area_2d.gd" id="1_iav6p"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("1_iav6p")
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 9
+position = Vector2(107, 75)
+priority = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+z_index = 4
+polygon = PackedVector2Array(29, 59, 45, 61, 52, 55, 62, 37, 59, 19, 56, -2, 48, -9, 53, -21, 79, -49, 82, -63, 49, -56, 32, -56, 13, -59, -12, -56, -35, -55, -59, -40, -74, -3, -80, 8, -91, 22, -53, 49, -38, 52, -2, 52, 10, 57)
+one_way_collision_margin = 20.7
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

@@ -140,6 +140,9 @@ func _start_enemy_turn():
 		end_turn()
 		
 func game_start():
+	Util.sysprint("Level","game start!")
+	await spawn_units()
+	
 	if !UIManager.ui:
 		Util.sysprint("game_start","UIManager.ui not found")
 		return
@@ -159,6 +162,12 @@ func game_start():
 	
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
+
+func spawn_units():
+	var tiles = []
+	for player_unit in PlayerManager.units:
+		tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
+		#EntityManager.spawn_entity(tiles.pick_random(), player_unit)
 
 var input_waiting_on_ability = false
 var input_waiting_on_dialogue = false

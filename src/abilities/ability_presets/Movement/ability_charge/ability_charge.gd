@@ -9,4 +9,4 @@ func get_target_tiles(
 	for tile in target_tiles:
 		possible_tiles.push_front(tile + Util.get_direction(map_pos,tile))
 			
-	return possible_tiles.filter(func (e): return WorldManager.grid.is_empty_tile(e))
+	return possible_tiles.filter(func (e): return WorldManager.level.grid.is_empty_tile(e))

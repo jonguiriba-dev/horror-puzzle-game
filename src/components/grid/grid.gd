@@ -17,12 +17,21 @@ enum HIGHLIGHT_COLORS{
 	NONE = 99,
 }
 
+enum TEAM_POSITION_LAYER_FILTERS{
+	PLAYER,
+	ENEMY,
+	CITIZEN
+}
+
+var CUSTOM_DATA_LAYER_TEAM_POSITION = "team_position"
+
 @onready var tiles_layer :TileMapLayer= $TileMapLayer
 @onready var ability_highlight_layer :TileMapLayer= $AbilityHighlightLayer
 @onready var threat_highlight_layer :TileMapLayer= $ThreatHighlightLayer
 @onready var debug_highlight_layer :TileMapLayer= $DebugHighlightLayer
 @onready var cursor_layer :TileMapLayer= $CursorLayer
 @onready var prop_layer :TileMapLayer= $PropLayer
+@onready var team_position_layer :TileMapLayer= $TeamPositionLayer
 @onready var astar_grid = AStarGrid2D.new()
 
 #var enemy_threat_tiles:Array[Vector2i]= []
@@ -228,3 +237,24 @@ func is_empty_tile(map_pos:Vector2i):
 	):
 		return true
 	return false
+ 
+func get_team_position_tiles(filter:TEAM_POSITION_LAYER_FILTERS):
+	var tiles = []
+	for cell in team_position_layer.get_used_cells():
+		var cell_data := team_position_layer.get_cell_tile_data(cell)
+		var team_position = cell_data.get_custom_data(CUSTOM_DATA_LAYER_TEAM_POSITION)
+		
+		match filter:
+			TEAM_POSITION_LAYER_FILTERS.PLAYER:
+				if team_position == 'player':
+					tiles.push_front(cell) 
+			TEAM_POSITION_LAYER_FILTERS.ENEMY:
+				if team_position == 'enemy':
+					tiles.push_front(cell) 
+			TEAM_POSITION_LAYER_FILTERS.CITIZEN:
+				if team_position == 'citizen':
+					tiles.push_front(cell) 
+	return tiles
+
+func add_child_entity(entity:Entity):
+	prop_layer.add_child(entity)

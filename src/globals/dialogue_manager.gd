@@ -1,6 +1,5 @@
 extends Node
 var speech_bubble_tscn := preload("res://src/components/dialogue/speech_bubble/SpeechBubble.tscn")
-var level
 var SCENARIO_TO_TEXT = {
 	"to_strategy_retreat": ["Retreat!"],
 	"to_strategy_forward": ["Push through!"],
@@ -15,7 +14,7 @@ func get_scenario_text(scenario:String):
 
 func speak(global_position,text,wait):
 	var speech_bubble = speech_bubble_tscn.instantiate()
-	level.grid.prop_layer.add_child(speech_bubble)
+	WorldManager.level.grid.prop_layer.add_child(speech_bubble)
 	speech_bubble.set_text(text)
 	speech_bubble.global_position = global_position + Vector2(6,-30)
 	var curr_modulate = speech_bubble.modulate

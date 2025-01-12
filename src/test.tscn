@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3r7qs30p1t0t"]
+
+[ext_resource type="Script" path="res://src/screens/map/map_region.gd" id="1_e1v6h"]
+[ext_resource type="PackedScene" uid="uid://cu1gi05ajx8h4" path="res://src/screens/map/map_location.tscn" id="2_bsujx"]
+[ext_resource type="LabelSettings" uid="uid://cxmoa2sbp616c" path="res://src/screens/map/map_label_settings.tres" id="3_xfs3u"]
+[ext_resource type="PackedScene" uid="uid://mw3ih8kba5sd" path="res://src/area_2d.tscn" id="4_nnpl2"]
+
+[node name="Shoptown" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 351.0
+offset_top = 156.0
+offset_right = 541.0
+offset_bottom = 297.0
+mouse_filter = 1
+script = ExtResource("1_e1v6h")
+
+[node name="Side1" parent="." instance=ExtResource("2_bsujx")]
+offset_top = 77.0
+offset_bottom = 160.0
+location_name = "Caves of Fuckery"
+
+[node name="Side2" parent="." instance=ExtResource("2_bsujx")]
+offset_left = 9.0
+offset_top = 18.0
+offset_right = 119.0
+offset_bottom = 101.0
+location_name = "Beach of Funtimes"
+
+[node name="Side3" parent="." instance=ExtResource("2_bsujx")]
+offset_left = 66.0
+offset_top = 56.0
+offset_right = 176.0
+offset_bottom = 139.0
+location_name = "Heart of the Region"
+
+[node name="Side4" parent="." instance=ExtResource("2_bsujx")]
+offset_left = 101.0
+offset_top = 101.0
+offset_right = 211.0
+offset_bottom = 184.0
+location_name = "Bandit Road"
+
+[node name="RegionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 117.0
+offset_right = 123.0
+offset_bottom = 139.333
+text = "Shop Town"
+label_settings = ExtResource("3_xfs3u")
+
+[node name="Area2D" parent="." instance=ExtResource("4_nnpl2")]

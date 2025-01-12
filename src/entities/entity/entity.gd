@@ -73,9 +73,11 @@ func _ready() -> void:
 	
 	
 func load_preset(_preset:EntityPreset):
+	Util.sysprint("Entity:loading_preset", "loading_preset")
 	if !_preset:
 		return
 	entity_name = _preset.entity_name
+	Util.sysprint("Entity:loading_preset", "name: "+entity_name)
 	set_max_health(_preset.max_health)
 	team = _preset.team
 	move_range = _preset.move_range

@@ -38,7 +38,7 @@ angle = intensity * (length(center - uv) - sqrt(0.5)) * time;
 
     // Output the result pixel from the original texture
     COLOR = texture(TEXTURE, uv);
-	
+
 	if (angle > 0.0){
 		discard ;
 	}

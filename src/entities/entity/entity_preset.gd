@@ -32,7 +32,9 @@ enum STATE_LISTS{
 
 func get_abilities()->Array:
 	var abilities = []
+	print(">>> ",ability_props)
 	for ability_prop in ability_props:
+		print("ability_prop",ability_prop)
 		var ability_node 
 		if ability_prop.custom_ability_script:
 			ability_node = load(ability_prop.custom_ability_script).new()
