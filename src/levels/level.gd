@@ -164,9 +164,10 @@ func game_start():
 	turn_start.emit(team_turn)
 
 func spawn_units():
-	var tiles = []
-	for player_unit in PlayerManager.units:
-		tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
+	pass
+	#var tiles = []
+	#for player_unit in PlayerManager.units:
+		#tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
 		#EntityManager.spawn_entity(tiles.pick_random(), player_unit)
 
 var input_waiting_on_ability = false

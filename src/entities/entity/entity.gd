@@ -82,7 +82,6 @@ func load_preset(_preset:EntityPreset):
 	team = _preset.team
 	move_range = _preset.move_range
 	
-	print("ABILITIES ",_preset.get_abilities())
 	for ability in _preset.get_abilities():
 		add_child(ability)
 	

@@ -1,14 +1,10 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=10 format=3 uid="uid://be0bd8arqf1my"]
+[gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://be0bd8arqf1my"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_0xa1f"]
-[ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_kupkv"]
-[ext_resource type="Resource" uid="uid://2rkgneidf3pt" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="3_2iyrj"]
+[ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_slfjp"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_tqcw5"]
+[ext_resource type="Resource" uid="uid://2rkgneidf3pt" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="3_2de08"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_jagov"]
-[ext_resource type="Resource" uid="uid://cup37mfpd6muw" path="res://src/abilities/ability_presets/Defense/ability_sanctuary/ability_sanctuary.tres" id="4_xckv1"]
 [ext_resource type="SpriteFrames" uid="uid://dpvcly4qbu5y5" path="res://src/entities/entity/presets/main_characters/elyana/elyana_sprite_frames.tres" id="5_3f5am"]
-[ext_resource type="Resource" uid="uid://74sbf8er413p" path="res://src/abilities/ability_presets/Offense/ability_lightning_call/ability_lightning_call.tres" id="5_3pwc0"]
-[ext_resource type="Resource" uid="uid://ci4ab1rgnw804" path="res://src/abilities/ability_presets/Offense/ability_earth_splitter/ability_earth_splitter.tres" id="6_louxo"]
-[ext_resource type="Resource" uid="uid://ccwq6lhscme2c" path="res://src/abilities/ability_presets/Support/ability_war_cry/ability_war_cry.tres" id="7_3lvnw"]
 
 [resource]
 script = ExtResource("4_jagov")
@@ -16,7 +12,7 @@ entity_name = "Eliana"
 max_health = 4
 move_range = 3
 team = 0
-ability_props = Array[ExtResource("1_0xa1f")]([ExtResource("2_kupkv"), ExtResource("3_2iyrj"), ExtResource("4_xckv1"), ExtResource("5_3pwc0"), ExtResource("6_louxo"), ExtResource("7_3lvnw")])
+ability_props = Array[ExtResource("2_tqcw5")]([ExtResource("2_slfjp"), ExtResource("3_2de08")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(2, -2)

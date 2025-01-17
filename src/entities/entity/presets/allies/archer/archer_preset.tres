@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://cnxebyxdvjec6"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_tw8v1"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_tw8v1"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_h2a8q"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_bktrc"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_sp7hp"]

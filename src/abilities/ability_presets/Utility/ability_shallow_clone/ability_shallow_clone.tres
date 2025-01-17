@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_rrklm"]
 [ext_resource type="Resource" uid="uid://qh4f5so5hchb" path="res://src/abilities/ability_effect/summon_dark_orb.tres" id="2_5gha4"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="3_tav6r"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="3_tav6r"]
 
 [resource]
 script = ExtResource("3_tav6r")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=5 format=3 uid="uid://ch7qmg8jhgmh8"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_1xqy7"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_k6u3y"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_k6u3y"]
 [ext_resource type="SpriteFrames" uid="uid://bpcqw3ux8t2hk" path="res://src/entities/entity/presets/civilian/civilian_sprite_frames.tres" id="2_pyme8"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_wad3f"]
 

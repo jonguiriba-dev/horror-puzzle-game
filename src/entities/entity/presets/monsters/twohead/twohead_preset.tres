@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://wdlgggc2ynf0"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_aovwl"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="1_kjx1t"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_kjx1t"]
 [ext_resource type="SpriteFrames" uid="uid://c15entj0nngfd" path="res://src/entities/entity/presets/monsters/twohead/twohead_sprite_frames.tres" id="2_5dhqf"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_iw2oa"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_ee7ec"]

@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="AbilityProps" load_steps=5 format=3 uid="uid://ca6k8754tx2hw"]
+[gd_resource type="Resource" script_class="AbilityProp" load_steps=5 format=3 uid="uid://ca6k8754tx2hw"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="2_lbtsf"]
 [ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="3_4nvh5"]
 [ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="4_765a6"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="5_msy45"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="5_msy45"]
 
 [resource]
 script = ExtResource("5_msy45")

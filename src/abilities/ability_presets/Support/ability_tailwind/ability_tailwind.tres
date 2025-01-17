@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityProps" load_steps=3 format=3 uid="uid://d1kf70lom66fp"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_y16o8"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="2_hxh8t"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_hxh8t"]
 
 [resource]
 script = ExtResource("2_hxh8t")

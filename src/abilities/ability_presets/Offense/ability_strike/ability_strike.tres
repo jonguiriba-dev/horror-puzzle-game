@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="AbilityProps" load_steps=5 format=3 uid="uid://2rkgneidf3pt"]
+[gd_resource type="Resource" script_class="AbilityProp" load_steps=5 format=3 uid="uid://2rkgneidf3pt"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="2_3y2h0"]
-[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="3_rnq35"]
-[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="4_yhcyu"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="5_pip7t"]
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_piv8f"]
+[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_8ew2t"]
+[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="3_hnxjq"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="4_onjm3"]
 
 [resource]
-script = ExtResource("5_pip7t")
+script = ExtResource("4_onjm3")
 ability_name = "Strike"
 ability_range = 1
-effects = Array[ExtResource("2_3y2h0")]([ExtResource("3_rnq35"), ExtResource("4_yhcyu")])
+effects = Array[ExtResource("1_piv8f")]([ExtResource("2_8ew2t"), ExtResource("3_hnxjq")])
 highlight_color = 3
 is_enemy_obstacle = false
 target_count = 1

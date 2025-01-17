@@ -28,7 +28,7 @@ var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OB
 var tile_exclude_self:=false
 var is_action:=true
 var animation_script
-var ability_props:AbilityProps
+var ability_props:AbilityProp
 
 var can_target_entities:bool:
 	get:

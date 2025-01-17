@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_ddr8d"]
 [ext_resource type="Resource" uid="uid://t6gu5uijvn83" path="res://src/abilities/ability_effect/haste_1.tres" id="2_t7p2j"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="3_1kjlg"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="3_1kjlg"]
 
 [resource]
 script = ExtResource("3_1kjlg")

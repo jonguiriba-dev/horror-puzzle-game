@@ -31,7 +31,6 @@ SfxManager="*res://src/globals/sfx_manager.gd"
 SystemManager="*res://src/globals/system_manager.gd"
 AnimationManager="*res://src/globals/animation_manager.gd"
 EntityManager="*res://src/globals/entity_manager.gd"
-PlayerManager="*res://src/globals/player_manager.gd"
 
 [debug]
 
@@ -46,6 +45,16 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[file_customization]
+
+folder_colors={
+"res://src/abilities/": "blue",
+"res://src/components/": "gray",
+"res://src/entities/": "orange",
+"res://src/entities/entity/presets/main_characters/": "green",
+"res://src/levels/": "yellow"
+}
 
 [gui]
 

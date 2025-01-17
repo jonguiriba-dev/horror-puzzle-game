@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_r3rto"]
 [ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_na48t"]
 [ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="3_gyhkk"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="4_5nmau"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="4_5nmau"]
 
 [resource]
 script = ExtResource("4_5nmau")

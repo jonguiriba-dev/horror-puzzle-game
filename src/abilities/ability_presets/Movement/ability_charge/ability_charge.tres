@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_e14cj"]
 [ext_resource type="Resource" uid="uid://cp132b8efxwt4" path="res://src/abilities/ability_effect/tile_move.tres" id="2_u6tm2"]
-[ext_resource type="Script" path="res://src/abilities/ability_props.gd" id="3_si3ky"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="3_si3ky"]
 
 [resource]
 script = ExtResource("3_si3ky")

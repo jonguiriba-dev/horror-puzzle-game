@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AbilityPropTEST" load_steps=2 format=3 uid="uid://tomjkibryih5"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_props_test.gd" id="1_fjp62"]
+
+[resource]
+script = ExtResource("1_fjp62")
+ability_name = "ability_name"
