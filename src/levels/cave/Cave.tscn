@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=4 uid="uid://c7y4ec3rrkgjv"]
+[gd_scene load_steps=26 format=4 uid="uid://c7y4ec3rrkgjv"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_025me"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_eodui"]
+[ext_resource type="Resource" uid="uid://br6uaxjggcqlg" path="res://src/levels/cave/cave_spawn_config.tres" id="2_ufs88"]
 [ext_resource type="TileSet" uid="uid://s4ki2g0cd8rf" path="res://src/levels/cave/cave_tileset.tres" id="3_2w05r"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_jovxc"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="5_xtins"]
@@ -12,10 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dlnxf7e1kj7nl" path="res://assets/tiles/village/barrel.png" id="10_lv0o2"]
 [ext_resource type="Texture2D" uid="uid://bytsc1qgs7whd" path="res://assets/tiles/village/props/hedge.png" id="11_0gjoj"]
 [ext_resource type="Texture2D" uid="uid://b42kr4l32glin" path="res://assets/tiles/village/props/street_lamp.png" id="12_5bqnw"]
-[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="13_57w0g"]
 [ext_resource type="Texture2D" uid="uid://tftvtkxipog8" path="res://assets/bgs/black.png" id="13_kpbvd"]
 [ext_resource type="Texture2D" uid="uid://c045pp86mh33s" path="res://assets/etc/shadow.png" id="14_8vady"]
-[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres" id="14_bf25n"]
 [ext_resource type="Texture2D" uid="uid://chihmnl6y46ny" path="res://assets/etc/light.png" id="15_8oh8e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7tt8x"]
@@ -104,12 +103,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -38.0
 offset_top = -10.0
-offset_right = -38.0
-offset_bottom = -10.0
+offset_right = -1318.0
+offset_bottom = -730.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_025me")
-orientation = 1
+spawn_config = ExtResource("2_ufs88")
 
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2(-48, 28)
@@ -144,9 +144,6 @@ tile_set = ExtResource("5_xtins")
 [node name="PropLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_jgmbd")
-
-[node name="Entity" parent="Grid/PropLayer" instance=ExtResource("13_57w0g")]
-preset = ExtResource("14_bf25n")
 
 [node name="TeamPositionLayer" type="TileMapLayer" parent="Grid"]
 visible = false

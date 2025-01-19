@@ -5,6 +5,7 @@ class_name World
 @export var orientation:=C.ORIENTATION.HORIZONTAL
 
 @onready var grid: Grid = $Grid
+@export var spawn_config:LevelSpawnConfig
 var team_turn:C.TEAM
 var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER, C.TEAM.ENEMY]
 var ai_turn_queue = []
@@ -18,6 +19,8 @@ var selected_entity:Entity
 var strategy := C.STRATEGIES.NEAREST
 var strategy_changed := false
 var starting_position := C.DIRECTION.NORTH
+var enemy_count := 0
+var neutral_count := 0
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -25,69 +28,6 @@ signal turn_end(team: C.TEAM)
 signal viewport_ready
 signal animation_counter_updated(val:int)
 signal animation_counter_cleared
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("click") :
-		print("World Manager click ")
-		var mouse_map_position = grid.local_to_map(grid.prop_layer.get_local_mouse_position())
-		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
-		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
-		if hovered_entity:
-			Util.sysprint("WorldManager._unhandled_input()","entity hovered: %s"%[hovered_entity.entity_name])
-		
-		if targetting_ability:
-			Util.sysprint("WorldManager._unhandled_input()","targetting ability: %s"%[targetting_ability.ability_name])
-		
-		if input_waiting_on_ability:
-			print(">input_waiting_on_ability return")
-			return
-		if !input_enabled:
-			return
-			
-		if selected_entity and !targetting_ability:
-			print(">selected_entity and !targetting_ability")
-			selected_entity.clear_sprite_material()
-			selected_entity = null
-		
-		if input_waiting_on_dialogue:
-			current_dialogue.input_recieved.emit()
-			input_waiting_on_dialogue = false
-		
-		if UIManager.ability_hovered:
-			UIManager.ability_hovered.target_select.emit()	
-			
-		if targetting_ability and !input_waiting_on_ability:		
-			print(">targetting_ability and !input_waiting_on_ability")
-			if selected_entity and targetting_ability.ability_name != "move":
-				selected_entity.clear_sprite_material()
-				selected_entity = null
-			input_waiting_on_ability = true
-			targetting_ability.stopped_targetting.connect(func():
-				input_waiting_on_ability = false
-			,ConnectFlags.CONNECT_ONE_SHOT)
-			targetting_ability.use(mouse_map_position)
-			if !targetting_ability.is_valid_target(mouse_map_position):
-				if selected_entity:
-					selected_entity.clear_sprite_material()
-					selected_entity = null
-					UIManager.ui.clear_context()
-				grid.tile_selected.emit(mouse_map_position)
-				if is_instance_valid(hovered_entity) and hovered_entity.team == team_turn:
-					hovered_entity.selected.emit()
-					
-		elif is_instance_valid(hovered_entity):
-			print(">is_instance_valid(hovered_entity)")
-			if hovered_entity.team == team_turn:
-				hovered_entity.selected.emit()
-			grid.tile_selected.emit(mouse_map_position)
-		else:
-			print(">else")
-			grid.tile_selected.emit(mouse_map_position)
-			UIManager.ui.clear_context()
-			if selected_entity:
-				selected_entity.clear_sprite_material()
-				selected_entity = null
-		print("*Tile Position: ",mouse_map_position)
 
 func _enter_tree() -> void:
 	WorldManager.register_level(self)
@@ -142,7 +82,7 @@ func _start_enemy_turn():
 func game_start():
 	Util.sysprint("Level","game start!")
 	await spawn_units()
-	
+	await register_entities()
 	if !UIManager.ui:
 		Util.sysprint("game_start","UIManager.ui not found")
 		return
@@ -164,12 +104,33 @@ func game_start():
 	turn_start.emit(team_turn)
 
 func spawn_units():
-	pass
-	#var tiles = []
-	#for player_unit in PlayerManager.units:
-		#tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
-		#EntityManager.spawn_entity(tiles.pick_random(), player_unit)
-
+	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
+	for player_unit in PlayerManager.units:
+		EntityManager.spawn_entity(WorldManager.level.grid.map_to_local(player_spawn_tiles.pick_random()) , player_unit)
+	
+	
+	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
+	while(enemy_count < spawn_config.max_enemies):
+		for enemy_spawn in spawn_config.enemy_spawn_pool:
+			var rng = randf_range(0.1,1.0)
+			if enemy_spawn.spawn_rate > rng:
+				EntityManager.spawn_entity(
+					WorldManager.level.grid.map_to_local(enemy_spawn_tiles.pick_random()), 
+					EntityManager.create_entity(enemy_spawn.entity_preset)
+				)
+				enemy_count += 1
+	
+	var neutral_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.NEUTRAL)
+	while(neutral_count < spawn_config.max_neutrals):
+		for neutral_spawn in spawn_config.neutral_spawn_pool:
+			var rng = randf_range(0.1,1.0)
+			if neutral_spawn.spawn_rate > rng:
+				EntityManager.spawn_entity(
+					WorldManager.level.grid.map_to_local(neutral_spawn_tiles.pick_random()), 
+					EntityManager.create_entity(neutral_spawn.entity_preset)
+				)
+				neutral_count += 1
+	
 var input_waiting_on_ability = false
 var input_waiting_on_dialogue = false
 
@@ -236,6 +197,12 @@ func get_team_group_threat_tiles(group:String):
 func get_world_bounds():
 	return grid.tiles_layer.get_used_rect()
 
+func register_entities():
+	print("entity_register_queue",entity_register_queue)
+	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		register_entity(entity)
+	entity_register_queue = []
+
 func register_entity(entity:Entity):
 	if !grid:
 		entity_register_queue.push_front(entity)
@@ -249,9 +216,11 @@ func register_entity(entity:Entity):
 
 	if entity.team == C.TEAM.ENEMY:
 		if orientation == C.ORIENTATION.VERTICAL:
-			entity.set_orientation(orientation == C.ORIENTATION.HORIZONTAL)
-		else:
 			entity.set_orientation(orientation == C.ORIENTATION.VERTICAL)
+			#entity.set_orientation(orientation == C.ORIENTATION.HORIZONTAL)
+		else:
+			entity.set_orientation(orientation == C.ORIENTATION.HORIZONTAL)
+			#entity.set_orientation(orientation == C.ORIENTATION.VERTICAL)
 	
 	entity.threat_updated.connect(_on_entity_threat_updated)
 	
@@ -269,10 +238,6 @@ func _on_scenetree_ready():
 		)
 	
 	
-	print("entity_register_queue",entity_register_queue)
-	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		register_entity(entity)
-	entity_register_queue = []
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
@@ -335,3 +300,67 @@ func _on_entity_threat_updated():
 		get_team_group_threat_tiles(C.GROUPS_ENEMIES),
 		get_team_group_threat_tiles(C.GROUPS_ALLIES)
 	)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click") :
+		Util.sysprint("Level._unhandled_input()","click")
+		var mouse_map_position = grid.local_to_map(grid.prop_layer.get_local_mouse_position())
+		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
+		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
+		if hovered_entity:
+			Util.sysprint("WorldManager._unhandled_input()","entity hovered: %s"%[hovered_entity.entity_name])
+		
+		if targetting_ability:
+			Util.sysprint("WorldManager._unhandled_input()","targetting ability: %s"%[targetting_ability.ability_name])
+		
+		if input_waiting_on_ability:
+			print(">input_waiting_on_ability return")
+			return
+		if !input_enabled:
+			return
+			
+		if selected_entity and !targetting_ability:
+			print(">selected_entity and !targetting_ability")
+			selected_entity.clear_sprite_material()
+			selected_entity = null
+		
+		if input_waiting_on_dialogue:
+			current_dialogue.input_recieved.emit()
+			input_waiting_on_dialogue = false
+		
+		if UIManager.ability_hovered:
+			UIManager.ability_hovered.target_select.emit()	
+			
+		if targetting_ability and !input_waiting_on_ability:		
+			print(">targetting_ability and !input_waiting_on_ability")
+			if selected_entity and targetting_ability.ability_name != "move":
+				selected_entity.clear_sprite_material()
+				selected_entity = null
+			input_waiting_on_ability = true
+			targetting_ability.stopped_targetting.connect(func():
+				input_waiting_on_ability = false
+			,ConnectFlags.CONNECT_ONE_SHOT)
+			targetting_ability.use(mouse_map_position)
+			if !targetting_ability.is_valid_target(mouse_map_position):
+				if selected_entity:
+					selected_entity.clear_sprite_material()
+					selected_entity = null
+					UIManager.ui.clear_context()
+				grid.tile_selected.emit(mouse_map_position)
+				if is_instance_valid(hovered_entity) and hovered_entity.team == team_turn:
+					hovered_entity.selected.emit()
+					
+		elif is_instance_valid(hovered_entity):
+			print(">is_instance_valid(hovered_entity)")
+			if hovered_entity.team == team_turn:
+				hovered_entity.selected.emit()
+			grid.tile_selected.emit(mouse_map_position)
+		else:
+			print(">else")
+			grid.tile_selected.emit(mouse_map_position)
+			UIManager.ui.clear_context()
+			if selected_entity:
+				selected_entity.clear_sprite_material()
+				selected_entity = null
+		print("*Tile Position: ",mouse_map_position)

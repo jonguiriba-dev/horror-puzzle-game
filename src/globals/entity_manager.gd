@@ -18,7 +18,7 @@ func spawn_entity(position:Vector2,entity:Entity):
 	WorldManager.level.grid.add_child_entity(entity)
 
 #returns a newly instantiated Entity
-#func create_entity(entity_preset):
-	#var entity = entity_tscn.instantiate()
-	#entity.preset = entity_preset
-	#return entity
+func create_entity(entity_preset):
+	var entity = entity_tscn.instantiate()
+	entity.preset = entity_preset
+	return entity

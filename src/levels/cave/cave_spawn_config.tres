@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LevelSpawnConfig" load_steps=7 format=3 uid="uid://br6uaxjggcqlg"]
+
+[ext_resource type="Script" path="res://src/levels/level_spawn_config.gd" id="1_pa6u3"]
+[ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="2_a0wgo"]
+[ext_resource type="Script" path="res://src/components/objects/entity_spawn.gd" id="2_sb31w"]
+[ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="3_001as"]
+
+[sub_resource type="Resource" id="Resource_tcj2d"]
+script = ExtResource("2_sb31w")
+entity_preset = ExtResource("3_001as")
+max_number = 3
+spawn_rate = 1.0
+
+[sub_resource type="Resource" id="Resource_fm5px"]
+script = ExtResource("2_sb31w")
+entity_preset = ExtResource("2_a0wgo")
+max_number = 3
+spawn_rate = 1.0
+
+[resource]
+script = ExtResource("1_pa6u3")
+enemy_spawn_pool = Array[ExtResource("2_sb31w")]([SubResource("Resource_tcj2d")])
+neutral_spawn_pool = Array[ExtResource("2_sb31w")]([SubResource("Resource_fm5px")])
+max_enemies = 5
+max_neutrals = 3

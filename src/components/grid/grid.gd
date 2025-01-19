@@ -20,7 +20,7 @@ enum HIGHLIGHT_COLORS{
 enum TEAM_POSITION_LAYER_FILTERS{
 	PLAYER,
 	ENEMY,
-	CITIZEN
+	NEUTRAL
 }
 
 var CUSTOM_DATA_LAYER_TEAM_POSITION = "team_position"
@@ -251,7 +251,7 @@ func get_team_position_tiles(filter:TEAM_POSITION_LAYER_FILTERS):
 			TEAM_POSITION_LAYER_FILTERS.ENEMY:
 				if team_position == 'enemy':
 					tiles.push_front(cell) 
-			TEAM_POSITION_LAYER_FILTERS.CITIZEN:
+			TEAM_POSITION_LAYER_FILTERS.NEUTRAL:
 				if team_position == 'citizen':
 					tiles.push_front(cell) 
 	return tiles

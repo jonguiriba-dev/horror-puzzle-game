@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("4_xt53e")
 entity_name = "Ghost"
-max_health = 99
+max_health = 2
 move_range = 5
 team = 1
 ability_props = Array[ExtResource("1_wjcad")]([ExtResource("2_gq353"), ExtResource("3_ou0q7")])

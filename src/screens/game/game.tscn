@@ -11,7 +11,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 script = ExtResource("1_jtsqk")
-game_scene = "res://src/levels/tests/demo/demo.tscn"
+game_scene = "res://src/levels/cave/Cave.tscn"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -45,8 +45,6 @@ alignment = 1
 
 [node name="UIContainer" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("3_oas52")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

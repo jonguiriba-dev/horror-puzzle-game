@@ -26,11 +26,12 @@ enum STATE{
 @onready var context_menu_name := $ContextMenu/Name/Label
 @onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
 @onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
+@onready var strategy_node := $StrategyMenu
 @onready var strategy_container := $StrategyMenu/VBoxContainer
-@onready var strategy_dropdown_button := $StrategyMenu/StrategyDropDown
+var strategy_node_prev_pos #to prevent mouse event being taken unwantedly
+@onready var strategy_dropdown_button := $StrategyDropDown
 var state := STATE.INACTIVE
 var context
-
 
 signal end_turn_pressed
 signal undo_move_pressed
@@ -48,7 +49,7 @@ func _ready() -> void:
 		child.pressed.connect(_on_strategy_selected.bind(child.get_meta("strategy")))
 	
 	UIManager.registerUI(self)
-
+	
 func show_ability_icons():
 	ability_container.show()
 
@@ -129,15 +130,20 @@ func disable_undo_move_button():
 var is_strategies_showing := false
 
 func hide_strategies():
-	for child in strategy_container.get_children():
-		if child == strategy_dropdown_button:
-			continue	
-		child.hide()
+	#for child in strategy_container.get_children():
+		#if child == strategy_dropdown_button:
+			#continue	
+		#child.hide()
+	strategy_node_prev_pos = strategy_node.position
+	strategy_node.position = Vector2(2000,2000)
+	strategy_node.hide()
 	is_strategies_showing = false
 	
 func show_strategies():
-	for child in strategy_container.get_children():
-		child.show()
+	#for child in strategy_container.get_children():
+		#child.show()
+	strategy_node.show()
+	strategy_node.position = strategy_node_prev_pos
 	is_strategies_showing = true
 
 func _on_strategy_selected(strategy:C.STRATEGIES):
