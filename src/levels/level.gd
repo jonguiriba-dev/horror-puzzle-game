@@ -7,7 +7,7 @@ class_name World
 @onready var grid: Grid = $Grid
 @export var spawn_config:LevelSpawnConfig
 var team_turn:C.TEAM
-var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER, C.TEAM.ENEMY]
+var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER]
 var ai_turn_queue = []
 var entity_moved_history:=[]
 var input_enabled = false
@@ -79,6 +79,30 @@ func _start_enemy_turn():
 	else:
 		end_turn()
 		
+func _start_ai_turn():
+	Util.sysprint("_start_ai_turn","start")
+	
+	if strategy_changed:
+		var random_ally = get_tree().get_nodes_in_group(C.GROUPS_ALLIES).pick_random()
+		DialogueManager.speak(random_ally.global_position,
+		DialogueManager.get_scenario_text("to_strategy_%s"%[C.STRATEGIES.keys()[strategy].to_lower()])
+		,1)
+		await AnimationManager.squeeze(random_ally)
+
+		strategy_changed = false
+		
+	ai_turn_queue = get_tree().get_nodes_in_group(C.GROUPS_ALLIES)
+	ai_turn_queue.append_array(get_tree().get_nodes_in_group(C.GROUPS_ENEMIES))
+	
+	ai_turn_queue.shuffle() #temp
+	
+	if ai_turn_queue.size() > 0:
+		var entity = ai_turn_queue.pop_front()
+		entity.turn_start.emit()
+		Util.sysprint("WorldManager._start_ai_turn","entity turn start: %s"%[entity.entity_name])
+	else:
+		end_turn()
+		
 func game_start():
 	Util.sysprint("Level","game start!")
 	await spawn_units()
@@ -105,28 +129,34 @@ func game_start():
 
 func spawn_units():
 	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
+	player_spawn_tiles.shuffle()
 	for player_unit in PlayerManager.units:
-		EntityManager.spawn_entity(WorldManager.level.grid.map_to_local(player_spawn_tiles.pick_random()) , player_unit)
+		EntityManager.spawn_entity(WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()) , player_unit)
 	
-	
+	var spawn_record = {}
 	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
+	enemy_spawn_tiles.shuffle()
 	while(enemy_count < spawn_config.max_enemies):
 		for enemy_spawn in spawn_config.enemy_spawn_pool:
 			var rng = randf_range(0.1,1.0)
 			if enemy_spawn.spawn_rate > rng:
 				EntityManager.spawn_entity(
-					WorldManager.level.grid.map_to_local(enemy_spawn_tiles.pick_random()), 
+					WorldManager.level.grid.map_to_local(enemy_spawn_tiles.pop_front()), 
 					EntityManager.create_entity(enemy_spawn.entity_preset)
 				)
-				enemy_count += 1
+				var current_spawn_count = spawn_record.get_or_add(enemy_spawn.entity_preset,0)
+				if current_spawn_count < enemy_spawn.max_number:
+					spawn_record[enemy_spawn.entity_preset] += 1
+					enemy_count += 1
 	
 	var neutral_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.NEUTRAL)
+	neutral_spawn_tiles.shuffle()
 	while(neutral_count < spawn_config.max_neutrals):
 		for neutral_spawn in spawn_config.neutral_spawn_pool:
 			var rng = randf_range(0.1,1.0)
 			if neutral_spawn.spawn_rate > rng:
 				EntityManager.spawn_entity(
-					WorldManager.level.grid.map_to_local(neutral_spawn_tiles.pick_random()), 
+					WorldManager.level.grid.map_to_local(neutral_spawn_tiles.pop_front()), 
 					EntityManager.create_entity(neutral_spawn.entity_preset)
 				)
 				neutral_count += 1
@@ -264,7 +294,7 @@ func _on_turn_start(turn:C.TEAM):
 	elif turn == C.TEAM.PLAYER:
 		_start_player_turn()
 	elif turn == C.TEAM.ALLY:
-		_start_ally_turn()
+		_start_ai_turn()
 
 			
 func _on_ai_unit_turn_end():

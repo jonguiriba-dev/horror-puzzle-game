@@ -27,7 +27,7 @@ func _enter_state(old_state, new_state):
 			print("Waiting on animation...")
 			await WorldManager.level.animation_counter_cleared
 			
-	if team_turn == host.team:
+	if team_turn != C.TEAM.PLAYER:
 		for l in tile_labels:
 			l.queue_free()
 		tile_labels = []
