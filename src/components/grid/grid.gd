@@ -37,9 +37,11 @@ var CUSTOM_DATA_LAYER_TEAM_POSITION = "team_position"
 #var enemy_threat_tiles:Array[Vector2i]= []
 #var ally_threat_tiles:Array[Vector2i]= []
 var highlight_tiles: Array[Vector2i]= []
-var entity_tiles: Array[Vector2i]= []
-var enemy_tiles: Array[Vector2i]= []
-var ally_tiles: Array[Vector2i]= []
+
+var player_entity_tiles: Array[Vector2i]= []
+var enemy_entity_tiles: Array[Vector2i]= []
+var ally_entity_tiles: Array[Vector2i]= []
+var neutral_entity_tiles: Array[Vector2i]= []
 
 var is_ability_select = false
 
@@ -65,8 +67,25 @@ enum TILE_EXCLUDE_FLAGS{
 }
 
 var possible_tiles_cache:Dictionary = {}
-func get_possible_tiles(exclude_flags:int=7)->Array[Vector2i]:
-	populate_entity_tiles()
+func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
+	populate_entity_tiles2()
+	
+	var entity_tiles: Array[Vector2i]= []
+	entity_tiles.append_array(player_entity_tiles)
+	entity_tiles.append_array(enemy_entity_tiles)
+	entity_tiles.append_array(ally_entity_tiles)
+	entity_tiles.append_array(neutral_entity_tiles)
+	
+	var enemy_tiles: Array[Vector2i]= []
+	var ally_tiles: Array[Vector2i]= []
+
+	enemy_tiles = enemy_entity_tiles
+	ally_tiles = ally_entity_tiles
+	ally_tiles.append_array(neutral_entity_tiles)
+	if team == C.TEAM.ENEMY:
+		enemy_tiles = ally_entity_tiles
+		enemy_tiles.append_array(neutral_entity_tiles)
+		ally_tiles = enemy_entity_tiles
 	
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
@@ -153,8 +172,8 @@ func local_to_map(local_pos:Vector2)->Vector2i:
 func map_to_local(map_pos:Vector2i)->Vector2:
 	return prop_layer.map_to_local(map_pos)
 	
-func get_nearest_path(source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
-	get_possible_tiles( 1 if include_obstacles else 3)
+func get_nearest_path(team:C.TEAM, source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
+	get_possible_tiles(team, 1 if include_obstacles else 3)
 	var path = astar_grid.get_id_path(source, target)
 	if path.size() > 0:
 		path.remove_at(0)
@@ -183,24 +202,39 @@ func debug_tile_text(map_pos:Vector2i,text:String):
 	label.position.x -= 10
 	label.z_index = 99
 
-func populate_entity_tiles():
-	entity_tiles = []
-	enemy_tiles = []
-	ally_tiles = []
+#func populate_entity_tiles():
+	#entity_tiles = []
+	#enemy_tiles = []
+	#ally_tiles = []
+	#
+	#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		#entity_tiles.push_front(entity.map_position)
+		#if (world.team_turn == entity.team and 
+			#(ally_tiles.size() == 0 or enemy_tiles.size() == 0)
+		#):
+			#entity.get_enemies().map(func (e):
+				#enemy_tiles.push_front(e.map_position)
+			#)
+			#entity.get_allies().map(func (e):
+				#ally_tiles.push_front(e.map_position)
+			#)
+		#
+func populate_entity_tiles2():
+	player_entity_tiles = []
+	enemy_entity_tiles = []
+	ally_entity_tiles = []
+	neutral_entity_tiles = []
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		entity_tiles.push_front(entity.map_position)
-		if (world.team_turn == entity.team and 
-			(ally_tiles.size() == 0 or enemy_tiles.size() == 0)
-		):
-			entity.get_enemies().map(func (e):
-				enemy_tiles.push_front(e.map_position)
-			)
-			entity.get_allies().map(func (e):
-				ally_tiles.push_front(e.map_position)
-			)
+		if entity.team == C.TEAM.PLAYER:
+			player_entity_tiles.push_front(entity.map_position)
+		if entity.team == C.TEAM.ENEMY:
+			enemy_entity_tiles.push_front(entity.map_position)
+		if entity.team == C.TEAM.ALLY:
+			ally_entity_tiles.push_front(entity.map_position)
+		if entity.team == C.TEAM.CITIZEN:
+			neutral_entity_tiles.push_front(entity.map_position)
 		
-
 func highlight_threat_tiles(enemy_threat_tiles,ally_threat_tiles):
 	clear_all_highlights(HIGHLIGHT_LAYERS.THREAT)
 	Util.sysprint("grid.highlight_threat_tiles()|enemy_threat_tiles",str(enemy_threat_tiles))
@@ -224,14 +258,14 @@ func get_entity_on_tile(map_pos:Vector2i):
 	return null
 
 func is_empty_tile(map_pos:Vector2i):
-	populate_entity_tiles()
+	populate_entity_tiles2()
 	
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	
 	if (
-		!enemy_tiles.has(map_pos) and
-		!ally_tiles.has(map_pos) and
+		!enemy_entity_tiles.has(map_pos) and
+		!ally_entity_tiles.has(map_pos) and
 		!props.has(map_pos) and 
 		tiles.has(map_pos)
 	):

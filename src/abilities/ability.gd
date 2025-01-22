@@ -128,6 +128,7 @@ func get_target_tiles(
 	_range:int=ability_range,
 )->Array[Vector2i]:
 	var possible_tiles = WorldManager.level.grid.get_possible_tiles(
+		host.team,
 		tile_exclude_flag
 	)
 	if tile_exclude_self:
@@ -145,6 +146,7 @@ func get_valid_targets(map_pos:Vector2i=Vector2i.ZERO)->Array[Entity]:
 	
 	var targets:Array[Entity]=[]
 	var reachable_tiles = get_target_tiles(map_pos,ability_range)
+	
 	if can_target_entities:
 		for entity in host.get_enemies():
 			if reachable_tiles.has(entity.map_position) :

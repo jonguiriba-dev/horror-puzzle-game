@@ -290,7 +290,8 @@ func _on_turn_start(turn:C.TEAM):
 		await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
 	Util.sysprint("WorldManager._on_turn_start","turn start: %s"%[C.TEAM.keys()[turn]])
 	if turn == C.TEAM.ENEMY:
-		_start_enemy_turn()
+		_start_ai_turn()
+		#_start_enemy_turn()
 	elif turn == C.TEAM.PLAYER:
 		_start_player_turn()
 	elif turn == C.TEAM.ALLY:
@@ -298,7 +299,8 @@ func _on_turn_start(turn:C.TEAM):
 
 			
 func _on_ai_unit_turn_end():
-	Util.sysprint("Level:_on_ai_unit_turn_end","start")
+	Util.sysprint("Level:_on_ai_unit_turn_end","ai_turn_queue:%s"%[ai_turn_queue.size()])
+	print(ai_turn_queue)
 	if ai_turn_queue.size() == 0 and (team_turn == C.TEAM.ENEMY or team_turn == C.TEAM.ALLY):
 		_on_all_ai_done()
 		return

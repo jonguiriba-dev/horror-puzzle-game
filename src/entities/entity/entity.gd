@@ -192,7 +192,7 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 	var target_pos = map_position + direction * distance 
 	if !WorldManager.level.grid.is_within_bounds(target_pos):
 		return
-	if !WorldManager.level.grid.get_possible_tiles().has(target_pos):
+	if !WorldManager.level.grid.get_possible_tiles(team).has(target_pos):
 		return
 	
 	WorldManager.level.increment_animation_counter(1) 

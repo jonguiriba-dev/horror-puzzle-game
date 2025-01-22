@@ -55,8 +55,8 @@ func get_manhattan_distance(a:Vector2,b:Vector2):
 	var x_distance = Vector2(a.x,0).distance_to(Vector2(b.x,0))
 	return abs(y_distance) + abs(x_distance)
 
-func get_pathfinding_distance(a:Vector2,b:Vector2,grid:Grid):
-	grid.get_possible_tiles(7)
+func get_pathfinding_distance(team:C.TEAM,a:Vector2,b:Vector2,grid:Grid):
+	grid.get_possible_tiles(team,7)
 	var path = grid.astar_grid.get_id_path(a, b)
 	return path.size()
 

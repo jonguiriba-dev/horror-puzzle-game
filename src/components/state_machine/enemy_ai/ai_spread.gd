@@ -27,7 +27,7 @@ func analyze_tile_scores():
 		return scored_tiles
 	
 	targets.map(func (e:Node):
-		var distance = Util.get_pathfinding_distance(e.map_position,host.map_position, WorldManager.level.grid)
+		var distance = Util.get_pathfinding_distance(host.team,e.map_position,host.map_position, WorldManager.level.grid)
 		e.set_meta("distance_to_host",distance)
 	)
 	
@@ -54,6 +54,7 @@ func analyze_tile_scores():
 		)
 	
 	path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+		host.team,
 		WorldManager.level.grid.local_to_map(host.position), 
 		WorldManager.level.grid.local_to_map(nearest.position)
 	)
@@ -61,6 +62,7 @@ func analyze_tile_scores():
 	#if no path, then try to get as close as possbile by disregarding obstacles 
 	if path_to_nearest_target.size() == 0:
 		path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+			host.team,
 			WorldManager.level.grid.local_to_map(host.position), 
 			WorldManager.level.grid.local_to_map(nearest.position),
 			false

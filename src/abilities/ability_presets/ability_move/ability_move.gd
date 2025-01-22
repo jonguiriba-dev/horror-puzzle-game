@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
 	var navigatable_tiles:Array[Vector2i]= []
-	var possible_tiles = WorldManager.level.grid.get_possible_tiles(tile_exclude_flag)
+	var possible_tiles = WorldManager.level.grid.get_possible_tiles(host.team,tile_exclude_flag)
 	var queued_tiles = [map_pos]
 	
 	var step = 0
@@ -31,7 +31,7 @@ func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_rang
 			for pending_tile in pending_tiles:
 				var next_tile = pending_tile + direction
 				if possible_tiles.has(next_tile) and !navigatable_tiles.has(next_tile):
-					if host.map_position != next_tile and !WorldManager.level.grid.ally_tiles.has(next_tile):
+					if host.map_position != next_tile and !WorldManager.level.grid.ally_entity_tiles.has(next_tile):
 						navigatable_tiles.push_front(next_tile)
 					queued_tiles.push_front(next_tile)
 		step += 1
@@ -65,16 +65,8 @@ func move_to_selected_tile(target_pos:Vector2i):
 	if path.size() > 0:
 		path.remove_at(0)
 		
-		var team_group
-		if WorldManager.level.team_turn == C.TEAM.PLAYER:
-			team_group = C.GROUPS_PLAYER_ENTITIES
-		elif WorldManager.level.team_turn == C.TEAM.ENEMY:
-			team_group = C.GROUPS_ENEMIES
-		elif WorldManager.level.team_turn == C.TEAM.ALLY:
-			team_group = C.GROUPS_ALLIES
-			
 		path = path.filter(func(e):
-			for ally in get_tree().get_nodes_in_group(team_group):
+			for ally in host.get_allies():
 				if WorldManager.level.grid.local_to_map(ally.position) == e:
 					return false
 			return true
