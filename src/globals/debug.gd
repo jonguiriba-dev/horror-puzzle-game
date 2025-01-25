@@ -2,11 +2,13 @@ extends Node
 
 var is_enabled = true
 var show_enemy_ai_tile_values = false
+var show_grid_coords_label = false
 var show_move_path_highlight = false
 var show_turn_card = false
 var highlight_enemy_target = false
 var play_game_start_sequence = false
 var play_game_start_dialogue = false
+var highlight_entity_in_action = true
 
 func _physics_process(delta: float) -> void:
 	if !WorldManager.level or !WorldManager.level.grid:
@@ -20,11 +22,14 @@ func _physics_process(delta: float) -> void:
 		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.level.team_turn]
 		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.level.strategy]
 		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.level.starting_position]
-		
+		text += "\nentity turn queue: %s"%", ".join(WorldManager.level.ai_turn_queue.map(func(e): if is_instance_valid(e): return e.entity_name))
+		if WorldManager.level.current_ai_entity_in_action:
+			text += "\nentity in action: %s"%WorldManager.level.current_ai_entity_in_action.entity_name
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:
 			UIManager.info(text)
 			return 
+		
 		
 		var entity = node as Entity
 		text += "\nhealth: %s"%entity.health

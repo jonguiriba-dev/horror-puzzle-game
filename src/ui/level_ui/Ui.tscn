@@ -412,10 +412,10 @@ vertical_alignment = 1
 
 [node name="Debug" type="Label" parent="."]
 layout_mode = 2
-offset_left = 1992.0
-offset_top = 22.0
-offset_right = 2047.0
-offset_bottom = 45.0
+offset_left = 24.0
+offset_top = 384.0
+offset_right = 79.0
+offset_bottom = 407.0
 text = "DEBUG"
 
 [node name="Label" type="Label" parent="Debug"]

@@ -33,14 +33,23 @@ func _enter_state(old_state, new_state):
 		tile_labels = []
 		
 		if !host.get_ability("move"):
+			print(">no move finalize_turn")
 			finalize_turn()
 			return
+		
+		path_to_nearest_target = []
 		var scored_tiles = analyze_tile_scores()
+		
+		#if standing still is better then just stand still
 		scored_tiles = scored_tiles.filter(func (e): return e.value != 0)
+		print(">scored_tiles ", scored_tiles)
 		if scored_tiles.size() == 0:
-			finalize_turn()
+			print(">no scored_tiles finalize_turn ", host.entity_name)
+			print(">path_to_nearest_target ", path_to_nearest_target)
 			return
-	
+		else: 
+			print(">found scored_tiles for ", host.entity_name)
+			
 		if Debug.show_enemy_ai_tile_values:
 			show_tile_values(scored_tiles)
 			
@@ -131,14 +140,18 @@ func analyze_tile_scores():
 		)
 	
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
+	print("moveable tiles ", moveable_tiles)
 	moveable_tiles.push_front(host.map_position)
 	for tile in moveable_tiles:
-		scored_tiles.push_front({
+		var scored_tile = {
 			"position": tile,
 			"value": get_tile_value(tile)
-		})
+		}
+		scored_tiles.push_front(scored_tile)
+		print("scored_tiles push_front", scored_tile)
 	
 	var current_tile_value = get_tile_value(host.map_position)
+	print("scored_tiles current_tile_value", current_tile_value)
 	
 	#remove less than the current standing tile value (preferr to stay on the same tile)
 	scored_tiles.map(func (e):
@@ -167,12 +180,15 @@ func get_tile_value(tile_pos:Vector2i)->int:
 			else:
 				value += 10
 	
+	#soft increment towards the target
+	var host_map_pos = WorldManager.level.grid.local_to_map(host.position)
+	value += host_map_pos.distance_to(tile_pos)
+	
 	#increment by pathfinding to target
 	if tile_value_factors.is_target_enabled:
 		if path_to_nearest_target.has(tile_pos):
-			var host_map_pos = WorldManager.level.grid.local_to_map(host.position)
-			value += 5 + host_map_pos.distance_to(tile_pos)
-		
+			value += 5 
+	
 	#decrement by already threatened tiles
 	if threat_tiles.has(tile_pos):
 		value -= 15
@@ -241,4 +257,5 @@ func _on_host_move_end():
 	if !events_active:
 		return
 		
+	print(">move end finalize_turn")
 	finalize_turn()

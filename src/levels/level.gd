@@ -21,6 +21,7 @@ var strategy_changed := false
 var starting_position := C.DIRECTION.NORTH
 var enemy_count := 0
 var neutral_count := 0
+var current_ai_entity_in_action: Entity
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -300,16 +301,29 @@ func _on_turn_start(turn:C.TEAM):
 			
 func _on_ai_unit_turn_end():
 	Util.sysprint("Level:_on_ai_unit_turn_end","ai_turn_queue:%s"%[ai_turn_queue.size()])
-	print(ai_turn_queue)
-	if ai_turn_queue.size() == 0 and (team_turn == C.TEAM.ENEMY or team_turn == C.TEAM.ALLY):
+	if is_instance_valid(current_ai_entity_in_action):
+		current_ai_entity_in_action.clear_sprite_material()
+	current_ai_entity_in_action = null
+	if (
+		ai_turn_queue.size() == 0 
+		and (team_turn == C.TEAM.ENEMY or team_turn == C.TEAM.ALLY)
+	):
 		_on_all_ai_done()
-		return
-		
-	var ai_entity = ai_turn_queue.pop_front()
-	if is_instance_valid(ai_entity):
-		print("my turn: ", ai_entity.entity_name)
-		ai_entity.turn_start.emit()
+	else:
+		#keep looping to find a valid ai_entity that could take its turn
+		while ai_turn_queue.size() > 0:
+			var ai_entity = ai_turn_queue.pop_front()
+			if is_instance_valid(ai_entity):
+				print("my turn: ", ai_entity.entity_name)
+				current_ai_entity_in_action = ai_entity
+				if Debug.highlight_entity_in_action:
+					current_ai_entity_in_action.sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 
+					
+				#await Util.wait_for_input()
+				ai_entity.turn_start.emit()
+				break
+			
 func _on_all_ai_done():
 	UIManager.ui.end_turn.disabled = false
 	end_turn()

@@ -33,6 +33,7 @@ var CUSTOM_DATA_LAYER_TEAM_POSITION = "team_position"
 @onready var prop_layer :TileMapLayer= $PropLayer
 @onready var team_position_layer :TileMapLayer= $TeamPositionLayer
 @onready var astar_grid = AStarGrid2D.new()
+@onready var grid_label = $GridLabel
 
 #var enemy_threat_tiles:Array[Vector2i]= []
 #var ally_threat_tiles:Array[Vector2i]= []
@@ -54,7 +55,16 @@ func _ready() -> void:
 	astar_grid.region = tiles_layer.get_used_rect()
 	astar_grid.update()
 	tile_selected.connect(_on_tile_selected)
-
+	
+	for cell_pos in tiles_layer.get_used_cells():
+		var coord_label = Label.new()
+		grid_label.add_child(coord_label)
+		coord_label.position = map_to_local(cell_pos) + Vector2(-2,2)
+		coord_label.text = "(%s,%s)" % [cell_pos.x, cell_pos.y]
+		coord_label.set("theme_override_font_sizes/font_size",6)
+	if !Debug.show_grid_coords_label:
+		grid_label.hide()
+	
 enum TILE_EXCLUDE_FLAGS{
 	EXCLUDE_OBSTACLES = 1,
 	EXCLUDE_ENEMIES = 2,
@@ -82,9 +92,11 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 	enemy_tiles = enemy_entity_tiles
 	ally_tiles = ally_entity_tiles
 	ally_tiles.append_array(neutral_entity_tiles)
+	ally_tiles.append_array(player_entity_tiles)
 	if team == C.TEAM.ENEMY:
 		enemy_tiles = ally_entity_tiles
 		enemy_tiles.append_array(neutral_entity_tiles)
+		enemy_tiles.append_array(player_entity_tiles)
 		ally_tiles = enemy_entity_tiles
 	
 	var tiles = tiles_layer.get_used_cells()

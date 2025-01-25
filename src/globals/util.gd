@@ -1,11 +1,19 @@
 extends Node
 
+signal input_recieved
 var DIRECTIONS = {
 	"NORTH"=Vector2i(0,-1),
 	"WEST"=Vector2i(-1,0),
 	"EAST"=Vector2i(1,0),
 	"SOUTH"=Vector2i(0,1)
 }
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		input_recieved.emit()
+
+func wait_for_input():
+	await input_recieved
 
 func wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout
