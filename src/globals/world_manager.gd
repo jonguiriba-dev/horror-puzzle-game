@@ -1,6 +1,6 @@
 extends Node
 
-var level
+var level:World
 
 func register_level(_level:World):
 	level = _level

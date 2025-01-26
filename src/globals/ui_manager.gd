@@ -22,6 +22,11 @@ func play_game_start_sequence():
 
 func show_victory_overlay():
 	ui.victory_overlay.show()
+	ui.overlays.show()
+	
+func hide_victory_overlay():
+	ui.victory_overlay.hide()
+	ui.overlays.hide()
 
 func registerUI(_ui:UI):
 	ui = _ui

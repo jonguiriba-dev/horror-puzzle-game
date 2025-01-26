@@ -139,6 +139,8 @@ func spawn_units():
 	enemy_spawn_tiles.shuffle()
 	while(enemy_count < spawn_config.max_enemies):
 		for enemy_spawn in spawn_config.enemy_spawn_pool:
+			if enemy_count >= spawn_config.max_enemies:
+				break
 			var rng = randf_range(0.1,1.0)
 			if enemy_spawn.spawn_rate > rng:
 				EntityManager.spawn_entity(
@@ -172,12 +174,16 @@ func _on_dialogue_input_waiting():
 func check_player_victory():
 	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
 		UIManager.show_victory_overlay()
-
+		UIManager.ui.overlay_clicked.connect(func():
+			UIManager.hide_victory_overlay()
+			SceneManager.change_scene(SceneManager.SCENE_MAP)
+		, CONNECT_ONE_SHOT)	
+	
 func clear_entity_moved_history():
 	entity_moved_history.clear()
 	if UIManager.ui:
 		UIManager.ui.disable_undo_move_button()
-
+		
 func increment_animation_counter(val: int):
 	animation_counter += val
 	animation_counter_updated.emit(animation_counter)
@@ -219,8 +225,14 @@ func hide_turn_order():
 func get_team_group_threat_tiles(group:String):
 	var tiles = []
 	for entity in get_tree().get_nodes_in_group(group):
+		entity = entity as Entity
 		if !entity.threat: continue
-		var threat_tiles = entity.threat.ability.get_threat_tiles(entity.map_position,entity.threat.tile)
+		var threat_tiles = (
+			entity.threat.ability.get_threat_tiles(
+				entity.map_position,
+				entity.threat.tile
+			)
+		)
 		for threat_tile in threat_tiles:
 			tiles.push_front(threat_tile)
 	return tiles
@@ -409,4 +421,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			if selected_entity:
 				selected_entity.clear_sprite_material()
 				selected_entity = null
+		
 		print("*Tile Position: ",mouse_map_position)

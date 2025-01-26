@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=37 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/ui/level_ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Script" path="res://src/ui/level_ui/context_menu.gd" id="2_0mq18"]
@@ -20,6 +20,7 @@
 [ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/ui/level_ui/sprite_button_label_settings.tres" id="13_mvkux"]
 [ext_resource type="Script" path="res://src/ui/level_ui/strategy.gd" id="18_2exhv"]
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="18_gcsod"]
+[ext_resource type="Script" path="res://src/ui/level_ui/overlays.gd" id="18_xd1td"]
 [ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/ui/level_ui/SpriteButton.tscn" id="19_mg8vx"]
 [ext_resource type="PackedScene" uid="uid://df3drhl7cxiip" path="res://src/shaders/speedlines/sample.tscn" id="22_4mp75"]
 
@@ -80,6 +81,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -525,12 +528,12 @@ offset_top = 10.0
 offset_right = 1204.0
 offset_bottom = 50.0
 scale = Vector2(4, 4)
+mouse_filter = 1
 icon = ExtResource("7_l2n6i")
 flat = true
 icon_alignment = 1
 
 [node name="Overlays" type="Control" parent="."]
-visible = false
 z_index = 99
 layout_mode = 1
 anchors_preset = 15
@@ -539,7 +542,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
-mouse_filter = 2
+mouse_filter = 1
+script = ExtResource("18_xd1td")
 
 [node name="GameStart" type="Sprite2D" parent="Overlays"]
 visible = false
@@ -547,7 +551,6 @@ texture = ExtResource("6_wi4k2")
 centered = false
 
 [node name="Victory" type="Control" parent="Overlays"]
-visible = false
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0

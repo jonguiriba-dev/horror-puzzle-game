@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_kdvnn")
 effect_type = 0
-value = 1
+value = 2
+entity_type = 0

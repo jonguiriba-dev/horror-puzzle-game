@@ -1,7 +1,7 @@
 extends State
 class_name AIAttackState
 
-var path_to_nearest_target
+var nearest_path_to_nearest_target
 var target
 var tile_labels:Array = []
 var to_idle = false
@@ -37,15 +37,14 @@ func _enter_state(old_state, new_state):
 			finalize_turn()
 			return
 		
-		path_to_nearest_target = []
-		var scored_tiles = analyze_tile_scores()
-		
+		nearest_path_to_nearest_target = []
+		var scored_tiles = await analyze_tile_scores()
+	
 		#if standing still is better then just stand still
 		scored_tiles = scored_tiles.filter(func (e): return e.value != 0)
-		print(">scored_tiles ", scored_tiles)
 		if scored_tiles.size() == 0:
-			print(">no scored_tiles finalize_turn ", host.entity_name)
-			print(">path_to_nearest_target ", path_to_nearest_target)
+			print(">no better move tiles finalize_turn ", host.entity_name)
+			finalize_turn()
 			return
 		else: 
 			print(">found scored_tiles for ", host.entity_name)
@@ -124,15 +123,20 @@ func analyze_tile_scores():
 			Grid.HIGHLIGHT_LAYERS.DEBUG
 		)
 	
-	path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
-		host.team,
-		WorldManager.level.grid.local_to_map(host.position), 
-		WorldManager.level.grid.local_to_map(target.position)
+	
+	nearest_path_to_nearest_target = (
+		WorldManager.level.grid.get_nearest_path(
+			host.team,
+			WorldManager.level.grid.local_to_map(host.position), 
+			WorldManager.level.grid.local_to_map(target.position)
+		)
 	)
 	
+	
 	#if no path, then try to get as close as possbile by disregarding obstacles 
-	if path_to_nearest_target.size() == 0:
-		path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+	if nearest_path_to_nearest_target.size() == 0:
+		Util.sysprint("AI ATTACK", "found no nearest_path, now searching without obstacles")
+		nearest_path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
 			host.team,
 			WorldManager.level.grid.local_to_map(host.position), 
 			WorldManager.level.grid.local_to_map(target.position),
@@ -140,7 +144,6 @@ func analyze_tile_scores():
 		)
 	
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
-	print("moveable tiles ", moveable_tiles)
 	moveable_tiles.push_front(host.map_position)
 	for tile in moveable_tiles:
 		var scored_tile = {
@@ -148,10 +151,8 @@ func analyze_tile_scores():
 			"value": get_tile_value(tile)
 		}
 		scored_tiles.push_front(scored_tile)
-		print("scored_tiles push_front", scored_tile)
 	
 	var current_tile_value = get_tile_value(host.map_position)
-	print("scored_tiles current_tile_value", current_tile_value)
 	
 	#remove less than the current standing tile value (preferr to stay on the same tile)
 	scored_tiles.map(func (e):
@@ -181,13 +182,12 @@ func get_tile_value(tile_pos:Vector2i)->int:
 				value += 10
 	
 	#soft increment towards the target
-	var host_map_pos = WorldManager.level.grid.local_to_map(host.position)
-	value += host_map_pos.distance_to(tile_pos)
+	#value += host_map_pos.distance_to(tile_pos)
 	
 	#increment by pathfinding to target
 	if tile_value_factors.is_target_enabled:
-		if path_to_nearest_target.has(tile_pos):
-			value += 5 
+		if nearest_path_to_nearest_target.has(tile_pos):
+			value += 5 + host.map_position.distance_to(tile_pos)
 	
 	#decrement by already threatened tiles
 	if threat_tiles.has(tile_pos):

@@ -3,6 +3,8 @@ extends Node
 var scene_node
 var current_scene
 
+const SCENE_MAP = "res://src/screens/map/Map.tscn"
+
 func register_game_node(_scene_node:Control):
 	scene_node = _scene_node
 

@@ -45,6 +45,7 @@ alignment = 1
 
 [node name="UIContainer" type="Control" parent="."]
 anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("3_oas52")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

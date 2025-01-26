@@ -229,7 +229,7 @@ func _on_death() -> void:
 		remove_from_group(group)
 		
 	if team == C.TEAM.ENEMY:
-		WorldManager.level.check_player_victory()
+		await WorldManager.level.check_player_victory()
 
 	print("animation_counter ", animation_counter)
 	if animation_counter != 0:

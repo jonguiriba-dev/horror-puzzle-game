@@ -55,15 +55,15 @@ func analyze_tile_scores():
 			Grid.HIGHLIGHT_LAYERS.DEBUG
 		)
 	
-	path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+	nearest_path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
 		host.team,
 		WorldManager.level.grid.local_to_map(host.position), 
 		WorldManager.level.grid.local_to_map(nearest.position)
 	)
 	
 	#if no path, then try to get as close as possbile by disregarding obstacles 
-	if path_to_nearest_target.size() == 0:
-		path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
+	if nearest_path_to_nearest_target.size() == 0:
+		nearest_path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
 			host.team,
 			WorldManager.level.grid.local_to_map(host.position), 
 			WorldManager.level.grid.local_to_map(nearest.position),

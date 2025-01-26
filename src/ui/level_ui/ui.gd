@@ -37,11 +37,16 @@ signal end_turn_pressed
 signal undo_move_pressed
 signal turn_order_pressed
 signal strategy_changed
+signal overlay_clicked
 
 func _ready() -> void:
 	game_start_overlay.hide()
 	victory_overlay.hide()
-	overlays.visible = true
+	overlays.hide()
+	overlays.clicked.connect(func():
+		if overlays.is_visible_in_tree():
+			overlay_clicked.emit()
+	)
 	clear_context()
 	hide_strategies()
 	
@@ -168,8 +173,8 @@ func _on_turn_order_pressed() -> void:
 		
 func _on_undo_move_pressed() -> void:
 	undo_move_pressed.emit()
-
-func _unhandled_key_input(event: InputEvent) -> void:
+	
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("console"):
 		if debug.visible:
 			debug.hide()

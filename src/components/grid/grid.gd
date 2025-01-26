@@ -56,18 +56,20 @@ func _ready() -> void:
 	astar_grid.update()
 	tile_selected.connect(_on_tile_selected)
 	
-	for cell_pos in tiles_layer.get_used_cells():
-		var coord_label = Label.new()
-		grid_label.add_child(coord_label)
-		coord_label.position = map_to_local(cell_pos) + Vector2(-2,2)
-		coord_label.text = "(%s,%s)" % [cell_pos.x, cell_pos.y]
-		coord_label.set("theme_override_font_sizes/font_size",6)
-	if !Debug.show_grid_coords_label:
-		grid_label.hide()
+	if grid_label:
+		for cell_pos in tiles_layer.get_used_cells():
+			var coord_label = Label.new()
+			grid_label.add_child(coord_label)
+			coord_label.position = map_to_local(cell_pos) + Vector2(-2,2)
+			coord_label.text = "(%s,%s)" % [cell_pos.x, cell_pos.y]
+			coord_label.set("theme_override_font_sizes/font_size",6)
+		if !Debug.show_grid_coords_label:
+			grid_label.hide()
 	
 enum TILE_EXCLUDE_FLAGS{
 	EXCLUDE_OBSTACLES = 1,
 	EXCLUDE_ENEMIES = 2,
+	EXCLUDE_OBSTACLES_ENEMIES = 3,
 	EXCLUDE_ALLIES = 4,
 	EXCLUDE_OBSTACLES_ALLIES = 5,
 	EXCLUDE_ALL_PROPS = 7,
@@ -93,11 +95,15 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 	ally_tiles = ally_entity_tiles
 	ally_tiles.append_array(neutral_entity_tiles)
 	ally_tiles.append_array(player_entity_tiles)
+	
 	if team == C.TEAM.ENEMY:
 		enemy_tiles = ally_entity_tiles
 		enemy_tiles.append_array(neutral_entity_tiles)
 		enemy_tiles.append_array(player_entity_tiles)
 		ally_tiles = enemy_entity_tiles
+	
+	#clear_all_highlights(HIGHLIGHT_LAYERS.DEBUG)
+	#set_highlight_area(ally_tiles,HIGHLIGHT_COLORS.PURPLE)
 	
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
@@ -116,7 +122,8 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_ALLIES) != 0:
 		for ally_pos in ally_tiles:
 			tiles.erase(ally_pos)
-		
+			astar_grid.set_point_solid(ally_pos)
+			
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_EMPTY) != 0:
 		for tile in tiles.duplicate():
 			if (
@@ -185,7 +192,12 @@ func map_to_local(map_pos:Vector2i)->Vector2:
 	return prop_layer.map_to_local(map_pos)
 	
 func get_nearest_path(team:C.TEAM, source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
-	get_possible_tiles(team, 1 if include_obstacles else 3)
+	get_possible_tiles(
+		team, 
+		TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES if 
+		include_obstacles else 
+		TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ENEMIES
+	)
 	var path = astar_grid.get_id_path(source, target)
 	if path.size() > 0:
 		path.remove_at(0)
