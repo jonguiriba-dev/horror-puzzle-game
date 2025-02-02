@@ -15,6 +15,7 @@ class_name AbilityProp
 @export var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
 @export var tile_exclude_self:=false
 @export var is_action:=true
+@export var description:="ability description"
 
 @export_file("animation_*gd") var animation_script
 @export_file("*gd") var custom_ability_script

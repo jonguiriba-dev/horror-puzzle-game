@@ -9,6 +9,7 @@ func get_vfx_node(vfx_name:String):
 			return preload("res://src/components/objects/effects/hit_spark/HitSpark.tscn").instantiate()
 
 func spawn(vfx_name:String,host:Node2D,options:Dictionary={}):
+	
 	var node:Vfx
 	var wait_time
 	match vfx_name:

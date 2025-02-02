@@ -14,7 +14,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		var region = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_REGIONS)
 		if region:
-			SceneManager.change_scene(region.scene)
+			SceneManager.change_scene(region.scene,true)
 			
 		
 func _on_region_area_entered(region) -> void:

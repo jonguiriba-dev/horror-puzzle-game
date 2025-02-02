@@ -126,7 +126,7 @@ offset_right = -32.0
 offset_bottom = -23.0
 mouse_filter = 1
 script = ExtResource("3_2fdwi")
-scene = "res://src/levels/tests/demo/demo.tscn"
+scene = "res://src/levels/cave/Cave.tscn"
 
 [node name="Area2D" type="Area2D" parent="Shoptown"]
 position = Vector2(107, 75)
@@ -479,7 +479,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
 script = ExtResource("3_2fdwi")
-scene = "res://src/levels/tests/demo/demo.tscn"
+scene = "res://src/levels/cave/Cave.tscn"
 
 [node name="Area2D" type="Area2D" parent="GoodCastle"]
 position = Vector2(37, -89)

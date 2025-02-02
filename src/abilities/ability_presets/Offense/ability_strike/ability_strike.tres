@@ -21,5 +21,6 @@ aoe_pattern = 3
 tile_exclude_flag = 5
 tile_exclude_self = false
 is_action = true
+description = "ability description"
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=38 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/ui/level_ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Script" path="res://src/ui/level_ui/context_menu.gd" id="2_0mq18"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="18_gcsod"]
 [ext_resource type="Script" path="res://src/ui/level_ui/overlays.gd" id="18_xd1td"]
 [ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/ui/level_ui/SpriteButton.tscn" id="19_mg8vx"]
+[ext_resource type="PackedScene" uid="uid://dcxbsateoow86" path="res://src/ui/level_ui/overlays/RewardOverlay.tscn" id="20_f1m0d"]
 [ext_resource type="PackedScene" uid="uid://df3drhl7cxiip" path="res://src/shaders/speedlines/sample.tscn" id="22_4mp75"]
 
 [sub_resource type="Gradient" id="Gradient_t4rwf"]
@@ -81,8 +82,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -432,9 +431,9 @@ theme_override_font_sizes/font_size = 40
 [node name="Endturn" type="Button" parent="."]
 custom_minimum_size = Vector2(254, 96)
 layout_mode = 0
-offset_left = 2144.0
+offset_left = 2168.0
 offset_top = 1268.0
-offset_right = 2398.0
+offset_right = 2422.0
 offset_bottom = 1364.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -551,6 +550,7 @@ texture = ExtResource("6_wi4k2")
 centered = false
 
 [node name="Victory" type="Control" parent="Overlays"]
+visible = false
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
@@ -609,6 +609,7 @@ scale = Vector2(5.63069, 10.0212)
 texture = SubResource("GradientTexture2D_fryhh")
 
 [node name="TurnStart" type="Control" parent="Overlays"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -680,6 +681,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.466667)
+
+[node name="RewardOverlay" parent="Overlays" instance=ExtResource("20_f1m0d")]
 
 [node name="NpcPortrait" type="Control" parent="."]
 visible = false

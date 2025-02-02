@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=4 uid="uid://c7y4ec3rrkgjv"]
+[gd_scene load_steps=27 format=4 uid="uid://c7y4ec3rrkgjv"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_025me"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_eodui"]
 [ext_resource type="Resource" uid="uid://br6uaxjggcqlg" path="res://src/levels/cave/cave_spawn_config.tres" id="2_ufs88"]
 [ext_resource type="TileSet" uid="uid://s4ki2g0cd8rf" path="res://src/levels/cave/cave_tileset.tres" id="3_2w05r"]
+[ext_resource type="Resource" uid="uid://exjcc57kvq8o" path="res://src/levels/cave/cave_rewards_config.tres" id="3_lwu6q"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_jovxc"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="5_xtins"]
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_6ap5s"]
@@ -109,7 +110,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_025me")
+dialogues = null
+orientation = null
 spawn_config = ExtResource("2_ufs88")
+rewards_config = ExtResource("3_lwu6q")
 
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2(-48, 28)

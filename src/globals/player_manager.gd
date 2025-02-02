@@ -10,9 +10,12 @@ const STARTING_UNIT_PRESETS := [
 ]
 
 var units := []
-
+var inventory := {
+	"abilities": []
+}
 
 func _ready() -> void:
+	print("READY PLAYER MANAGER")
 	if units == []:
 		load_starting_units()
 
@@ -22,4 +25,4 @@ func load_starting_units():
 	for starting_unit_preset in STARTING_UNIT_PRESETS:
 		print("> ",starting_unit_preset)
 		units.push_front(EntityManager.create_entity(starting_unit_preset))
-	
+		

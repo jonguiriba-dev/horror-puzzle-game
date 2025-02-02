@@ -24,7 +24,9 @@ var max_action_counter := 1
 var animation_counter := 0
 var map_position:Vector2i:
 	get:
-		return WorldManager.level.grid.local_to_map(position)
+		if WorldManager.level:
+			return WorldManager.level.grid.local_to_map(position)
+		return Vector2i.ZERO
 var flip_h:=false
 var threat = null
 var status_effects:Array[Status] = []
@@ -219,9 +221,9 @@ func _on_hit(damage:int) -> void:
 	if health <= 0:
 		health = 0
 		death.emit()
-	
-	VfxManager.flash(sprite,Color.DARK_RED,0.15)
-	VfxManager.spawn("hit-spark-1",self,{"offset":Vector2(randi_range(-12,12),randi_range(-12,4))})
+	else:
+		VfxManager.flash(sprite,Color.DARK_RED,0.15)
+		VfxManager.spawn("hit-spark-1",self,{"offset":Vector2(randi_range(-12,12),randi_range(-12,4))})
 	
 	
 func _on_death() -> void:

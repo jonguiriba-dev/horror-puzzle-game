@@ -18,6 +18,7 @@ enum STATE{
 @onready var game_start_overlay := $Overlays/GameStart
 @onready var victory_overlay := $Overlays/Victory
 @onready var turn_start_overlay := $Overlays/TurnStart
+@onready var reward_overlay :RewardOverlay= $Overlays/RewardOverlay
 @onready var turn_start_overlay_background := $Overlays/TurnStart/Background
 @onready var turn_start_overlay_label := $Overlays/TurnStart/Label
 @onready var overlays := $Overlays
@@ -38,10 +39,12 @@ signal undo_move_pressed
 signal turn_order_pressed
 signal strategy_changed
 signal overlay_clicked
+signal reward_card_selected(reward_card)
 
 func _ready() -> void:
 	game_start_overlay.hide()
 	victory_overlay.hide()
+	reward_overlay.hide()
 	overlays.hide()
 	overlays.clicked.connect(func():
 		if overlays.is_visible_in_tree():
@@ -72,6 +75,7 @@ func clear_context():
 	
 func hide_portrait():
 	portrait_container.hide()
+	
 func show_portrait():
 	pass
 	#portrait_container.show()
@@ -151,6 +155,19 @@ func show_strategies():
 	strategy_node.position = strategy_node_prev_pos
 	is_strategies_showing = true
 
+#limit to 3
+func show_reward_overlay(ability_props:Array[AbilityProp]):
+	reward_overlay.populate_with_abilities(ability_props)
+	reward_overlay.show()
+	reward_overlay.selected_card.connect(
+		func(e):
+			print("SELECTED CARD",e)
+			reward_card_selected.emit(e),
+		CONNECT_ONE_SHOT
+	)
+func hide_reward_overlay():
+	reward_overlay.hide()
+	
 func _on_strategy_selected(strategy:C.STRATEGIES):
 	if strategy != WorldManager.level.strategy:
 		strategy_changed.emit()

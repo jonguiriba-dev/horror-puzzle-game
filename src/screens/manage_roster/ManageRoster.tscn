@@ -1,12 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://2hkv4xg7vv6r"]
+[gd_scene load_steps=19 format=4 uid="uid://2hkv4xg7vv6r"]
 
 [ext_resource type="Script" path="res://src/screens/manage_roster/manage_roster.gd" id="1_2af76"]
-[ext_resource type="PackedScene" uid="uid://b1nklre06x1x4" path="res://src/components/grid/Grid.tscn" id="1_b8sl2"]
+[ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_1xkho"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="2_d0bkh"]
+[ext_resource type="TileSet" uid="uid://1y6hgwsryiu2" path="res://src/components/grid/city_tileset.tres" id="3_dx7w1"]
 [ext_resource type="Resource" uid="uid://b5ej70tnc1s0t" path="res://src/entities/entity/presets/main_characters/layla/layla_preset.tres" id="3_q6ltb"]
+[ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="4_4cvsn"]
 [ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres" id="4_lv2ry"]
+[ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="5_24nyv"]
 [ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/main_characters/talya/talya_preset.tres" id="5_xww0w"]
 [ext_resource type="Resource" uid="uid://clywh0svuxrk4" path="res://src/entities/entity/presets/allies/knight/knight_preset.tres" id="6_8bglm"]
+[ext_resource type="TileSet" uid="uid://d4bdxckthb2de" path="res://src/components/grid/prop_tileset.tres" id="6_aenym"]
 [ext_resource type="LabelSettings" uid="uid://pohtyfrp5ww1" path="res://src/screens/manage_roster/unit_details_label_settings.tres" id="7_ge3kq"]
 [ext_resource type="LabelSettings" uid="uid://bvxclt427koii" path="res://src/screens/manage_roster/section_label_settings.tres" id="8_vbvyv"]
 [ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="9_jqa2a"]
@@ -58,32 +62,78 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4375, 0.402115, 0.323676, 1)
 
-[node name="Grid" parent="Anchor" instance=ExtResource("1_b8sl2")]
+[node name="Grid" type="Node2D" parent="Anchor"]
 position = Vector2(-280, -158)
+script = ExtResource("2_1xkho")
 
-[node name="Entity" parent="Anchor/Grid/PropLayer" index="0" instance=ExtResource("2_d0bkh")]
+[node name="TileMapLayer" type="TileMapLayer" parent="Anchor/Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_map_data = PackedByteArray("AAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAABAP3/AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP3/AAAAAAAAAAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD9/wQAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAP7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
+tile_set = ExtResource("3_dx7w1")
+
+[node name="ThreatHighlightLayer" type="TileMapLayer" parent="Anchor/Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("4_4cvsn")
+
+[node name="AbilityHighlightLayer" type="TileMapLayer" parent="Anchor/Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("4_4cvsn")
+
+[node name="CursorLayer" type="TileMapLayer" parent="Anchor/Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("5_24nyv")
+
+[node name="DebugHighlightLayer" type="TileMapLayer" parent="Anchor/Grid"]
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("4_4cvsn")
+
+[node name="PropLayer" type="TileMapLayer" parent="Anchor/Grid"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(264, 141)
+tile_set = ExtResource("6_aenym")
+
+[node name="Entity" parent="Anchor/Grid/PropLayer" instance=ExtResource("2_d0bkh")]
 position = Vector2(33, 33)
 preset = ExtResource("3_q6ltb")
 
-[node name="Entity2" parent="Anchor/Grid/PropLayer" index="1" instance=ExtResource("2_d0bkh")]
+[node name="Entity2" parent="Anchor/Grid/PropLayer" instance=ExtResource("2_d0bkh")]
 position = Vector2(65, 17)
 preset = ExtResource("4_lv2ry")
 
-[node name="Entity3" parent="Anchor/Grid/PropLayer" index="2" instance=ExtResource("2_d0bkh")]
+[node name="Entity3" parent="Anchor/Grid/PropLayer" instance=ExtResource("2_d0bkh")]
 position = Vector2(1, 48)
 preset = ExtResource("5_xww0w")
 
-[node name="Entity4" parent="Anchor/Grid/PropLayer" index="3" instance=ExtResource("2_d0bkh")]
+[node name="Entity4" parent="Anchor/Grid/PropLayer" instance=ExtResource("2_d0bkh")]
 position = Vector2(-16, 40)
 preset = ExtResource("6_8bglm")
 
-[node name="Entity5" parent="Anchor/Grid/PropLayer" index="4" instance=ExtResource("2_d0bkh")]
+[node name="Entity5" parent="Anchor/Grid/PropLayer" instance=ExtResource("2_d0bkh")]
 position = Vector2(-33, 33)
 preset = ExtResource("6_8bglm")
 
-[node name="Entity6" parent="Anchor/Grid/PropLayer" index="5" instance=ExtResource("2_d0bkh")]
+[node name="Entity6" parent="Anchor/Grid/PropLayer" instance=ExtResource("2_d0bkh")]
 position = Vector2(15, 25)
 preset = ExtResource("6_8bglm")
+
+[node name="TeamPositionLayer" type="TileMapLayer" parent="Anchor/Grid"]
+visible = false
+tile_map_data = PackedByteArray("AAD6//7/AAACAAAAAAD6//3/AAACAAAAAAD7//z/AAACAAAAAAD7//3/AAACAAAAAAD7//7/AAACAAAAAAD7////AAACAAAAAAD7/wAAAAACAAAAAAD7/wEAAAACAAAAAAD7/wIAAAACAAAAAAD7/wMAAAACAAAAAAD7/wQAAAACAAAAAAD6/wAAAAACAAAAAAD6////AAACAAAAAAD6/wEAAAACAAAAAAD6/wIAAAACAAAAAAD6/wMAAAACAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAJAAIAAAADAAAAAAAJAAMAAAADAAAAAAAJAAQAAAADAAAAAAAJAP3/AAADAAAAAAAJAPz/AAADAAAAAAAJAP7/AAADAAAAAAAJAP//AAADAAAAAAAIAAQAAAADAAAAAAAIAAMAAAADAAAAAAAIAAIAAAADAAAAAAAIAAEAAAADAAAAAAAIAAAAAAADAAAAAAAIAP//AAADAAAAAAAIAP7/AAADAAAAAAAIAP3/AAADAAAAAAAIAPz/AAADAAAAAAAHAAQAAAADAAAAAAAHAAMAAAADAAAAAAAHAAIAAAADAAAAAAAHAAEAAAADAAAAAAAHAAAAAAADAAAAAAAHAP//AAADAAAAAAAHAP7/AAADAAAAAAAHAP3/AAADAAAAAAAHAPz/AAADAAAAAAD8//z/AAACAAAAAAD8//3/AAACAAAAAAD8//7/AAACAAAAAAD8////AAACAAAAAAD8/wAAAAACAAAAAAD8/wEAAAACAAAAAAD8/wIAAAACAAAAAAD8/wMAAAACAAAAAAD8/wQAAAACAAAAAAD9//3/AAAAAAAAAAD9//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD+//z/AAAAAAAAAAD9/wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD///z/AAAAAAAAAAD///v/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAP3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAACAPz/AAAAAAAAAAADAPz/AAAAAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAACAAQAAAAAAAAAAAADAAIAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAAEAAAAAAAAAAAADAAQAAAAAAAAAAAACAAIAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAP3/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPv/AAAAAAAAAAABAPv/AAAAAAAAAAACAPv/AAAAAAAAAAAEAPz/AAAAAAAAAAADAPv/AAAAAAAAAAAEAP3/AAAAAAAAAAABAP7/AAAAAAAAAAAGAAQAAAADAAAAAAAGAAMAAAADAAAAAAAGAAIAAAADAAAAAAAGAAAAAAADAAAAAAAGAP//AAADAAAAAAAGAP7/AAADAAAAAAAGAPz/AAADAAAAAAAGAP3/AAADAAAAAAAGAAEAAAADAAAAAAD+/wMAAAAAAAAAAAA=")
+tile_set = ExtResource("4_4cvsn")
+
+[node name="GridLabel" type="Control" parent="Anchor/Grid"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 264.0
+offset_top = 141.0
+offset_right = 264.0
+offset_bottom = 141.0
 
 [node name="Details" type="Control" parent="Anchor"]
 anchors_preset = 0
@@ -273,6 +323,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
 [node name="MapButton" type="Button" parent="Anchor"]
+layout_mode = 0
 offset_left = -307.0
 offset_top = -164.0
 offset_right = -257.0
@@ -301,6 +352,39 @@ label_settings = SubResource("LabelSettings_fm36n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Anchor/MapButton" to="." method="_on_map_button_pressed"]
+[node name="Abilities" type="Control" parent="Anchor"]
+anchors_preset = 0
+offset_left = -307.0
+offset_top = -124.0
+offset_right = -212.0
+offset_bottom = -6.0
 
-[editable path="Anchor/Grid"]
+[node name="Bg" type="ColorRect" parent="Anchor/Abilities"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.761719, 0.695913, 0.546743, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Anchor/Abilities"]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 95.0
+offset_bottom = 116.0
+
+[node name="Label" type="Label" parent="Anchor/Abilities/VBoxContainer"]
+layout_mode = 2
+text = "SADASDsadasdasdasd"
+label_settings = ExtResource("7_ge3kq")
+
+[node name="SectionLabel" type="Label" parent="Anchor/Abilities"]
+offset_left = 7.0
+offset_top = -7.0
+offset_right = 54.0
+offset_bottom = 15.333
+text = "Abilities"
+label_settings = ExtResource("8_vbvyv")
+
+[connection signal="pressed" from="Anchor/MapButton" to="." method="_on_map_button_pressed"]

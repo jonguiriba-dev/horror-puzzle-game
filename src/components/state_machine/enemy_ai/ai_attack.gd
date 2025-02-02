@@ -219,8 +219,8 @@ func finalize_turn():
 	find_threat()
 	to_idle = true
 	free_debug()
-	host.turn_end.emit()
 	Util.sysprint("%s:finalize_turn"%[host.entity_name], "end")
+	host.turn_end.emit()
 
 func free_debug():
 	if get("heatmap_tile_labels"):

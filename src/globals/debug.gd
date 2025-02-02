@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.level.strategy]
 		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.level.starting_position]
 		text += "\nentity turn queue: %s"%", ".join(WorldManager.level.ai_turn_queue.map(func(e): if is_instance_valid(e): return e.entity_name))
-		if WorldManager.level.current_ai_entity_in_action:
+		if is_instance_valid(WorldManager.level.current_ai_entity_in_action):
 			text += "\nentity in action: %s"%WorldManager.level.current_ai_entity_in_action.entity_name
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:

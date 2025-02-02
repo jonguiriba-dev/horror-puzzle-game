@@ -3,9 +3,11 @@ class_name World
 
 @export var dialogues:Array[Dialogue]=[]
 @export var orientation:=C.ORIENTATION.HORIZONTAL
+@export var spawn_config:LevelSpawnConfig
+@export var rewards_config:LevelRewardsConfig
 
 @onready var grid: Grid = $Grid
-@export var spawn_config:LevelSpawnConfig
+
 var team_turn:C.TEAM
 var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER]
 var ai_turn_queue = []
@@ -38,6 +40,7 @@ func _ready() -> void:
 	_on_scenetree_ready()
 	
 func end_turn():
+	UIManager.ui.clear_context()
 	turn_changed.emit()
 	turn_end.emit(team_turn)
 	turn_order.push_front(turn_order.pop_back())
@@ -47,6 +50,7 @@ func end_turn():
 	
 func _start_player_turn():
 	Util.sysprint("_start_player_turn","start")
+	
 	for player_entity in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
 		player_entity.turn_start.emit()
 	
@@ -127,12 +131,16 @@ func game_start():
 	
 	team_turn = turn_order[0]
 	turn_start.emit(team_turn)
+	
 
 func spawn_units():
 	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
 	player_spawn_tiles.shuffle()
 	for player_unit in PlayerManager.units:
-		EntityManager.spawn_entity(WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()) , player_unit)
+		EntityManager.spawn_entity(
+			WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()),
+			player_unit
+		)
 	
 	var spawn_record = {}
 	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
@@ -172,13 +180,36 @@ func _on_dialogue_input_waiting():
 	input_waiting_on_dialogue = true
 
 func check_player_victory():
-	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
+	#if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
 		UIManager.show_victory_overlay()
+		var player_entities = get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES)
+		player_entities.append_array(get_tree().get_nodes_in_group(C.GROUPS_ALLIES)) 
+		
 		UIManager.ui.overlay_clicked.connect(func():
+			
 			UIManager.hide_victory_overlay()
-			SceneManager.change_scene(SceneManager.SCENE_MAP)
+			var reward_abilities = get_reward_abilities()
+			UIManager.show_reward_overlay(reward_abilities)
+			UIManager.reward_card_selected.connect(func(reward_card):
+				PlayerManager.inventory.abilities.push_front(reward_card.get_meta("data"))
+				SceneManager.change_scene(SceneManager.SCENE_MAP)
+				for player_entity in player_entities:
+					player_entity.get_parent().remove_child(player_entity)
+				WorldManager.level = null
+				UIManager.clear_ui()
+			, CONNECT_ONE_SHOT)
+			
 		, CONNECT_ONE_SHOT)	
-	
+
+func get_reward_abilities():
+	var abilities :Array[AbilityProp]= []
+	while abilities.size() < rewards_config.max_rewards:
+		for ability_reward in rewards_config.ability_reward_pool:
+			var rng = randf_range(0.1,1.0)
+			if rng < ability_reward.chance:
+				abilities.push_front(ability_reward.value)
+	print("get_reward_abilities",abilities)
+	return abilities
 func clear_entity_moved_history():
 	entity_moved_history.clear()
 	if UIManager.ui:
@@ -284,6 +315,7 @@ func _on_scenetree_ready():
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
+	check_player_victory()
 
 func _on_end_turn_pressed():
 	Util.sysprint("Level:_on_end_turn_pressed","start")
@@ -325,14 +357,12 @@ func _on_ai_unit_turn_end():
 		#keep looping to find a valid ai_entity that could take its turn
 		while ai_turn_queue.size() > 0:
 			var ai_entity = ai_turn_queue.pop_front()
+			await Util.wait(0.1)
 			if is_instance_valid(ai_entity):
 				print("my turn: ", ai_entity.entity_name)
 				current_ai_entity_in_action = ai_entity
 				if Debug.highlight_entity_in_action:
 					current_ai_entity_in_action.sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
-
-					
-				#await Util.wait_for_input()
 				ai_entity.turn_start.emit()
 				break
 			

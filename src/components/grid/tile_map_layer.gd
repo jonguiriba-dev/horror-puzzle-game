@@ -59,7 +59,6 @@ func add_test(map_position:Vector2):
 	var offset_vector = Vector2(0,-12)
 	var entity = preload("res://src/entities/entity/Entity.tscn").instantiate()
 	entity.position = sprite_pos
-	entity.sprite_texture = preload("res://assets/obstacle.png")
 	add_child(entity)
 	entity.sprite.offset = offset_vector
 	entity.add_to_group(C.TARGETS)
