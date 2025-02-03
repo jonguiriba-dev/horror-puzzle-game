@@ -42,7 +42,7 @@ func show_reward_overlay(ability_props:Array[AbilityProp]):
 		CONNECT_ONE_SHOT
 	)
 	
-func hide_reward_overlay(ability_props:Array[AbilityProp]):
+func hide_reward_overlay():
 	ui.hide_reward_overlay()
 	ui.overlays.hide()
 

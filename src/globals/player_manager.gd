@@ -26,3 +26,12 @@ func load_starting_units():
 		print("> ",starting_unit_preset)
 		units.push_front(EntityManager.create_entity(starting_unit_preset))
 		
+func get_units_by_name(name:String):
+	
+	return units.filter(func(e): 
+		if e.entity_name == name:
+			return e
+	)
+	
+func add_entity_ability(entity:Entity,ability:AbilityProp):
+	entity.add_ability(ability)

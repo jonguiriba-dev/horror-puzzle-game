@@ -168,7 +168,12 @@ func set_orientation(vertical:bool):
 func clear_threat():
 	threat = null
 	threat_updated.emit()
-	
+
+func add_ability(ability_prop:AbilityProp):
+	var ability_node = Ability.new()
+	ability_node.ability_props = ability_prop
+	add_child(ability_node)
+
 func _on_turn_start():
 	move_counter = max_move_counter
 	action_counter = max_action_counter

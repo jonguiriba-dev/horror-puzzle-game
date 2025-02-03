@@ -180,7 +180,7 @@ func _on_dialogue_input_waiting():
 	input_waiting_on_dialogue = true
 
 func check_player_victory():
-	#if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
+	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
 		UIManager.show_victory_overlay()
 		var player_entities = get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES)
 		player_entities.append_array(get_tree().get_nodes_in_group(C.GROUPS_ALLIES)) 
@@ -191,7 +191,11 @@ func check_player_victory():
 			var reward_abilities = get_reward_abilities()
 			UIManager.show_reward_overlay(reward_abilities)
 			UIManager.reward_card_selected.connect(func(reward_card):
-				PlayerManager.inventory.abilities.push_front(reward_card.get_meta("data"))
+				var ability_prop = reward_card.get_meta("data")
+				var entity = reward_card.get_meta("target_entity")
+				PlayerManager.add_entity_ability(entity,ability_prop)
+				UIManager.hide_reward_overlay()
+				#PlayerManager.inventory.abilities.push_front(reward_card.get_meta("data"))
 				SceneManager.change_scene(SceneManager.SCENE_MAP)
 				for player_entity in player_entities:
 					player_entity.get_parent().remove_child(player_entity)
@@ -315,7 +319,7 @@ func _on_scenetree_ready():
 	viewport_ready.emit()
 	await game_start()
 	_start_player_turn()
-	check_player_victory()
+	#check_player_victory()
 
 func _on_end_turn_pressed():
 	Util.sysprint("Level:_on_end_turn_pressed","start")
