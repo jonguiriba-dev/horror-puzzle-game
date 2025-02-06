@@ -5,10 +5,11 @@
 [ext_resource type="Script" path="res://src/screens/map/map_region.gd" id="3_2fdwi"]
 [ext_resource type="LabelSettings" uid="uid://cxmoa2sbp616c" path="res://src/screens/map/map_label_settings.tres" id="3_a2uu1"]
 [ext_resource type="PackedScene" uid="uid://cu1gi05ajx8h4" path="res://src/screens/map/map_location.tscn" id="4_mxdcs"]
-[ext_resource type="LabelSettings" uid="uid://bxaq6qh356g02" path="res://src/screens/map/map_location_details_label_settings.tres" id="5_7uo4y"]
 [ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="6_jldv6"]
 [ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="7_2o0wd"]
+[ext_resource type="Script" path="res://src/screens/map/colored_collision_polygon_2d.gd" id="7_4ajck"]
 [ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="8_3anxe"]
+[ext_resource type="Script" path="res://src/screens/map/select_view.gd" id="10_q6nnh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wope"]
 atlas = ExtResource("1_olvll")
@@ -33,9 +34,6 @@ font_size = 12
 font_color = Color(0.184314, 0.168627, 0.0980392, 1)
 outline_size = 8
 outline_color = Color(0.59, 0.55755, 0.413, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_jeq0c"]
-font_size = 8
 
 [node name="Map" type="Control"]
 layout_mode = 3
@@ -80,43 +78,6 @@ label_settings = SubResource("LabelSettings_5yj53")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LocationDetails" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="LocationDetails"]
-layout_mode = 0
-offset_left = -144.0
-offset_top = -132.0
-offset_right = -62.0
-offset_bottom = -29.0
-color = Color(0.132813, 0.132813, 0.132813, 1)
-
-[node name="Label" type="Label" parent="LocationDetails"]
-layout_mode = 0
-offset_left = -138.0
-offset_top = -124.0
-offset_right = -65.0
-offset_bottom = -101.667
-text = "Shop Town"
-label_settings = ExtResource("5_7uo4y")
-
-[node name="Label2" type="Label" parent="LocationDetails"]
-layout_mode = 0
-offset_left = -139.0
-offset_top = -102.0
-offset_right = -65.0
-offset_bottom = 135.0
-text = "Items: 4
-Skills: 5
-Difficulty: 1
-"
-label_settings = SubResource("LabelSettings_jeq0c")
-autowrap_mode = 3
-
 [node name="Shoptown" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -135,6 +96,7 @@ priority = 1
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shoptown/Area2D"]
 polygon = PackedVector2Array(29, 59, 45, 61, 52, 55, 62, 37, 59, 19, 56, -2, 48, -9, 53, -21, 79, -49, 82, -63, 49, -56, 32, -56, 13, -59, -12, -56, -35, -55, -59, -40, -74, -3, -80, 8, -91, 22, -53, 49, -38, 52, -2, 52, 10, 57)
 one_way_collision_margin = 20.7
+script = ExtResource("7_4ajck")
 
 [node name="Side1" parent="Shoptown" instance=ExtResource("4_mxdcs")]
 offset_top = 77.0
@@ -168,12 +130,20 @@ location_name = "Bandit Road"
 
 [node name="RegionLabel" type="Label" parent="Shoptown"]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 117.0
-offset_right = 123.0
-offset_bottom = 139.333
+offset_left = 26.0
+offset_top = 18.0
+offset_right = 94.0
+offset_bottom = 40.333
 text = "Shop Town"
 label_settings = ExtResource("3_a2uu1")
+
+[node name="SelectAnchor" type="Control" parent="Shoptown"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 95.0
+offset_top = 102.0
+offset_right = 95.0
+offset_bottom = 102.0
 
 [node name="Gateway" type="Control" parent="."]
 anchors_preset = 0
@@ -198,224 +168,75 @@ offset_bottom = 180.333
 text = "Gateway"
 label_settings = ExtResource("3_a2uu1")
 
-[node name="BadCastle" type="Control" parent="."]
+[node name="SelectAnchor" type="Control" parent="Gateway"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 245.0
+offset_top = 123.0
+offset_right = 245.0
+offset_bottom = 123.0
+
+[node name="GoodCastle" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
 script = ExtResource("3_2fdwi")
-scene = "res://src/levels/tests/demo/demo.tscn"
+scene = "res://src/levels/cave/Cave.tscn"
 
-[node name="Area2D" type="Area2D" parent="BadCastle"]
-position = Vector2(-188, 45)
+[node name="Area2D" type="Area2D" parent="GoodCastle"]
+position = Vector2(37, -89)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BadCastle/Area2D"]
-polygon = PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GoodCastle/Area2D"]
+polygon = PackedVector2Array(29, 59, 45, 61, 84, 89, 95, 57, 106, 46, 121, 8, 124, -1, 120, -6, 96, -8, 79, -26, 78, -49, 67, -75, 56, -82, 37, -76, 8, -71, -12, -56, -41, -74, -72, -63, -74, -48, -88, -38, -100, -21, -106, -8, -97, -3, -91, 22, -53, 49, -38, 52, -2, 52, 10, 57)
 
-[node name="Side1" parent="BadCastle" instance=ExtResource("4_mxdcs")]
-offset_left = -278.0
-offset_top = 53.0
-offset_right = -168.0
-offset_bottom = 136.0
+[node name="Side1" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
+offset_left = -47.0
+offset_top = -76.0
+offset_right = 63.0
+offset_bottom = 7.0
 mouse_filter = 1
-location_name = "Scorched Plains"
+location_name = "Busy Alley"
 
-[node name="Side2" parent="BadCastle" instance=ExtResource("4_mxdcs")]
-offset_left = -236.0
-offset_top = -18.0
-offset_right = -126.0
-offset_bottom = 65.0
+[node name="Side2" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
+offset_left = 3.0
+offset_top = -154.0
+offset_right = 113.0
+offset_bottom = -71.0
 mouse_filter = 1
-location_name = "XXX Mines"
+location_name = "Stockpiles"
 
-[node name="Side3" parent="BadCastle" instance=ExtResource("4_mxdcs")]
-offset_left = -235.0
-offset_top = 36.0
-offset_right = -125.0
-offset_bottom = 119.0
+[node name="Side3" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
+offset_left = 3.0
+offset_top = -110.0
+offset_right = 113.0
+offset_bottom = -27.0
 mouse_filter = 1
-location_name = "South Town"
+location_name = "King's Throne"
 
-[node name="Side4" parent="BadCastle" instance=ExtResource("4_mxdcs")]
-offset_left = -290.0
-offset_top = 10.0
-offset_right = -180.0
-offset_bottom = 93.0
+[node name="Side4" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 70.0
+offset_bottom = -37.0
 mouse_filter = 1
-location_name = "North Town"
+location_name = "Arcane Sanctum"
 
-[node name="RegionLabel" type="Label" parent="BadCastle"]
-layout_mode = 0
-offset_left = -265.0
-offset_top = -12.0
-offset_right = -195.0
-offset_bottom = 10.333
-text = "Bad Castle"
-label_settings = ExtResource("3_a2uu1")
-
-[node name="LakeTown" type="Control" parent="."]
+[node name="SelectAnchor" type="Control" parent="GoodCastle"]
+layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-script = ExtResource("3_2fdwi")
-scene = "res://src/levels/tests/demo/demo.tscn"
+offset_left = -32.0
+offset_top = -89.0
+offset_right = -32.0
+offset_bottom = -89.0
 
-[node name="Area2D" type="Area2D" parent="LakeTown"]
-position = Vector2(-67, 86)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LakeTown/Area2D"]
-polygon = PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54)
-
-[node name="Side1" parent="LakeTown" instance=ExtResource("4_mxdcs")]
-offset_left = -158.0
-offset_top = 95.0
-offset_right = -48.0
-offset_bottom = 178.0
-mouse_filter = 1
-location_name = "Scorched Plains"
-
-[node name="Side2" parent="LakeTown" instance=ExtResource("4_mxdcs")]
-offset_left = -115.0
-offset_top = 23.0
-offset_right = -5.0
-offset_bottom = 106.0
-mouse_filter = 1
-location_name = "XXX Mines"
-
-[node name="Side3" parent="LakeTown" instance=ExtResource("4_mxdcs")]
-offset_left = -114.0
-offset_top = 77.0
-offset_right = -4.0
-offset_bottom = 160.0
-mouse_filter = 1
-location_name = "South Town"
-
-[node name="Side4" parent="LakeTown" instance=ExtResource("4_mxdcs")]
-offset_left = -169.0
-offset_top = 51.0
-offset_right = -59.0
-offset_bottom = 134.0
-mouse_filter = 1
-location_name = "North Town"
-
-[node name="RegionLabel" type="Label" parent="LakeTown"]
+[node name="RegionLabel" type="Label" parent="GoodCastle"]
 layout_mode = 0
-offset_left = -144.0
-offset_top = 29.0
-offset_right = -74.0
-offset_bottom = 51.333
-text = "Lake Town"
-label_settings = ExtResource("3_a2uu1")
-
-[node name="Portside" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-script = ExtResource("3_2fdwi")
-scene = "res://src/levels/tests/demo/demo.tscn"
-
-[node name="Area2D" type="Area2D" parent="Portside"]
-position = Vector2(58, 155)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Portside/Area2D"]
-polygon = PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 36, -25, 26, -38, 20, -55, 20, -61, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54)
-
-[node name="Side1" parent="Portside" instance=ExtResource("4_mxdcs")]
-offset_left = -33.0
-offset_top = 164.0
-offset_right = 77.0
-offset_bottom = 247.0
-mouse_filter = 1
-location_name = "Scorched Plains"
-
-[node name="Side2" parent="Portside" instance=ExtResource("4_mxdcs")]
-offset_left = 10.0
-offset_top = 92.0
-offset_right = 120.0
-offset_bottom = 175.0
-mouse_filter = 1
-location_name = "XXX Mines"
-
-[node name="Side3" parent="Portside" instance=ExtResource("4_mxdcs")]
-offset_left = 11.0
-offset_top = 146.0
-offset_right = 121.0
-offset_bottom = 229.0
-mouse_filter = 1
-location_name = "South Town"
-
-[node name="Side4" parent="Portside" instance=ExtResource("4_mxdcs")]
-offset_left = -44.0
-offset_top = 120.0
-offset_right = 66.0
-offset_bottom = 203.0
-mouse_filter = 1
-location_name = "North Town"
-
-[node name="RegionLabel" type="Label" parent="Portside"]
-layout_mode = 0
-offset_left = -19.0
-offset_top = 98.0
-offset_right = 51.0
-offset_bottom = 120.333
-text = "Portside"
-label_settings = ExtResource("3_a2uu1")
-
-[node name="DarkForest" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-script = ExtResource("3_2fdwi")
-scene = "res://src/levels/tests/demo/demo.tscn"
-
-[node name="Area2D" type="Area2D" parent="DarkForest"]
-position = Vector2(173, 110)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DarkForest/Area2D"]
-polygon = PackedVector2Array(19, 45, 13, 29, 5, 1, 10, -24, 16, -34, 24, -40, 27, -49, 13, -70, 1, -92, -13, -92, -32, -94, -35, -57, -53, -51, -70, -41, -74, -38, -77, -28, -85, -27, -91, -20, -93, -8, -86, 6, -75, 18, -55, 23, -54, 42, -44, 47, -42, 54, -36, 71, 27, 70, 21, 54)
-
-[node name="Side1" parent="DarkForest" instance=ExtResource("4_mxdcs")]
-offset_left = 82.0
-offset_top = 119.0
-offset_right = 192.0
-offset_bottom = 202.0
-mouse_filter = 1
-location_name = "Scorched Plains"
-
-[node name="Side2" parent="DarkForest" instance=ExtResource("4_mxdcs")]
-offset_left = 125.0
-offset_top = 47.0
-offset_right = 235.0
-offset_bottom = 130.0
-mouse_filter = 1
-location_name = "XXX Mines"
-
-[node name="Side3" parent="DarkForest" instance=ExtResource("4_mxdcs")]
-offset_left = 126.0
-offset_top = 101.0
-offset_right = 236.0
-offset_bottom = 184.0
-mouse_filter = 1
-location_name = "South Town"
-
-[node name="Side4" parent="DarkForest" instance=ExtResource("4_mxdcs")]
-offset_left = 71.0
-offset_top = 75.0
-offset_right = 181.0
-offset_bottom = 158.0
-mouse_filter = 1
-location_name = "North Town"
-
-[node name="RegionLabel" type="Label" parent="DarkForest"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 53.0
-offset_right = 166.0
-offset_bottom = 75.333
-text = "Dark Forest"
+offset_left = -40.0
+offset_top = -146.0
+offset_right = 30.0
+offset_bottom = -123.667
+text = "Good Castle"
 label_settings = ExtResource("3_a2uu1")
 
 [node name="MtRed" type="Control" parent="."]
@@ -473,59 +294,316 @@ offset_bottom = -59.667
 text = "Mt. Red"
 label_settings = ExtResource("3_a2uu1")
 
-[node name="GoodCastle" type="Control" parent="."]
+[node name="SelectAnchor" type="Control" parent="MtRed"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 85.0
+offset_top = -40.0
+offset_right = 85.0
+offset_bottom = -40.0
+
+[node name="DarkForest" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
 script = ExtResource("3_2fdwi")
-scene = "res://src/levels/cave/Cave.tscn"
+scene = "res://src/levels/tests/demo/demo.tscn"
 
-[node name="Area2D" type="Area2D" parent="GoodCastle"]
-position = Vector2(37, -89)
+[node name="Area2D" type="Area2D" parent="DarkForest"]
+position = Vector2(173, 110)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GoodCastle/Area2D"]
-polygon = PackedVector2Array(29, 59, 45, 61, 84, 89, 95, 57, 106, 46, 121, 8, 124, -1, 120, -6, 96, -8, 79, -26, 78, -49, 67, -75, 56, -82, 37, -76, 8, -71, -12, -56, -41, -74, -72, -63, -74, -48, -88, -38, -100, -21, -106, -8, -97, -3, -91, 22, -53, 49, -38, 52, -2, 52, 10, 57)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DarkForest/Area2D"]
+polygon = PackedVector2Array(19, 45, 13, 29, 5, 1, 10, -24, 16, -34, 24, -40, 27, -49, 13, -70, 1, -92, -13, -92, -32, -94, -35, -57, -53, -51, -70, -41, -74, -38, -77, -28, -85, -27, -91, -20, -93, -8, -86, 6, -75, 18, -55, 23, -54, 42, -44, 47, -42, 54, -36, 71, 27, 70, 21, 54)
 
-[node name="Side1" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
-offset_left = -47.0
-offset_top = -76.0
-offset_right = 63.0
-offset_bottom = 7.0
+[node name="Side1" parent="DarkForest" instance=ExtResource("4_mxdcs")]
+offset_left = 82.0
+offset_top = 119.0
+offset_right = 192.0
+offset_bottom = 202.0
 mouse_filter = 1
-location_name = "Busy Alley"
+location_name = "Scorched Plains"
 
-[node name="Side2" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
-offset_left = 3.0
-offset_top = -154.0
-offset_right = 113.0
-offset_bottom = -71.0
+[node name="Side2" parent="DarkForest" instance=ExtResource("4_mxdcs")]
+offset_left = 125.0
+offset_top = 47.0
+offset_right = 235.0
+offset_bottom = 130.0
 mouse_filter = 1
-location_name = "Stockpiles"
+location_name = "XXX Mines"
 
-[node name="Side3" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
-offset_left = 3.0
-offset_top = -110.0
-offset_right = 113.0
-offset_bottom = -27.0
+[node name="Side3" parent="DarkForest" instance=ExtResource("4_mxdcs")]
+offset_left = 126.0
+offset_top = 101.0
+offset_right = 236.0
+offset_bottom = 184.0
 mouse_filter = 1
-location_name = "King's Throne"
+location_name = "South Town"
 
-[node name="Side4" parent="GoodCastle" instance=ExtResource("4_mxdcs")]
-offset_left = -40.0
-offset_top = -120.0
-offset_right = 70.0
-offset_bottom = -37.0
+[node name="Side4" parent="DarkForest" instance=ExtResource("4_mxdcs")]
+offset_left = 71.0
+offset_top = 75.0
+offset_right = 181.0
+offset_bottom = 158.0
 mouse_filter = 1
-location_name = "Arcane Sanctum"
+location_name = "North Town"
 
-[node name="RegionLabel" type="Label" parent="GoodCastle"]
+[node name="RegionLabel" type="Label" parent="DarkForest"]
 layout_mode = 0
-offset_left = -40.0
-offset_top = -146.0
-offset_right = 30.0
-offset_bottom = -123.667
-text = "Good Castle"
+offset_left = 113.0
+offset_top = 29.0
+offset_right = 185.0
+offset_bottom = 51.333
+text = "Dark Forest"
 label_settings = ExtResource("3_a2uu1")
+
+[node name="SelectAnchor" type="Control" parent="DarkForest"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 93.0
+offset_top = 72.0
+offset_right = 93.0
+offset_bottom = 72.0
+
+[node name="Portside" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("3_2fdwi")
+scene = "res://src/levels/tests/demo/demo.tscn"
+
+[node name="Area2D" type="Area2D" parent="Portside"]
+position = Vector2(58, 155)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Portside/Area2D"]
+polygon = PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 36, -25, 26, -38, 20, -55, 20, -61, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54)
+
+[node name="Side1" parent="Portside" instance=ExtResource("4_mxdcs")]
+offset_left = -33.0
+offset_top = 164.0
+offset_right = 77.0
+offset_bottom = 247.0
+mouse_filter = 1
+location_name = "Scorched Plains"
+
+[node name="Side2" parent="Portside" instance=ExtResource("4_mxdcs")]
+offset_left = 10.0
+offset_top = 92.0
+offset_right = 120.0
+offset_bottom = 175.0
+mouse_filter = 1
+location_name = "XXX Mines"
+
+[node name="Side3" parent="Portside" instance=ExtResource("4_mxdcs")]
+offset_left = 11.0
+offset_top = 146.0
+offset_right = 121.0
+offset_bottom = 229.0
+mouse_filter = 1
+location_name = "South Town"
+
+[node name="Side4" parent="Portside" instance=ExtResource("4_mxdcs")]
+offset_left = -44.0
+offset_top = 120.0
+offset_right = 66.0
+offset_bottom = 203.0
+mouse_filter = 1
+location_name = "North Town"
+
+[node name="RegionLabel" type="Label" parent="Portside"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = 160.0
+offset_right = 52.0
+offset_bottom = 182.333
+text = "Portside"
+label_settings = ExtResource("3_a2uu1")
+
+[node name="SelectAnchor" type="Control" parent="Portside"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -22.0
+offset_top = 54.0
+offset_right = -22.0
+offset_bottom = 54.0
+
+[node name="LakeTown" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("3_2fdwi")
+scene = "res://src/levels/tests/demo/demo.tscn"
+
+[node name="Area2D" type="Area2D" parent="LakeTown"]
+position = Vector2(-67, 86)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LakeTown/Area2D"]
+polygon = PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54)
+
+[node name="Side1" parent="LakeTown" instance=ExtResource("4_mxdcs")]
+offset_left = -158.0
+offset_top = 95.0
+offset_right = -48.0
+offset_bottom = 178.0
+mouse_filter = 1
+location_name = "Scorched Plains"
+
+[node name="Side2" parent="LakeTown" instance=ExtResource("4_mxdcs")]
+offset_left = -115.0
+offset_top = 23.0
+offset_right = -5.0
+offset_bottom = 106.0
+mouse_filter = 1
+location_name = "XXX Mines"
+
+[node name="Side3" parent="LakeTown" instance=ExtResource("4_mxdcs")]
+offset_left = -114.0
+offset_top = 77.0
+offset_right = -4.0
+offset_bottom = 160.0
+mouse_filter = 1
+location_name = "South Town"
+
+[node name="Side4" parent="LakeTown" instance=ExtResource("4_mxdcs")]
+offset_left = -169.0
+offset_top = 51.0
+offset_right = -59.0
+offset_bottom = 134.0
+mouse_filter = 1
+location_name = "North Town"
+
+[node name="RegionLabel" type="Label" parent="LakeTown"]
+layout_mode = 0
+offset_left = -144.0
+offset_top = 29.0
+offset_right = -74.0
+offset_bottom = 51.333
+text = "Lake Town"
+label_settings = ExtResource("3_a2uu1")
+
+[node name="SelectAnchor" type="Control" parent="LakeTown"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -125.0
+offset_top = 53.0
+offset_right = -125.0
+offset_bottom = 53.0
+
+[node name="BadCastle" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("3_2fdwi")
+scene = "res://src/levels/tests/demo/demo.tscn"
+
+[node name="Area2D" type="Area2D" parent="BadCastle"]
+position = Vector2(-188, 45)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BadCastle/Area2D"]
+polygon = PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54)
+
+[node name="Side1" parent="BadCastle" instance=ExtResource("4_mxdcs")]
+offset_left = -278.0
+offset_top = 53.0
+offset_right = -168.0
+offset_bottom = 136.0
+mouse_filter = 1
+location_name = "Scorched Plains"
+
+[node name="Side2" parent="BadCastle" instance=ExtResource("4_mxdcs")]
+offset_left = -236.0
+offset_top = -18.0
+offset_right = -126.0
+offset_bottom = 65.0
+mouse_filter = 1
+location_name = "XXX Mines"
+
+[node name="Side3" parent="BadCastle" instance=ExtResource("4_mxdcs")]
+offset_left = -235.0
+offset_top = 36.0
+offset_right = -125.0
+offset_bottom = 119.0
+mouse_filter = 1
+location_name = "South Town"
+
+[node name="Side4" parent="BadCastle" instance=ExtResource("4_mxdcs")]
+offset_left = -290.0
+offset_top = 10.0
+offset_right = -180.0
+offset_bottom = 93.0
+mouse_filter = 1
+location_name = "North Town"
+
+[node name="RegionLabel" type="Label" parent="BadCastle"]
+layout_mode = 0
+offset_left = -265.0
+offset_top = -12.0
+offset_right = -195.0
+offset_bottom = 10.333
+text = "Bad Castle"
+label_settings = ExtResource("3_a2uu1")
+
+[node name="SelectAnchor" type="Control" parent="BadCastle"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -196.0
+offset_top = -41.0
+offset_right = -196.0
+offset_bottom = -41.0
+
+[node name="SelectView" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -121.0
+offset_top = -84.0
+offset_right = -121.0
+offset_bottom = -84.0
+script = ExtResource("10_q6nnh")
+
+[node name="Bg" type="ColorRect" parent="SelectView"]
+layout_mode = 0
+offset_right = 143.0
+offset_bottom = 90.0
+
+[node name="LocationName" type="Label" parent="SelectView"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -9.0
+offset_right = 72.0
+offset_bottom = 13.3333
+text = "Crossroads"
+label_settings = ExtResource("3_a2uu1")
+
+[node name="TypeOfAction" type="ColorRect" parent="SelectView"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 2.0
+offset_right = 138.0
+offset_bottom = 22.0
+color = Color(1, 0.0287017, 0.095904, 1)
+
+[node name="EnemyList" type="HBoxContainer" parent="SelectView"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 59.0
+offset_right = 71.0
+offset_bottom = 83.0
+
+[node name="ColorRect" type="ColorRect" parent="SelectView/EnemyList"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.889188, 0.290437, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="SelectView/EnemyList"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.889188, 0.290437, 1, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="SelectView/EnemyList"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.889188, 0.290437, 1, 1)
 
 [connection signal="pressed" from="PartyButton" to="." method="_on_party_button_pressed"]

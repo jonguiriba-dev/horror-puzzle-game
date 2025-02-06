@@ -13,6 +13,8 @@ var units := []
 var inventory := {
 	"abilities": []
 }
+var gold := 0
+
 
 func _ready() -> void:
 	print("READY PLAYER MANAGER")
@@ -35,3 +37,6 @@ func get_units_by_name(name:String):
 	
 func add_entity_ability(entity:Entity,ability:AbilityProp):
 	entity.add_ability(ability)
+
+func add_gold(amount:int):
+	gold += amount

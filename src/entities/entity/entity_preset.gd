@@ -10,9 +10,14 @@ enum STATE_LISTS{
 
 @export_group("Stats")
 @export var entity_name := ""
-@export var max_health = 1
-@export var move_range = 3
+@export var max_health := 1
+@export var move_range := 3
 @export var team :C.TEAM = C.TEAM.PLAYER
+@export var speed := 5
+@export var max_move_counter := 1
+@export var max_action_counter := 1
+@export var max_ability_slots := 1
+@export var max_equipment_slots := 2
 
 @export_group("Nodes")
 ## Ability script file name
@@ -43,3 +48,30 @@ func get_abilities()->Array:
 
 func get_state_machine()->StateMachine:
 	return load(state_machine).instantiate()
+
+func apply(entity:Entity):
+	Util.sysprint("Entity:loading_preset", "loading_preset")
+	entity.entity_name = entity_name
+	entity.team = team
+	entity.move_range = move_range
+	entity.speed = speed
+	entity.max_move_counter = max_move_counter
+	entity.max_action_counter = max_action_counter
+	entity.max_ability_slots = max_ability_slots
+	entity.max_equipment_slots = max_equipment_slots
+	entity.set_max_health(max_health)
+	
+	for ability in get_abilities():
+		entity.add_child(ability)
+	
+	entity.add_child(get_state_machine())
+	
+	if sprite_frames:
+		entity.sprite.sprite_frames = sprite_frames
+	
+	if portrait_image:
+		entity.portrait_image = load(portrait_image)
+	
+	entity.sprite.position += sprite_offset
+	entity.shadow.position += shadow_offset
+	

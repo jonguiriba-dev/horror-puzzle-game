@@ -1,4 +1,5 @@
 extends Control
+class_name RegionLocation
 
 @export var location_name := "location_name"
 @export var location_image:CompressedTexture2D

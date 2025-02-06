@@ -9,19 +9,24 @@ class_name Entity
 
 @export var preset:EntityPreset
 
-var move_speed = 55
-var portrait_image
-var entity_name := ""
 var max_health := 1
-var health := 1
-var team :C.TEAM = C.TEAM.PLAYER
+var speed := 5
+var exp := 0
+var lvl := 1
 var move_range := 3
-var can_move := false
-var move_counter := 1
-var action_counter := 1
 var max_move_counter := 1
 var max_action_counter := 1
+var max_ability_slots := 1
+var max_equipment_slots := 2 
+var entity_name := ""
+var portrait_image
+var team :C.TEAM = C.TEAM.PLAYER
+var can_move := false
 var animation_counter := 0
+var action_counter := 1
+var move_counter := 1
+var health := 1
+
 var map_position:Vector2i:
 	get:
 		if WorldManager.level:
@@ -43,7 +48,8 @@ signal selected
 signal threat_updated
 
 func _ready() -> void:
-	load_preset(preset)
+	if preset:
+		preset.apply(self)
 	add_to_group(C.GROUPS_ENTITIES)
 	death.connect(_on_death)
 	hit.connect(_on_hit)
@@ -73,31 +79,31 @@ func _ready() -> void:
 	
 	#WorldManager.level.register_entity(self)
 	
-	
-func load_preset(_preset:EntityPreset):
-	Util.sysprint("Entity:loading_preset", "loading_preset")
-	if !_preset:
-		return
-	entity_name = _preset.entity_name
-	Util.sysprint("Entity:loading_preset", "name: "+entity_name)
-	set_max_health(_preset.max_health)
-	team = _preset.team
-	move_range = _preset.move_range
-	
-	for ability in _preset.get_abilities():
-		add_child(ability)
-	
-	add_child(_preset.get_state_machine())
-	
-	if preset.sprite_frames:
-		sprite.sprite_frames = preset.sprite_frames
-	
-	if preset.portrait_image:
-		portrait_image = load(preset.portrait_image)
-	
-	sprite.position += _preset.sprite_offset
-	shadow.position += _preset.shadow_offset
-	
+	#
+#func load_preset(_preset:EntityPreset):
+	#Util.sysprint("Entity:loading_preset", "loading_preset")
+	#if !_preset:
+		#return
+	#entity_name = _preset.entity_name
+	#Util.sysprint("Entity:loading_preset", "name: "+entity_name)
+	#set_max_health(_preset.max_health)
+	#team = _preset.team
+	#move_range = _preset.move_range
+	#
+	#for ability in _preset.get_abilities():
+		#add_child(ability)
+	#
+	#add_child(_preset.get_state_machine())
+	#
+	#if preset.sprite_frames:
+		#sprite.sprite_frames = preset.sprite_frames
+	#
+	#if preset.portrait_image:
+		#portrait_image = load(preset.portrait_image)
+	#
+	#sprite.position += _preset.sprite_offset
+	#shadow.position += _preset.shadow_offset
+	#
 func set_max_health(_max_health:int):
 	max_health = _max_health
 	healthbar.max_value = max_health

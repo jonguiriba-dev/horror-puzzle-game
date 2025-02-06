@@ -352,6 +352,96 @@ label_settings = SubResource("LabelSettings_fm36n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TrainingButtonEndurance" type="Button" parent="Anchor"]
+layout_mode = 0
+offset_left = -137.0
+offset_top = -164.0
+offset_right = -87.0
+offset_bottom = -142.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xnq00")
+flat = true
+script = ExtResource("9_jqa2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anchor/TrainingButtonEndurance"]
+scale = Vector2(0.0925926, 0.1375)
+texture = ExtResource("10_qiokh")
+centered = false
+
+[node name="Label" type="Label" parent="Anchor/TrainingButtonEndurance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Endurance"
+label_settings = SubResource("LabelSettings_fm36n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrainingButtonLecture" type="Button" parent="Anchor"]
+layout_mode = 0
+offset_left = -65.0
+offset_top = -164.0
+offset_right = -15.0
+offset_bottom = -142.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xnq00")
+flat = true
+script = ExtResource("9_jqa2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anchor/TrainingButtonLecture"]
+scale = Vector2(0.0925926, 0.1375)
+texture = ExtResource("10_qiokh")
+centered = false
+
+[node name="Label" type="Label" parent="Anchor/TrainingButtonLecture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lecture"
+label_settings = SubResource("LabelSettings_fm36n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TrainingButtonSparring" type="Button" parent="Anchor"]
+layout_mode = 0
+offset_left = -212.0
+offset_top = -164.0
+offset_right = -162.0
+offset_bottom = -142.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xnq00")
+flat = true
+script = ExtResource("9_jqa2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anchor/TrainingButtonSparring"]
+scale = Vector2(0.0925926, 0.1375)
+texture = ExtResource("10_qiokh")
+centered = false
+
+[node name="Label" type="Label" parent="Anchor/TrainingButtonSparring"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sparring"
+label_settings = SubResource("LabelSettings_fm36n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Abilities" type="Control" parent="Anchor"]
 anchors_preset = 0
 offset_left = -307.0
@@ -380,6 +470,7 @@ text = "SADASDsadasdasdasd"
 label_settings = ExtResource("7_ge3kq")
 
 [node name="SectionLabel" type="Label" parent="Anchor/Abilities"]
+layout_mode = 0
 offset_left = 7.0
 offset_top = -7.0
 offset_right = 54.0
@@ -388,3 +479,6 @@ text = "Abilities"
 label_settings = ExtResource("8_vbvyv")
 
 [connection signal="pressed" from="Anchor/MapButton" to="." method="_on_map_button_pressed"]
+[connection signal="pressed" from="Anchor/TrainingButtonEndurance" to="." method="_on_training_button_endurance_pressed"]
+[connection signal="pressed" from="Anchor/TrainingButtonLecture" to="." method="_on_training_button_lecture_pressed"]
+[connection signal="pressed" from="Anchor/TrainingButtonSparring" to="." method="_on_training_button_sparring_pressed"]

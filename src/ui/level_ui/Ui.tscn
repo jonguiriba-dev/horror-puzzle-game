@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=39 format=3 uid="uid://de11wfnraklxo"]
 
 [ext_resource type="Script" path="res://src/ui/level_ui/ui.gd" id="1_0ibs7"]
 [ext_resource type="Script" path="res://src/ui/level_ui/context_menu.gd" id="2_0mq18"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://src/ui/level_ui/overlays.gd" id="18_xd1td"]
 [ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/ui/level_ui/SpriteButton.tscn" id="19_mg8vx"]
 [ext_resource type="PackedScene" uid="uid://dcxbsateoow86" path="res://src/ui/level_ui/overlays/RewardOverlay.tscn" id="20_f1m0d"]
+[ext_resource type="FontFile" uid="uid://2t7grnmmukb" path="res://assets/fonts/CrimsonText-SemiBold.ttf" id="20_hl3ok"]
 [ext_resource type="PackedScene" uid="uid://df3drhl7cxiip" path="res://src/shaders/speedlines/sample.tscn" id="22_4mp75"]
 
 [sub_resource type="Gradient" id="Gradient_t4rwf"]
@@ -550,7 +551,6 @@ texture = ExtResource("6_wi4k2")
 centered = false
 
 [node name="Victory" type="Control" parent="Overlays"]
-visible = false
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
@@ -566,6 +566,7 @@ offset_top = 49.0
 offset_right = 33.5
 offset_bottom = 72.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("20_hl3ok")
 theme_override_font_sizes/font_size = 70
 text = "VICTORY"
 
@@ -580,26 +581,79 @@ offset_right = 187.0
 offset_bottom = 147.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Overlays/Victory"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 148.0
-offset_right = -142.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlays/Victory"]
+layout_mode = 0
+offset_left = 163.5
+offset_top = 158.0
+offset_right = 466.5
+offset_bottom = 257.0
 
-[node name="SoulsSavedLabel" type="Label" parent="Overlays/Victory/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlays/Victory/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SoulsSavedLabel" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Souls Saved"
+text = "Souls saved"
 
-[node name="SoulsSavedCount" type="Label" parent="Overlays/Victory/HBoxContainer"]
+[node name="SoulsSavedCount" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "6"
 horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Overlays/Victory/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GoldGainedLabel" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gold gained"
+
+[node name="GoldGainedCount" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "6"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Overlays/Victory/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ExpGainedLabel" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exp gained"
+
+[node name="ExpGainedCount" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "6"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Overlays/Victory/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemGainedLabel" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item gained!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Overlays/Victory/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AbilityGainedLabel" type="Label" parent="Overlays/Victory/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ability gained!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Overlays/Victory"]
 modulate = Color(1, 1, 1, 0.239216)
@@ -683,6 +737,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.466667)
 
 [node name="RewardOverlay" parent="Overlays" instance=ExtResource("20_f1m0d")]
+visible = false
 
 [node name="NpcPortrait" type="Control" parent="."]
 visible = false

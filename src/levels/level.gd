@@ -24,6 +24,8 @@ var starting_position := C.DIRECTION.NORTH
 var enemy_count := 0
 var neutral_count := 0
 var current_ai_entity_in_action: Entity
+var level_gold = 10
+var level_exp = 0
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -186,8 +188,10 @@ func check_player_victory():
 		player_entities.append_array(get_tree().get_nodes_in_group(C.GROUPS_ALLIES)) 
 		
 		UIManager.ui.overlay_clicked.connect(func():
-			
 			UIManager.hide_victory_overlay()
+			
+			give_player_rewards()
+			
 			var reward_abilities = get_reward_abilities()
 			UIManager.show_reward_overlay(reward_abilities)
 			UIManager.reward_card_selected.connect(func(reward_card):
@@ -195,7 +199,6 @@ func check_player_victory():
 				var entity = reward_card.get_meta("target_entity")
 				PlayerManager.add_entity_ability(entity,ability_prop)
 				UIManager.hide_reward_overlay()
-				#PlayerManager.inventory.abilities.push_front(reward_card.get_meta("data"))
 				SceneManager.change_scene(SceneManager.SCENE_MAP)
 				for player_entity in player_entities:
 					player_entity.get_parent().remove_child(player_entity)
@@ -205,10 +208,15 @@ func check_player_victory():
 			
 		, CONNECT_ONE_SHOT)	
 
+func give_player_rewards():
+	
+	PlayerManager.add_gold(level_gold)
 func get_reward_abilities():
 	var abilities :Array[AbilityProp]= []
 	while abilities.size() < rewards_config.max_rewards:
 		for ability_reward in rewards_config.ability_reward_pool:
+			if abilities.size() >= rewards_config.max_rewards:
+				break
 			var rng = randf_range(0.1,1.0)
 			if rng < ability_reward.chance:
 				abilities.push_front(ability_reward.value)

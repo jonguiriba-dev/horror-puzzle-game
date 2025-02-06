@@ -32,6 +32,7 @@ SystemManager="*res://src/globals/system_manager.gd"
 AnimationManager="*res://src/globals/animation_manager.gd"
 EntityManager="*res://src/globals/entity_manager.gd"
 PlayerManager="*res://src/globals/player_manager.gd"
+TrainingManager="*res://src/globals/training_manager.gd"
 
 [debug]
 
