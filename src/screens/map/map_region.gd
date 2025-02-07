@@ -9,9 +9,7 @@ class_name Region
 var active_location:RegionLocation
 
 func ready():
-	print("here")
-	area_collision_polygon.draw_colored_polygon(area_collision_polygon.polygon,Color.BLACK)
-
+	pass
 
 func _on_area_2d_mouse_entered() -> void:
 	pass # Replace with function body.

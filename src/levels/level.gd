@@ -203,6 +203,7 @@ func check_player_victory():
 				for player_entity in player_entities:
 					player_entity.get_parent().remove_child(player_entity)
 				WorldManager.level = null
+				WorldManager.level_complete.emit()
 				UIManager.clear_ui()
 			, CONNECT_ONE_SHOT)
 			
