@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" path="res://src/abilities/ability_presets/Test/TEST.tres" id="1_bhy7h"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_wpbp2"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_cr1mx"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_cr1mx"]
 [ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="5_45rtx"]
 
 [resource]

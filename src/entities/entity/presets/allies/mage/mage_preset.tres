@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_keyim"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_ducon"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_8rgyj"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_dacxi"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_dacxi"]
 [ext_resource type="SpriteFrames" uid="uid://bik6xlmkjtmhy" path="res://src/entities/entity/presets/allies/archer/archer_sprite_frames.tres" id="5_gcdl0"]
 
 [resource]

@@ -26,6 +26,7 @@ var neutral_count := 0
 var current_ai_entity_in_action: Entity
 var level_gold = 10
 var level_exp = 0
+var loaded_data
 
 signal turn_changed
 signal turn_start(team: C.TEAM)
@@ -36,11 +37,26 @@ signal animation_counter_cleared
 
 func _enter_tree() -> void:
 	WorldManager.register_level(self)
-
+	
 func _ready() -> void:
 	turn_start.connect(_on_turn_start)
+	
 	_on_scenetree_ready()
 	
+func _on_scenetree_ready():
+	var ui_node = UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
+	if ui_node:
+		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
+		UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
+		UIManager.ui.turn_order_pressed.connect(_on_turn_order_pressed)
+		UIManager.ui.strategy_changed.connect(func ():
+			strategy_changed = true
+		)
+	
+	viewport_ready.emit()
+	await game_start()
+	#_start_player_turn()
+
 func end_turn():
 	UIManager.ui.clear_context()
 	turn_changed.emit()
@@ -52,7 +68,7 @@ func end_turn():
 	
 func _start_player_turn():
 	Util.sysprint("_start_player_turn","start")
-	
+	input_enabled = true
 	for player_entity in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
 		player_entity.turn_start.emit()
 	
@@ -72,7 +88,7 @@ func _start_ally_turn():
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
-		Util.sysprint("WorldManager._start_ally_turn","entity turn start: %s"%[entity.entity_name])
+		Util.sysprint("WorldManager._start_ally_turn","entity turn start: %s"%[entity.data.entity_name])
 	else:
 		end_turn()
 		
@@ -82,7 +98,7 @@ func _start_enemy_turn():
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
-		Util.sysprint("WorldManager._start_enemy_turn","entity turn start: %s"%[entity.entity_name])
+		Util.sysprint("WorldManager._start_enemy_turn","entity turn start: %s"%[entity.data.entity_name])
 	else:
 		end_turn()
 		
@@ -106,13 +122,17 @@ func _start_ai_turn():
 	if ai_turn_queue.size() > 0:
 		var entity = ai_turn_queue.pop_front()
 		entity.turn_start.emit()
-		Util.sysprint("WorldManager._start_ai_turn","entity turn start: %s"%[entity.entity_name])
+		Util.sysprint("WorldManager._start_ai_turn","entity turn start: %s"%[entity.data.entity_name])
 	else:
 		end_turn()
 		
 func game_start():
 	Util.sysprint("Level","game start!")
-	await spawn_units()
+	selected_entity = null
+	if SaveManager.get_loaded("level","entities"):
+		await load_units()
+	else:
+		await spawn_units()
 	await register_entities()
 	if !UIManager.ui:
 		Util.sysprint("game_start","UIManager.ui not found")
@@ -132,9 +152,22 @@ func game_start():
 	current_dialogue = null
 	
 	team_turn = turn_order[0]
+	turn_order = SaveManager.get_loaded("level","turn_order",turn_order)
+	team_turn = SaveManager.get_loaded("level","team_turn",team_turn)
+
+		
 	turn_start.emit(team_turn)
 	
+func load_units():
+	for entity in SaveManager.get_loaded("level","entities",[]):
+		var loaded_entity = EntityManager.load_entity(entity)
+		loaded_entity.set_meta("recently_loaded",true)
 
+		EntityManager.spawn_entity(
+			loaded_entity.position,
+			loaded_entity
+		)
+		
 func spawn_units():
 	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
 	player_spawn_tiles.shuffle()
@@ -143,7 +176,8 @@ func spawn_units():
 			WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()),
 			player_unit
 		)
-	
+		player_unit.refresh_move_and_action_counters()
+		
 	var spawn_record = {}
 	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
 	enemy_spawn_tiles.shuffle()
@@ -210,8 +244,8 @@ func check_player_victory():
 		, CONNECT_ONE_SHOT)	
 
 func give_player_rewards():
-	
 	PlayerManager.add_gold(level_gold)
+	
 func get_reward_abilities():
 	var abilities :Array[AbilityProp]= []
 	while abilities.size() < rewards_config.max_rewards:
@@ -295,13 +329,13 @@ func register_entity(entity:Entity):
 		entity_register_queue.push_front(entity)
 		return
 		
-	if entity.team == C.TEAM.ENEMY or entity.team == C.TEAM.ALLY:
+	if entity.data.team == C.TEAM.ENEMY or entity.data.team == C.TEAM.ALLY:
 		entity.turn_end.connect(_on_ai_unit_turn_end)
 		
-	if entity.team == C.TEAM.PLAYER or entity.team == C.TEAM.ALLY or entity.team == C.TEAM.CITIZEN:
+	if entity.data.team == C.TEAM.PLAYER or entity.data.team == C.TEAM.ALLY or entity.data.team == C.TEAM.CITIZEN:
 		entity.set_orientation(orientation == C.ORIENTATION.VERTICAL) 
 
-	if entity.team == C.TEAM.ENEMY:
+	if entity.data.team == C.TEAM.ENEMY:
 		if orientation == C.ORIENTATION.VERTICAL:
 			entity.set_orientation(orientation == C.ORIENTATION.VERTICAL)
 			#entity.set_orientation(orientation == C.ORIENTATION.HORIZONTAL)
@@ -310,26 +344,10 @@ func register_entity(entity:Entity):
 			#entity.set_orientation(orientation == C.ORIENTATION.VERTICAL)
 	
 	entity.threat_updated.connect(_on_entity_threat_updated)
-	
+	entity.turn_end.connect(_on_unit_turn_end)
 	entity.sprite.speed_scale = SystemManager.idle_animation_speed
 	entity.position = grid.map_to_local(entity.map_position)
 	
-func _on_scenetree_ready():
-	var ui_node = UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
-	if ui_node:
-		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
-		UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
-		UIManager.ui.turn_order_pressed.connect(_on_turn_order_pressed)
-		UIManager.ui.strategy_changed.connect(func ():
-			strategy_changed = true
-		)
-	
-	
-	viewport_ready.emit()
-	await game_start()
-	_start_player_turn()
-	#check_player_victory()
-
 func _on_end_turn_pressed():
 	Util.sysprint("Level:_on_end_turn_pressed","start")
 	if team_turn == C.TEAM.PLAYER:
@@ -344,6 +362,9 @@ func _on_turn_order_pressed():
 			show_turn_order()
 	
 func _on_turn_start(turn:C.TEAM):
+	SaveManager.save_data("level",to_save_data())
+	SaveManager.save_game()
+	
 	if Debug.show_turn_card:
 		await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
 	Util.sysprint("WorldManager._on_turn_start","turn start: %s"%[C.TEAM.keys()[turn]])
@@ -355,7 +376,7 @@ func _on_turn_start(turn:C.TEAM):
 	elif turn == C.TEAM.ALLY:
 		_start_ai_turn()
 
-			
+		
 func _on_ai_unit_turn_end():
 	Util.sysprint("Level:_on_ai_unit_turn_end","ai_turn_queue:%s"%[ai_turn_queue.size()])
 	if is_instance_valid(current_ai_entity_in_action):
@@ -372,17 +393,20 @@ func _on_ai_unit_turn_end():
 			var ai_entity = ai_turn_queue.pop_front()
 			await Util.wait(0.1)
 			if is_instance_valid(ai_entity):
-				print("my turn: ", ai_entity.entity_name)
+				print("my turn: ", ai_entity.data.entity_name)
 				current_ai_entity_in_action = ai_entity
 				if Debug.highlight_entity_in_action:
 					current_ai_entity_in_action.sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 				ai_entity.turn_start.emit()
 				break
-			
+
+func _on_unit_turn_end():
+	SaveManager.save_data("level",to_save_data())
+	SaveManager.save_game()
+
 func _on_all_ai_done():
 	UIManager.ui.end_turn.disabled = false
 	end_turn()
-	input_enabled = true
 
 
 func _on_enemy_unit_turn_start(entity:Entity):
@@ -410,7 +434,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
 		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if hovered_entity:
-			Util.sysprint("WorldManager._unhandled_input()","entity hovered: %s"%[hovered_entity.entity_name])
+			Util.sysprint("WorldManager._unhandled_input()","entity hovered: %s"%[hovered_entity.data.entity_name])
 		
 		if targetting_ability:
 			Util.sysprint("WorldManager._unhandled_input()","targetting ability: %s"%[targetting_ability.ability_name])
@@ -449,12 +473,12 @@ func _unhandled_input(event: InputEvent) -> void:
 					selected_entity = null
 					UIManager.ui.clear_context()
 				grid.tile_selected.emit(mouse_map_position)
-				if is_instance_valid(hovered_entity) and hovered_entity.team == team_turn:
+				if is_instance_valid(hovered_entity) and hovered_entity.data.team == team_turn:
 					hovered_entity.selected.emit()
 					
 		elif is_instance_valid(hovered_entity):
 			print(">is_instance_valid(hovered_entity)")
-			if hovered_entity.team == team_turn:
+			if hovered_entity.data.team == team_turn:
 				hovered_entity.selected.emit()
 			grid.tile_selected.emit(mouse_map_position)
 		else:
@@ -466,3 +490,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				selected_entity = null
 		
 		print("*Tile Position: ",mouse_map_position)
+
+func to_save_data():
+	var entities = get_tree().get_nodes_in_group(C.GROUPS_ENTITIES)
+	return {
+		"team_turn":team_turn,
+		"turn_order":turn_order,
+		"entities":entities.map(func(e):return e.to_save_data())
+	}

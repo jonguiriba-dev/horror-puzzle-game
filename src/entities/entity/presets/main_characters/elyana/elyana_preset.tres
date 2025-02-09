@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_slfjp"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_tqcw5"]
 [ext_resource type="Resource" uid="uid://2rkgneidf3pt" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="3_2de08"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_jagov"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_jagov"]
 [ext_resource type="SpriteFrames" uid="uid://dpvcly4qbu5y5" path="res://src/entities/entity/presets/main_characters/elyana/elyana_sprite_frames.tres" id="5_3f5am"]
 
 [resource]

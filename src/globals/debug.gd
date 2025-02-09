@@ -22,9 +22,9 @@ func _physics_process(delta: float) -> void:
 		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.level.team_turn]
 		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.level.strategy]
 		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.level.starting_position]
-		text += "\nentity turn queue: %s"%", ".join(WorldManager.level.ai_turn_queue.map(func(e): if is_instance_valid(e): return e.entity_name))
+		text += "\nentity turn queue: %s"%", ".join(WorldManager.level.ai_turn_queue.map(func(e): if is_instance_valid(e): return e.data.entity_name))
 		if is_instance_valid(WorldManager.level.current_ai_entity_in_action):
-			text += "\nentity in action: %s"%WorldManager.level.current_ai_entity_in_action.entity_name
+			text += "\nentity in action: %s"%WorldManager.level.current_ai_entity_in_action.data.entity_name
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:
 			UIManager.info(text)
@@ -32,20 +32,20 @@ func _physics_process(delta: float) -> void:
 		
 		
 		var entity = node as Entity
-		text += "\nhealth: %s"%entity.health
+		text += "\nhealth: %s"%entity.data.health
 		text += "\nstatus_effects: %s"%str(entity.status_effects)
 		if entity.has_node("PlayerEntityStateMachine"):
 			var state_machine = entity.get_node("PlayerEntityStateMachine")
 			var state = state_machine.get_state() as State
 			text += "\n %s"%[C.STATE.keys()[state.state_id]]
-			text += "\nmove_counter: %s"%entity.move_counter
-			text += "\naction_counter: %s"%entity.action_counter
+			text += "\nmove_counter: %s"%entity.data.move_counter
+			text += "\naction_counter: %s"%entity.data.action_counter
 		elif entity.has_node("EnemyAiStateMachine"):
 			var state_machine = entity.get_node("EnemyAiStateMachine")
 			var state = state_machine.get_state() as State
 			text += "\n %s"%[C.STATE.keys()[state.state_id]]
-			text += "\nmove_counter: %s"%entity.move_counter
-			text += "\naction_counter: %s"%entity.action_counter
+			text += "\nmove_counter: %s"%entity.data.move_counter
+			text += "\naction_counter: %s"%entity.data.action_counter
 			if entity.has_meta("distance_to_bounds"):
 				text += "\ndistance_to_bounds: %s"%entity.get_meta("distance_to_bounds")
 			if entity.has_meta("distance_to_host"):

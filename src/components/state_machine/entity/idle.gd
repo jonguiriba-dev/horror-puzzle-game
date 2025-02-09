@@ -18,7 +18,7 @@ func _on_configured():
 	host.selected.connect(_on_selected)
 	
 func _state_logic(delta:float):
-	if host.move_counter == 0 and host.action_counter == 0:
+	if host.data.move_counter == 0 and host.data.action_counter == 0:
 		to_done = true
 				
 func _transition():

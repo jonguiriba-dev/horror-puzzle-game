@@ -19,7 +19,7 @@ func play(entities:Array[Node]):
 		var text = c.split(":")[1]
 		
 		var actor = entities.filter(func(e):
-			return e.entity_name == entity_name
+			return e.data.entity_name == entity_name
 		)[0]
 		var speech_bubble = speech_bubble_tscn.instantiate()
 		level.grid.prop_layer.add_child(speech_bubble)

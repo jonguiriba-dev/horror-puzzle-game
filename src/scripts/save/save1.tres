@@ -1,0 +1,311 @@
+[gd_resource type="Resource" script_class="SaveData" load_steps=26 format=3]
+
+[ext_resource type="Resource" path="res://src/entities/entity/presets/allies/knight/knight_preset.tres" id="1_w3a0h"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_4qaio"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="3_7pb4a"]
+[ext_resource type="Resource" path="res://src/entities/entity/presets/main_characters/talya/talya_preset.tres" id="4_tn3je"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/talya-body.png" id="5_ao0qt"]
+[ext_resource type="Resource" path="res://src/entities/entity/presets/main_characters/layla/layla_preset.tres" id="5_asjlt"]
+[ext_resource type="Resource" path="res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres" id="6_fl3wk"]
+[ext_resource type="Script" path="res://src/scripts/save/save.gd" id="7_u4k8e"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/layla-body.png" id="7_v3um5"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/elyana-body.png" id="9_oknyd"]
+[ext_resource type="Resource" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="10_ukhcl"]
+[ext_resource type="Texture2D" path="res://assets/portraits/layla-portrait.png" id="11_d7qug"]
+[ext_resource type="Resource" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="12_q24ff"]
+
+[sub_resource type="Resource" id="Resource_j75iu"]
+script = ExtResource("3_7pb4a")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_u1fs0"]
+script = ExtResource("3_7pb4a")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_vdbit"]
+script = ExtResource("3_7pb4a")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_r0ynd"]
+script = ExtResource("3_7pb4a")
+entity_name = "Talya"
+max_health = 2
+move_range = 3
+team = 0
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = ExtResource("5_ao0qt")
+
+[sub_resource type="Resource" id="Resource_g7kqu"]
+script = ExtResource("3_7pb4a")
+entity_name = "Layla"
+max_health = 3
+move_range = 3
+team = 0
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = ExtResource("7_v3um5")
+
+[sub_resource type="Resource" id="Resource_fxowk"]
+script = ExtResource("3_7pb4a")
+entity_name = "Eliana"
+max_health = 4
+move_range = 3
+team = 0
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = ExtResource("9_oknyd")
+
+[sub_resource type="Resource" id="Resource_f2tus"]
+script = ExtResource("3_7pb4a")
+entity_name = "Ghost"
+max_health = 2
+move_range = 5
+team = 1
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = ExtResource("11_d7qug")
+
+[sub_resource type="Resource" id="Resource_fro2m"]
+script = ExtResource("3_7pb4a")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_cdnky"]
+script = ExtResource("3_7pb4a")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_8gufy"]
+script = ExtResource("3_7pb4a")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_i2kph"]
+script = ExtResource("3_7pb4a")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[sub_resource type="Resource" id="Resource_ad1ie"]
+script = ExtResource("3_7pb4a")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_4qaio")]([])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+
+[resource]
+script = ExtResource("7_u4k8e")
+player_manager = {
+"gold": 0,
+"inventory": {},
+"units": [{
+"data": SubResource("Resource_j75iu"),
+"position": Vector2(0, 0),
+"preset": ExtResource("1_w3a0h")
+}, {
+"data": SubResource("Resource_u1fs0"),
+"position": Vector2(0, 0),
+"preset": ExtResource("1_w3a0h")
+}, {
+"data": SubResource("Resource_vdbit"),
+"position": Vector2(0, 0),
+"preset": ExtResource("1_w3a0h")
+}, {
+"data": SubResource("Resource_r0ynd"),
+"position": Vector2(0, 0),
+"preset": ExtResource("4_tn3je")
+}, {
+"data": SubResource("Resource_g7kqu"),
+"position": Vector2(0, 0),
+"preset": ExtResource("5_asjlt")
+}, {
+"data": SubResource("Resource_fxowk"),
+"position": Vector2(0, 0),
+"preset": ExtResource("6_fl3wk")
+}]
+}
+scene_manager = {
+"current_scene_path": "res://src/levels/cave/Cave.tscn",
+"scene_list": {
+"res://src/screens/main_menu/MainMenu.tscn": null
+}
+}
+level = {
+"entities": [{
+"data": SubResource("Resource_j75iu"),
+"position": Vector2(-32, 16),
+"preset": ExtResource("1_w3a0h")
+}, {
+"data": SubResource("Resource_u1fs0"),
+"position": Vector2(-16, -8),
+"preset": ExtResource("1_w3a0h")
+}, {
+"data": SubResource("Resource_vdbit"),
+"position": Vector2(-64, -48),
+"preset": ExtResource("1_w3a0h")
+}, {
+"data": SubResource("Resource_r0ynd"),
+"position": Vector2(-64, -16),
+"preset": ExtResource("4_tn3je")
+}, {
+"data": SubResource("Resource_g7kqu"),
+"position": Vector2(-48, -40),
+"preset": ExtResource("5_asjlt")
+}, {
+"data": SubResource("Resource_fxowk"),
+"position": Vector2(-128, 0),
+"preset": ExtResource("6_fl3wk")
+}, {
+"data": SubResource("Resource_f2tus"),
+"position": Vector2(128, 16),
+"preset": ExtResource("10_ukhcl")
+}, {
+"data": SubResource("Resource_fro2m"),
+"position": Vector2(80, 40),
+"preset": ExtResource("12_q24ff")
+}, {
+"data": SubResource("Resource_cdnky"),
+"position": Vector2(128, 0),
+"preset": ExtResource("12_q24ff")
+}, {
+"data": SubResource("Resource_8gufy"),
+"position": Vector2(16, 72),
+"preset": ExtResource("12_q24ff")
+}, {
+"data": SubResource("Resource_i2kph"),
+"position": Vector2(64, -32),
+"preset": ExtResource("12_q24ff")
+}, {
+"data": SubResource("Resource_ad1ie"),
+"position": Vector2(48, 56),
+"preset": ExtResource("12_q24ff")
+}],
+"team_turn": 0,
+"turn_order": [0, 4]
+}
+map = {}

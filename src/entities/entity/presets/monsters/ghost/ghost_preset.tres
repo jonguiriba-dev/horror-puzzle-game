@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://bv0od6fwjqnkm"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=6 format=3 uid="uid://bv0od6fwjqnkm"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_wjcad"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_gq353"]
 [ext_resource type="Resource" uid="uid://2rkgneidf3pt" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="3_ou0q7"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="4_xt53e"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_xt53e"]
 [ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="5_q40xb"]
 
 [resource]
@@ -12,6 +12,11 @@ entity_name = "Ghost"
 max_health = 2
 move_range = 5
 team = 1
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
 ability_props = Array[ExtResource("1_wjcad")]([ExtResource("2_gq353"), ExtResource("3_ou0q7")])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)

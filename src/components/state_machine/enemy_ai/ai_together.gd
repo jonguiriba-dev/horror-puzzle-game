@@ -21,13 +21,13 @@ func analyze_tile_scores():
 	
 	var scored_tiles = []
 	var targets = host.get_enemies()
-	print(host.entity_name, " targets ", targets.map(func (e):return e.entity_name))
+	print(host.data.entity_name, " targets ", targets.map(func (e):return e.data.entity_name))
 	
 	if targets.size() == 0:
 		return scored_tiles
 	
 	targets.map(func (e:Node):
-		var distance = Util.get_pathfinding_distance(host.team,e.map_position,host.map_position, WorldManager.level.grid)
+		var distance = Util.get_pathfinding_distance(host.data.team,e.map_position,host.map_position, WorldManager.level.grid)
 		e.set_meta("distance_to_host",distance)
 	)
 	
@@ -46,7 +46,7 @@ func analyze_tile_scores():
 	
 	print("targets> ",targets)
 	target = nearest
-	print(host.entity_name, " is targeting ", nearest.entity_name)
+	print(host.data.entity_name, " is targeting ", nearest.entity_name)
 	
 	if Debug.highlight_enemy_target:
 		WorldManager.level.grid.set_highlight(
@@ -56,7 +56,7 @@ func analyze_tile_scores():
 		)
 	
 	nearest_path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
-		host.team,
+		host.data.team,
 		WorldManager.level.grid.local_to_map(host.position), 
 		WorldManager.level.grid.local_to_map(nearest.position)
 	)
@@ -64,7 +64,7 @@ func analyze_tile_scores():
 	#if no path, then try to get as close as possbile by disregarding obstacles 
 	if nearest_path_to_nearest_target.size() == 0:
 		nearest_path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
-			host.team,
+			host.data.team,
 			WorldManager.level.grid.local_to_map(host.position), 
 			WorldManager.level.grid.local_to_map(nearest.position),
 			false
@@ -95,7 +95,7 @@ func get_heat_map():
 	var _heatmap = []
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		if entity.team == C.TEAM.ENEMY or entity.team == C.TEAM.CITIZEN:
+		if entity.data.team == C.TEAM.ENEMY or entity.data.team == C.TEAM.CITIZEN:
 			continue
 		if entity == host:
 			continue

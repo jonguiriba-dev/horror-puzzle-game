@@ -14,7 +14,7 @@ func _enter_state(old_state, new_state):
 	to_attack = false
 	
 func _transition():
-	if host.team == C.TEAM.ALLY and to_attack:
+	if host.data.team == C.TEAM.ALLY and to_attack:
 		if (
 			WorldManager.level.strategy == C.STRATEGIES.FORWARD
 		):

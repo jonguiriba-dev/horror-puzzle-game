@@ -13,7 +13,7 @@ func _on_configured():
 func _enter_state(old_state, new_state):
 	host.sprite.modulate = Color("626262")
 	to_idle = false
-			
+	host.turn_end.emit()
 func _transition():
 	if to_idle:
 		return C.STATE.ENTITY_IDLE

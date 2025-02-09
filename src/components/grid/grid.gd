@@ -233,7 +233,7 @@ func debug_tile_text(map_pos:Vector2i,text:String):
 	#
 	#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		#entity_tiles.push_front(entity.map_position)
-		#if (world.team_turn == entity.team and 
+		#if (world.team_turn == entity.data.team and 
 			#(ally_tiles.size() == 0 or enemy_tiles.size() == 0)
 		#):
 			#entity.get_enemies().map(func (e):
@@ -250,13 +250,13 @@ func populate_entity_tiles2():
 	neutral_entity_tiles = []
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		if entity.team == C.TEAM.PLAYER:
+		if entity.data.team == C.TEAM.PLAYER:
 			player_entity_tiles.push_front(entity.map_position)
-		if entity.team == C.TEAM.ENEMY:
+		if entity.data.team == C.TEAM.ENEMY:
 			enemy_entity_tiles.push_front(entity.map_position)
-		if entity.team == C.TEAM.ALLY:
+		if entity.data.team == C.TEAM.ALLY:
 			ally_entity_tiles.push_front(entity.map_position)
-		if entity.team == C.TEAM.CITIZEN:
+		if entity.data.team == C.TEAM.CITIZEN:
 			neutral_entity_tiles.push_front(entity.map_position)
 		
 func highlight_threat_tiles(enemy_threat_tiles,ally_threat_tiles):

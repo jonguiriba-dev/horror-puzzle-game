@@ -81,7 +81,7 @@ func show_portrait():
 	#portrait_container.show()
 
 func show_context_menu(host:Entity):
-	context_menu_name.text = host.entity_name
+	context_menu_name.text = host.data.entity_name
 	for child in context_menu_ability_list.get_children():
 		child.queue_free()
 	

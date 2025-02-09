@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3 uid="uid://dlkyplpdpd73j"]
+
+[ext_resource type="Script" path="res://src/scripts/save/save.gd" id="1_n6hha"]
+
+[resource]
+script = ExtResource("1_n6hha")
+current_scene = ""
+scene_list = {}
+level_entities = []
+level_team_turn = 0
+level_turn_order = []
+player = {
+"units": []
+}

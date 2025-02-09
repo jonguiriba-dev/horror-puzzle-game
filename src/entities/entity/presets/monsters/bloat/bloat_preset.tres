@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityPreset" load_steps=3 format=3 uid="uid://dmdpdt2ttqdwo"]
 
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="1_7dx7f"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_7dx7f"]
 [ext_resource type="SpriteFrames" uid="uid://clcojv72qd6dl" path="res://src/entities/entity/presets/monsters/bloat/bloat_sprite_frames.tres" id="2_persi"]
 
 [resource]

@@ -23,7 +23,7 @@ func _on_scenetree_ready():
 
 
 func _state_logic(delta:float):
-	if host.move_counter == 0 and host.action_counter == 0:
+	if host.data.move_counter == 0 and host.data.action_counter == 0:
 		to_done = true
 
 func _enter_state(old_state, new_state):
@@ -32,8 +32,8 @@ func _enter_state(old_state, new_state):
 	UIManager.ui.set_context(host)
 
 	#UIManager.ui.set_context(host)
-	if host.move_counter > 0 and host.action_counter > 0:
-		Util.sysprint("EntitySelectedState._enter_state"," host.move_counter(%s) > 1, starting move"%[host.move_counter])
+	if host.data.move_counter > 0 and host.data.action_counter > 0:
+		Util.sysprint("EntitySelectedState._enter_state"," host.data.move_counter(%s) > 1, starting move"%[host.data.move_counter])
 		host.get_ability("move").target_select.emit()
 	
 func _on_tile_selected(map_pos:Vector2i):
@@ -52,6 +52,6 @@ func _transition():
 
 
 func _on_host_selected():
-	if host.move_counter > 0 and host.action_counter > 0:
+	if host.data.move_counter > 0 and host.data.action_counter > 0:
 		host.get_ability("move").target_select.emit()
 	

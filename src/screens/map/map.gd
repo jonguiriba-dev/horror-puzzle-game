@@ -34,7 +34,8 @@ func _ready() -> void:
 			child.area.mouse_exited.connect(_on_region_area_exited.bind(child))
 			child.randomize_active_location()
 	select_view.hide()
-
+	PlayerManager.save_data_to_storage()
+	
 func randomize_active_regions():
 	active_regions = region_config.values()
 	active_regions.shuffle()
@@ -51,6 +52,7 @@ func randomize_active_regions():
 		label.text = "ACTIVE_REGION"
 		label.global_position = region.node.select_anchor.global_position
 		active_region_sprites.push_front(label)
+		
 func _on_party_button_pressed() -> void:
 	SceneManager.change_scene("res://src/screens/manage_roster/ManageRoster.tscn")
 
@@ -110,3 +112,11 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_WorldManager_level_complete() -> void:
 	randomize_active_regions()
+	SaveManager.save_data("screen",SaveManager.SCREENS.MAP)
+	SaveManager.save_data("map",to_save_data())
+	SaveManager.save_data("level",null)
+	PlayerManager.save_data_to_storage()
+func to_save_data():
+	return {
+		"active_regions":active_regions
+	}

@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://chvrmbbhh5rjx" path="res://src/abilities/ability_presets/Support/ability_haste/ability_haste.tres" id="4_8bjag"]
 [ext_resource type="Resource" uid="uid://dhk3ejpsnmlvr" path="res://src/abilities/ability_presets/Movement/ability_vault/ability_vault.tres" id="5_my0i3"]
 [ext_resource type="Resource" uid="uid://dybqpxqjo3lan" path="res://src/abilities/ability_presets/Utility/ability_dark_orb/ability_dark_orb.tres" id="6_0u11r"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_preset.gd" id="6_uh0c7"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="6_uh0c7"]
 [ext_resource type="SpriteFrames" uid="uid://d1taf2r4a1ps7" path="res://src/entities/entity/presets/main_characters/layla/layla_sprite_frames.tres" id="7_6mu81"]
 [ext_resource type="Resource" uid="uid://1rc1ixa7c8lh" path="res://src/abilities/ability_presets/Utility/ability_beckon/ability_beckon.tres" id="7_n6ssa"]
 

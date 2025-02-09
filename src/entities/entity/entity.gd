@@ -7,25 +7,27 @@ class_name Entity
 @onready var healthbar := $Healthbar
 @onready var status_bar := $StatusBar
 
-@export var preset:EntityPreset
+@export var preset:EntityData
 
-var max_health := 1
-var speed := 5
-var exp := 0
-var lvl := 1
-var move_range := 3
-var max_move_counter := 1
-var max_action_counter := 1
-var max_ability_slots := 1
-var max_equipment_slots := 2 
-var entity_name := ""
-var portrait_image
-var team :C.TEAM = C.TEAM.PLAYER
-var can_move := false
+var data:EntityData
+
+#var max_health := 1
+#var speed := 5
+#var experience := 0
+#var lvl := 1
+#var move_range := 3
+#var max_move_counter := 1
+#var max_action_counter := 1
+#var max_ability_slots := 1
+#var max_equipment_slots := 2 
+#var entity_name := ""
+#var portrait_image
+#var team :C.TEAM = C.TEAM.PLAYER
+#var can_move := false
 var animation_counter := 0
-var action_counter := 1
-var move_counter := 1
-var health := 1
+#var action_counter := 1
+#var move_counter := 1
+#var health := 1
 
 var map_position:Vector2i:
 	get:
@@ -49,7 +51,8 @@ signal threat_updated
 
 func _ready() -> void:
 	if preset:
-		preset.apply(self)
+		preset.apply_node_data(self)
+	
 	add_to_group(C.GROUPS_ENTITIES)
 	death.connect(_on_death)
 	hit.connect(_on_hit)
@@ -60,13 +63,13 @@ func _ready() -> void:
 	selected.connect(_on_selected)
 	apply_status.connect(_on_apply_status)
 
-	if team == C.TEAM.ENEMY:
+	if data.team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
 	else:
 		add_to_group(C.GROUPS_TARGETS)
-		if team == C.TEAM.PLAYER:
+		if data.team == C.TEAM.PLAYER:
 			add_to_group(C.GROUPS_PLAYER_ENTITIES)
-		elif team == C.TEAM.ALLY:
+		elif data.team == C.TEAM.ALLY:
 			add_to_group(C.GROUPS_ALLIES)
 	
 	if sprite:
@@ -80,7 +83,7 @@ func _ready() -> void:
 	#WorldManager.level.register_entity(self)
 	
 	#
-#func load_preset(_preset:EntityPreset):
+#func load_preset(_preset:EntityData):
 	#Util.sysprint("Entity:loading_preset", "loading_preset")
 	#if !_preset:
 		#return
@@ -105,10 +108,10 @@ func _ready() -> void:
 	#shadow.position += _preset.shadow_offset
 	#
 func set_max_health(_max_health:int):
-	max_health = _max_health
-	healthbar.max_value = max_health
-	health = max_health
-	healthbar.value = health
+	data.max_health = _max_health
+	data.health = _max_health
+	#healthbar.max_value = max_health
+	#healthbar.value = health
 	
 
 func show_detail(detail_name:String):
@@ -143,8 +146,8 @@ func hide_all_details():
 func get_enemies()->Array[Entity]:
 	var enemies:Array[Entity] = []
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		if entity.team != team:
-			if C.ALLIED_TEAMS[C.TEAM.keys()[team]].has(entity.team):
+		if entity.data.team != data.team:
+			if C.ALLIED_TEAMS[C.TEAM.keys()[data.team]].has(entity.data.team):
 				continue
 			enemies.push_front(entity as Entity)
 				
@@ -154,16 +157,16 @@ func get_enemies()->Array[Entity]:
 func get_allies()->Array[Entity]:
 	var allies:Array[Entity] = []
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		if entity.team == team:
+		if entity.data.team == data.team:
 			allies.push_front(entity as Entity)
-		elif C.ALLIED_TEAMS[C.TEAM.keys()[team]].has(entity.team):
+		elif C.ALLIED_TEAMS[C.TEAM.keys()[data.team]].has(entity.data.team):
 			allies.push_front(entity as Entity)
 	return allies 
 	
 func undo_move(initial_position:Vector2):
 	WorldManager.level.grid.set_map_cursor(initial_position)
 	position = initial_position
-	move_counter = 1
+	data.move_counter = 1
 	
 func clear_sprite_material():
 	sprite.material = null
@@ -181,12 +184,19 @@ func add_ability(ability_prop:AbilityProp):
 	add_child(ability_node)
 
 func _on_turn_start():
-	move_counter = max_move_counter
-	action_counter = max_action_counter
-	Util.sysprint("%s.Entity._on_turn_start"%[entity_name],"counter refresh done")
+	Util.sysprint("%s.Entity._on_turn_start"%[data.entity_name],"counter refresh done")
+	refresh_move_and_action_counters()
+	
+func refresh_move_and_action_counters():
+	var recently_loaded = get_meta("recently_loaded",false)
+	if recently_loaded:
+		set_meta("recently_loaded",false)
+		return
+	data.move_counter = data.max_move_counter
+	data.action_counter = data.max_action_counter
 	
 func _on_turn_end():
-	pass
+	Util.sysprint("%s.Entity._on_turn_end"%[data.entity_name],"saving level_entities")
 	
 func _on_mouse_entered() -> void:
 	add_to_group(C.HOVERED_ENTITIES)
@@ -196,7 +206,7 @@ func _on_mouse_exited() -> void:
 
 	
 func _on_knockback(distance:int, source_map_pos:Vector2i):
-	if health == 0:
+	if data.health == 0:
 		return
 	
 	var prev_position = map_position
@@ -205,7 +215,7 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 	var target_pos = map_position + direction * distance 
 	if !WorldManager.level.grid.is_within_bounds(target_pos):
 		return
-	if !WorldManager.level.grid.get_possible_tiles(team).has(target_pos):
+	if !WorldManager.level.grid.get_possible_tiles(data.team).has(target_pos):
 		return
 	
 	WorldManager.level.increment_animation_counter(1) 
@@ -226,11 +236,11 @@ func _on_area_2d_mouse_exited() -> void:
 	remove_from_group(C.GROUPS_HOVERED_ENTITIES)
 
 func _on_hit(damage:int) -> void:
-	health -= damage
-	healthbar.value = health
+	data.health -= damage
+	healthbar.value = data.health
 	
-	if health <= 0:
-		health = 0
+	if data.health <= 0:
+		data.health = 0
 		death.emit()
 	else:
 		VfxManager.flash(sprite,Color.DARK_RED,0.15)
@@ -241,7 +251,7 @@ func _on_death() -> void:
 	for group in get_groups():
 		remove_from_group(group)
 		
-	if team == C.TEAM.ENEMY:
+	if data.team == C.TEAM.ENEMY:
 		await WorldManager.level.check_player_victory()
 
 	print("animation_counter ", animation_counter)
@@ -252,7 +262,7 @@ func _on_death() -> void:
 	queue_free()
 		
 func _on_selected():
-	if team == C.TEAM.PLAYER:
+	if data.team == C.TEAM.PLAYER:
 		WorldManager.level.selected_entity = self
 		#UIManager.ui.set_context(self)
 		WorldManager.level.input_waiting_on_ability = false
@@ -265,12 +275,12 @@ func _on_selected():
 		
 func _on_ability_used(ability:Ability):
 	WorldManager.level.clear_entity_moved_history()
-	action_counter -= ability.action_cost
+	data.action_counter -= ability.action_cost
 	if ability.is_action:
-		move_counter = 0
+		data.move_counter = 0
 
 func _on_apply_status(status:Status):
-	Util.sysprint("%s.Entity._on_apply_status"%[entity_name],"applying status: %s"%[status.status_props.status_name])
+	Util.sysprint("%s.Entity._on_apply_status"%[data.entity_name],"applying status: %s"%[status.status_props.status_name])
 	status_effects.push_front(status)
 	status.register_entity(self)
 	status.status_finished.connect(func (e):
@@ -282,4 +292,11 @@ func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i, pre
 		var direction = Util.get_direction(source_map_pos,map_position)
 		threat.tile += direction * distance 
 		threat_updated.emit()
+
+func to_save_data():
+	return {
+		"preset": preset,
+		"data" : data,
+		"position": position,
 		
+	}

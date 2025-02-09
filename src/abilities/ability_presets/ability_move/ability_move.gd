@@ -11,7 +11,7 @@ func _ready() -> void:
 	super()
 	has_ui = false
 	ability_name = "move"
-	ability_range = host.move_range
+	ability_range = host.data.move_range
 	is_enemy_obstacle = true
 	effects = []
 	is_action = false
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 func get_target_tiles(map_pos:Vector2i=host.map_position,_range:int=ability_range)->Array[Vector2i]:
 	var navigatable_tiles:Array[Vector2i]= []
-	var possible_tiles = WorldManager.level.grid.get_possible_tiles(host.team,tile_exclude_flag)
+	var possible_tiles = WorldManager.level.grid.get_possible_tiles(host.data.team,tile_exclude_flag)
 	var queued_tiles = [map_pos]
 	
 	var step = 0
@@ -49,7 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func use(target_map_position:Vector2i, options:Dictionary={}):
 	if !is_valid_target(target_map_position) and !options.get('absolute',false):
 		stopped_targetting.emit()
-		print("%s.%s[host.ability.use()]: no valid target found for pos %s"%[host.entity_name,ability_name,target_map_position])
+		print("%s.%s[host.ability.use()]: no valid target found for pos %s"%[host.data.entity_name,ability_name,target_map_position])
 		return
 	
 	initial_position = host.position
@@ -73,7 +73,7 @@ func move_to_selected_tile(target_pos:Vector2i):
 		)
 	target_position = target_pos
 		
-	host.move_counter -= 1
+	host.data.move_counter -= 1
 
 	if Debug.show_move_path_highlight:
 		show_path_highlight()
@@ -114,6 +114,6 @@ func show_path_highlight():
 	
 func _on_used(ability:Ability):
 	super(ability)
-	if host.team == C.TEAM.PLAYER:
+	if host.data.team == C.TEAM.PLAYER:
 		WorldManager.level.entity_moved_history.push_front({"entity":host,"prev_map_position":initial_position})
 		UIManager.ui.enable_undo_move_button()
