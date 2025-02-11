@@ -19,7 +19,7 @@ func train_ability(instructor:Entity, student:Entity)->bool:
 				var student_ability_names = student.get_abilities().map(
 					func (e): return e.ability_name
 				)
-				if !student_ability_names.has(instructor_ability.ability_name):
+				if !student_ability_names.has(instructor_ability.data.ability_name):
 					return instructor_ability 
 		)
 		

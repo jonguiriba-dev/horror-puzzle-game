@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_s2he3")
-effect_type = 2
+effect_type = 3
 value = 1
+entity_type = 0

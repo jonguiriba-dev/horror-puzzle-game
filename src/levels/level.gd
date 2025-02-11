@@ -132,7 +132,8 @@ func game_start():
 	if SaveManager.get_loaded("level","entities"):
 		await load_units()
 	else:
-		await spawn_units()
+		if spawn_config:
+			await spawn_units()
 	await register_entities()
 	if !UIManager.ui:
 		Util.sysprint("game_start","UIManager.ui not found")
@@ -431,13 +432,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") :
 		Util.sysprint("Level._unhandled_input()","click")
 		var mouse_map_position = grid.local_to_map(grid.prop_layer.get_local_mouse_position())
-		var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
+		
 		var hovered_entity = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if hovered_entity:
 			Util.sysprint("WorldManager._unhandled_input()","entity hovered: %s"%[hovered_entity.data.entity_name])
 		
+		var targetting_entity = get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY)
+		
+		var targetting_ability:AbilityV2=Util.get_meta_from_node(
+			get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY),
+			"targetting_ability"
+		)
 		if targetting_ability:
-			Util.sysprint("WorldManager._unhandled_input()","targetting ability: %s"%[targetting_ability.ability_name])
+			Util.sysprint("WorldManager._unhandled_input()","targetting ability: %s"%[targetting_ability.data.ability_name])
 		
 		if input_waiting_on_ability:
 			print(">input_waiting_on_ability return")
@@ -458,15 +465,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			UIManager.ability_hovered.target_select.emit()	
 			
 		if targetting_ability and !input_waiting_on_ability:		
-			print(">targetting_ability and !input_waiting_on_ability")
-			if selected_entity and targetting_ability.ability_name != "move":
+			if selected_entity and targetting_ability.data.ability_name.to_lower() != "move":
 				selected_entity.clear_sprite_material()
 				selected_entity = null
 			input_waiting_on_ability = true
 			targetting_ability.stopped_targetting.connect(func():
 				input_waiting_on_ability = false
 			,ConnectFlags.CONNECT_ONE_SHOT)
+			
+			print("ABILITY USED ON ", mouse_map_position)
 			targetting_ability.use(mouse_map_position)
+			
 			if !targetting_ability.is_valid_target(mouse_map_position):
 				if selected_entity:
 					selected_entity.clear_sprite_material()

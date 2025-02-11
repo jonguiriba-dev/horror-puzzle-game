@@ -78,7 +78,7 @@ func find_threat():
 		if !ability.can_target_entities:
 			return
 		var valid_targets = ability.get_valid_targets()
-		Util.sysprint("%s(host).%s(sm_node).find_threat()"%[host.data.entity_name,'ai_attack'],"ability:%s;valid_targets:%s"%[ability.ability_name,valid_targets])
+		Util.sysprint("%s(host).%s(sm_node).find_threat()"%[host.data.entity_name,'ai_attack'],"ability:%s;valid_targets:%s"%[ability.data.ability_name,valid_targets])
 		
 		if valid_targets.size() > 0:
 			target_found = true
@@ -196,7 +196,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 
 func set_threat(target_map_position:Vector2i,ability:Ability):
 	var threat = {"tile":target_map_position, "ability":ability}
-	Util.sysprint("%s.ai_attack.set_threat"%[host.data.entity_name],"ability:%s tile:%s"%[threat.ability.ability_name,str(threat.tile)])
+	Util.sysprint("%s.ai_attack.set_threat"%[host.data.entity_name],"ability:%s tile:%s"%[threat.ability.data.ability_name,str(threat.tile)])
 	host.threat = threat
 	host.threat_updated.emit()
 	var targetted_entity = WorldManager.level.grid.get_entity_on_tile(host.threat.tile)

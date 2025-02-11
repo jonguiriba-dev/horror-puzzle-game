@@ -32,6 +32,7 @@ func _enter_state(old_state, new_state):
 	UIManager.ui.set_context(host)
 
 	#UIManager.ui.set_context(host)
+	print("HOST.DATA.MOVE ",host.data.move_counter)
 	if host.data.move_counter > 0 and host.data.action_counter > 0:
 		Util.sysprint("EntitySelectedState._enter_state"," host.data.move_counter(%s) > 1, starting move"%[host.data.move_counter])
 		host.get_ability("move").target_select.emit()

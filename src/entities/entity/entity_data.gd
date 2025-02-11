@@ -21,6 +21,7 @@ enum STATE_LISTS{
 @export_group("Nodes")
 ## Ability script file name
 @export var ability_props:Array[AbilityProp]
+@export var starting_abilities:Array[AbilityData]
 ## States
 @export_file() var state_machine
 
@@ -38,17 +39,22 @@ var lvl := 1
 #var animation_counter := 0
 var action_counter := 1
 var move_counter := 1
+var abilities:Array[AbilityV2]=[]
 
-func get_abilities()->Array:
-	var abilities = []
-	for ability_prop in ability_props:
-		var ability_node 
-		if ability_prop.custom_ability_script:
-			ability_node = load(ability_prop.custom_ability_script).new()
-		else:
-			ability_node = Ability.new()
-		ability_node.ability_props = ability_prop
-		abilities.push_front(ability_node)
+#func get_abilities()->Array:
+	#var abilities = []
+	#for ability_prop in ability_props:
+		#var ability_node 
+		#if ability_prop.custom_ability_script:
+			#ability_node = load(ability_prop.custom_ability_script).new()
+		#else:
+			#ability_node = Ability.new()
+		#ability_node.ability_props = ability_prop
+		#abilities.push_front(ability_node)
+	#return abilities 
+	
+	
+func get_abilities()->Array[AbilityV2]:
 	return abilities 
 
 func get_state_machine()->StateMachine:
@@ -67,16 +73,27 @@ func apply(entity:Entity):
 	entity.data.max_action_counter = max_action_counter
 	entity.data.max_ability_slots = max_ability_slots
 	entity.data.max_equipment_slots = max_equipment_slots
+	for starting_ability_data in starting_abilities:
+		var ability = AbilityV2.new()
+		if starting_ability_data.custom_ability_script:
+			ability = load(starting_ability_data.custom_ability_script).new()
+		ability.data = starting_ability_data.duplicate()
+		ability.setup(entity)
+		entity.data.abilities.push_front(ability) 
+	
 	entity.set_max_health(max_health)
 	entity.preset = self
-
-	for ability in get_abilities():
-		entity.add_child(ability)
+	
+	#for ability in get_abilities():
+		#entity.add_child(ability)
 	
 	entity.add_child(get_state_machine())
 	
 
 func apply_node_data(entity:Entity):
+	if entity.data == null:
+		apply(entity)
+	
 	entity.healthbar.max_value = max_health
 	entity.healthbar.value = entity.data.health
 	if sprite_frames:

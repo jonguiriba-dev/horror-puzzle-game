@@ -1,18 +1,23 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=5 format=3 uid="uid://cxchgrvtv0mfv"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=5 format=3 uid="uid://cxchgrvtv0mfv"]
 
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Test/TEST.tres" id="1_bhy7h"]
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_hn48p"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_wpbp2"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_cr1mx"]
 [ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="5_45rtx"]
 
 [resource]
 script = ExtResource("4_cr1mx")
-ability1 = ExtResource("1_bhy7h")
 entity_name = "Dummy"
 max_health = 99
 move_range = 5
 team = 1
-ability_props = Array[ExtResource("1_wpbp2")]([ExtResource("1_bhy7h")])
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("1_wpbp2")]([])
+abilities = Array[ExtResource("1_hn48p")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

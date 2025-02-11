@@ -75,3 +75,9 @@ func get_global_from_local(local_position:Vector2,source_node:Node2D):
 	var global_pos = node.global_position
 	node.queue_free()
 	return global_pos
+
+func get_meta_from_node(node:Node,key:String):
+	if is_instance_valid(node):
+		if node.has_meta(key):
+			return node.get_meta(key)
+		return null

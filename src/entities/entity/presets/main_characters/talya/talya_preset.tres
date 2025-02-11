@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=10 format=3 uid="uid://duswqp4hpdc62"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=11 format=3 uid="uid://duswqp4hpdc62"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_5ramq"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_6mr6h"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="7_eygvi"]
 [ext_resource type="Resource" uid="uid://dcrknter06kkf" path="res://src/abilities/ability_presets/Support/ability_shared_vision/ability_shared_vision.tres" id="7_xh74m"]
 [ext_resource type="Resource" uid="uid://d1kf70lom66fp" path="res://src/abilities/ability_presets/Support/ability_tailwind/ability_tailwind.tres" id="8_12ytw"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="10_1akup"]
 
 [resource]
 script = ExtResource("1_5ramq")
@@ -22,6 +23,7 @@ max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
 ability_props = Array[ExtResource("1_6mr6h")]([ExtResource("2_w5s8k"), ExtResource("5_lf5bs"), ExtResource("6_njpdv"), ExtResource("7_xh74m"), ExtResource("8_12ytw"), ExtResource("7_eygvi")])
+starting_abilities = Array[ExtResource("10_1akup")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

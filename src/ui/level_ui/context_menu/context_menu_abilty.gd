@@ -4,7 +4,7 @@ class_name ContextMenuAbility
 @onready var bg := $Bg
 @onready var label := $HBoxContainer/AbilityName
 @onready var charges := $HBoxContainer/Control/Charges
-var ability:Ability
+var ability:AbilityV2
 	
 func _on_mouse_entered() -> void:
 	if ability.is_usable():
@@ -19,7 +19,10 @@ func _on_mouse_exited() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if UIManager.ability_hovered and ability.is_usable():
-			var targetting_ability := get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY) as Ability
+			var targetting_ability:AbilityV2=Util.get_meta_from_node(
+				get_tree().get_first_node_in_group(C.GROUPS_TARGETTING_ABILITY),
+				"targetting_ability"
+			)
 			if targetting_ability:
 				targetting_ability.stopped_targetting.emit()
 			UIManager.ability_hovered.target_select.emit()

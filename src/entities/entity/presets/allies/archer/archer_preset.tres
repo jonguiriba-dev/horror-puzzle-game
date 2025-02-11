@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://cnxebyxdvjec6"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://cnxebyxdvjec6"]
 
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_mgg53"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_tw8v1"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_h2a8q"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_bktrc"]
@@ -12,7 +13,13 @@ entity_name = "Archer"
 max_health = 99
 move_range = 3
 team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
 ability_props = Array[ExtResource("1_tw8v1")]([ExtResource("2_h2a8q"), ExtResource("3_bktrc")])
+abilities = Array[ExtResource("1_mgg53")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

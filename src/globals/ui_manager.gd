@@ -8,7 +8,7 @@ enum UI_TYPE{
 
 var ui_container
 var ui: UI
-var ability_hovered:Ability
+var ability_hovered:AbilityV2
 
 var level_ui = preload("res://src/ui/level_ui/Ui.tscn").instantiate()
 var map_ui

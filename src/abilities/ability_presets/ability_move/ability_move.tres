@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityProps" load_steps=4 format=3 uid="uid://bcejyyr3x8qqb"]
+[gd_resource type="Resource" script_class="AbilityProp" load_steps=4 format=3 uid="uid://bcejyyr3x8qqb"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_8xsia"]
 [ext_resource type="Resource" uid="uid://cp132b8efxwt4" path="res://src/abilities/ability_effect/tile_move.tres" id="2_i1r65"]
@@ -20,5 +20,6 @@ aoe_pattern = 3
 tile_exclude_flag = 7
 tile_exclude_self = true
 is_action = false
+description = "ability description"
 animation_script = null
 custom_ability_script = "res://src/abilities/ability_presets/ability_move/ability_move.gd"

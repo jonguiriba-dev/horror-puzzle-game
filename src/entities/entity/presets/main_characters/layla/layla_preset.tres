@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=10 format=3 uid="uid://b5ej70tnc1s0t"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=11 format=3 uid="uid://b5ej70tnc1s0t"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_0xnpx"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_ki15p"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="6_uh0c7"]
 [ext_resource type="SpriteFrames" uid="uid://d1taf2r4a1ps7" path="res://src/entities/entity/presets/main_characters/layla/layla_sprite_frames.tres" id="7_6mu81"]
 [ext_resource type="Resource" uid="uid://1rc1ixa7c8lh" path="res://src/abilities/ability_presets/Utility/ability_beckon/ability_beckon.tres" id="7_n6ssa"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="10_nsl2t"]
 
 [resource]
 script = ExtResource("6_uh0c7")
@@ -22,6 +23,7 @@ max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
 ability_props = Array[ExtResource("1_0xnpx")]([ExtResource("2_ki15p"), ExtResource("3_ya42a"), ExtResource("4_8bjag"), ExtResource("5_my0i3"), ExtResource("6_0u11r"), ExtResource("7_n6ssa")])
+starting_abilities = Array[ExtResource("10_nsl2t")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(3, -2)

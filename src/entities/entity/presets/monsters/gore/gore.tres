@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://y68iwe3dy48k"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://y68iwe3dy48k"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_ef1yf"]
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_nic7h"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_ns7lc"]
 [ext_resource type="SpriteFrames" uid="uid://jcy5fw848v25" path="res://src/entities/entity/presets/monsters/gore/gore_sprite_frames.tres" id="2_5qki6"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_d466v"]
@@ -12,7 +13,13 @@ entity_name = "Gore"
 max_health = 5
 move_range = 3
 team = 1
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
 ability_props = Array[ExtResource("1_ns7lc")]([ExtResource("2_d466v"), ExtResource("3_j7rkw")])
+abilities = Array[ExtResource("1_nic7h")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

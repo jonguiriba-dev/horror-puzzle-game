@@ -1,5 +1,5 @@
 extends Resource
-class_name AbilityProp
+class_name AbilityData
 
 @export var ability_name := "ability_name"
 @export var ability_range := 0
@@ -16,28 +16,6 @@ class_name AbilityProp
 @export var tile_exclude_self:=false
 @export var is_action:=true
 @export var description:="ability description"
-
 @export_file("animation_*gd") var animation_script
 @export_file("*gd") var custom_ability_script
-
-func apply(ability:Ability):
-	var prop_list = [
-		"ability_name",
-		"ability_range",
-		"effects",
-		"highlight_color",
-		"is_enemy_obstacle",
-		"target_count",
-		"use_host_as_origin",
-		"max_charges",
-		"action_cost",
-		"range_pattern",
-		"aoe_pattern",
-		"tile_exclude_flag",
-		"tile_exclude_self",
-		"is_action",
-		"animation_script",
-	]
-	for prop in prop_list:
-		ability.set(prop,get(prop))
-	ability.refresh_charges()
+var charges:=0

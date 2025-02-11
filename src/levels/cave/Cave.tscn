@@ -110,8 +110,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_025me")
-dialogues = null
-orientation = null
 spawn_config = ExtResource("2_ufs88")
 rewards_config = ExtResource("3_lwu6q")
 

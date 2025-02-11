@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="EntityPreset" load_steps=6 format=3 uid="uid://clywh0svuxrk4"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://clywh0svuxrk4"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_12eiq"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_hkhur"]
 [ext_resource type="Resource" uid="uid://2rkgneidf3pt" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="3_qqdkn"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_dj2ly"]
 [ext_resource type="SpriteFrames" uid="uid://bhykddn2qcs7t" path="res://src/entities/entity/presets/allies/knight/knight_sprite_frames.tres" id="5_wv0s7"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="6_f3rm1"]
 
 [resource]
 script = ExtResource("4_dj2ly")
@@ -18,6 +19,7 @@ max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
 ability_props = Array[ExtResource("1_12eiq")]([ExtResource("2_hkhur"), ExtResource("3_qqdkn")])
+starting_abilities = Array[ExtResource("6_f3rm1")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

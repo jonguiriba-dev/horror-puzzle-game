@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cs01m16vvh2vk"]
+[gd_scene load_steps=14 format=4 uid="uid://cs01m16vvh2vk"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_ufvuu"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_dxwwt"]
@@ -8,9 +8,7 @@
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_kt5py"]
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_3jos5"]
 [ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_2kexs"]
-[ext_resource type="Resource" uid="uid://cnxebyxdvjec6" path="res://src/entities/entity/presets/allies/archer/archer_preset.tres" id="9_53klh"]
-[ext_resource type="Resource" uid="uid://duswqp4hpdc62" path="res://src/entities/entity/presets/main_characters/talya/talya_preset.tres" id="9_ko3e7"]
-[ext_resource type="Resource" uid="uid://dbsqmmhlp60lk" path="res://src/entities/entity/presets/allies/mage/mage_preset.tres" id="10_aqhve"]
+[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres" id="9_cwqjs"]
 [ext_resource type="Resource" uid="uid://cxchgrvtv0mfv" path="res://src/entities/entity/presets/monsters/dummy/dummy_preset.tres" id="11_xbhhf"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="12_vevov"]
 
@@ -61,34 +59,29 @@ tile_set = ExtResource("6_kt5py")
 y_sort_enabled = true
 tile_set = ExtResource("5_0vs47")
 
+[node name="TeamPositionLayer" type="TileMapLayer" parent="Grid"]
+visible = false
+tile_map_data = PackedByteArray("AAD6//7/AAACAAAAAAD6//3/AAACAAAAAAD7//z/AAACAAAAAAD7//3/AAACAAAAAAD7//7/AAACAAAAAAD7////AAACAAAAAAD7/wAAAAACAAAAAAD7/wEAAAACAAAAAAD7/wIAAAACAAAAAAD7/wMAAAACAAAAAAD7/wQAAAACAAAAAAD6/wAAAAACAAAAAAD6////AAACAAAAAAD6/wEAAAACAAAAAAD6/wIAAAACAAAAAAD6/wMAAAACAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAJAAIAAAADAAAAAAAJAAMAAAADAAAAAAAJAAQAAAADAAAAAAAJAP3/AAADAAAAAAAJAPz/AAADAAAAAAAJAP7/AAADAAAAAAAJAP//AAADAAAAAAAIAAQAAAADAAAAAAAIAAMAAAADAAAAAAAIAAIAAAADAAAAAAAIAAEAAAADAAAAAAAIAAAAAAADAAAAAAAIAP//AAADAAAAAAAIAP7/AAADAAAAAAAIAP3/AAADAAAAAAAIAPz/AAADAAAAAAAHAAQAAAADAAAAAAAHAAMAAAADAAAAAAAHAAIAAAADAAAAAAAHAAEAAAADAAAAAAAHAAAAAAADAAAAAAAHAP//AAADAAAAAAAHAP7/AAADAAAAAAAHAP3/AAADAAAAAAAHAPz/AAADAAAAAAD8//z/AAACAAAAAAD8//3/AAACAAAAAAD8//7/AAACAAAAAAD8////AAACAAAAAAD8/wAAAAACAAAAAAD8/wEAAAACAAAAAAD8/wIAAAACAAAAAAD8/wMAAAACAAAAAAD8/wQAAAACAAAAAAD9//3/AAAAAAAAAAD9//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD+//z/AAAAAAAAAAD9/wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD///z/AAAAAAAAAAD///v/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAP3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAACAPz/AAAAAAAAAAADAPz/AAAAAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAACAAQAAAAAAAAAAAADAAIAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAAEAAAAAAAAAAAADAAQAAAAAAAAAAAACAAIAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAP3/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPv/AAAAAAAAAAABAPv/AAAAAAAAAAACAPv/AAAAAAAAAAAEAPz/AAAAAAAAAAADAPv/AAAAAAAAAAAEAP3/AAAAAAAAAAABAP7/AAAAAAAAAAAGAAQAAAADAAAAAAAGAAMAAAADAAAAAAAGAAIAAAADAAAAAAAGAAAAAAADAAAAAAAGAP//AAADAAAAAAAGAP7/AAADAAAAAAAGAPz/AAADAAAAAAAGAP3/AAADAAAAAAAGAAEAAAADAAAAAAD+/wMAAAAAAAAAAAA=")
+tile_set = ExtResource("5_0vs47")
+
 [node name="PropLayer" type="TileMapLayer" parent="Grid"]
 z_index = 1
 y_sort_enabled = true
 tile_set = ExtResource("7_3jos5")
 
-[node name="Talya" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
+[node name="Eliana" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
 position = Vector2(-49, -25)
-preset = ExtResource("9_ko3e7")
-
-[node name="Archer2" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
-position = Vector2(-46, -8)
-preset = ExtResource("9_53klh")
-
-[node name="Mage" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
-position = Vector2(-17, -24)
-preset = ExtResource("10_aqhve")
+preset = ExtResource("9_cwqjs")
 
 [node name="Dummy" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
 position = Vector2(-1, 16)
 preset = ExtResource("11_xbhhf")
 
-[node name="Dummy3" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
-position = Vector2(31, 0)
-preset = ExtResource("11_xbhhf")
-
-[node name="Dummy2" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
-position = Vector2(15, 8)
-preset = ExtResource("11_xbhhf")
+[node name="GridLabel" type="Control" parent="Grid"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="WorldBg" type="Sprite2D" parent="."]
 z_index = -99

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://bprqcm81bu4mf"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_0achc"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_5hs6o"]
+[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_fekma"]
+[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="3_ccr8j"]
+
+[resource]
+script = ExtResource("2_5hs6o")
+ability_name = "Strike"
+ability_range = 1
+effects = Array[ExtResource("1_0achc")]([ExtResource("2_fekma"), ExtResource("3_ccr8j")])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+description = "ability description"
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null

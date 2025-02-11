@@ -3,6 +3,9 @@ extends Node
 #const file_path := "user://saves/save1.tres"
 const file_path := "res://src/scripts/save/save1.tres"
 var save_file = load("res://src/scripts/save/save.tres")
+const config_file_path := "user://game.cfg"
+var config_file
+var config_file_key = "d0nt_h4ck!"
 var loaded_data: SaveData
 
 enum SCREENS {
@@ -27,9 +30,26 @@ func save_data(key,data):
 	Util.sysprint("SaveManager","save data %s - %s"%[key,data])
 	save_file.set(key,data)
 
+func set_config(section,key,data):
+	Util.sysprint("SaveManager","save config data %s - %s"%[key,data])
+	if !config_file:
+		config_file = ConfigFile.new()
+	
+	config_file.set_value(section,key,data)
+	config_file.save_encrypted_pass(config_file_path,config_file_key)
+	
+func get_config(section,key):
+	Util.sysprint("SaveManager","load config %s - %s"%[key])
+	if !config_file:
+		config_file = config_file.load_encrypted_pass(config_file_path,config_file_key)
+		if !config_file:
+			return
+	
+	config_file.get_value(section,key)
+	
 func load_data():
 	print("loading data ")
-	loaded_data = ResourceLoader.load(file_path,"SaveData")
+	loaded_data = SafeResourceLoader.load(file_path,"SaveData")
 	if loaded_data:
 		for key in loaded_data.to_dict():
 			save_data(key,loaded_data[key])

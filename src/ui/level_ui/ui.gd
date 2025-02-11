@@ -87,15 +87,15 @@ func show_context_menu(host:Entity):
 	
 	var ability_count = 0
 	for ability in host.get_abilities():
-		if ability.ability_name == "move":
+		if ability.data.ability_name == "move":
 			continue
 		ability_count+=1
 		var ability_node = preload("res://src/ui/level_ui/context_menu/context_menu_abilty.tscn").instantiate()
 		context_menu_ability_list.add_child(ability_node)
-		ability_node.label.text = ability.ability_name
+		ability_node.label.text = ability.data.ability_name
 		ability_node.ability = ability
-		if ability.max_charges != 0:
-			ability_node.charges.text = str(ability.charges)
+		if ability.data.max_charges != 0:
+			ability_node.charges.text = str(ability.data.charges)
 		else:
 			ability_node.charges.text = ""
 		if !ability.is_usable():

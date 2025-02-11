@@ -76,7 +76,7 @@ func _ready() -> void:
 		sprite.play("idle")
 	
 	for ability in get_abilities():
-		if ability.ability_name == "move":
+		if ability.data.ability_name == "move":
 			continue
 		ability.used.connect(_on_ability_used)
 	
@@ -125,18 +125,21 @@ func check_overlap(map_pos:Vector2i):
 			entity.rescued.emit()
 
 
-func get_abilities()->Array[Ability]:
-	var abilities:Array[Ability]= []
-	for child in get_children():
-		if child is Ability:
-			var ability = child as Ability
-			abilities.append(ability)
-		
-	return abilities
+#func get_abilities()->Array[Ability]:
+	#var abilities:Array[Ability]= []
+	#for child in get_children():
+		#if child is Ability:
+			#var ability = child as Ability
+			#abilities.append(ability)
+		#
+	#return abilities
 	
-func get_ability(ability_name:String)->Ability:
+func get_abilities()->Array[AbilityV2]:
+	return data.abilities
+	
+func get_ability(ability_name:String)->AbilityV2:
 	for ability in get_abilities():
-		if ability.ability_name == ability_name:
+		if ability.data.ability_name.to_lower() == ability_name.to_lower():
 			return ability
 	return null
 func hide_all_details():
@@ -273,10 +276,10 @@ func _on_selected():
 		UIManager.ui.clear_context()
 
 		
-func _on_ability_used(ability:Ability):
+func _on_ability_used(ability:AbilityV2):
 	WorldManager.level.clear_entity_moved_history()
-	data.action_counter -= ability.action_cost
-	if ability.is_action:
+	data.action_counter -= ability.data.action_cost
+	if ability.data.is_action:
 		data.move_counter = 0
 
 func _on_apply_status(status:Status):
