@@ -32,8 +32,8 @@ func hide_victory_overlay():
 	ui.victory_overlay.hide()
 	ui.overlays.hide()
 
-func show_reward_overlay(ability_props:Array[AbilityProp]):
-	ui.show_reward_overlay(ability_props)
+func show_reward_overlay(ability_presets:Array[AbilityData]):
+	ui.show_reward_overlay(ability_presets)
 	ui.overlays.show()
 	ui.reward_card_selected.connect(
 		func(e):

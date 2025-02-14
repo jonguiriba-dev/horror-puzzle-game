@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://dslk1ursehvik"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=6 format=3 uid="uid://dslk1ursehvik"]
 
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_8xou8"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_50mq2"]
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_smaqy"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_u3s7m"]
 [ext_resource type="SpriteFrames" uid="uid://b0nvqdmmju3hj" path="res://src/entities/entity/presets/monsters/watcher/watcher_sprite_frames.tres" id="2_3jjid"]
-[ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_gwhfx"]
-[ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_e5shx"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="6_x1m3m"]
 
 [resource]
 script = ExtResource("1_50mq2")
@@ -18,10 +17,16 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("1_u3s7m")]([ExtResource("2_gwhfx"), ExtResource("3_e5shx")])
-abilities = Array[ExtResource("1_smaqy")]([])
+ability_props = Array[ExtResource("1_u3s7m")]([])
+starting_abilities = Array[ExtResource("6_x1m3m")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 3)
 sprite_offset = Vector2(0, 0)
 sprite_frames = ExtResource("2_3jjid")
 portrait_image = "res://assets/portraits/layla-portrait.png"
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_8xou8")]([])

@@ -35,7 +35,7 @@ func get_units_by_name(entity_name:String):
 			return e
 	)
 	
-func add_entity_ability(entity:Entity,ability:AbilityProp):
+func add_entity_ability(entity:Entity,ability:AbilityData):
 	entity.add_ability(ability)
 
 func add_gold(amount:int):
@@ -57,7 +57,7 @@ func to_save_data():
 func _on_game_loaded():
 	print("load player manager")
 	var load_data = SaveManager.get_loaded("player_manager")
-	var loaded_units = load_data.units.map(func(e):return EntityManager.load_entity(e))
+	var loaded_units = load_data.get(units,[]).map(func(e):return EntityManager.load_entity(e))
 	print("loaded_units ",loaded_units)
 	if load_data:
 		units = loaded_units

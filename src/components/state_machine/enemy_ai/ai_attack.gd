@@ -15,7 +15,8 @@ func _ready() -> void:
 	state_id = C.STATE.AI_ATTACK
 	
 func _on_configured():
-	host.move_end.connect(_on_host_move_end)
+	pass
+	#host.move_end.connect(_on_host_move_end)
 	
 func _enter_state(old_state, new_state):
 	to_idle = false
@@ -51,8 +52,12 @@ func _enter_state(old_state, new_state):
 			
 		if Debug.show_enemy_ai_tile_values:
 			show_tile_values(scored_tiles)
-			
-		host.get_ability("move").use(scored_tiles[0].position)
+		
+		var move_ability = host.get_ability("move")
+		move_ability.used.connect(func(e):
+			finalize_turn()
+		, CONNECT_ONE_SHOT)
+		move_ability.use(scored_tiles[0].position)
 
 
 func show_tile_values(scored_tiles:Array):
@@ -194,7 +199,7 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		value -= 15
 	return value
 
-func set_threat(target_map_position:Vector2i,ability:Ability):
+func set_threat(target_map_position:Vector2i,ability:AbilityV2):
 	var threat = {"tile":target_map_position, "ability":ability}
 	Util.sysprint("%s.ai_attack.set_threat"%[host.data.entity_name],"ability:%s tile:%s"%[threat.ability.data.ability_name,str(threat.tile)])
 	host.threat = threat
@@ -253,9 +258,9 @@ func get_nearest_target():
 	var nearest = targets[0]
 	return nearest
 	
-func _on_host_move_end():
-	if !events_active:
-		return
-		
-	print(">move end finalize_turn")
-	finalize_turn()
+#func _on_host_move_end():
+	#if !events_active:
+		#return
+		#
+	#print(">move end finalize_turn")
+	#finalize_turn()

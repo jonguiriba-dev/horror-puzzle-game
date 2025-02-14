@@ -58,6 +58,11 @@ func _on_scenetree_ready():
 	#_start_player_turn()
 
 func end_turn():
+	Util.sysprint("Level","end_turn: from %s to %s"%[
+		C.TEAM.keys()[turn_order[0]],
+		C.TEAM.keys()[turn_order[1]],
+	])
+	
 	UIManager.ui.clear_context()
 	turn_changed.emit()
 	turn_end.emit(team_turn)
@@ -153,7 +158,12 @@ func game_start():
 	current_dialogue = null
 	
 	team_turn = turn_order[0]
-	turn_order = SaveManager.get_loaded("level","turn_order",turn_order)
+	turn_order = SaveManager.get_loaded(
+		"level",
+		"turn_order",
+		turn_order
+	) as Array[C.TEAM]
+	print("turn order-> ",C.TEAM.keys()[turn_order[0]],C.TEAM.keys()[turn_order[1]])
 	team_turn = SaveManager.get_loaded("level","team_turn",team_turn)
 
 		
@@ -161,7 +171,7 @@ func game_start():
 	
 func load_units():
 	for entity in SaveManager.get_loaded("level","entities",[]):
-		var loaded_entity = EntityManager.load_entity(entity)
+		var loaded_entity = Entity.load_data(entity)
 		loaded_entity.set_meta("recently_loaded",true)
 
 		EntityManager.spawn_entity(
@@ -230,9 +240,9 @@ func check_player_victory():
 			var reward_abilities = get_reward_abilities()
 			UIManager.show_reward_overlay(reward_abilities)
 			UIManager.reward_card_selected.connect(func(reward_card):
-				var ability_prop = reward_card.get_meta("data")
+				var ability_preset = reward_card.get_meta("data")
 				var entity = reward_card.get_meta("target_entity")
-				PlayerManager.add_entity_ability(entity,ability_prop)
+				PlayerManager.add_entity_ability(entity,ability_preset)
 				UIManager.hide_reward_overlay()
 				SceneManager.change_scene(SceneManager.SCENE_MAP)
 				for player_entity in player_entities:
@@ -248,7 +258,9 @@ func give_player_rewards():
 	PlayerManager.add_gold(level_gold)
 	
 func get_reward_abilities():
-	var abilities :Array[AbilityProp]= []
+	var abilities :Array[AbilityData]= []
+	if !rewards_config:
+		return abilities
 	while abilities.size() < rewards_config.max_rewards:
 		for ability_reward in rewards_config.ability_reward_pool:
 			if abilities.size() >= rewards_config.max_rewards:
@@ -363,16 +375,14 @@ func _on_turn_order_pressed():
 			show_turn_order()
 	
 func _on_turn_start(turn:C.TEAM):
-	SaveManager.save_data("level",to_save_data())
-	SaveManager.save_game()
 	
 	if Debug.show_turn_card:
 		await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
 	Util.sysprint("WorldManager._on_turn_start","turn start: %s"%[C.TEAM.keys()[turn]])
-	if turn == C.TEAM.ENEMY:
-		_start_ai_turn()
+	#if turn == C.TEAM.ENEMY:
+		#_start_ai_turn()
 		#_start_enemy_turn()
-	elif turn == C.TEAM.PLAYER:
+	if turn == C.TEAM.PLAYER:
 		_start_player_turn()
 	elif turn == C.TEAM.ALLY:
 		_start_ai_turn()
@@ -380,6 +390,7 @@ func _on_turn_start(turn:C.TEAM):
 		
 func _on_ai_unit_turn_end():
 	Util.sysprint("Level:_on_ai_unit_turn_end","ai_turn_queue:%s"%[ai_turn_queue.size()])
+
 	if is_instance_valid(current_ai_entity_in_action):
 		current_ai_entity_in_action.clear_sprite_material()
 	current_ai_entity_in_action = null

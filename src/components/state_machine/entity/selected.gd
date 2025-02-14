@@ -34,9 +34,11 @@ func _enter_state(old_state, new_state):
 	#UIManager.ui.set_context(host)
 	print("HOST.DATA.MOVE ",host.data.move_counter)
 	if host.data.move_counter > 0 and host.data.action_counter > 0:
-		Util.sysprint("EntitySelectedState._enter_state"," host.data.move_counter(%s) > 1, starting move"%[host.data.move_counter])
-		host.get_ability("move").target_select.emit()
-	
+		Util.sysprint(
+			"EntitySelectedState._enter_state",
+			" host.data.move_counter(%s) > 0 and host.data.action_counter(%s) > 0, starting move"%[host.data.move_counter,host.data.action_counter])
+		var ability_move = host.get_ability("move")
+		ability_move.target_select.emit()
 func _on_tile_selected(map_pos:Vector2i):
 	if (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ABILITY) == 0):
 		#and ability.state != Ability.STATE.TARGET_SELECT):

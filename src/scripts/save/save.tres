@@ -4,11 +4,7 @@
 
 [resource]
 script = ExtResource("1_n6hha")
-current_scene = ""
-scene_list = {}
-level_entities = []
-level_team_turn = 0
-level_turn_order = []
-player = {
-"units": []
-}
+player_manager = {}
+scene_manager = {}
+level = {}
+map = {}

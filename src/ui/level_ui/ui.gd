@@ -156,8 +156,8 @@ func show_strategies():
 	is_strategies_showing = true
 
 #limit to 3
-func show_reward_overlay(ability_props:Array[AbilityProp]):
-	reward_overlay.populate_with_abilities(ability_props)
+func show_reward_overlay(ability_presets:Array[AbilityData]):
+	reward_overlay.populate_with_abilities(ability_presets)
 	reward_overlay.show()
 	reward_overlay.selected_card.connect(
 		func(e):

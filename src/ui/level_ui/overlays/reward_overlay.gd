@@ -5,15 +5,15 @@ var hovered_card
 
 signal selected_card(reward_card)
 
-func populate_with_abilities(ability_props:Array[AbilityProp]):
+func populate_with_abilities(ability_presets:Array[AbilityData]):
 	for child in hbox.get_children():
 		child.queue_free()
 	
-	for ability_prop in ability_props:
+	for ability_preset in ability_presets:
 		var reward_card = preload("res://src/ui/reward_card/RewardCard.tscn").instantiate()
 		hbox.add_child(reward_card)
-		reward_card.card_name.text = ability_prop.ability_name
-		reward_card.description.text = ability_prop.description
+		reward_card.card_name.text = ability_preset.ability_name
+		reward_card.description.text = ability_preset.description
 		reward_card.mouse_entered.connect(_on_reward_card_mouse_entered.bind(reward_card))
 		reward_card.mouse_exited.connect(_on_reward_card_mouse_exited)
 		
@@ -29,7 +29,7 @@ func populate_with_abilities(ability_props:Array[AbilityProp]):
 			entity = PlayerManager.get_units_by_name(EntityManager.PRESET_TALYA.entity_name)[0]
 			reward_card.bg.color = Color.LIGHT_SKY_BLUE
 			
-		reward_card.set_meta("data",ability_prop)
+		reward_card.set_meta("data",ability_preset)
 		reward_card.set_meta("target_entity",entity)
 		
 func _on_reward_card_mouse_entered(reward_card):

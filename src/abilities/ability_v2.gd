@@ -7,9 +7,9 @@ enum STATE{
 }
 
 var host:Entity
-var state = STATE.INACTIVE
-var has_ui = true
-var data:AbilityData
+@export var state = STATE.INACTIVE
+@export var has_ui = true
+@export var data:AbilityData
 
 var can_target_entities:bool:
 	get:
@@ -32,7 +32,7 @@ func setup(_host:Entity) -> void:
 	
 
 func use(target_map_position:Vector2i, options:Dictionary={}):
-	print("Ability used on 2 ... ", target_map_position)
+	print("Ability ",data.ability_name, " used on ", target_map_position)
 
 	if !is_valid_target(target_map_position) and !options.get('absolute',false):
 		stopped_targetting.emit()
@@ -48,7 +48,7 @@ func use(target_map_position:Vector2i, options:Dictionary={}):
 	if data.use_host_as_origin:
 		origin = host.map_position + direction
 	
-	apply_effect_to_tiles(target_map_position)
+	await apply_effect_to_tiles(target_map_position)
 	
 	used.emit(self)
 	
@@ -84,7 +84,7 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		if data.effects.filter(
 			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
 		).size() > 0:
-			apply_move_effect(affected_tile)
+			await apply_move_effect(affected_tile)
 			
 
 func apply_entity_effect(target:Entity):

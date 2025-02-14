@@ -81,3 +81,14 @@ func get_meta_from_node(node:Node,key:String):
 		if node.has_meta(key):
 			return node.get_meta(key)
 		return null
+
+func get_user_defined_properties(object)->Array[Dictionary]:
+	var res :Array[Dictionary]= []
+	for property in object.get_property_list():
+		if property["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE:
+			res.push_front({
+				"key":  property["name"],
+				"value":  object.get(property["name"])
+			})
+	return res
+	

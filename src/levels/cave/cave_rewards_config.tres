@@ -1,24 +1,23 @@
-[gd_resource type="Resource" script_class="LevelRewardsConfig" load_steps=9 format=3 uid="uid://exjcc57kvq8o"]
+[gd_resource type="Resource" script_class="LevelRewardsConfig" load_steps=8 format=3 uid="uid://exjcc57kvq8o"]
 
 [ext_resource type="Script" path="res://src/levels/chance_outcome.gd" id="1_nuud4"]
+[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike_v2_preset.tres" id="2_nipfv"]
 [ext_resource type="Script" path="res://src/levels/level_rewards_config.gd" id="2_o5wfu"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="2_qxokl"]
-[ext_resource type="Resource" uid="uid://brofib71ihnbr" path="res://src/abilities/ability_presets/Offense/ability_spear_stab/ability_spear_stab.tres" id="3_ttwss"]
-[ext_resource type="Resource" uid="uid://dhk3ejpsnmlvr" path="res://src/abilities/ability_presets/Movement/ability_vault/ability_vault.tres" id="4_4nnrq"]
 
 [sub_resource type="Resource" id="Resource_km6ul"]
 script = ExtResource("1_nuud4")
-value = ExtResource("2_qxokl")
+value = ExtResource("2_nipfv")
 chance = 0.5
 
 [sub_resource type="Resource" id="Resource_peui3"]
 script = ExtResource("1_nuud4")
-value = ExtResource("3_ttwss")
+value = ExtResource("2_nipfv")
 chance = 0.5
 
 [sub_resource type="Resource" id="Resource_dipud"]
 script = ExtResource("1_nuud4")
-value = ExtResource("4_4nnrq")
+value = ExtResource("2_qxokl")
 chance = 0.5
 
 [resource]

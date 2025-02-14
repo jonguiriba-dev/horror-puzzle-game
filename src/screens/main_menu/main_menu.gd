@@ -18,7 +18,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if selected_label == continue_label:
 			SaveManager.load_data()
 		if selected_label == new_game_label:
-			SceneManager.change_scene(SceneManager.SCENE_MAP)
+			#SceneManager.change_scene(SceneManager.SCENE_MAP)
+			SceneManager.change_scene("res://src/levels/cave/Cave.tscn")
 
 func _on_label_mouse_entered(label:Label):
 	print("label entered ",label)

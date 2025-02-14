@@ -21,13 +21,16 @@ func spawn_entity(position:Vector2,entity:Entity):
 #returns a newly instantiated Entity
 func create_entity(entity_preset:EntityData):
 	var entity = entity_tscn.instantiate()
-	entity_preset.apply(entity)
+	entity_preset.apply_as_preset(entity)
+
 	return entity
 
-func load_entity(entity_load_data):
-	var entity = entity_tscn.instantiate()
-	for key in entity_load_data:
-		entity.set(key,entity_load_data[key])
-		print("entity.set - ",key, " - ",entity_load_data[key])
-	print("entity.set done - ",entity.data.entity_name)
-	return entity
+#func load_entity(entity_load_data):
+	#print("LOADED ENTITY ",entity_load_data)
+	#var entity = entity_tscn.instantiate()
+	#entity_load_data.preset.apply_as_preset(entity)
+	#for key in entity_load_data:
+		#entity.set(key,entity_load_data[key])
+		#print("entity.set - ",key, " - ",entity_load_data[key])
+	#print("entity.set done - ",entity.data.entity_name)
+	#return entity

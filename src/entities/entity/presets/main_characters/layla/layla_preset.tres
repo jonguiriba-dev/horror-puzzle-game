@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=11 format=3 uid="uid://b5ej70tnc1s0t"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=12 format=3 uid="uid://b5ej70tnc1s0t"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_0xnpx"]
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_qcu5n"]
 [ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_ki15p"]
 [ext_resource type="Resource" uid="uid://brofib71ihnbr" path="res://src/abilities/ability_presets/Offense/ability_spear_stab/ability_spear_stab.tres" id="3_ya42a"]
 [ext_resource type="Resource" uid="uid://chvrmbbhh5rjx" path="res://src/abilities/ability_presets/Support/ability_haste/ability_haste.tres" id="4_8bjag"]
@@ -29,3 +30,9 @@ shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(3, -2)
 sprite_frames = ExtResource("7_6mu81")
 portrait_image = "res://assets/characters/angels/layla-body.png"
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_qcu5n")]([])

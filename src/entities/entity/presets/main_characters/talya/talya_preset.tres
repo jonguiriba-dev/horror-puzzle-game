@@ -1,14 +1,11 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=11 format=3 uid="uid://duswqp4hpdc62"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://duswqp4hpdc62"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_5ramq"]
 [ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_6mr6h"]
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_ik2c4"]
 [ext_resource type="SpriteFrames" uid="uid://jc3proaf3kq0" path="res://src/entities/entity/presets/main_characters/talya/talya_sprite_frames.tres" id="2_gn7xq"]
-[ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_w5s8k"]
-[ext_resource type="Resource" uid="uid://bphejklwgk8d8" path="res://src/abilities/ability_presets/Support/ability_frost_shot/ability_frost_shot.tres" id="5_lf5bs"]
-[ext_resource type="Resource" uid="uid://p6i5jib3t2gt" path="res://src/abilities/ability_presets/Support/ability_heal_shot/ability_heal_shot.tres" id="6_njpdv"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_hwvvs"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="7_eygvi"]
-[ext_resource type="Resource" uid="uid://dcrknter06kkf" path="res://src/abilities/ability_presets/Support/ability_shared_vision/ability_shared_vision.tres" id="7_xh74m"]
-[ext_resource type="Resource" uid="uid://d1kf70lom66fp" path="res://src/abilities/ability_presets/Support/ability_tailwind/ability_tailwind.tres" id="8_12ytw"]
 [ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="10_1akup"]
 
 [resource]
@@ -22,10 +19,16 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("1_6mr6h")]([ExtResource("2_w5s8k"), ExtResource("5_lf5bs"), ExtResource("6_njpdv"), ExtResource("7_xh74m"), ExtResource("8_12ytw"), ExtResource("7_eygvi")])
-starting_abilities = Array[ExtResource("10_1akup")]([])
+ability_props = Array[ExtResource("1_6mr6h")]([])
+starting_abilities = Array[ExtResource("10_1akup")]([ExtResource("5_hwvvs"), ExtResource("7_eygvi")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
 sprite_frames = ExtResource("2_gn7xq")
 portrait_image = "res://assets/characters/angels/talya-body.png"
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_ik2c4")]([])

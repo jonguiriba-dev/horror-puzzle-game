@@ -50,6 +50,6 @@ func _on_game_loaded():
 
 func to_save_data():
 	return {
-		"scene_list":scene_list,
+		#"scene_list":scene_list,
 		"current_scene_path":current_scene_path,
 	}

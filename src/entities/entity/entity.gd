@@ -1,34 +1,16 @@
 extends Node2D
 class_name Entity
-# use shader https://godotshaders.com/shader/highlight-canvasitem/ for highlighting icons
+
+const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn") 
+
 @onready var sprite :AnimatedSprite2D= $EntitySprite
 @onready var shadow :Sprite2D= $Shadow
 @onready var rescue_text := $EntitySprite/RescueText
 @onready var healthbar := $Healthbar
 @onready var status_bar := $StatusBar
-
 @export var preset:EntityData
-
-var data:EntityData
-
-#var max_health := 1
-#var speed := 5
-#var experience := 0
-#var lvl := 1
-#var move_range := 3
-#var max_move_counter := 1
-#var max_action_counter := 1
-#var max_ability_slots := 1
-#var max_equipment_slots := 2 
-#var entity_name := ""
-#var portrait_image
-#var team :C.TEAM = C.TEAM.PLAYER
-#var can_move := false
+@export var data:EntityData
 var animation_counter := 0
-#var action_counter := 1
-#var move_counter := 1
-#var health := 1
-
 var map_position:Vector2i:
 	get:
 		if WorldManager.level:
@@ -52,7 +34,7 @@ signal threat_updated
 func _ready() -> void:
 	if preset:
 		preset.apply_node_data(self)
-	
+
 	add_to_group(C.GROUPS_ENTITIES)
 	death.connect(_on_death)
 	hit.connect(_on_hit)
@@ -181,10 +163,11 @@ func clear_threat():
 	threat = null
 	threat_updated.emit()
 
-func add_ability(ability_prop:AbilityProp):
-	var ability_node = Ability.new()
-	ability_node.ability_props = ability_prop
-	add_child(ability_node)
+func add_ability(ability_data:AbilityData):
+	var ability = AbilityV2.new()
+	ability.data = ability_data
+	data.abilities.push_front(ability) 
+
 
 func _on_turn_start():
 	Util.sysprint("%s.Entity._on_turn_start"%[data.entity_name],"counter refresh done")
@@ -298,8 +281,21 @@ func _on_knockback_animation_finished(distance:int, source_map_pos:Vector2i, pre
 
 func to_save_data():
 	return {
-		"preset": preset,
-		"data" : data,
+		"preset": preset.duplicate(true),
+		"data" : data.to_save_data(),
 		"position": position,
-		
+		"threat":threat,
+		"status_effects":status_effects.duplicate(true)
 	}
+	
+static func load_data(entity_load_data)->Entity:
+	Util.sysprint("Entity","loading data.. %s"%[entity_load_data.data.entity_name])
+	var entity = ENTITY_TSCN.instantiate()
+	entity_load_data.preset.apply_as_preset(entity)
+	for key in entity_load_data:
+		entity.set(key,entity_load_data[key])
+		if key == "data":
+			var entity_data:EntityData= entity_load_data[key]
+			entity_data.load_data(entity)
+			
+	return entity

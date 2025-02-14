@@ -1,9 +1,10 @@
 extends Resource
 class_name EntityData
 
+const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn") 
+
 var ability_file_path = "res://src/abilities"
 var state_file_path = "res://src/components/state_machine/entity"
-
 enum STATE_LISTS{
 	PLAYER_STATES
 }
@@ -33,34 +34,18 @@ enum STATE_LISTS{
 @export var sprite_frames:SpriteFrames
 @export_file() var portrait_image
 
-var health := 1
-var experience := 0
-var lvl := 1
+@export var health := 1
+@export var experience := 0
+@export var lvl := 1
 #var animation_counter := 0
-var action_counter := 1
-var move_counter := 1
-var abilities:Array[AbilityV2]=[]
-
-#func get_abilities()->Array:
-	#var abilities = []
-	#for ability_prop in ability_props:
-		#var ability_node 
-		#if ability_prop.custom_ability_script:
-			#ability_node = load(ability_prop.custom_ability_script).new()
-		#else:
-			#ability_node = Ability.new()
-		#ability_node.ability_props = ability_prop
-		#abilities.push_front(ability_node)
-	#return abilities 
-	
+@export var action_counter := 1
+@export var move_counter := 1
+@export var abilities:Array[AbilityV2]=[]
 	
 func get_abilities()->Array[AbilityV2]:
 	return abilities 
 
-func get_state_machine()->StateMachine:
-	return load(state_machine).instantiate()
-
-func apply(entity:Entity):
+func apply_as_preset(entity:Entity):
 	Util.sysprint("Entity:loading_preset", "loading_preset")
 	if entity.data == null:
 		entity.data = EntityData.new()
@@ -73,6 +58,7 @@ func apply(entity:Entity):
 	entity.data.max_action_counter = max_action_counter
 	entity.data.max_ability_slots = max_ability_slots
 	entity.data.max_equipment_slots = max_equipment_slots
+
 	for starting_ability_data in starting_abilities:
 		var ability = AbilityV2.new()
 		if starting_ability_data.custom_ability_script:
@@ -83,16 +69,14 @@ func apply(entity:Entity):
 	
 	entity.set_max_health(max_health)
 	entity.preset = self
-	
-	#for ability in get_abilities():
-		#entity.add_child(ability)
-	
-	entity.add_child(get_state_machine())
-	
+
+	entity.data.state_machine = state_machine
+	entity.add_child(load(state_machine).instantiate())
+
 
 func apply_node_data(entity:Entity):
 	if entity.data == null:
-		apply(entity)
+		apply_as_preset(entity)
 	
 	entity.healthbar.max_value = max_health
 	entity.healthbar.value = entity.data.health
@@ -104,3 +88,11 @@ func apply_node_data(entity:Entity):
 	
 	entity.sprite.position += sprite_offset
 	entity.shadow.position += shadow_offset
+
+func to_save_data():
+	var res = self.duplicate(true)
+	return res
+	
+func load_data(entity:Entity):
+	for ability in abilities:
+		ability.setup(entity)
