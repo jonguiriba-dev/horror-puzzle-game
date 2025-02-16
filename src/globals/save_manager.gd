@@ -53,7 +53,10 @@ func save_game():
 func save_data(key,data):
 	Util.sysprint("SaveManager","save data %s - %s"%[key,data])
 	save_file.set(key,data)
-
+	
+func reset_save_data():
+	
+	save_file.reset()
 func set_config(section,key,data):
 	Util.sysprint("SaveManager","save config data %s - %s"%[key,data])
 	

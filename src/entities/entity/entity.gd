@@ -166,6 +166,7 @@ func clear_threat():
 func add_ability(ability_data:AbilityData):
 	var ability = AbilityV2.new()
 	ability.data = ability_data
+	ability.setup(self)
 	data.abilities.push_front(ability) 
 
 

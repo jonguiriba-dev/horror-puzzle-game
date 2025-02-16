@@ -25,9 +25,12 @@ signal used(ability:AbilityV2)
 
 func setup(_host:Entity) -> void:
 	self.host = _host
-	target_select.connect(_on_target_select)
-	stopped_targetting.connect(_on_stopped_targetting)
-	used.connect(_on_used)
+	if !target_select.is_connected(_on_target_select):
+		target_select.connect(_on_target_select)
+	if !stopped_targetting.is_connected(_on_stopped_targetting):
+		stopped_targetting.connect(_on_stopped_targetting)
+	if !used.is_connected(_on_used):
+		used.connect(_on_used)
 	refresh_charges()
 	
 

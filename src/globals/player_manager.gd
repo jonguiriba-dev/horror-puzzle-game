@@ -18,9 +18,8 @@ var gold := 0
 
 func _ready() -> void:
 	print("READY PLAYER MANAGER")
+	WorldManager.level_complete.connect(_on_world_manager_level_complete)
 	SaveManager.game_loaded.connect(_on_game_loaded)
-	if units == []:
-		load_starting_units()
 
 func load_starting_units():
 	Util.sysprint("PlayerManager","loading starting units")
@@ -28,7 +27,9 @@ func load_starting_units():
 	for starting_unit_preset in STARTING_UNIT_PRESETS:
 		print("> ",starting_unit_preset)
 		units.push_front(EntityManager.create_entity(starting_unit_preset))
-		
+	SaveManager.save_data("player_manager",to_save_data())	
+	SaveManager.save_game()	
+	
 func get_units_by_name(entity_name:String):
 	return units.filter(func(e): 
 		if is_instance_valid(e) and e.data.entity_name == entity_name:
@@ -41,11 +42,7 @@ func add_entity_ability(entity:Entity,ability:AbilityData):
 func add_gold(amount:int):
 	gold += amount
 
-func save_data_to_storage():
-	var savedata = to_save_data()
-	print("savedata",savedata)
-	SaveManager.save_data("player_manager",to_save_data())	
-	SaveManager.save_game()	
+
 
 func to_save_data():
 	return {
@@ -57,10 +54,15 @@ func to_save_data():
 func _on_game_loaded():
 	print("load player manager")
 	var load_data = SaveManager.get_loaded("player_manager")
-	var loaded_units = load_data.get(units,[]).map(func(e):return EntityManager.load_entity(e))
+	var loaded_units = load_data.get("units",[])
 	print("loaded_units ",loaded_units)
 	if load_data:
-		units = loaded_units
+		units = loaded_units.map(func (e):
+			return Entity.load_data(e)
+		)
 		inventory = load_data.inventory
 		gold = load_data.gold
 	
+func _on_world_manager_level_complete() -> void:
+	SaveManager.save_data("player_manager",to_save_data())	
+	SaveManager.save_game()	

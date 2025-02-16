@@ -31,7 +31,6 @@ var loaded_data
 signal turn_changed
 signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
-signal viewport_ready
 signal animation_counter_updated(val:int)
 signal animation_counter_cleared
 
@@ -40,10 +39,6 @@ func _enter_tree() -> void:
 	
 func _ready() -> void:
 	turn_start.connect(_on_turn_start)
-	
-	_on_scenetree_ready()
-	
-func _on_scenetree_ready():
 	var ui_node = UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
 	if ui_node:
 		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
@@ -53,9 +48,8 @@ func _on_scenetree_ready():
 			strategy_changed = true
 		)
 	
-	viewport_ready.emit()
+	await load_data()
 	await game_start()
-	#_start_player_turn()
 
 func end_turn():
 	Util.sysprint("Level","end_turn: from %s to %s"%[
@@ -134,11 +128,7 @@ func _start_ai_turn():
 func game_start():
 	Util.sysprint("Level","game start!")
 	selected_entity = null
-	if SaveManager.get_loaded("level","entities"):
-		await load_units()
-	else:
-		if spawn_config:
-			await spawn_units()
+	
 	await register_entities()
 	if !UIManager.ui:
 		Util.sysprint("game_start","UIManager.ui not found")
@@ -157,68 +147,12 @@ func game_start():
 				await current_dialogue.play(get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
 	current_dialogue = null
 	
-	team_turn = turn_order[0]
-	turn_order = SaveManager.get_loaded(
-		"level",
-		"turn_order",
-		turn_order
-	) as Array[C.TEAM]
-	print("turn order-> ",C.TEAM.keys()[turn_order[0]],C.TEAM.keys()[turn_order[1]])
-	team_turn = SaveManager.get_loaded("level","team_turn",team_turn)
+	
 
 		
 	turn_start.emit(team_turn)
 	
-func load_units():
-	for entity in SaveManager.get_loaded("level","entities",[]):
-		var loaded_entity = Entity.load_data(entity)
-		loaded_entity.set_meta("recently_loaded",true)
 
-		EntityManager.spawn_entity(
-			loaded_entity.position,
-			loaded_entity
-		)
-		
-func spawn_units():
-	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
-	player_spawn_tiles.shuffle()
-	for player_unit in PlayerManager.units:
-		EntityManager.spawn_entity(
-			WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()),
-			player_unit
-		)
-		player_unit.refresh_move_and_action_counters()
-		
-	var spawn_record = {}
-	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
-	enemy_spawn_tiles.shuffle()
-	while(enemy_count < spawn_config.max_enemies):
-		for enemy_spawn in spawn_config.enemy_spawn_pool:
-			if enemy_count >= spawn_config.max_enemies:
-				break
-			var rng = randf_range(0.1,1.0)
-			if enemy_spawn.spawn_rate > rng:
-				EntityManager.spawn_entity(
-					WorldManager.level.grid.map_to_local(enemy_spawn_tiles.pop_front()), 
-					EntityManager.create_entity(enemy_spawn.entity_preset)
-				)
-				var current_spawn_count = spawn_record.get_or_add(enemy_spawn.entity_preset,0)
-				if current_spawn_count < enemy_spawn.max_number:
-					spawn_record[enemy_spawn.entity_preset] += 1
-					enemy_count += 1
-	
-	var neutral_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.NEUTRAL)
-	neutral_spawn_tiles.shuffle()
-	while(neutral_count < spawn_config.max_neutrals):
-		for neutral_spawn in spawn_config.neutral_spawn_pool:
-			var rng = randf_range(0.1,1.0)
-			if neutral_spawn.spawn_rate > rng:
-				EntityManager.spawn_entity(
-					WorldManager.level.grid.map_to_local(neutral_spawn_tiles.pop_front()), 
-					EntityManager.create_entity(neutral_spawn.entity_preset)
-				)
-				neutral_count += 1
-	
 var input_waiting_on_ability = false
 var input_waiting_on_dialogue = false
 
@@ -250,6 +184,10 @@ func check_player_victory():
 				WorldManager.level = null
 				WorldManager.level_complete.emit()
 				UIManager.clear_ui()
+				
+				SaveManager.save_data("level",{})
+				SaveManager.save_game()
+
 			, CONNECT_ONE_SHOT)
 			
 		, CONNECT_ONE_SHOT)	
@@ -511,6 +449,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		print("*Tile Position: ",mouse_map_position)
 
+
 func to_save_data():
 	var entities = get_tree().get_nodes_in_group(C.GROUPS_ENTITIES)
 	return {
@@ -518,3 +457,73 @@ func to_save_data():
 		"turn_order":turn_order,
 		"entities":entities.map(func(e):return e.to_save_data())
 	}
+
+func load_data():
+	if SaveManager.get_loaded("level","entities",[]).size() > 0:
+		await load_units(SaveManager.get_loaded("level","entities",[]))
+	else:
+		if spawn_config:
+			await spawn_units()
+			
+	team_turn = turn_order[0]
+	turn_order = SaveManager.get_loaded(
+		"level",
+		"turn_order",
+		turn_order
+	) as Array[C.TEAM]
+	team_turn = SaveManager.get_loaded("level","team_turn",team_turn)
+	
+	
+func load_units(entities_load_data):
+	for entity in entities_load_data:
+		var loaded_entity = Entity.load_data(entity)
+		loaded_entity.set_meta("recently_loaded",true)
+
+		EntityManager.spawn_entity(
+			loaded_entity.position,
+			loaded_entity
+		)
+		loaded_entity.refresh_move_and_action_counters()
+		
+
+func spawn_units():
+	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
+	player_spawn_tiles.shuffle()
+	for player_unit in PlayerManager.units:
+		print("SPWANING PLAYER UNITS ", player_unit.data.entity_name)
+		EntityManager.spawn_entity(
+			WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()),
+			player_unit
+		)
+		player_unit.refresh_move_and_action_counters()
+		
+	var spawn_record = {}
+	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
+	enemy_spawn_tiles.shuffle()
+	while(enemy_count < spawn_config.max_enemies):
+		for enemy_spawn in spawn_config.enemy_spawn_pool:
+			if enemy_count >= spawn_config.max_enemies:
+				break
+			var rng = randf_range(0.1,1.0)
+			if enemy_spawn.spawn_rate > rng:
+				EntityManager.spawn_entity(
+					WorldManager.level.grid.map_to_local(enemy_spawn_tiles.pop_front()), 
+					EntityManager.create_entity(enemy_spawn.entity_preset)
+				)
+				var current_spawn_count = spawn_record.get_or_add(enemy_spawn.entity_preset,0)
+				if current_spawn_count < enemy_spawn.max_number:
+					spawn_record[enemy_spawn.entity_preset] += 1
+					enemy_count += 1
+	
+	var neutral_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.NEUTRAL)
+	neutral_spawn_tiles.shuffle()
+	while(neutral_count < spawn_config.max_neutrals):
+		for neutral_spawn in spawn_config.neutral_spawn_pool:
+			var rng = randf_range(0.1,1.0)
+			if neutral_spawn.spawn_rate > rng:
+				EntityManager.spawn_entity(
+					WorldManager.level.grid.map_to_local(neutral_spawn_tiles.pop_front()), 
+					EntityManager.create_entity(neutral_spawn.entity_preset)
+				)
+				neutral_count += 1
+	

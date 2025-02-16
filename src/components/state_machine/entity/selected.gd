@@ -15,7 +15,7 @@ func _on_configured():
 	for ally in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
 		ally.selected.connect(_on_other_entity_selected)
 	
-	WorldManager.level.viewport_ready.connect(_on_scenetree_ready)
+	WorldManager.level.ready.connect(_on_scenetree_ready)
 	host.selected.connect(_on_host_selected)
 	
 func _on_scenetree_ready():
@@ -39,6 +39,7 @@ func _enter_state(old_state, new_state):
 			" host.data.move_counter(%s) > 0 and host.data.action_counter(%s) > 0, starting move"%[host.data.move_counter,host.data.action_counter])
 		var ability_move = host.get_ability("move")
 		ability_move.target_select.emit()
+		
 func _on_tile_selected(map_pos:Vector2i):
 	if (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ABILITY) == 0):
 		#and ability.state != Ability.STATE.TARGET_SELECT):

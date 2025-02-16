@@ -1,39 +1,39 @@
-[gd_resource type="Resource" script_class="SaveData" load_steps=135 format=3]
+[gd_resource type="Resource" script_class="SaveData" load_steps=124 format=3]
 
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_uistd"]
-[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_6fj6m"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="3_7gcxq"]
-[ext_resource type="Texture2D" path="res://assets/characters/npc/Knight.png" id="4_t2j8j"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="5_y8wfk"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_oblko"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike_v2_preset.tres" id="7_ckki5"]
-[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="8_pwyud"]
-[ext_resource type="Resource" path="res://src/abilities/ability_effect/damage_1.tres" id="9_recxq"]
-[ext_resource type="Resource" path="res://src/abilities/ability_effect/knockback_1.tres" id="10_gb20i"]
-[ext_resource type="Resource" path="res://src/abilities/ability_effect/tile_move.tres" id="11_bie1q"]
-[ext_resource type="Script" path="res://src/components/objects/status/status.gd" id="12_x38te"]
-[ext_resource type="Texture2D" path="res://assets/characters/angels/Talia.png" id="13_7hwlf"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="14_l84e6"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="15_o6c2t"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Offense/ability_spear_stab/ability_spear_stab.tres" id="16_e1but"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Support/ability_haste/ability_haste.tres" id="17_lghrq"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Movement/ability_vault/ability_vault.tres" id="18_illi1"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Utility/ability_dark_orb/ability_dark_orb.tres" id="19_8bj5h"]
-[ext_resource type="Resource" path="res://src/abilities/ability_presets/Utility/ability_beckon/ability_beckon.tres" id="20_0tqtj"]
-[ext_resource type="Texture2D" path="res://assets/characters/angels/Layla.png" id="21_0e3l8"]
-[ext_resource type="Texture2D" path="res://assets/characters/angels/Elyana.png" id="22_jkrbv"]
-[ext_resource type="Texture2D" path="res://assets/characters/npc/Peasant.png" id="24_kuub3"]
-[ext_resource type="Script" path="res://src/scripts/save/save.gd" id="25_iqtul"]
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_l320r"]
+[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_kwgng"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="3_j8ju4"]
+[ext_resource type="Texture2D" path="res://assets/characters/npc/Knight.png" id="4_8jxbu"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="5_qg2qv"]
+[ext_resource type="Resource" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_sg6bg"]
+[ext_resource type="Resource" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike_v2_preset.tres" id="7_bxpw1"]
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="8_lknj8"]
+[ext_resource type="Resource" path="res://src/abilities/ability_effect/damage_1.tres" id="9_46usu"]
+[ext_resource type="Resource" path="res://src/abilities/ability_effect/knockback_1.tres" id="10_k0ugr"]
+[ext_resource type="Resource" path="res://src/abilities/ability_effect/tile_move.tres" id="11_coyuj"]
+[ext_resource type="Script" path="res://src/components/objects/status/status.gd" id="12_28llh"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/talya-body.png" id="13_eeopt"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/Talia.png" id="13_sr5xt"]
+[ext_resource type="Resource" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="14_njyws"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/Layla.png" id="15_75nq0"]
+[ext_resource type="Resource" path="res://src/abilities/ability_presets/Offense/ability_spear_stab/ability_spear_stab.tres" id="16_el5su"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/layla-body.png" id="16_xty0x"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/Elyana.png" id="17_gs4hw"]
+[ext_resource type="Script" path="res://src/scripts/save/save.gd" id="18_e4n5p"]
+[ext_resource type="Texture2D" path="res://assets/characters/nightmares/Ghost.png" id="18_qu7b6"]
+[ext_resource type="Resource" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="19_544iu"]
+[ext_resource type="Texture2D" path="res://assets/characters/angels/elyana-body.png" id="19_ow0dl"]
+[ext_resource type="Texture2D" path="res://assets/characters/npc/Peasant.png" id="20_128cs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gm71i"]
-atlas = ExtResource("4_t2j8j")
+atlas = ExtResource("4_8jxbu")
 region = Rect2(0, 0, 36, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t8pp8"]
-atlas = ExtResource("4_t2j8j")
+atlas = ExtResource("4_8jxbu")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1sppb"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_12kjq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -47,8 +47,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_20brl"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_qbiax"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -58,25 +58,25 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_1sppb")
+sprite_frames = SubResource("SpriteFrames_12kjq")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_88rmk"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_cb7gp"]
+script = ExtResource("5_qg2qv")
 ability_name = "Strike"
 ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("9_46usu"), ExtResource("10_k0ugr")])
 highlight_color = 3
 is_enemy_obstacle = false
 target_count = 1
@@ -92,17 +92,17 @@ description = "ability description"
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_3ixqe"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_h0ico"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_88rmk")
+data = SubResource("Resource_cb7gp")
 
-[sub_resource type="Resource" id="Resource_u8pao"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_dtv2t"]
+script = ExtResource("5_qg2qv")
 ability_name = "Move"
 ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
 highlight_color = 0
 is_enemy_obstacle = true
 target_count = 1
@@ -118,14 +118,14 @@ description = "ability description"
 animation_script = null
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_x5hyq"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_o1kxp"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_u8pao")
+data = SubResource("Resource_dtv2t")
 
-[sub_resource type="Resource" id="Resource_73msj"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_p63q5"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -135,8 +135,8 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -144,11 +144,11 @@ portrait_image = null
 health = 99
 experience = 0
 lvl = 1
-action_counter = 0
+action_counter = 1
 move_counter = 0
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_3ixqe"), SubResource("Resource_x5hyq")])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_h0ico"), SubResource("Resource_o1kxp")])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_oe74r"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3l68"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -162,8 +162,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_mu4p0"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_ete3s"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -173,25 +173,25 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_oe74r")
+sprite_frames = SubResource("SpriteFrames_x3l68")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_7r5wy"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_v0vyu"]
+script = ExtResource("5_qg2qv")
 ability_name = "Strike"
 ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("9_46usu"), ExtResource("10_k0ugr")])
 highlight_color = 3
 is_enemy_obstacle = false
 target_count = 1
@@ -207,17 +207,17 @@ description = "ability description"
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_0ilen"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_ii7uk"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_7r5wy")
+data = SubResource("Resource_v0vyu")
 
-[sub_resource type="Resource" id="Resource_nh3uk"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_txpsu"]
+script = ExtResource("5_qg2qv")
 ability_name = "Move"
 ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
 highlight_color = 0
 is_enemy_obstacle = true
 target_count = 1
@@ -233,14 +233,14 @@ description = "ability description"
 animation_script = null
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_n4q1n"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_lnlrn"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_nh3uk")
+data = SubResource("Resource_txpsu")
 
-[sub_resource type="Resource" id="Resource_dld7g"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_8wmsw"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -250,8 +250,8 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -260,133 +260,133 @@ health = 99
 experience = 0
 lvl = 1
 action_counter = 1
-move_counter = -1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_0ilen"), SubResource("Resource_n4q1n")])
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_a7him"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gm71i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t8pp8")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}]
-
-[sub_resource type="Resource" id="Resource_gltj6"]
-script = ExtResource("3_7gcxq")
-entity_name = "Knight"
-max_health = 99
-move_range = 3
-team = 4
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_a7him")
-portrait_image = null
-health = 1
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
-
-[sub_resource type="Resource" id="Resource_m0g5p"]
-script = ExtResource("5_y8wfk")
-ability_name = "Strike"
-ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
-highlight_color = 3
-is_enemy_obstacle = false
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 1
-range_pattern = 1
-aoe_pattern = 3
-tile_exclude_flag = 5
-tile_exclude_self = false
-is_action = true
-description = "ability description"
-animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_q1rm7"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_m0g5p")
-
-[sub_resource type="Resource" id="Resource_qwv41"]
-script = ExtResource("5_y8wfk")
-ability_name = "Move"
-ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
-highlight_color = 0
-is_enemy_obstacle = true
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 0
-range_pattern = 2
-aoe_pattern = 3
-tile_exclude_flag = 7
-tile_exclude_self = true
-is_action = false
-description = "ability description"
-animation_script = null
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_i5n12"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_qwv41")
-
-[sub_resource type="Resource" id="Resource_y8m8t"]
-script = ExtResource("3_7gcxq")
-entity_name = "Knight"
-max_health = 99
-move_range = 3
-team = 4
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-portrait_image = null
-health = 99
-experience = 0
-lvl = 1
-action_counter = 0
 move_counter = 0
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_q1rm7"), SubResource("Resource_i5n12")])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_ii7uk"), SubResource("Resource_lnlrn")])
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbain"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm71i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8pp8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Resource" id="Resource_7n5rx"]
+script = ExtResource("3_j8ju4")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_rbain")
+portrait_image = null
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([])
+
+[sub_resource type="Resource" id="Resource_afxj4"]
+script = ExtResource("5_qg2qv")
+ability_name = "Strike"
+ability_range = 1
+effects = Array[ExtResource("8_lknj8")]([ExtResource("9_46usu"), ExtResource("10_k0ugr")])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+description = "ability description"
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null
+
+[sub_resource type="Resource" id="Resource_jpq6n"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = SubResource("Resource_afxj4")
+
+[sub_resource type="Resource" id="Resource_mwmj3"]
+script = ExtResource("5_qg2qv")
+ability_name = "Move"
+ability_range = 3
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
+highlight_color = 0
+is_enemy_obstacle = true
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 0
+range_pattern = 2
+aoe_pattern = 3
+tile_exclude_flag = 7
+tile_exclude_self = true
+is_action = false
+description = "ability description"
+animation_script = null
+custom_ability_script = null
+
+[sub_resource type="Resource" id="Resource_mk5pf"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = SubResource("Resource_mwmj3")
+
+[sub_resource type="Resource" id="Resource_u07ej"]
+script = ExtResource("3_j8ju4")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+health = 99
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_jpq6n"), SubResource("Resource_mk5pf")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgwg8"]
-atlas = ExtResource("13_7hwlf")
+atlas = ExtResource("13_sr5xt")
 region = Rect2(0, 0, 36, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ul5x"]
-atlas = ExtResource("13_7hwlf")
+atlas = ExtResource("13_sr5xt")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fp6vd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_evtg6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -400,8 +400,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_u2kj5"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_xhrf0"]
+script = ExtResource("3_j8ju4")
 entity_name = "Talya"
 max_health = 2
 move_range = 3
@@ -411,25 +411,25 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("14_l84e6")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("14_njyws")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_fp6vd")
+sprite_frames = SubResource("SpriteFrames_evtg6")
 portrait_image = "res://assets/characters/angels/talya-body.png"
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_fx5io"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_mw7bw"]
+script = ExtResource("5_qg2qv")
 ability_name = "Shoot"
 ability_range = 5
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("9_46usu"), ExtResource("10_k0ugr")])
 highlight_color = 3
 is_enemy_obstacle = false
 target_count = 1
@@ -445,17 +445,17 @@ description = "ability description"
 animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_vcsn1"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_kgcfj"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_fx5io")
+data = SubResource("Resource_mw7bw")
 
-[sub_resource type="Resource" id="Resource_pgyt8"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_3k1u5"]
+script = ExtResource("5_qg2qv")
 ability_name = "Move"
 ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
 highlight_color = 0
 is_enemy_obstacle = true
 target_count = 1
@@ -471,17 +471,17 @@ description = "ability description"
 animation_script = null
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_xocii"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_qt26j"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_pgyt8")
+data = SubResource("Resource_3k1u5")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7ipi4"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cs245"]
 load_path = "res://.godot/imported/talya-body.png-f07a888108aae1e8e376cd4b5bee5875.ctex"
 
-[sub_resource type="Resource" id="Resource_iqrlp"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_epipq"]
+script = ExtResource("3_j8ju4")
 entity_name = "Talya"
 max_health = 2
 move_range = 3
@@ -491,28 +491,28 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-portrait_image = SubResource("CompressedTexture2D_7ipi4")
+portrait_image = SubResource("CompressedTexture2D_cs245")
 health = 2
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_vcsn1"), SubResource("Resource_xocii")])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_kgcfj"), SubResource("Resource_qt26j")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ourl1"]
-atlas = ExtResource("21_0e3l8")
+atlas = ExtResource("15_75nq0")
 region = Rect2(0, 0, 36, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgljd"]
-atlas = ExtResource("21_0e3l8")
+atlas = ExtResource("15_75nq0")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bvkpg"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugtpn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -526,8 +526,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_ian77"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_ys0r2"]
+script = ExtResource("3_j8ju4")
 entity_name = "Layla"
 max_health = 3
 move_range = 3
@@ -537,25 +537,83 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([ExtResource("15_o6c2t"), ExtResource("16_e1but"), ExtResource("17_lghrq"), ExtResource("18_illi1"), ExtResource("19_8bj5h"), ExtResource("20_0tqtj")])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("16_el5su")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(3, -2)
-sprite_frames = SubResource("SpriteFrames_bvkpg")
+sprite_frames = SubResource("SpriteFrames_ugtpn")
 portrait_image = "res://assets/characters/angels/layla-body.png"
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cgnqq"]
+[sub_resource type="Resource" id="Resource_ru57r"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = ExtResource("14_njyws")
+
+[sub_resource type="Resource" id="Resource_atihi"]
+script = ExtResource("5_qg2qv")
+ability_name = "Pierce"
+ability_range = 2
+effects = Array[ExtResource("8_lknj8")]([])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = true
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 0
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+description = "ability description"
+animation_script = "res://src/abilities/ability_animations/animation_spear_stab.gd"
+custom_ability_script = null
+
+[sub_resource type="Resource" id="Resource_jh0iu"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = SubResource("Resource_atihi")
+
+[sub_resource type="Resource" id="Resource_hpo3b"]
+script = ExtResource("5_qg2qv")
+ability_name = "Move"
+ability_range = 3
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
+highlight_color = 0
+is_enemy_obstacle = true
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 0
+range_pattern = 2
+aoe_pattern = 3
+tile_exclude_flag = 7
+tile_exclude_self = true
+is_action = false
+description = "ability description"
+animation_script = null
+custom_ability_script = null
+
+[sub_resource type="Resource" id="Resource_s7aco"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = SubResource("Resource_hpo3b")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d8s7u"]
 load_path = "res://.godot/imported/layla-body.png-786a16630a123a45513c3f83b716a515.ctex"
 
-[sub_resource type="Resource" id="Resource_4u7mb"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_li15u"]
+script = ExtResource("3_j8ju4")
 entity_name = "Layla"
 max_health = 3
 move_range = 3
@@ -565,28 +623,28 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-portrait_image = SubResource("CompressedTexture2D_cgnqq")
+portrait_image = SubResource("CompressedTexture2D_d8s7u")
 health = 3
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_ru57r"), SubResource("Resource_jh0iu"), SubResource("Resource_s7aco")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gilu8"]
-atlas = ExtResource("22_jkrbv")
+atlas = ExtResource("17_gs4hw")
 region = Rect2(0, 0, 36, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ykrvr"]
-atlas = ExtResource("22_jkrbv")
+atlas = ExtResource("17_gs4hw")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1y2iw"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_chvgp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -600,8 +658,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_jx5c8"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_y5gd6"]
+script = ExtResource("3_j8ju4")
 entity_name = "Eliana"
 max_health = 4
 move_range = 3
@@ -611,25 +669,25 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(2, -2)
-sprite_frames = SubResource("SpriteFrames_1y2iw")
+sprite_frames = SubResource("SpriteFrames_chvgp")
 portrait_image = "res://assets/characters/angels/elyana-body.png"
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_hihd3"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_pxqe0"]
+script = ExtResource("5_qg2qv")
 ability_name = "Strike"
 ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("9_46usu"), ExtResource("10_k0ugr")])
 highlight_color = 3
 is_enemy_obstacle = false
 target_count = 1
@@ -645,17 +703,17 @@ description = "ability description"
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_7nmjx"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_w63oa"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_hihd3")
+data = SubResource("Resource_pxqe0")
 
-[sub_resource type="Resource" id="Resource_1lq84"]
-script = ExtResource("5_y8wfk")
+[sub_resource type="Resource" id="Resource_1765m"]
+script = ExtResource("5_qg2qv")
 ability_name = "Move"
 ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
 highlight_color = 0
 is_enemy_obstacle = true
 target_count = 1
@@ -671,17 +729,17 @@ description = "ability description"
 animation_script = null
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_bvppl"]
-script = ExtResource("1_uistd")
+[sub_resource type="Resource" id="Resource_6sgnu"]
+script = ExtResource("1_l320r")
 state = 0
 has_ui = true
-data = SubResource("Resource_1lq84")
+data = SubResource("Resource_1765m")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pvy01"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6cumk"]
 load_path = "res://.godot/imported/elyana-body.png-4a2308f13aae6c92589e547e4029da29.ctex"
 
-[sub_resource type="Resource" id="Resource_ob1bs"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_50574"]
+script = ExtResource("3_j8ju4")
 entity_name = "Eliana"
 max_health = 4
 move_range = 3
@@ -691,28 +749,154 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-portrait_image = SubResource("CompressedTexture2D_pvy01")
+portrait_image = SubResource("CompressedTexture2D_6cumk")
 health = 4
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_7nmjx"), SubResource("Resource_bvppl")])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_w63oa"), SubResource("Resource_6sgnu")])
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpwin"]
+atlas = ExtResource("18_qu7b6")
+region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpu78"]
+atlas = ExtResource("18_qu7b6")
+region = Rect2(36, 0, 36, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ef52t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpwin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpu78")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Resource" id="Resource_w0vt5"]
+script = ExtResource("3_j8ju4")
+entity_name = "Ghost"
+max_health = 2
+move_range = 5
+team = 1
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_ef52t")
+portrait_image = "res://assets/portraits/layla-portrait.png"
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([])
+
+[sub_resource type="Resource" id="Resource_vqr0e"]
+script = ExtResource("5_qg2qv")
+ability_name = "Strike"
+ability_range = 1
+effects = Array[ExtResource("8_lknj8")]([ExtResource("9_46usu"), ExtResource("10_k0ugr")])
+highlight_color = 3
+is_enemy_obstacle = false
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_exclude_self = false
+is_action = true
+description = "ability description"
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null
+
+[sub_resource type="Resource" id="Resource_igjox"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = SubResource("Resource_vqr0e")
+
+[sub_resource type="Resource" id="Resource_6gaxq"]
+script = ExtResource("5_qg2qv")
+ability_name = "Move"
+ability_range = 3
+effects = Array[ExtResource("8_lknj8")]([ExtResource("11_coyuj")])
+highlight_color = 0
+is_enemy_obstacle = true
+target_count = 1
+use_host_as_origin = false
+max_charges = 0
+action_cost = 0
+range_pattern = 2
+aoe_pattern = 3
+tile_exclude_flag = 7
+tile_exclude_self = true
+is_action = false
+description = "ability description"
+animation_script = null
+custom_ability_script = null
+
+[sub_resource type="Resource" id="Resource_h8gsf"]
+script = ExtResource("1_l320r")
+state = 0
+has_ui = true
+data = SubResource("Resource_6gaxq")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_805p5"]
+load_path = "res://.godot/imported/layla-portrait.png-fbe309491c7758f7047cc7080b9fb0a5.ctex"
+
+[sub_resource type="Resource" id="Resource_i3xmk"]
+script = ExtResource("3_j8ju4")
+entity_name = "Ghost"
+max_health = 2
+move_range = 5
+team = 1
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = SubResource("CompressedTexture2D_805p5")
+health = 2
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_igjox"), SubResource("Resource_h8gsf")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bvj3"]
-atlas = ExtResource("24_kuub3")
+atlas = ExtResource("20_128cs")
 region = Rect2(0, 0, 36, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cxklc"]
-atlas = ExtResource("24_kuub3")
+atlas = ExtResource("20_128cs")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_30pbr"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_6pdb0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -726,8 +910,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_gqwsc"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_7ebjh"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -737,22 +921,22 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([ExtResource("15_o6c2t")])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([ExtResource("19_544iu")])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_30pbr")
+sprite_frames = SubResource("SpriteFrames_6pdb0")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_kaspl"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_umk0s"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -762,8 +946,8 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -773,9 +957,9 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_o8lk1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pn3qy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -789,8 +973,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_7dtho"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_520lk"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -800,22 +984,22 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([ExtResource("15_o6c2t")])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([ExtResource("19_544iu")])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_o8lk1")
+sprite_frames = SubResource("SpriteFrames_pn3qy")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_ovynu"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_ki7vs"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -825,8 +1009,8 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -836,9 +1020,9 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3a6pq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ckjqa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -852,8 +1036,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_2fq30"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_i1n6r"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -863,22 +1047,22 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([ExtResource("15_o6c2t")])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([ExtResource("19_544iu")])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_3a6pq")
+sprite_frames = SubResource("SpriteFrames_ckjqa")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_2k2j1"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_u7hpf"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -888,8 +1072,8 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -899,9 +1083,9 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pn522"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_bec40"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -915,8 +1099,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_7dank"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_avxe4"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -926,22 +1110,22 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([ExtResource("15_o6c2t")])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([ExtResource("19_544iu")])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_pn522")
+sprite_frames = SubResource("SpriteFrames_bec40")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_w74xj"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_pxf5w"]
+script = ExtResource("3_j8ju4")
 entity_name = "Peasant"
 max_health = 1
 move_range = 3
@@ -951,8 +1135,8 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -962,32 +1146,73 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mggi8"]
-atlas = ExtResource("4_t2j8j")
-region = Rect2(0, 0, 36, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yt5mq"]
-atlas = ExtResource("4_t2j8j")
-region = Rect2(36, 0, 36, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8ohw3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ioj5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mggi8")
+"texture": SubResource("AtlasTexture_6bvj3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yt5mq")
+"texture": SubResource("AtlasTexture_cxklc")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_3nivo"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_yskhv"]
+script = ExtResource("3_j8ju4")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([ExtResource("19_544iu")])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_4ioj5")
+portrait_image = null
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([])
+
+[sub_resource type="Resource" id="Resource_cj7bw"]
+script = ExtResource("3_j8ju4")
+entity_name = "Peasant"
+max_health = 1
+move_range = 3
+team = 2
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([])
+
+[sub_resource type="Resource" id="Resource_a8nxw"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -997,74 +1222,35 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_8ohw3")
 portrait_image = null
-health = 1
+health = 99
 experience = 0
 lvl = 1
 action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+move_counter = 0
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_h0ico"), SubResource("Resource_o1kxp")])
 
-[sub_resource type="Resource" id="Resource_6f534"]
-script = ExtResource("5_y8wfk")
-ability_name = "Strike"
-ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
-highlight_color = 3
-is_enemy_obstacle = false
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 1
-range_pattern = 1
-aoe_pattern = 3
-tile_exclude_flag = 5
-tile_exclude_self = false
-is_action = true
-description = "ability description"
-animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
-custom_ability_script = null
+[sub_resource type="SpriteFrames" id="SpriteFrames_372n7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm71i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8pp8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
 
-[sub_resource type="Resource" id="Resource_7t6gd"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_6f534")
-
-[sub_resource type="Resource" id="Resource_46h02"]
-script = ExtResource("5_y8wfk")
-ability_name = "Move"
-ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
-highlight_color = 0
-is_enemy_obstacle = true
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 0
-range_pattern = 2
-aoe_pattern = 3
-tile_exclude_flag = 7
-tile_exclude_self = true
-is_action = false
-description = "ability description"
-animation_script = null
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_ds8rj"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_46h02")
-
-[sub_resource type="Resource" id="Resource_y3yy1"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_3qilj"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -1074,8 +1260,96 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_372n7")
+portrait_image = null
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([])
+
+[sub_resource type="Resource" id="Resource_guf6e"]
+script = ExtResource("3_j8ju4")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = null
+health = 99
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 0
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_ii7uk"), SubResource("Resource_lnlrn")])
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5aqx7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm71i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8pp8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Resource" id="Resource_aart3"]
+script = ExtResource("3_j8ju4")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
+state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_5aqx7")
+portrait_image = null
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([])
+
+[sub_resource type="Resource" id="Resource_drw2y"]
+script = ExtResource("3_j8ju4")
+entity_name = "Knight"
+max_health = 99
+move_range = 3
+team = 4
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
@@ -1085,24 +1359,24 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_7t6gd"), SubResource("Resource_ds8rj")])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_jpq6n"), SubResource("Resource_mk5pf")])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4efxk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1hkwf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mggi8")
+"texture": SubResource("AtlasTexture_gm71i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yt5mq")
+"texture": SubResource("AtlasTexture_t8pp8")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_ue14u"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_nona7"]
+script = ExtResource("3_j8ju4")
 entity_name = "Knight"
 max_health = 99
 move_range = 3
@@ -1112,235 +1386,22 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_4efxk")
+sprite_frames = SubResource("SpriteFrames_1hkwf")
 portrait_image = null
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_reuep"]
-script = ExtResource("5_y8wfk")
-ability_name = "Strike"
-ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
-highlight_color = 3
-is_enemy_obstacle = false
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 1
-range_pattern = 1
-aoe_pattern = 3
-tile_exclude_flag = 5
-tile_exclude_self = false
-is_action = true
-description = "ability description"
-animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_pcaq1"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_reuep")
-
-[sub_resource type="Resource" id="Resource_0xia7"]
-script = ExtResource("5_y8wfk")
-ability_name = "Move"
-ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
-highlight_color = 0
-is_enemy_obstacle = true
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 0
-range_pattern = 2
-aoe_pattern = 3
-tile_exclude_flag = 7
-tile_exclude_self = true
-is_action = false
-description = "ability description"
-animation_script = null
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_xp6u4"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_0xia7")
-
-[sub_resource type="Resource" id="Resource_wqfkh"]
-script = ExtResource("3_7gcxq")
-entity_name = "Knight"
-max_health = 99
-move_range = 3
-team = 4
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-portrait_image = null
-health = 99
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_pcaq1"), SubResource("Resource_xp6u4")])
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qshcp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mggi8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yt5mq")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}]
-
-[sub_resource type="Resource" id="Resource_mq6c4"]
-script = ExtResource("3_7gcxq")
-entity_name = "Knight"
-max_health = 99
-move_range = 3
-team = 4
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_qshcp")
-portrait_image = null
-health = 1
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
-
-[sub_resource type="Resource" id="Resource_snq1l"]
-script = ExtResource("5_y8wfk")
-ability_name = "Strike"
-ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
-highlight_color = 3
-is_enemy_obstacle = false
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 1
-range_pattern = 1
-aoe_pattern = 3
-tile_exclude_flag = 5
-tile_exclude_self = false
-is_action = true
-description = "ability description"
-animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_xkll4"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_snq1l")
-
-[sub_resource type="Resource" id="Resource_5g6xn"]
-script = ExtResource("5_y8wfk")
-ability_name = "Move"
-ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
-highlight_color = 0
-is_enemy_obstacle = true
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 0
-range_pattern = 2
-aoe_pattern = 3
-tile_exclude_flag = 7
-tile_exclude_self = true
-is_action = false
-description = "ability description"
-animation_script = null
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_7hsgc"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_5g6xn")
-
-[sub_resource type="Resource" id="Resource_j4u43"]
-script = ExtResource("3_7gcxq")
-entity_name = "Knight"
-max_health = 99
-move_range = 3
-team = 4
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-portrait_image = null
-health = 99
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_xkll4"), SubResource("Resource_7hsgc")])
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cenb0"]
-atlas = ExtResource("13_7hwlf")
-region = Rect2(0, 0, 36, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1mg65"]
-atlas = ExtResource("13_7hwlf")
-region = Rect2(36, 0, 36, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_631iu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cenb0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1mg65")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}]
-
-[sub_resource type="Resource" id="Resource_d2024"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_3ol6r"]
+script = ExtResource("3_j8ju4")
 entity_name = "Talya"
 max_health = 2
 move_range = 3
@@ -1350,126 +1411,60 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("14_l84e6")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_631iu")
+portrait_image = ExtResource("13_eeopt")
+health = 2
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_kgcfj"), SubResource("Resource_qt26j")])
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fapx7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgwg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ul5x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Resource" id="Resource_61xuk"]
+script = ExtResource("3_j8ju4")
+entity_name = "Talya"
+max_health = 2
+move_range = 3
+team = 0
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("14_njyws")])
+state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_fapx7")
 portrait_image = "res://assets/characters/angels/talya-body.png"
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_i84ch"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = ExtResource("7_ckki5")
-
-[sub_resource type="Resource" id="Resource_fqwna"]
-script = ExtResource("5_y8wfk")
-ability_name = "Shoot"
-ability_range = 5
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
-highlight_color = 3
-is_enemy_obstacle = false
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 1
-range_pattern = 1
-aoe_pattern = 3
-tile_exclude_flag = 5
-tile_exclude_self = false
-is_action = true
-description = "ability description"
-animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_ss1e7"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_fqwna")
-
-[sub_resource type="Resource" id="Resource_fsgmv"]
-script = ExtResource("5_y8wfk")
-ability_name = "Move"
-ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
-highlight_color = 0
-is_enemy_obstacle = true
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 0
-range_pattern = 2
-aoe_pattern = 3
-tile_exclude_flag = 7
-tile_exclude_self = true
-is_action = false
-description = "ability description"
-animation_script = null
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_ctmns"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_fsgmv")
-
-[sub_resource type="Resource" id="Resource_7ab2f"]
-script = ExtResource("3_7gcxq")
-entity_name = "Talya"
-max_health = 2
-move_range = 3
-team = 0
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
-state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-portrait_image = null
-health = 2
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_i84ch"), SubResource("Resource_ss1e7"), SubResource("Resource_ctmns")])
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ng21l"]
-atlas = ExtResource("21_0e3l8")
-region = Rect2(0, 0, 36, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qo88v"]
-atlas = ExtResource("21_0e3l8")
-region = Rect2(36, 0, 36, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_exyg3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ng21l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qo88v")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}]
-
-[sub_resource type="Resource" id="Resource_vv5w3"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_hrfj1"]
+script = ExtResource("3_j8ju4")
 entity_name = "Layla"
 max_health = 3
 move_range = 3
@@ -1479,24 +1474,62 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([ExtResource("15_o6c2t"), ExtResource("16_e1but"), ExtResource("17_lghrq"), ExtResource("18_illi1"), ExtResource("19_8bj5h"), ExtResource("20_0tqtj")])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
+state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+portrait_image = ExtResource("16_xty0x")
+health = 3
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_ru57r"), SubResource("Resource_jh0iu"), SubResource("Resource_s7aco")])
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sggk4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ourl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgljd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="Resource" id="Resource_6vf68"]
+script = ExtResource("3_j8ju4")
+entity_name = "Layla"
+max_health = 3
+move_range = 3
+team = 0
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("16_el5su")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(3, -2)
-sprite_frames = SubResource("SpriteFrames_exyg3")
+sprite_frames = SubResource("SpriteFrames_sggk4")
 portrait_image = "res://assets/characters/angels/layla-body.png"
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([])
 
-[sub_resource type="Resource" id="Resource_ge54e"]
-script = ExtResource("3_7gcxq")
-entity_name = "Layla"
-max_health = 3
+[sub_resource type="Resource" id="Resource_vapph"]
+script = ExtResource("3_j8ju4")
+entity_name = "Eliana"
+max_health = 4
 move_range = 3
 team = 0
 speed = 5
@@ -1504,43 +1537,35 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-portrait_image = null
-health = 3
+portrait_image = ExtResource("19_ow0dl")
+health = 4
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
+abilities = Array[ExtResource("1_l320r")]([SubResource("Resource_w63oa"), SubResource("Resource_6sgnu")])
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bp5hq"]
-atlas = ExtResource("22_jkrbv")
-region = Rect2(0, 0, 36, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7q2vy"]
-atlas = ExtResource("22_jkrbv")
-region = Rect2(36, 0, 36, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yq0jd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmvi7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bp5hq")
+"texture": SubResource("AtlasTexture_gilu8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7q2vy")
+"texture": SubResource("AtlasTexture_ykrvr")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_salky"]
-script = ExtResource("3_7gcxq")
+[sub_resource type="Resource" id="Resource_ku8yn"]
+script = ExtResource("3_j8ju4")
 entity_name = "Eliana"
 max_health = 4
 move_range = 3
@@ -1550,265 +1575,143 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([ExtResource("6_oblko"), ExtResource("7_ckki5")])
+ability_props = Array[ExtResource("2_kwgng")]([])
+starting_abilities = Array[ExtResource("5_qg2qv")]([ExtResource("6_sg6bg"), ExtResource("7_bxpw1")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(2, -2)
-sprite_frames = SubResource("SpriteFrames_yq0jd")
+sprite_frames = SubResource("SpriteFrames_bmvi7")
 portrait_image = "res://assets/characters/angels/elyana-body.png"
 health = 1
 experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([])
-
-[sub_resource type="Resource" id="Resource_d4f44"]
-script = ExtResource("5_y8wfk")
-ability_name = "Strike"
-ability_range = 1
-effects = Array[ExtResource("8_pwyud")]([ExtResource("9_recxq"), ExtResource("10_gb20i")])
-highlight_color = 3
-is_enemy_obstacle = false
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 1
-range_pattern = 1
-aoe_pattern = 3
-tile_exclude_flag = 5
-tile_exclude_self = false
-is_action = true
-description = "ability description"
-animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_loc8u"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_d4f44")
-
-[sub_resource type="Resource" id="Resource_l2m5u"]
-script = ExtResource("5_y8wfk")
-ability_name = "Move"
-ability_range = 3
-effects = Array[ExtResource("8_pwyud")]([ExtResource("11_bie1q")])
-highlight_color = 0
-is_enemy_obstacle = true
-target_count = 1
-use_host_as_origin = false
-max_charges = 0
-action_cost = 0
-range_pattern = 2
-aoe_pattern = 3
-tile_exclude_flag = 7
-tile_exclude_self = true
-is_action = false
-description = "ability description"
-animation_script = null
-custom_ability_script = null
-
-[sub_resource type="Resource" id="Resource_x7cd4"]
-script = ExtResource("1_uistd")
-state = 0
-has_ui = true
-data = SubResource("Resource_l2m5u")
-
-[sub_resource type="Resource" id="Resource_2kq21"]
-script = ExtResource("3_7gcxq")
-entity_name = "Eliana"
-max_health = 4
-move_range = 3
-team = 0
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-ability_props = Array[ExtResource("2_6fj6m")]([])
-starting_abilities = Array[ExtResource("5_y8wfk")]([])
-state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
-portrait_image = null
-health = 4
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_uistd")]([SubResource("Resource_loc8u"), SubResource("Resource_x7cd4")])
+abilities = Array[ExtResource("1_l320r")]([])
 
 [resource]
-script = ExtResource("25_iqtul")
+script = ExtResource("18_e4n5p")
 player_manager = {
 "gold": 10,
 "inventory": {},
 "units": [{
-"data": SubResource("Resource_y3yy1"),
-"position": Vector2(0, 0),
-"preset": SubResource("Resource_3nivo"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_a8nxw"),
+"position": Vector2(-64, 0),
+"preset": SubResource("Resource_3qilj"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_wqfkh"),
-"position": Vector2(0, 0),
-"preset": SubResource("Resource_ue14u"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_guf6e"),
+"position": Vector2(48, -24),
+"preset": SubResource("Resource_aart3"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_j4u43"),
-"position": Vector2(0, 0),
-"preset": SubResource("Resource_mq6c4"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_drw2y"),
+"position": Vector2(48, -56),
+"preset": SubResource("Resource_nona7"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_7ab2f"),
-"position": Vector2(0, 0),
-"preset": SubResource("Resource_d2024"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_3ol6r"),
+"position": Vector2(64, -16),
+"preset": SubResource("Resource_61xuk"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_ge54e"),
-"position": Vector2(0, 0),
-"preset": SubResource("Resource_vv5w3"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_hrfj1"),
+"position": Vector2(-64, -32),
+"preset": SubResource("Resource_6vf68"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_2kq21"),
-"position": Vector2(0, 0),
-"preset": SubResource("Resource_salky"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_vapph"),
+"position": Vector2(-48, -24),
+"preset": SubResource("Resource_ku8yn"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }]
 }
 scene_manager = {
-"current_scene_path": "res://src/screens/map/Map.tscn"
+"current_scene_path": "res://src/levels/cave/Cave.tscn"
 }
 level = {
 "entities": [{
-"data": SubResource("Resource_73msj"),
-"position": Vector2(-16, 40),
-"preset": SubResource("Resource_20brl"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_p63q5"),
+"position": Vector2(-16, -40),
+"preset": SubResource("Resource_qbiax"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_dld7g"),
-"position": Vector2(16, 56),
-"preset": SubResource("Resource_mu4p0"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
-"threat": {
-"ability": SubResource("Resource_0ilen"),
-"tile": Vector2i(2, 3)
-}
-}, {
-"data": SubResource("Resource_y8m8t"),
-"position": Vector2(16, 40),
-"preset": SubResource("Resource_gltj6"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_8wmsw"),
+"position": Vector2(-64, 0),
+"preset": SubResource("Resource_ete3s"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_iqrlp"),
-"position": Vector2(-48, -24),
-"preset": SubResource("Resource_u2kj5"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
-"threat": null
-}, {
-"data": SubResource("Resource_4u7mb"),
+"data": SubResource("Resource_u07ej"),
 "position": Vector2(-96, 0),
-"preset": SubResource("Resource_ian77"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"preset": SubResource("Resource_7n5rx"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_ob1bs"),
-"position": Vector2(-16, -24),
-"preset": SubResource("Resource_jx5c8"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_epipq"),
+"position": Vector2(-16, -56),
+"preset": SubResource("Resource_xhrf0"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_kaspl"),
-"position": Vector2(128, 16),
-"preset": SubResource("Resource_gqwsc"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_li15u"),
+"position": Vector2(-80, -40),
+"preset": SubResource("Resource_ys0r2"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_ovynu"),
-"position": Vector2(96, -32),
-"preset": SubResource("Resource_7dtho"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_50574"),
+"position": Vector2(-32, -32),
+"preset": SubResource("Resource_y5gd6"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_2k2j1"),
-"position": Vector2(80, -8),
-"preset": SubResource("Resource_2fq30"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_i3xmk"),
+"position": Vector2(176, 40),
+"preset": SubResource("Resource_w0vt5"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_w74xj"),
-"position": Vector2(-64, 32),
-"preset": SubResource("Resource_7dank"),
-"status_effects": Array[ExtResource("12_x38te")]([]),
+"data": SubResource("Resource_umk0s"),
+"position": Vector2(96, 48),
+"preset": SubResource("Resource_7ebjh"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
+"threat": null
+}, {
+"data": SubResource("Resource_ki7vs"),
+"position": Vector2(112, -8),
+"preset": SubResource("Resource_520lk"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
+"threat": null
+}, {
+"data": SubResource("Resource_u7hpf"),
+"position": Vector2(128, 0),
+"preset": SubResource("Resource_i1n6r"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
+"threat": null
+}, {
+"data": SubResource("Resource_pxf5w"),
+"position": Vector2(-48, 40),
+"preset": SubResource("Resource_avxe4"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
+"threat": null
+}, {
+"data": SubResource("Resource_cj7bw"),
+"position": Vector2(16, 56),
+"preset": SubResource("Resource_yskhv"),
+"status_effects": Array[ExtResource("12_28llh")]([]),
 "threat": null
 }],
-"team_turn": 0,
-"turn_order": [0, 4]
+"team_turn": 4,
+"turn_order": [4, 0]
 }
 map = {
-"active_regions": [{
-"level": 1,
-"node": Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":40.0,"offset_bottom":40.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_region.gd"),"scene":"res://src/levels/tests/demo/demo.tscn","label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":113.0,"offset_top":29.0,"offset_right":185.0,"offset_bottom":51.333,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Dark Forest","label_settings":Resource("../../../screens/map/map_label_settings.tres"),"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"area":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(173, 110),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
-,"select_anchor":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":93.0,"offset_top":72.0,"offset_right":93.0,"offset_bottom":72.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":null)
-,"area_collision_polygon":Object(CollisionPolygon2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"build_mode":0,"polygon":PackedVector2Array(19, 45, 13, 29, 5, 1, 10, -24, 16, -34, 24, -40, 27, -49, 13, -70, 1, -92, -13, -92, -32, -94, -35, -57, -53, -51, -70, -41, -74, -38, -77, -28, -85, -27, -91, -20, -93, -8, -86, 6, -75, 18, -55, 23, -54, 42, -44, 47, -42, 54, -36, 71, 27, 70, 21, 54),"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"script":null)
-,"active_location":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":125.0,"offset_top":47.0,"offset_right":235.0,"offset_bottom":130.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_location.gd"),"location_name":"XXX Mines","location_image":null,"location_name_label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":5,"anchor_left":0.5,"anchor_top":0.0,"anchor_right":0.5,"anchor_bottom":0.0,"offset_left":-25.5,"offset_top":26.0,"offset_right":25.5,"offset_bottom":35.0,"grow_horizontal":2,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"XXX Mines","label_settings":null,"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"location_image_sprite":Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 11),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":null,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
-)
-)
-
-}, {
-"level": 1,
-"node": Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":40.0,"offset_bottom":40.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_region.gd"),"scene":"res://src/levels/tests/demo/demo.tscn","label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-265.0,"offset_top":-12.0,"offset_right":-195.0,"offset_bottom":10.333,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Bad Castle","label_settings":Resource("../../../screens/map/map_label_settings.tres"),"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"area":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-188, 45),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
-,"select_anchor":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-196.0,"offset_top":-41.0,"offset_right":-196.0,"offset_bottom":-41.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":null)
-,"area_collision_polygon":Object(CollisionPolygon2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"build_mode":0,"polygon":PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54),"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"script":null)
-,"active_location":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-278.0,"offset_top":53.0,"offset_right":-168.0,"offset_bottom":136.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_location.gd"),"location_name":"Scorched Plains","location_image":null,"location_name_label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":5,"anchor_left":0.5,"anchor_top":0.0,"anchor_right":0.5,"anchor_bottom":0.0,"offset_left":-25.5,"offset_top":26.0,"offset_right":25.5,"offset_bottom":35.0,"grow_horizontal":2,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Scorched Plains","label_settings":null,"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"location_image_sprite":Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 11),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":null,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
-)
-)
-
-}, {
-"level": 1,
-"node": Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":40.0,"offset_bottom":40.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_region.gd"),"scene":"res://src/levels/tests/demo/demo.tscn","label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-144.0,"offset_top":29.0,"offset_right":-74.0,"offset_bottom":51.333,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Lake Town","label_settings":Resource("../../../screens/map/map_label_settings.tres"),"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"area":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-67, 86),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
-,"select_anchor":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-125.0,"offset_top":53.0,"offset_right":-125.0,"offset_bottom":53.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":null)
-,"area_collision_polygon":Object(CollisionPolygon2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"build_mode":0,"polygon":PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54),"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"script":null)
-,"active_location":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-169.0,"offset_top":51.0,"offset_right":-59.0,"offset_bottom":134.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_location.gd"),"location_name":"North Town","location_image":null,"location_name_label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":5,"anchor_left":0.5,"anchor_top":0.0,"anchor_right":0.5,"anchor_bottom":0.0,"offset_left":-25.5,"offset_top":26.0,"offset_right":25.5,"offset_bottom":35.0,"grow_horizontal":2,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"North Town","label_settings":null,"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"location_image_sprite":Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 11),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":null,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
-)
-)
-
-}, {
-"level": 1,
-"node": Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":40.0,"offset_bottom":40.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_region.gd"),"scene":"res://src/levels/tests/demo/demo.tscn","label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":134.0,"offset_top":-82.0,"offset_right":204.0,"offset_bottom":-59.667,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Mt. Red","label_settings":Resource("../../../screens/map/map_label_settings.tres"),"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"area":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(211, -25),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
-,"select_anchor":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":85.0,"offset_top":-40.0,"offset_right":85.0,"offset_bottom":-40.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":null)
-,"area_collision_polygon":Object(CollisionPolygon2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"build_mode":0,"polygon":PackedVector2Array(31, 46, 42, 46, 36, 28, 46, -17, 64, -32, 63, -49, 53, -62, 40, -63, 11, -66, -12, -56, -35, -57, -55, -57, -62, -37, -66, -24, -75, -16, -79, -7, -77, 9, -84, 16, -84, 26, -76, 38, -65, 41, -60, 48, -37, 41, -20, 53, -3, 50, 7, 56, 21, 54),"disabled":false,"one_way_collision":false,"one_way_collision_margin":1.0,"script":null)
-,"active_location":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":164.0,"offset_top":-34.0,"offset_right":274.0,"offset_bottom":49.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_location.gd"),"location_name":"South Town","location_image":null,"location_name_label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":5,"anchor_left":0.5,"anchor_top":0.0,"anchor_right":0.5,"anchor_bottom":0.0,"offset_left":-25.5,"offset_top":26.0,"offset_right":25.5,"offset_bottom":35.0,"grow_horizontal":2,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"South Town","label_settings":null,"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"location_image_sprite":Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 11),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":null,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
-)
-)
-
-}, {
-"level": 1,
-"node": Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":-222.0,"offset_top":-164.0,"offset_right":-32.0,"offset_bottom":-23.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_region.gd"),"scene":"res://src/levels/cave/Cave.tscn","label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":0,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":26.0,"offset_top":18.0,"offset_right":94.0,"offset_bottom":40.333,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Shop Town","label_settings":Resource("../../../screens/map/map_label_settings.tres"),"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"area":Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(107, 75),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":1,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":null)
-,"select_anchor":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":95.0,"offset_top":102.0,"offset_right":95.0,"offset_bottom":102.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":null)
-,"area_collision_polygon":Object(CollisionPolygon2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"build_mode":0,"polygon":PackedVector2Array(29, 59, 45, 61, 52, 55, 62, 37, 59, 19, 56, -2, 48, -9, 53, -21, 79, -49, 82, -63, 49, -56, 32, -56, 13, -59, -12, -56, -35, -55, -59, -40, -74, -3, -80, 8, -91, 22, -53, 49, -38, 52, -2, 52, 10, 57),"disabled":false,"one_way_collision":false,"one_way_collision_margin":20.7,"script":null)
-,"active_location":Object(Control,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":9.0,"offset_top":18.0,"offset_right":119.0,"offset_bottom":101.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","script":Resource("../../../screens/map/map_location.gd"),"location_name":"Beach of Funtimes","location_image":null,"location_name_label":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":5,"anchor_left":0.5,"anchor_top":0.0,"anchor_right":0.5,"anchor_bottom":0.0,"offset_left":-25.5,"offset_top":26.0,"offset_right":25.5,"offset_bottom":35.0,"grow_horizontal":2,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"Beach of Funtimes","label_settings":null,"horizontal_alignment":0,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-,"location_image_sprite":Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 11),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":null,"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
-)
-)
-
-}]
+"active_region_keys": [0, 1, 2, 3, 4]
 }

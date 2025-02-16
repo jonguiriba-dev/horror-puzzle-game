@@ -14,3 +14,9 @@ func to_dict()->Dictionary:
 		"level":level,
 		"map":map,
 	}
+
+func reset():
+	player_manager = {}
+	scene_manager = {}
+	level = {}
+	map = {}
