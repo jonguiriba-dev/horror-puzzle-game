@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://brofib71ihnbr"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://brofib71ihnbr"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_f38hg"]
 [ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_b2ewq"]
+
+[sub_resource type="Resource" id="Resource_phxdm"]
+script = ExtResource("1_f38hg")
+effect_type = 0
+value = 2
+entity_type = 0
 
 [resource]
 script = ExtResource("2_b2ewq")
 ability_name = "Pierce"
 ability_range = 2
-effects = Array[ExtResource("1_f38hg")]([])
+effects = Array[ExtResource("1_f38hg")]([SubResource("Resource_phxdm")])
 highlight_color = 3
 is_enemy_obstacle = false
 target_count = 1
@@ -20,5 +26,7 @@ tile_exclude_flag = 5
 tile_exclude_self = false
 is_action = true
 description = "ability description"
+target_strategy = 0
+is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_spear_stab.gd"
 custom_ability_script = null

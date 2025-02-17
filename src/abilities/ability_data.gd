@@ -1,6 +1,11 @@
 extends Resource
 class_name AbilityData
 
+enum TARGET_STRATEGIES{
+	DEFAULT,
+	NAVIGATION
+}
+
 @export var ability_name := "ability_name"
 @export var ability_range := 0
 @export var effects:Array[AbilityEffect]
@@ -16,6 +21,8 @@ class_name AbilityData
 @export var tile_exclude_self:=false
 @export var is_action:=true
 @export var description:="ability description"
-@export_file("animation_*gd") var animation_script
+@export var target_strategy := TARGET_STRATEGIES.DEFAULT
+@export var is_passive := false
+@export_file("*gd") var animation_script
 @export_file("*gd") var custom_ability_script
 var charges:=0

@@ -87,7 +87,7 @@ func show_context_menu(host:Entity):
 	
 	var ability_count = 0
 	for ability in host.get_abilities():
-		if ability.data.ability_name == "move":
+		if ability.data.is_passive:
 			continue
 		ability_count+=1
 		var ability_node = preload("res://src/ui/level_ui/context_menu/context_menu_abilty.tscn").instantiate()

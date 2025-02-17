@@ -79,6 +79,7 @@ enum TILE_EXCLUDE_FLAGS{
 }
 
 var possible_tiles_cache:Dictionary = {}
+
 func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 	populate_entity_tiles2()
 	
@@ -101,9 +102,6 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 		enemy_tiles.append_array(neutral_entity_tiles)
 		enemy_tiles.append_array(player_entity_tiles)
 		ally_tiles = enemy_entity_tiles
-	
-	#clear_all_highlights(HIGHLIGHT_LAYERS.DEBUG)
-	#set_highlight_area(ally_tiles,HIGHLIGHT_COLORS.PURPLE)
 	
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
@@ -132,8 +130,43 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 				!props.has(tile) 
 			):
 				tiles.erase(tile)
+				astar_grid.set_point_solid(tile)
 	
 	return tiles
+
+func get_navigatable_tiles(
+	start_position:Vector2i,
+	max_steps:int,
+	team:C.TEAM,
+	exclude_flags:int=TILE_EXCLUDE_FLAGS.EXCLUDE_ALL_PROPS
+)->Array[Vector2i]:
+	var navigatable_tiles:Array[Vector2i]= []
+	
+	var possible_tiles = WorldManager.level.grid.get_possible_tiles(
+		team,
+		exclude_flags
+	)
+	var queued_tiles = [start_position]
+		
+	var step = 0
+	while !queued_tiles.is_empty():
+		var pending_tiles = queued_tiles.duplicate()
+		queued_tiles = []
+		for direction in [Vector2i(-1,0),Vector2i(1,0),Vector2i(0,-1),Vector2i(0,1)]:
+			for pending_tile in pending_tiles:
+				var next_tile = pending_tile + direction
+				if possible_tiles.has(next_tile) and !navigatable_tiles.has(next_tile):
+					if (
+						start_position != next_tile and 
+						!WorldManager.level.grid.ally_entity_tiles.has(next_tile)
+					):
+						navigatable_tiles.push_front(next_tile)
+					queued_tiles.push_front(next_tile)
+		step += 1
+		if step == max_steps:
+			break
+	return navigatable_tiles
+
 
 
 func get_all_tiles()->Array[Vector2i]:
@@ -226,23 +259,7 @@ func debug_tile_text(map_pos:Vector2i,text:String):
 	label.position.x -= 10
 	label.z_index = 99
 
-#func populate_entity_tiles():
-	#entity_tiles = []
-	#enemy_tiles = []
-	#ally_tiles = []
-	#
-	#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		#entity_tiles.push_front(entity.map_position)
-		#if (world.team_turn == entity.data.team and 
-			#(ally_tiles.size() == 0 or enemy_tiles.size() == 0)
-		#):
-			#entity.get_enemies().map(func (e):
-				#enemy_tiles.push_front(e.map_position)
-			#)
-			#entity.get_allies().map(func (e):
-				#ally_tiles.push_front(e.map_position)
-			#)
-		#
+
 func populate_entity_tiles2():
 	player_entity_tiles = []
 	enemy_entity_tiles = []

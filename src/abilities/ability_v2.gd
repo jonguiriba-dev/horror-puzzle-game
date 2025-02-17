@@ -56,6 +56,21 @@ func use(target_map_position:Vector2i, options:Dictionary={}):
 	used.emit(self)
 	
 	stopped_targetting.emit()
+	
+func highlight_target_tiles():
+	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
+	
+	var target_tiles
+	
+	target_tiles = get_target_tiles(host.map_position,data.ability_range)
+
+	
+	for pos in target_tiles:
+		WorldManager.level.grid.set_highlight(
+			pos,
+			data.highlight_color,
+			Grid.HIGHLIGHT_LAYERS.ABILITY
+		)
 
 func _get_tile_target(map_pos:Vector2i):
 	var entities = host.get_tree().get_nodes_in_group(C.GROUPS_ENTITIES).filter(func(e):
@@ -84,11 +99,11 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		if is_instance_valid(target_entity):
 			apply_entity_effect(target_entity)
 		
-		if data.effects.filter(
-			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
-		).size() > 0:
-			await apply_move_effect(affected_tile)
-			
+		#if data.effects.filter(
+			#func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
+		#).size() > 0:
+			#await apply_move_effect(affected_tile)
+			#
 
 func apply_entity_effect(target:Entity):
 	for effect in data.effects:
@@ -109,7 +124,6 @@ func apply_move_effect(target_map_position:Vector2i):
 	)
 	if path.size() > 0:
 		path.remove_at(0)
-		
 		path = path.filter(func(e):
 			for ally in host.get_allies():
 				if WorldManager.level.grid.local_to_map(ally.position) == e:
@@ -146,34 +160,33 @@ func set_state(_state:STATE):
 	
 	state = _state
 	
-func highlight_target_tiles():
-	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
-	var target_tiles = get_target_tiles()
-	
-	for pos in target_tiles:
-		WorldManager.level.grid.set_highlight(
-			pos,
-			data.highlight_color,
-			Grid.HIGHLIGHT_LAYERS.ABILITY
-		)
-
-
+#can potentially moved to strategy pattern if more diverse scenarios come
 func get_target_tiles(
 	map_pos:Vector2i=host.map_position,
 	_range:int=data.ability_range,
 )->Array[Vector2i]:
-	var possible_tiles = WorldManager.level.grid.get_possible_tiles(
-		host.data.team,
-		data.tile_exclude_flag
-	)
-	if data.tile_exclude_self:
-		possible_tiles.erase(map_pos)
-		
-	var tiles = TilePattern.get_callable(data.range_pattern).call(map_pos,_range).filter(func(e):
-		return possible_tiles.has(e)	
-	)
+	var target_tiles = []
+	if data.target_strategy == AbilityData.TARGET_STRATEGIES.DEFAULT:
+		var possible_tiles = WorldManager.level.grid.get_possible_tiles(
+			host.data.team,
+			data.tile_exclude_flag
+		)
+		if data.tile_exclude_self:
+			possible_tiles.erase(map_pos)
+			
+		target_tiles = TilePattern.get_callable(data.range_pattern).call(map_pos,_range).filter(func(e):
+			return possible_tiles.has(e)	
+		)
+	elif data.target_strategy == AbilityData.TARGET_STRATEGIES.NAVIGATION:
+		target_tiles = WorldManager.level.grid.get_navigatable_tiles(
+			host.map_position,
+			data.ability_range,
+			host.data.team,
+			Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_ALL_PROPS
+		)
+
 	
-	return tiles
+	return target_tiles
 
 func get_valid_targets(map_pos:Vector2i=Vector2i.ZERO)->Array[Entity]:
 	if map_pos == Vector2i.ZERO:
