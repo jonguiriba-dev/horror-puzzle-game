@@ -24,10 +24,6 @@ enum STATE{
 @onready var turn_start_overlay_label := $Overlays/TurnStart/Label
 @onready var overlays := $Overlays
 @onready var context_menu := $ContextMenu
-#@onready var context_menu_name_container := $ContextMenu/Name
-#@onready var context_menu_name := $ContextMenu/Name/Label
-#@onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
-#@onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
 @onready var strategy_node := $StrategyMenu
 @onready var strategy_container := $StrategyMenu/VBoxContainer
 var strategy_node_prev_pos #to prevent mouse event being taken unwantedly

@@ -29,4 +29,4 @@ func _gui_input(event: InputEvent) -> void:
 				targetting_ability.stopped_targetting.emit()
 			UIManager.ability_hovered.target_select.emit()
 			UIManager.ability_hovered = null
-			UIManager.ui.hide_context_menu()
+			UIManager.level_ui.hide_context_menu()

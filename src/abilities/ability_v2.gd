@@ -266,6 +266,6 @@ func _on_used(ability:AbilityV2):
 	data.charges -=1
 	
 	if host.data.action_counter > 0 && host.data.team == C.TEAM.PLAYER:
-		UIManager.ui.set_context(host)
+		UIManager.level_ui.set_context(host)
 
 	

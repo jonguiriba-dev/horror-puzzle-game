@@ -39,14 +39,13 @@ func _enter_tree() -> void:
 	
 func _ready() -> void:
 	turn_start.connect(_on_turn_start)
-	var ui_node = UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
-	if ui_node:
-		UIManager.ui.undo_move_pressed.connect(_on_undo_move_pressed)
-		UIManager.ui.end_turn_pressed.connect(_on_end_turn_pressed)
-		UIManager.ui.turn_order_pressed.connect(_on_turn_order_pressed)
-		UIManager.ui.strategy_changed.connect(func ():
-			strategy_changed = true
-		)
+	UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
+	UIManager.level_ui.undo_move_pressed.connect(_on_undo_move_pressed)
+	UIManager.level_ui.end_turn_pressed.connect(_on_end_turn_pressed)
+	UIManager.level_ui.turn_order_pressed.connect(_on_turn_order_pressed)
+	UIManager.level_ui.strategy_changed.connect(func ():
+		strategy_changed = true
+	)
 	
 	await load_data()
 	await game_start()
@@ -57,7 +56,7 @@ func end_turn():
 		C.TEAM.keys()[turn_order[1]],
 	])
 	
-	UIManager.ui.clear_context()
+	UIManager.level_ui.clear_context()
 	turn_changed.emit()
 	turn_end.emit(team_turn)
 	turn_order.push_front(turn_order.pop_back())
@@ -130,11 +129,11 @@ func game_start():
 	selected_entity = null
 	
 	await register_entities()
-	if !UIManager.ui:
-		Util.sysprint("game_start","UIManager.ui not found")
+	if !UIManager.level_ui:
+		Util.sysprint("game_start","UIManager.level_ui not found")
 		return
 	clear_entity_moved_history()
-	UIManager.ui.turn_start_overlay.hide()
+	UIManager.level_ui.turn_start_overlay.hide()
 
 	if Debug.play_game_start_sequence:
 		await UIManager.play_game_start_sequence()
@@ -166,7 +165,7 @@ func check_player_victory():
 		var player_entities = get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES)
 		player_entities.append_array(get_tree().get_nodes_in_group(C.GROUPS_ALLIES)) 
 		
-		UIManager.ui.overlay_clicked.connect(func():
+		UIManager.level_ui.overlay_clicked.connect(func():
 			UIManager.hide_victory_overlay()
 			
 			give_player_rewards()
@@ -183,7 +182,6 @@ func check_player_victory():
 					player_entity.get_parent().remove_child(player_entity)
 				WorldManager.level = null
 				WorldManager.level_complete.emit()
-				UIManager.clear_ui()
 				
 				SaveManager.save_data("level",{})
 				SaveManager.save_game()
@@ -210,8 +208,8 @@ func get_reward_abilities():
 	return abilities
 func clear_entity_moved_history():
 	entity_moved_history.clear()
-	if UIManager.ui:
-		UIManager.ui.disable_undo_move_button()
+	if UIManager.level_ui:
+		UIManager.level_ui.disable_undo_move_button()
 		
 func increment_animation_counter(val: int):
 	animation_counter += val
@@ -302,7 +300,7 @@ func register_entity(entity:Entity):
 func _on_end_turn_pressed():
 	Util.sysprint("Level:_on_end_turn_pressed","start")
 	if team_turn == C.TEAM.PLAYER:
-		UIManager.ui.end_turn.disabled = true
+		UIManager.level_ui.end_turn.disabled = true
 		end_turn()
 
 func _on_turn_order_pressed():
@@ -315,7 +313,7 @@ func _on_turn_order_pressed():
 func _on_turn_start(turn:C.TEAM):
 	
 	if Debug.show_turn_card:
-		await UIManager.ui.present_turn_start_overlay(C.TEAM.keys()[turn])
+		await UIManager.level_ui.present_turn_start_overlay(C.TEAM.keys()[turn])
 	Util.sysprint("WorldManager._on_turn_start","turn start: %s"%[C.TEAM.keys()[turn]])
 	#if turn == C.TEAM.ENEMY:
 		#_start_ai_turn()
@@ -355,7 +353,7 @@ func _on_unit_turn_end():
 	SaveManager.save_game()
 
 func _on_all_ai_done():
-	UIManager.ui.end_turn.disabled = false
+	UIManager.level_ui.end_turn.disabled = false
 	end_turn()
 
 
@@ -414,7 +412,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			UIManager.ability_hovered.target_select.emit()	
 			
 		if targetting_ability and !input_waiting_on_ability:		
-			UIManager.ui.clear_context()
+			UIManager.level_ui.clear_context()
 			if selected_entity and targetting_ability.data.ability_name.to_lower() != "move":
 				selected_entity.clear_sprite_material()
 				selected_entity = null
@@ -442,7 +440,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			print(">else")
 			grid.tile_selected.emit(mouse_map_position)
-			UIManager.ui.clear_context()
+			UIManager.level_ui.clear_context()
 			if selected_entity:
 				selected_entity.clear_sprite_material()
 				selected_entity = null

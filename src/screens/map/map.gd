@@ -25,8 +25,22 @@ enum REGIONS {
 }
 var active_region_sprites = []
 
+func _enter_tree() -> void:
+	print("enter tree")
+	UIManager.set_ui(UIManager.UI_TYPE.MAP)
+	SaveManager.save_data("map",to_save_data())
+	
+	randomize_active_regions()
+	active_region_sprites = []
+	for i in active_regions:
+		var label = Label.new()
+		active_regions[i].node.add_child(label)
+		label.text = "ACTIVE_REGION"
+		label.global_position = active_regions[i].node.select_anchor.global_position
+		active_region_sprites.push_front(label)
+		
 func _ready() -> void:
-	WorldManager.level_complete.connect(_on_world_manager_level_complete)
+	#WorldManager.level_complete.connect(_on_world_manager_level_complete)
 	load_data()
 	select_view.hide()
 	
@@ -39,12 +53,6 @@ func randomize_active_regions():
 	for i in range(disabled_regions):
 		active_regions.erase(region_keys.pop_front())
 	print("active_regions ",active_regions)
-	
-	
-
-		
-func _on_party_button_pressed() -> void:
-	SceneManager.change_scene("res://src/screens/manage_roster/ManageRoster.tscn")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
@@ -99,16 +107,17 @@ func _on_area_2d_mouse_exited() -> void:
 	print("456") # Replace with function body.
 	pass # Replace with function body.
 
-func _on_world_manager_level_complete() -> void:
-	randomize_active_regions()
-	active_region_sprites = []
-	for i in active_regions:
-		var label = Label.new()
-		active_regions[i].node.add_child(label)
-		label.text = "ACTIVE_REGION"
-		label.global_position = active_regions[i].node.select_anchor.global_position
-		active_region_sprites.push_front(label)
-	SaveManager.save_data("map",to_save_data())
+#func _on_world_manager_level_complete() -> void:
+	#randomize_active_regions()
+	#active_region_sprites = []
+	#for i in active_regions:
+		#var label = Label.new()
+		#active_regions[i].node.add_child(label)
+		#label.text = "ACTIVE_REGION"
+		#label.global_position = active_regions[i].node.select_anchor.global_position
+		#active_region_sprites.push_front(label)
+		#
+	#
 	
 func to_save_data():
 	return {

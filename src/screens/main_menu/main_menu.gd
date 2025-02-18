@@ -7,6 +7,10 @@ extends Control
 
 var selected_label 
 
+
+func _enter_tree() -> void:
+	UIManager.clear_ui()
+
 func _ready() -> void:
 	for label in [continue_label,new_game_label,options_label,exit_label]:
 		label.mouse_entered.connect(_on_label_mouse_entered.bind(label))

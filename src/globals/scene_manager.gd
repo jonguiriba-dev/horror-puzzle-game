@@ -21,8 +21,10 @@ func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 		new_scene = scene_list.get(scene_path)
 	else:
 		new_scene =  load(scene_path).instantiate()
+	
+	var prev_scene:Node
 	if(scene_node.get_child_count() > 0):
-		var prev_scene :Node= scene_node.get_child(scene_node.get_child_count()-1)
+		prev_scene = scene_node.get_child(scene_node.get_child_count()-1)
 		if keep_prev_scene:
 			Util.sysprint("SceneManager","storing prev_scene: %s"%[prev_scene.name])
 			scene_list[prev_scene.scene_file_path] = prev_scene
@@ -30,7 +32,7 @@ func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 		else:
 			Util.sysprint("SceneManager","freeing prev_scene: %s"%[prev_scene.name])
 			scene_list[prev_scene.scene_file_path] = null
-			prev_scene.queue_free()
+			prev_scene.hide()
 
 	new_scene.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	new_scene.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -41,6 +43,9 @@ func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 	if !save_exclude_list.has(scene_path):
 		SaveManager.save_data("scene_manager",to_save_data())
 		SaveManager.save_game()
+	
+	if !keep_prev_scene and prev_scene:
+		prev_scene.queue_free()
 
 func _on_game_loaded():
 	var path = SaveManager.get_loaded("scene_manager","current_scene_path",current_scene_path)

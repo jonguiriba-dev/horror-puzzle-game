@@ -1,4 +1,3 @@
-
 extends Node
 
 enum UI_TYPE{
@@ -6,36 +5,37 @@ enum UI_TYPE{
 	MAP
 }
 
-var ui_container
-var ui: UI
+var ui_container:Control
+var level_ui: UI
+var map_ui: MapUI
 var ability_hovered:AbilityV2
 
-var level_ui = preload("res://src/ui/level_ui/Ui.tscn").instantiate()
-var map_ui
+var level_ui_node = preload("res://src/ui/level_ui/Ui.tscn")
+var map_ui_node = preload("res://src/ui/map_ui/map_ui.tscn")
 
 signal reward_card_selected(reward_card)
 
 func info(text:String):
-	if ui:
-		ui.debug_label.text = text
+	if level_ui:
+		level_ui.debug_label.text = text
 
 func play_game_start_sequence():
-	ui.game_start_overlay.show()
+	level_ui.game_start_overlay.show()
 	await Util.wait(2)
-	ui.game_start_overlay.hide()
+	level_ui.game_start_overlay.hide()
 
 func show_victory_overlay():
-	ui.victory_overlay.show()
-	ui.overlays.show()
+	level_ui.victory_overlay.show()
+	level_ui.overlays.show()
 	
 func hide_victory_overlay():
-	ui.victory_overlay.hide()
-	ui.overlays.hide()
+	level_ui.victory_overlay.hide()
+	level_ui.overlays.hide()
 
 func show_reward_overlay(ability_presets:Array[AbilityData]):
-	ui.show_reward_overlay(ability_presets)
-	ui.overlays.show()
-	ui.reward_card_selected.connect(
+	level_ui.show_reward_overlay(ability_presets)
+	level_ui.overlays.show()
+	level_ui.reward_card_selected.connect(
 		func(e):
 			print("almsot there ",e)
 			reward_card_selected.emit(e),
@@ -43,31 +43,33 @@ func show_reward_overlay(ability_presets:Array[AbilityData]):
 	)
 	
 func hide_reward_overlay():
-	ui.hide_reward_overlay()
-	ui.overlays.hide()
+	level_ui.hide_reward_overlay()
+	level_ui.overlays.hide()
 
 func registerUI(_ui:UI):
-	ui = _ui
-	ui.visible = true
-	ui.clear_context()
+	level_ui = _ui
+	level_ui.visible = true
+	level_ui.clear_context()
 
 func set_ui(ui_type:UI_TYPE):
 	if !ui_container:
 		return
-	
-	if ui_container.get_child_count() > 0:
-		#ui_container.get_children()[0].queue_free()
-		ui_container.remove_child(ui_container.get_children()[0])
 		
+	await clear_ui()
+
 	var ui_node
 	match ui_type:
-		UI_TYPE.LEVEL: ui_node = level_ui
-		UI_TYPE.MAP: ui_node = map_ui
-	
+		UI_TYPE.LEVEL: 
+			ui_node = level_ui_node.instantiate()
+			level_ui = ui_node
+			map_ui = null
+		UI_TYPE.MAP: 
+			ui_node = map_ui_node.instantiate()
+			map_ui = ui_node
+			level_ui = null
+		
 	ui_container.add_child(ui_node)
-	ui = ui_node
-	return ui
 
 func clear_ui():
-	if ui_container.get_child_count() > 0:
-		ui_container.remove_child(ui_container.get_children()[0])
+	for child in ui_container.get_children():
+		child.queue_free()

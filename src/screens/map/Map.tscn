@@ -1,13 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://de725xpg1lps6"]
+[gd_scene load_steps=9 format=3 uid="uid://de725xpg1lps6"]
 
 [ext_resource type="Script" path="res://src/screens/map/map.gd" id="1_mkf4a"]
 [ext_resource type="Texture2D" uid="uid://cbiiv0achhftf" path="res://assets/map/map.png" id="1_olvll"]
 [ext_resource type="Script" path="res://src/screens/map/map_region.gd" id="3_2fdwi"]
 [ext_resource type="LabelSettings" uid="uid://cxmoa2sbp616c" path="res://src/screens/map/map_label_settings.tres" id="3_a2uu1"]
 [ext_resource type="PackedScene" uid="uid://cu1gi05ajx8h4" path="res://src/screens/map/map_location.tscn" id="4_mxdcs"]
-[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="6_jldv6"]
-[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="7_2o0wd"]
-[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="8_3anxe"]
 [ext_resource type="Script" path="res://src/screens/map/select_view.gd" id="10_q6nnh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wope"]
@@ -25,15 +22,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgurw"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_5yj53"]
-font = ExtResource("8_3anxe")
-font_size = 12
-font_color = Color(0.184314, 0.168627, 0.0980392, 1)
-outline_size = 8
-outline_color = Color(0.59, 0.55755, 0.413, 1)
-
 [node name="Map" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -46,36 +34,6 @@ script = ExtResource("1_mkf4a")
 
 [node name="Map" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rups3")
-
-[node name="PartyButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 254.0
-offset_top = -164.0
-offset_right = 304.0
-offset_bottom = -142.0
-size_flags_horizontal = 4
-size_flags_vertical = 6
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bgurw")
-flat = true
-script = ExtResource("6_jldv6")
-
-[node name="Sprite2D" type="Sprite2D" parent="PartyButton"]
-scale = Vector2(0.0925926, 0.1375)
-texture = ExtResource("7_2o0wd")
-centered = false
-
-[node name="Label" type="Label" parent="PartyButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Party"
-label_settings = SubResource("LabelSettings_5yj53")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Shoptown" type="Control" parent="."]
 layout_mode = 3
@@ -603,5 +561,3 @@ color = Color(0.889188, 0.290437, 1, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 color = Color(0.889188, 0.290437, 1, 1)
-
-[connection signal="pressed" from="PartyButton" to="." method="_on_party_button_pressed"]

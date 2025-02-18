@@ -29,9 +29,9 @@ func _state_logic(delta:float):
 func _enter_state(old_state, new_state):
 	to_done = false
 	to_idle = false
-	UIManager.ui.set_context(host)
+	UIManager.level_ui.set_context(host)
 
-	#UIManager.ui.set_context(host)
+	#UIManager.level_ui.set_context(host)
 	print("HOST.DATA.MOVE ",host.data.move_counter)
 	if host.data.move_counter > 0 and host.data.action_counter > 0:
 		Util.sysprint(

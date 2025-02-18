@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqyajoq41rilo"]
+
+[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="1_2rwec"]
+[ext_resource type="Script" path="res://src/ui/menu/menu.gd" id="1_bilg6"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_koqhg"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="3_w8pet"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_klaj7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0puem"]
+font = ExtResource("3_w8pet")
+font_size = 24
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_bilg6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -38.0
+offset_right = 45.5
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(91, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_klaj7")
+flat = true
+script = ExtResource("1_2rwec")
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Options"]
+scale = Vector2(0.166667, 0.225)
+texture = ExtResource("2_koqhg")
+centered = false
+
+[node name="Label" type="Label" parent="VBoxContainer/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_0puem")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitToMainMenu" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(91, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_klaj7")
+flat = true
+script = ExtResource("1_2rwec")
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/ExitToMainMenu"]
+scale = Vector2(0.166667, 0.225)
+texture = ExtResource("2_koqhg")
+centered = false
+
+[node name="Label" type="Label" parent="VBoxContainer/ExitToMainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+label_settings = SubResource("LabelSettings_0puem")
+horizontal_alignment = 1
+vertical_alignment = 1
