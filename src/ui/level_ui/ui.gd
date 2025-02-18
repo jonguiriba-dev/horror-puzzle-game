@@ -1,6 +1,7 @@
 extends Control
 class_name UI
 
+
 enum STATE{
 	INACTIVE,
 	SELECTING_TARGET
@@ -23,10 +24,10 @@ enum STATE{
 @onready var turn_start_overlay_label := $Overlays/TurnStart/Label
 @onready var overlays := $Overlays
 @onready var context_menu := $ContextMenu
-@onready var context_menu_name_container := $ContextMenu/Name
-@onready var context_menu_name := $ContextMenu/Name/Label
-@onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
-@onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
+#@onready var context_menu_name_container := $ContextMenu/Name
+#@onready var context_menu_name := $ContextMenu/Name/Label
+#@onready var context_menu_ability_list := $ContextMenu/AbilityList/VBoxContainer
+#@onready var context_menu_ability_bar := $ContextMenu/Frame/Bar
 @onready var strategy_node := $StrategyMenu
 @onready var strategy_container := $StrategyMenu/VBoxContainer
 var strategy_node_prev_pos #to prevent mouse event being taken unwantedly
@@ -80,35 +81,9 @@ func show_portrait():
 	pass
 	#portrait_container.show()
 
+
 func show_context_menu(host:Entity):
-	context_menu_name.text = host.data.entity_name
-	for child in context_menu_ability_list.get_children():
-		child.queue_free()
-	
-	var ability_count = 0
-	for ability in host.get_abilities():
-		if ability.data.is_passive:
-			continue
-		ability_count+=1
-		var ability_node = preload("res://src/ui/level_ui/context_menu/context_menu_abilty.tscn").instantiate()
-		context_menu_ability_list.add_child(ability_node)
-		ability_node.label.text = ability.data.ability_name
-		ability_node.ability = ability
-		if ability.data.max_charges != 0:
-			ability_node.charges.text = str(ability.data.charges)
-		else:
-			ability_node.charges.text = ""
-		if !ability.is_usable():
-			ability_node.bg.texture = preload("res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_unusable.tres")
-
-	context_menu.global_position = (host.global_position * 2) + Vector2(36,-240)
-	context_menu_ability_bar.size = Vector2(3,100)
-	context_menu_ability_bar.size += Vector2(0,70 * (ability_count - 1))
-	context_menu_name_container.position = Vector2(16,180)
-	context_menu_name_container.position += Vector2(0,-72 * (ability_count - 1))
-	context_menu.animate()
-	context_menu.show()
-
+	context_menu.update_with_entity_abilities(host)
 func hide_context_menu():
 	context_menu.hide()
 

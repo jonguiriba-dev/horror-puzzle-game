@@ -255,7 +255,6 @@ func _on_selected():
 		WorldManager.level.input_waiting_on_ability = false
 		sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 	else:
-		print("sprite.material = null")
 		clear_sprite_material()
 		UIManager.ui.clear_context()
 

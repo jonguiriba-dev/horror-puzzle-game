@@ -22,5 +22,7 @@ tile_exclude_flag = 5
 tile_exclude_self = false
 is_action = true
 description = "ability description"
+target_strategy = 0
+is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
 custom_ability_script = null

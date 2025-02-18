@@ -414,6 +414,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			UIManager.ability_hovered.target_select.emit()	
 			
 		if targetting_ability and !input_waiting_on_ability:		
+			UIManager.ui.clear_context()
 			if selected_entity and targetting_ability.data.ability_name.to_lower() != "move":
 				selected_entity.clear_sprite_material()
 				selected_entity = null
@@ -429,7 +430,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				if selected_entity:
 					selected_entity.clear_sprite_material()
 					selected_entity = null
-					UIManager.ui.clear_context()
 				grid.tile_selected.emit(mouse_map_position)
 				if is_instance_valid(hovered_entity) and hovered_entity.data.team == team_turn:
 					hovered_entity.selected.emit()

@@ -71,4 +71,3 @@ func set_ui(ui_type:UI_TYPE):
 func clear_ui():
 	if ui_container.get_child_count() > 0:
 		ui_container.remove_child(ui_container.get_children()[0])
-	

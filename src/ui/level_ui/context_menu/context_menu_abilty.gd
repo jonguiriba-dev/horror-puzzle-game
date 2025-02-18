@@ -1,6 +1,8 @@
 extends Control
 class_name ContextMenuAbility
 
+const CONTEXT_MENU_ABILITY_TSCN = "res://src/ui/level_ui/context_menu/context_menu_abilty.tscn"
+
 @onready var bg := $Bg
 @onready var label := $HBoxContainer/AbilityName
 @onready var charges := $HBoxContainer/Control/Charges
