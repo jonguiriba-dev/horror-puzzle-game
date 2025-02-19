@@ -28,6 +28,7 @@ enum STATE{
 @onready var strategy_container := $StrategyMenu/VBoxContainer
 var strategy_node_prev_pos #to prevent mouse event being taken unwantedly
 @onready var strategy_dropdown_button := $StrategyDropDown
+@onready var menu_button := $MenuButton
 var state := STATE.INACTIVE
 var context
 
@@ -52,6 +53,8 @@ func _ready() -> void:
 	
 	for child in strategy_container.get_children():
 		child.pressed.connect(_on_strategy_selected.bind(child.get_meta("strategy")))
+	
+	menu_button.pressed.connect(_on_menu_button_pressed)
 	
 	UIManager.registerUI(self)
 	
@@ -161,7 +164,13 @@ func _on_turn_order_pressed() -> void:
 		
 func _on_undo_move_pressed() -> void:
 	undo_move_pressed.emit()
-	
+
+func _on_menu_button_pressed() -> void:
+	var menu_node = preload(Menu.MENU_TSCN).instantiate()
+	menu_node = menu_node as Control
+	add_child(menu_node)
+	menu_node.global_position = DisplayServer.window_get_size()/2	
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("console"):
 		if debug.visible:

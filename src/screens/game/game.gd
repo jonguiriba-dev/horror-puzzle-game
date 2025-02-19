@@ -19,5 +19,4 @@ func _ready():
 	SceneManager.register_game_node(game_node)
 	if game_scene:
 		SceneManager.change_scene(game_scene)
-	
-	
+		

@@ -1,26 +1,27 @@
-[gd_scene load_steps=33 format=3 uid="uid://de11wfnraklxo"]
+[gd_scene load_steps=36 format=3 uid="uid://de11wfnraklxo"]
 
-[ext_resource type="Script" path="res://src/ui/level_ui/ui.gd" id="1_0ibs7"]
-[ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="2_w4ruf"]
-[ext_resource type="PackedScene" uid="uid://c15k8jyhng3o8" path="res://src/ui/level_ui/context_menu/context_menu.tscn" id="3_goa6j"]
-[ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="3_i27ym"]
-[ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/ui/level_ui/clickable_sprite/ClickableSprite.tscn" id="3_pq1jb"]
-[ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="5_kf4q6"]
-[ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="6_0rxox"]
-[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="6_ekjn1"]
-[ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="6_wi4k2"]
-[ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="7_l2n6i"]
-[ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="7_nuuhx"]
-[ext_resource type="FontFile" uid="uid://sfmk3hf8i5ir" path="res://assets/fonts/CrimsonText-SemiBoldItalic.ttf" id="8_7yv3f"]
-[ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="8_rfbs1"]
-[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/ui/level_ui/sprite_button_label_settings.tres" id="13_mvkux"]
-[ext_resource type="Script" path="res://src/ui/level_ui/strategy.gd" id="18_2exhv"]
-[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="18_gcsod"]
-[ext_resource type="Script" path="res://src/ui/level_ui/overlays.gd" id="18_xd1td"]
-[ext_resource type="PackedScene" uid="uid://141sftgeowqw" path="res://src/ui/level_ui/SpriteButton.tscn" id="19_mg8vx"]
-[ext_resource type="PackedScene" uid="uid://dcxbsateoow86" path="res://src/ui/level_ui/overlays/RewardOverlay.tscn" id="20_f1m0d"]
-[ext_resource type="FontFile" uid="uid://2t7grnmmukb" path="res://assets/fonts/CrimsonText-SemiBold.ttf" id="20_hl3ok"]
-[ext_resource type="PackedScene" uid="uid://df3drhl7cxiip" path="res://src/shaders/speedlines/sample.tscn" id="22_4mp75"]
+[ext_resource type="Script" path="res://src/ui/level_ui/level_ui.gd" id="1_vogrj"]
+[ext_resource type="FontFile" uid="uid://sfmk3hf8i5ir" path="res://assets/fonts/CrimsonText-SemiBoldItalic.ttf" id="2_klg6i"]
+[ext_resource type="PackedScene" uid="uid://c15k8jyhng3o8" path="res://src/ui/level_ui/context_menu/context_menu.tscn" id="3_d06lw"]
+[ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="4_16e8e"]
+[ext_resource type="PackedScene" uid="uid://dij75oxvp88at" path="res://src/ui/level_ui/clickable_sprite/ClickableSprite.tscn" id="5_xwert"]
+[ext_resource type="Texture2D" uid="uid://jce6i6vgo6aw" path="res://assets/ui/ability_frame.png" id="6_1bvqs"]
+[ext_resource type="Texture2D" uid="uid://yyf21jmknuog" path="res://assets/ui/people_icon.png" id="7_x4kq1"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="8_p0iwl"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="9_si7uh"]
+[ext_resource type="LabelSettings" uid="uid://pt8dsvwp6slh" path="res://src/ui/level_ui/sprite_button_label_settings.tres" id="10_l210w"]
+[ext_resource type="Texture2D" uid="uid://c1e28wyab7lw4" path="res://assets/characters/angels/layla-body.png" id="11_d0e63"]
+[ext_resource type="Texture2D" uid="uid://c0hgc11pjw5br" path="res://assets/portraits/portrait-frame.png" id="12_ub2pe"]
+[ext_resource type="Texture2D" uid="uid://ccuuhcpgpokd0" path="res://assets/ui/undo-icon_2.png" id="13_rubvd"]
+[ext_resource type="Script" path="res://src/ui/level_ui/overlays.gd" id="14_5iogs"]
+[ext_resource type="Texture2D" uid="uid://b3wak6eo8qvck" path="res://assets/bgs/game_start_1.png" id="15_nrkrw"]
+[ext_resource type="FontFile" uid="uid://2t7grnmmukb" path="res://assets/fonts/CrimsonText-SemiBold.ttf" id="16_knrsr"]
+[ext_resource type="PackedScene" uid="uid://dcxbsateoow86" path="res://src/ui/level_ui/overlays/RewardOverlay.tscn" id="17_cd6ru"]
+[ext_resource type="Texture2D" uid="uid://bewuictajmvjq" path="res://assets/characters/nightmares/bloat-halfbody.png" id="18_55yaq"]
+[ext_resource type="Script" path="res://src/ui/level_ui/strategy.gd" id="19_lk734"]
+[ext_resource type="PackedScene" uid="uid://df3drhl7cxiip" path="res://src/shaders/speedlines/sample.tscn" id="21_bd8v6"]
+[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="22_frlcl"]
+[ext_resource type="Texture2D" uid="uid://dfgoxv05ub7wo" path="res://assets/etc/gear.png" id="23_wm81a"]
 
 [sub_resource type="Gradient" id="Gradient_t4rwf"]
 offsets = PackedFloat32Array(0.330532, 1)
@@ -30,24 +31,13 @@ colors = PackedColorArray(0.0829914, 0.0859375, 0.0748647, 1, 0, 0, 0, 0)
 gradient = SubResource("Gradient_t4rwf")
 
 [sub_resource type="LabelSettings" id="LabelSettings_vrnde"]
-font = ExtResource("8_7yv3f")
+font = ExtResource("2_klg6i")
 font_size = 42
 font_color = Color(0.91388, 0.93, 0.8556, 1)
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s3w84"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_gfcfi"]
-font = ExtResource("6_ekjn1")
-font_size = 38
-font_color = Color(0.184314, 0.168627, 0.0980392, 1)
-outline_size = 8
-outline_color = Color(0.59, 0.55755, 0.413, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3o4f"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_3uust"]
-font = ExtResource("6_ekjn1")
+font = ExtResource("9_si7uh")
 font_size = 60
 outline_size = 12
 outline_color = Color(0.21, 0.21, 0.21, 1)
@@ -61,12 +51,27 @@ fill_from = Vector2(1, 0)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l1hol"]
-font = ExtResource("6_ekjn1")
+font = ExtResource("9_si7uh")
 font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ql6o"]
-font = ExtResource("6_ekjn1")
-font_size = 43
+font = ExtResource("9_si7uh")
+font_size = 23
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgurw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s3w84"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3o4f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_33crl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5lnyq"]
+font = ExtResource("9_si7uh")
+font_size = 24
+font_color = Color(0.184314, 0.168627, 0.0980392, 1)
+outline_size = 8
+outline_color = Color(0.59, 0.55755, 0.413, 1)
 
 [node name="LevelUI" type="Control"]
 layout_mode = 3
@@ -75,9 +80,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
 mouse_filter = 1
-script = ExtResource("1_0ibs7")
+script = ExtResource("1_vogrj")
 
 [node name="SubActions" type="Control" parent="."]
 visible = false
@@ -156,7 +160,11 @@ text = "Priority↑"
 label_settings = SubResource("LabelSettings_vrnde")
 vertical_alignment = 1
 
-[node name="ContextMenu" parent="." instance=ExtResource("3_goa6j")]
+[node name="ContextMenu" parent="." instance=ExtResource("3_d06lw")]
+offset_left = -358.0
+offset_top = 40.0
+offset_right = -358.0
+scale = Vector2(0.5, 0.5)
 
 [node name="Action" type="Control" parent="."]
 visible = false
@@ -170,7 +178,7 @@ mouse_filter = 1
 [node name="Bg" type="Sprite2D" parent="Action"]
 visible = false
 position = Vector2(183, 45.5)
-texture = ExtResource("7_nuuhx")
+texture = ExtResource("4_16e8e")
 
 [node name="AbilityContainer" type="Control" parent="Action"]
 anchors_preset = 0
@@ -180,30 +188,30 @@ offset_right = 64.0
 offset_bottom = 28.0
 mouse_filter = 1
 
-[node name="AbilityFrame1" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+[node name="AbilityFrame1" parent="Action/AbilityContainer" instance=ExtResource("5_xwert")]
 position = Vector2(120, 126)
 scale = Vector2(3, 3)
-texture = ExtResource("3_i27ym")
+texture = ExtResource("6_1bvqs")
 
-[node name="AbilityFrame2" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+[node name="AbilityFrame2" parent="Action/AbilityContainer" instance=ExtResource("5_xwert")]
 position = Vector2(207, 44)
 scale = Vector2(3, 3)
-texture = ExtResource("3_i27ym")
+texture = ExtResource("6_1bvqs")
 
-[node name="AbilityFrame3" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+[node name="AbilityFrame3" parent="Action/AbilityContainer" instance=ExtResource("5_xwert")]
 position = Vector2(291, 125)
 scale = Vector2(3, 3)
-texture = ExtResource("3_i27ym")
+texture = ExtResource("6_1bvqs")
 
-[node name="AbilityFrame4" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+[node name="AbilityFrame4" parent="Action/AbilityContainer" instance=ExtResource("5_xwert")]
 position = Vector2(375, 44)
 scale = Vector2(3, 3)
-texture = ExtResource("3_i27ym")
+texture = ExtResource("6_1bvqs")
 
-[node name="AbilityFrame5" parent="Action/AbilityContainer" instance=ExtResource("3_pq1jb")]
+[node name="AbilityFrame5" parent="Action/AbilityContainer" instance=ExtResource("5_xwert")]
 position = Vector2(459, 125)
 scale = Vector2(3, 3)
-texture = ExtResource("3_i27ym")
+texture = ExtResource("6_1bvqs")
 
 [node name="Popularity" type="HBoxContainer" parent="."]
 visible = false
@@ -220,7 +228,7 @@ mouse_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Popularity/Control"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_w4ruf")
+texture = ExtResource("7_x4kq1")
 centered = false
 
 [node name="Label" type="Label" parent="Popularity"]
@@ -231,10 +239,10 @@ vertical_alignment = 1
 
 [node name="Debug" type="Label" parent="."]
 layout_mode = 2
-offset_left = 24.0
-offset_top = 384.0
-offset_right = 79.0
-offset_bottom = 407.0
+offset_left = 8.0
+offset_top = 160.0
+offset_right = 63.0
+offset_bottom = 183.0
 text = "DEBUG"
 
 [node name="Label" type="Label" parent="Debug"]
@@ -243,64 +251,7 @@ offset_left = 1.0
 offset_top = 24.0
 offset_right = 52.0
 offset_bottom = 47.0
-theme_override_font_sizes/font_size = 40
-
-[node name="Endturn" type="Button" parent="."]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 0
-offset_left = 2168.0
-offset_top = 1268.0
-offset_right = 2422.0
-offset_bottom = 1364.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s3w84")
-flat = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Endturn"]
-position = Vector2(24, 6)
-scale = Vector2(0.395125, 0.5)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="Endturn"]
-layout_mode = 0
-offset_right = 261.0
-offset_bottom = 96.0
-text = "End Turn"
-label_settings = SubResource("LabelSettings_gfcfi")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TurnOrder" type="Button" parent="."]
-custom_minimum_size = Vector2(254, 96)
-layout_mode = 0
-offset_left = 1878.0
-offset_top = 1268.0
-offset_right = 2132.0
-offset_bottom = 1364.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_c3o4f")
-flat = true
-
-[node name="Sprite2D" type="Sprite2D" parent="TurnOrder"]
-position = Vector2(24, 6)
-scale = Vector2(0.395125, 0.5)
-texture = ExtResource("18_gcsod")
-centered = false
-
-[node name="Label" type="Label" parent="TurnOrder"]
-layout_mode = 0
-offset_left = -2.0
-offset_right = 259.0
-offset_bottom = 96.0
-text = "Turn Order"
-label_settings = ExtResource("13_mvkux")
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 23
 
 [node name="Portrait" type="Control" parent="."]
 visible = false
@@ -314,12 +265,12 @@ mouse_filter = 1
 [node name="image" type="Sprite2D" parent="Portrait"]
 position = Vector2(208, 467)
 scale = Vector2(0.789179, 0.789179)
-texture = ExtResource("6_0rxox")
+texture = ExtResource("11_d0e63")
 
 [node name="frame" type="Sprite2D" parent="Portrait"]
 visible = false
 position = Vector2(33, 5)
-texture = ExtResource("5_kf4q6")
+texture = ExtResource("12_ub2pe")
 
 [node name="name" type="Label" parent="Portrait"]
 layout_mode = 0
@@ -339,17 +290,17 @@ offset_bottom = 513.0
 
 [node name="UndoMove" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1164.0
-offset_top = 10.0
-offset_right = 1204.0
-offset_bottom = 50.0
-scale = Vector2(4, 4)
+offset_left = 908.0
+offset_right = 948.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
 mouse_filter = 1
-icon = ExtResource("7_l2n6i")
+icon = ExtResource("13_rubvd")
 flat = true
 icon_alignment = 1
 
 [node name="Overlays" type="Control" parent="."]
+visible = false
 z_index = 99
 layout_mode = 1
 anchors_preset = 15
@@ -357,19 +308,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
 mouse_filter = 1
-script = ExtResource("18_xd1td")
+script = ExtResource("14_5iogs")
 
 [node name="GameStart" type="Sprite2D" parent="Overlays"]
 visible = false
-texture = ExtResource("6_wi4k2")
+texture = ExtResource("15_nrkrw")
 centered = false
 
 [node name="Victory" type="Control" parent="Overlays"]
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+scale = Vector2(3, 3)
 mouse_filter = 1
 
 [node name="VictoryLabel" type="Label" parent="Overlays/Victory"]
@@ -382,7 +333,7 @@ offset_top = 49.0
 offset_right = 33.5
 offset_bottom = 72.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("20_hl3ok")
+theme_override_fonts/font = ExtResource("16_knrsr")
 theme_override_font_sizes/font_size = 70
 text = "VICTORY"
 
@@ -552,7 +503,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.466667)
 
-[node name="RewardOverlay" parent="Overlays" instance=ExtResource("20_f1m0d")]
+[node name="RewardOverlay" parent="Overlays" instance=ExtResource("17_cd6ru")]
 visible = false
 
 [node name="NpcPortrait" type="Control" parent="."]
@@ -582,7 +533,7 @@ vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="NpcPortrait"]
 position = Vector2(607, 56)
-texture = ExtResource("8_rfbs1")
+texture = ExtResource("18_55yaq")
 
 [node name="DialogueBg" type="ColorRect" parent="NpcPortrait"]
 layout_mode = 0
@@ -621,13 +572,13 @@ label_settings = SubResource("LabelSettings_6ql6o")
 
 [node name="StrategyMenu" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 1184.0
-offset_top = 814.0
-offset_right = 1464.0
-offset_bottom = 1256.0
+offset_left = 23.0
+offset_top = 160.0
+offset_right = 230.0
+offset_bottom = 598.0
 mouse_filter = 1
 mouse_default_cursor_shape = 3
-script = ExtResource("18_2exhv")
+script = ExtResource("19_lk734")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StrategyMenu"]
 layout_mode = 1
@@ -638,19 +589,126 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="StrategyDropDown" parent="." instance=ExtResource("19_mg8vx")]
+[node name="StrategyDropDown" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1216.0
-offset_top = 1274.0
-offset_right = 1430.0
-offset_bottom = 1354.0
+offset_left = 39.0
+offset_top = 989.0
+offset_right = 148.0
+offset_bottom = 1033.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bgurw")
+flat = true
+script = ExtResource("22_frlcl")
 
-[node name="TEST" parent="." instance=ExtResource("22_4mp75")]
+[node name="Sprite2D" type="Sprite2D" parent="StrategyDropDown"]
+scale = Vector2(0.201852, 0.28125)
+texture = ExtResource("8_p0iwl")
+centered = false
+
+[node name="Label" type="Label" parent="StrategyDropDown"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Strategy"
+label_settings = ExtResource("10_l210w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Endturn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1731.0
+offset_top = 996.0
+offset_right = 1842.0
+offset_bottom = 1040.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s3w84")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Endturn"]
+scale = Vector2(0.201852, 0.28125)
+texture = ExtResource("8_p0iwl")
+centered = false
+
+[node name="Label" type="Label" parent="Endturn"]
+layout_mode = 0
+offset_right = 109.0
+offset_bottom = 44.0
+text = "End Turn"
+label_settings = ExtResource("10_l210w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnOrder" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1532.0
+offset_top = 996.0
+offset_right = 1665.0
+offset_bottom = 1041.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c3o4f")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="TurnOrder"]
+position = Vector2(-1.52588e-05, 0)
+scale = Vector2(0.246296, 0.28125)
+texture = ExtResource("8_p0iwl")
+centered = false
+
+[node name="Label" type="Label" parent="TurnOrder"]
+layout_mode = 0
+offset_right = 134.0
+offset_bottom = 44.0
+text = "Turn Order"
+label_settings = ExtResource("10_l210w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 24.0
+offset_right = 90.0
+offset_bottom = 76.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_33crl")
+flat = true
+script = ExtResource("22_frlcl")
+
+[node name="Sprite2D" type="Sprite2D" parent="MenuButton"]
+scale = Vector2(0.796875, 0.8125)
+texture = ExtResource("23_wm81a")
+centered = false
+
+[node name="Label" type="Label" parent="MenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_5lnyq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TEST" parent="." instance=ExtResource("21_bd8v6")]
 visible = false
 
 [connection signal="mouse_entered" from="SubActions/AbilityList/VBoxContainer/Control" to="SubActions/AbilityList/VBoxContainer/Control" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="SubActions/AbilityList/VBoxContainer/Control" to="SubActions/AbilityList/VBoxContainer/Control" method="_on_mouse_exited"]
-[connection signal="pressed" from="Endturn" to="." method="_on_end_turn_pressed"]
-[connection signal="pressed" from="TurnOrder" to="." method="_on_turn_order_pressed"]
 [connection signal="pressed" from="UndoMove" to="." method="_on_undo_move_pressed"]
 [connection signal="pressed" from="StrategyDropDown" to="." method="_on_strategy_drop_down_pressed"]
+[connection signal="pressed" from="Endturn" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="TurnOrder" to="." method="_on_turn_order_pressed"]

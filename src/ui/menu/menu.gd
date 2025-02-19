@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _on_exit_to_main_menu_pressed():
 	print("_on_exit_to_main_menu_pressed")
-	SceneManager.change_scene(SceneManager.SCENE_MAIN_MENU,true)
+	SceneManager.change_scene(SceneManager.SCENE_MAIN_MENU,false)
 	
 func _on_options_pressed():
-	SceneManager.change_scene(SceneManager.SCENE_MAIN_MENU,true)
+	SceneManager.change_scene(SceneManager.SCENE_MAIN_MENU,false)
