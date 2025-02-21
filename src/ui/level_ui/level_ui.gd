@@ -83,6 +83,7 @@ func show_portrait():
 
 func show_context_menu(host:Entity):
 	context_menu.update_with_entity_abilities(host)
+	
 func hide_context_menu():
 	context_menu.hide()
 

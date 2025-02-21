@@ -1,5 +1,7 @@
 extends Node
 
+
+
 var GROUPS_ENTITIES = "entities"
 var GROUPS_ALLIES = "allies"
 var GROUPS_UNITS= "units"
@@ -92,3 +94,10 @@ var ALLIED_TEAMS = {
 	CITIZEN = [C.TEAM.PLAYER, C.TEAM.ALLY, C.TEAM.CITIZEN],	
 	ENEMY = [],	
 }
+
+#func _ready() -> void:
+	#preload("res://src/entities/entity/entity_data.gd")
+	#preload("res://src/abilities/ability_prop.gd")
+	#preload("res://src/abilities/ability_data.gd")
+	#preload("res://src/abilities/ability_v2.gd")
+	#

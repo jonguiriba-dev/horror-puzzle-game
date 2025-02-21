@@ -34,6 +34,7 @@ EntityManager="*res://src/globals/entity_manager.gd"
 PlayerManager="*res://src/globals/player_manager.gd"
 TrainingManager="*res://src/globals/training_manager.gd"
 SaveManager="*res://src/globals/save_manager.gd"
+SettingsManager="*res://src/globals/settings_manager.gd"
 
 [debug]
 
@@ -44,8 +45,8 @@ gdscript/warnings/integer_division=0
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/initial_position_type=2
 window/size/initial_screen=1
 window/stretch/mode="viewport"

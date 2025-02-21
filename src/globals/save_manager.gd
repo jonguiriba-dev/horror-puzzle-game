@@ -33,7 +33,8 @@ func _ready() -> void:
 		config_file = ConfigFile.new()
 		config_file.load_encrypted_pass(config_file_path,config_file_key)
 	
-	var current_file_path = get_config("save_manager","current_file_path")
+	#for toggling between save_file_path 1 and 2; which is for corruption protection
+	var current_file_path = get_config("save_manager","current_file_path","")
 	if !current_file_path:
 		save_file_path = default_file_path
 	else:
@@ -63,10 +64,10 @@ func set_config(section,key,data):
 	config_file.set_value(section,key,data)
 	config_file.save_encrypted_pass(config_file_path,config_file_key)
 	
-func get_config(section,key):
+func get_config(section, key, default=null):
 	Util.sysprint("SaveManager","load config %s - %s"%[section,key])
 	
-	config_file.get_value(section,key,null)
+	return config_file.get_value(section,key,default)
 	
 func load_data():
 	print("loading data ", save_file_path)

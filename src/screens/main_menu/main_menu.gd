@@ -23,8 +23,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			SaveManager.load_data()
 		if selected_label == new_game_label:
 			SaveManager.reset_save_data()
+			SceneManager.change_scene(SceneManager.SCENES.MAP)
 			PlayerManager.load_starting_units()
-			SceneManager.change_scene(SceneManager.SCENE_MAP)
 		if selected_label == options_label:
 			UIManager.show_menu()
 			

@@ -1,6 +1,6 @@
 extends Node
 
-const STARTING_UNIT_PRESETS := [
+const STARTING_UNIT_PRESETS :Array[EntityData]= [
 	preload("res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres"),
 	preload("res://src/entities/entity/presets/main_characters/layla/layla_preset.tres"),
 	preload("res://src/entities/entity/presets/main_characters/talya/talya_preset.tres"),
