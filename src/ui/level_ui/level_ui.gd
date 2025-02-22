@@ -9,8 +9,9 @@ enum STATE{
 
 @onready var ability_container := $Action/AbilityContainer
 @onready var undo_move := $UndoMove
-@onready var end_turn := $Endturn
-@onready var turn_order := $TurnOrder
+@onready var end_turn := $ActionContainer/Endturn
+@onready var turn_order := $ActionContainer/TurnOrder
+@onready var strategy_dropdown_button := $ActionContainer/StrategyDropDown
 @onready var debug := $Debug
 @onready var debug_label := $Debug/Label
 @onready var portrait_container := $Portrait
@@ -23,11 +24,10 @@ enum STATE{
 @onready var turn_start_overlay_background := $Overlays/TurnStart/Background
 @onready var turn_start_overlay_label := $Overlays/TurnStart/Label
 @onready var overlays := $Overlays
-@onready var context_menu := $ContextMenu
+@onready var context_menu :ContextMenu= $ContextMenu
 @onready var strategy_node := $StrategyMenu
 @onready var strategy_container := $StrategyMenu/VBoxContainer
 var strategy_node_prev_pos #to prevent mouse event being taken unwantedly
-@onready var strategy_dropdown_button := $StrategyDropDown
 @onready var menu_button := $MenuButton
 var state := STATE.INACTIVE
 var context
@@ -44,6 +44,9 @@ func _ready() -> void:
 	victory_overlay.hide()
 	reward_overlay.hide()
 	overlays.hide()
+	visible = true
+	clear_context()
+	
 	overlays.clicked.connect(func():
 		if overlays.is_visible_in_tree():
 			overlay_clicked.emit()
@@ -55,9 +58,11 @@ func _ready() -> void:
 		child.pressed.connect(_on_strategy_selected.bind(child.get_meta("strategy")))
 	
 	menu_button.pressed.connect(_on_menu_button_pressed)
-	
-	UIManager.registerUI(self)
-	
+	UIManager.call_deferred("set_resolution",
+		SettingsManager.current_resolution,
+		SettingsManager.resolution_scale
+	)
+
 func show_ability_icons():
 	ability_container.show()
 
@@ -84,6 +89,19 @@ func show_portrait():
 func show_context_menu(host:Entity):
 	context_menu.update_with_entity_abilities(host)
 	
+	#context_menu.global_position = (host.global_position * 2) + Vector2(36,-240)
+	print(">> ",SettingsManager.get_ui_game_resolution_multiplier())
+	#context_menu.global_position = (
+			#host.global_position * SettingsManager.get_ui_game_resolution_multiplier()
+	#) + Vector2(50,-280) 
+	
+	context_menu.global_position = host.context_menu_point.global_position * SettingsManager.get_ui_game_resolution_multiplier()
+	
+	if SettingsManager.resolution_scale.x < 0.7:
+		context_menu.scale = Vector2(0.7,0.7)
+		
+	context_menu.show()
+	context_menu.animate()
 func hide_context_menu():
 	context_menu.hide()
 
@@ -172,7 +190,9 @@ func _on_menu_button_pressed() -> void:
 	add_child(menu_node)
 	menu_node.global_position = DisplayServer.window_get_size()/2	
 
+	
 func _unhandled_input(event: InputEvent) -> void:
+			
 	if event.is_action_pressed("console"):
 		if debug.visible:
 			debug.hide()

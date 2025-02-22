@@ -6,31 +6,33 @@ const SCENES :={
 	"MAP" : "res://src/screens/map/Map.tscn",
 	"MAIN_MENU" : "res://src/screens/main_menu/MainMenu.tscn",
 	"CAVE" : "res://src/levels/cave/Cave.tscn",
+	"MENU_PAGE" : "res://src/ui/menu/menu.tscn",
 }
 
-var scene_list := {
+var preload_list := {
 	SCENES.MAP : preload(SCENES.MAP).instantiate(),
-	SCENES.CAVE : preload(SCENES.CAVE).instantiate()
-} #keeps track of scenes to swap
+	#SCENES.CAVE : preload(SCENES.CAVE).instantiate(),
+	SCENES.MENU_PAGE : preload(SCENES.MENU_PAGE).instantiate(),
+}
+
+var scene_list := {} #keeps track of scenes to swap
 var main_menu
+
+signal game_node_registered
 
 func _ready() -> void:
 	SaveManager.game_loaded.connect(_on_game_loaded)
-
+	game_node_registered.connect(func():
+		for i in preload_list:
+			scene_node.add_child(preload_list[i])
+			preload_list[i].queue_free()
+	)
+		
 func register_game_node(_scene_node:Control):
 	Util.sysprint("SceneManager","scene_node registered")
 	scene_node = _scene_node
+	game_node_registered.emit()
 
-var t = true
-func _process(delta: float) -> void:
-	if scene_node and t:
-		scene_node.add_child(scene_list[SCENES.MAP])
-		scene_list[SCENES.MAP].queue_free()
-		scene_list[SCENES.MAP] = null
-		#scene_node.add_child(scene_list[SCENES.CAVE])
-		#scene_list[SCENES.MAP].queue_free()
-		#scene_node.remove_child(scene_list[SCENES.CAVE])
-		t = false
 func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 	keep_prev_scene = false
 	Util.sysprint("SceneManager", "changing scene... %s"%[scene_path])

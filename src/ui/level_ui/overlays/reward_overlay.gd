@@ -20,13 +20,13 @@ func populate_with_abilities(ability_presets:Array[AbilityData]):
 		var rng = randi_range(1,3)
 		var entity
 		if rng == 1:
-			entity = PlayerManager.get_units_by_name(EntityManager.PRESET_ELYANA.entity_name)[0]
+			entity = PlayerManager.get_units_by_name(load(EntityManager.PRESET_ELYANA).entity_name)[0]
 			reward_card.bg.color = Color.YELLOW
 		if rng == 2:
-			entity = PlayerManager.get_units_by_name(EntityManager.PRESET_LAYLA.entity_name)[0]
+			entity = PlayerManager.get_units_by_name(load(EntityManager.PRESET_LAYLA).entity_name)[0]
 			reward_card.bg.color = Color.MEDIUM_PURPLE
 		if rng == 3:
-			entity = PlayerManager.get_units_by_name(EntityManager.PRESET_TALYA.entity_name)[0]
+			entity = PlayerManager.get_units_by_name(load(EntityManager.PRESET_TALYA).entity_name)[0]
 			reward_card.bg.color = Color.LIGHT_SKY_BLUE
 			
 		reward_card.set_meta("data",ability_preset)

@@ -25,7 +25,7 @@ func animate():
 	tween.tween_property(ability_list_container,'position',item_position,0.1)
 	tween.tween_property(ability_list_container,'modulate',item_modulate,0.1)
 
-func update_with_entity_abilities(host:Entity)->void:
+func update_with_entity_abilities(host:Entity)->ContextMenu:
 	for child in ability_list.get_children():
 		child.queue_free()
 		
@@ -46,16 +46,12 @@ func update_with_entity_abilities(host:Entity)->void:
 			ability_node.charges.text = ""
 		if !ability.is_usable():
 			ability_node.bg.texture = preload("res://src/ui/level_ui/context_menu/context_menu_abilty_gradient_unusable.tres")
+	ability_bar.scale = Vector2(1,1)
+	ability_bar.size = Vector2(3,40 * SettingsManager.get_ui_game_resolution_multiplier().y)
+	ability_bar.size += Vector2(0,70 * SettingsManager.get_ui_game_resolution_multiplier().y * (ability_count - 2))
+	
+	#name_container.position = Vector2(16,180)
+	#name_container.position += Vector2(0,-72 * (ability_count - 2))
 
-	ability_bar.size = Vector2(3,100)
-	ability_bar.size += Vector2(0,70 * (ability_count - 2))
-	
-	name_container.position = Vector2(16,180)
-	name_container.position += Vector2(0,-72 * (ability_count - 2))
-	
-	print(">>> ",ability_count, " ",host.data.entity_name)
-	
-	global_position = (host.global_position * 2) + Vector2(36,-240)
-	show()
-	animate()
+	return self
 	

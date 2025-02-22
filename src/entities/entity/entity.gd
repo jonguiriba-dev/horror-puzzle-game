@@ -8,6 +8,7 @@ const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn")
 @onready var rescue_text := $EntitySprite/RescueText
 @onready var healthbar := $Healthbar
 @onready var status_bar := $StatusBar
+@onready var context_menu_point := $ContextMenuPoint
 @export var preset:EntityData
 @export var data:EntityData
 var animation_counter := 0
@@ -264,6 +265,9 @@ func _on_ability_used(ability:AbilityV2):
 	data.action_counter -= ability.data.action_cost
 	if ability.data.is_action:
 		data.move_counter = 0
+
+	if data.action_counter > 0 && data.team == C.TEAM.PLAYER:
+		UIManager.level_ui.set_context(self)
 
 func _on_apply_status(status:Status):
 	Util.sysprint("%s.Entity._on_apply_status"%[data.entity_name],"applying status: %s"%[status.status_props.status_name])

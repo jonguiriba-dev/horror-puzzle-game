@@ -177,7 +177,7 @@ func check_player_victory():
 				var entity = reward_card.get_meta("target_entity")
 				PlayerManager.add_entity_ability(entity,ability_preset)
 				UIManager.hide_reward_overlay()
-				SceneManager.change_scene(SceneManager.SCENE_MAP)
+				SceneManager.change_scene(SceneManager.SCENES.MAP)
 				for player_entity in player_entities:
 					player_entity.get_parent().remove_child(player_entity)
 				WorldManager.level = null
