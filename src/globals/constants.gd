@@ -1,7 +1,20 @@
 extends Node
 
 
-
+const GROUPS:={
+	"ENTITIES":"entities",
+	"ALLIES" : "allies",
+	"UNITS":"units",
+	"CIVILIANS":"civilians",
+	"TARGETTING_ABILITY" : "targetting_ability",
+	"HOVERED_ENTITIES" : "hovered_entities",
+	"TARGETS" : "targets",
+	"HIGHLIGHT_TEXT" : "highlight_text",
+	"ENEMIES" : "enemies",
+	"SELECTED" : "selected",
+	"PLAYER_ENTITIES" : "player_entities",
+	"ANIMATING_ENTITIES" : "animating_entities",
+}
 var GROUPS_ENTITIES = "entities"
 var GROUPS_ALLIES = "allies"
 var GROUPS_UNITS= "units"
@@ -12,7 +25,6 @@ var GROUPS_TARGETS = "targets"
 var GROUPS_HIGHLIGHT_TEXT = "highlight_text"
 var GROUPS_ENEMIES = "enemies"
 var GROUPS_SELECTED = "selected"
-var GROUPS_PLAYER_ENTITIES = "player_entities"
 var GROUPS_ANIMATING_ENTITIES = "animating_entities"
 
 #map
@@ -93,6 +105,17 @@ var ALLIED_TEAMS = {
 	ALLY = [C.TEAM.PLAYER, C.TEAM.ALLY, C.TEAM.CITIZEN],	
 	CITIZEN = [C.TEAM.PLAYER, C.TEAM.ALLY, C.TEAM.CITIZEN],	
 	ENEMY = [],	
+}
+
+const SCENES := {
+	"LEVELS":{
+		"CAVE":"res://src/levels/cave/Cave.tscn"
+	},
+	"UI":{
+		"LEVEL":{
+			"EVENT_OPTION":"res://src/levels/EventOption.tscn"
+		}
+	}
 }
 
 #func _ready() -> void:

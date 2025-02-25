@@ -22,29 +22,26 @@ signal game_node_registered
 
 func _ready() -> void:
 	SaveManager.game_loaded.connect(_on_game_loaded)
-	game_node_registered.connect(func():
-		for i in preload_list:
-			scene_node.add_child(preload_list[i])
-			preload_list[i].queue_free()
-	)
+	#game_node_registered.connect(func():
+		#for i in preload_list:
+			#scene_node.add_child(preload_list[i])
+			#preload_list[i].queue_free()
+	#)
 		
 func register_game_node(_scene_node:Control):
 	Util.sysprint("SceneManager","scene_node registered")
 	scene_node = _scene_node
 	game_node_registered.emit()
 
+func load_level(level_preset:LevelPreset):
+	WorldManager.level.unload_units()
+	WorldManager.level.init(level_preset)
+
+
 func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 	keep_prev_scene = false
 	Util.sysprint("SceneManager", "changing scene... %s"%[scene_path])
-	var new_scene
-	if scene_list.get(scene_path):
-		Util.sysprint("SceneManager","scene in cache...")
-		#scene_list[SCENES.MAP].get_parnt().remove_child(scene_list[SCENES.MAP])
-		#scene_list[SCENES.MAP].show()
-		new_scene = scene_list[scene_path]
-	else:
-		Util.sysprint("SceneManager","instantiating scene...")
-		new_scene =  load(scene_path).instantiate()
+	
 	
 	var prev_scene:Node
 	if(scene_node.get_child_count() > 0):
@@ -57,6 +54,17 @@ func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 			Util.sysprint("SceneManager","freeing prev_scene: %s"%[prev_scene.name])
 			scene_list[prev_scene.scene_file_path] = null
 			prev_scene.queue_free()
+	
+	var new_scene
+	if scene_list.get(scene_path):
+		Util.sysprint("SceneManager","scene in cache...")
+		#scene_list[SCENES.MAP].get_parnt().remove_child(scene_list[SCENES.MAP])
+		#scene_list[SCENES.MAP].show()
+		new_scene = scene_list[scene_path]
+	else:
+		Util.sysprint("SceneManager","instantiating scene...")
+		new_scene =  load(scene_path).instantiate()
+	
 
 	new_scene.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	new_scene.size_flags_horizontal = Control.SIZE_SHRINK_CENTER

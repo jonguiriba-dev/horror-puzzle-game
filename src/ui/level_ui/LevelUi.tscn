@@ -159,8 +159,6 @@ label_settings = SubResource("LabelSettings_vrnde")
 vertical_alignment = 1
 
 [node name="ContextMenu" parent="." instance=ExtResource("3_d06lw")]
-offset_right = 0.0
-offset_bottom = 0.0
 scale = Vector2(0.5, 0.5)
 
 [node name="Action" type="Control" parent="."]
@@ -708,6 +706,16 @@ text = "End Turn"
 label_settings = ExtResource("10_l210w")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EventOptions" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+columns = 2
 
 [connection signal="mouse_entered" from="SubActions/AbilityList/VBoxContainer/Control" to="SubActions/AbilityList/VBoxContainer/Control" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="SubActions/AbilityList/VBoxContainer/Control" to="SubActions/AbilityList/VBoxContainer/Control" method="_on_mouse_exited"]

@@ -22,3 +22,4 @@ func randomize_active_location():
 	
 	if locations.size() > 0:
 		active_location = locations.pick_random()
+	return active_location

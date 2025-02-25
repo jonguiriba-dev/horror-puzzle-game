@@ -73,8 +73,11 @@ func set_ui(ui_type:UI_TYPE):
 	
 	current_ui = ui_node
 	ui_container.add_child(ui_node)
-	ui_node.scale = resolution_scale
 	
+	call_deferred("set_resolution",
+		SettingsManager.current_resolution,
+		SettingsManager.resolution_scale
+	)
 func clear_ui():
 	for child in ui_container.get_children():
 		child.queue_free()
@@ -86,8 +89,9 @@ func show_menu():
 	menu_node.global_position = DisplayServer.window_get_size()/2	
 
 func set_resolution(resolution:Vector2,scale:Vector2):
-	Util.sysprint("UIManager","set resolution:(%s,%s), scale:(%s,%s), %s"%
-		[resolution.x, resolution.y, scale.x, scale.y, current_ui.name]
-	)
+	if current_ui:
+		Util.sysprint("UIManager","set resolution:(%s,%s), scale:(%s,%s), %s"%
+			[resolution.x, resolution.y, scale.x, scale.y, current_ui.name]
+		)
+		current_ui.scale = scale
 	view_port_container.set_deferred("size",resolution)
-	current_ui.scale = scale

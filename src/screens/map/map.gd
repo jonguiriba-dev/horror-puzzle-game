@@ -3,6 +3,11 @@ extends Control
 @onready var map := $Map
 @onready var select_view := $SelectView
 var active_regions := {}
+var MAX_ACTIVE_REGIONS = 3
+
+enum EVENT_TYPES{
+	COMBAT
+}
 
 enum REGIONS {
 	SHOP_TOWN,
@@ -31,6 +36,7 @@ func _enter_tree() -> void:
 	SaveManager.save_data("map",to_save_data())
 	
 	randomize_active_regions()
+	
 	active_region_sprites = []
 	for i in active_regions:
 		var label = Label.new()
@@ -48,11 +54,25 @@ func randomize_active_regions():
 	active_regions = region_config.duplicate()
 	var region_keys = region_config.keys()
 	region_keys.shuffle()
-	var disabled_regions = 2
 	
-	for i in range(disabled_regions):
+	for i in range(region_config.keys().size() - MAX_ACTIVE_REGIONS ):
 		active_regions.erase(region_keys.pop_front())
 	print("active_regions ",active_regions)
+	
+	var events = generate_events()
+	
+	#for active_region in active_regions:
+		#var active_location : RegionLocation = active_region.randomize_active_location()
+		#active_location.set_meta("event",{
+			#"type": EVENT_TYPES.COMBAT,
+			#"scene":"res://src/levels/cave/Cave.tscn",
+			#"description":"Description of said event",
+			#"title":"Test event",
+		#})
+		
+func generate_events():
+	var events = []
+	return events
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):

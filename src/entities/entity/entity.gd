@@ -51,7 +51,7 @@ func _ready() -> void:
 	else:
 		add_to_group(C.GROUPS_TARGETS)
 		if data.team == C.TEAM.PLAYER:
-			add_to_group(C.GROUPS_PLAYER_ENTITIES)
+			add_to_group(C.GROUPS.PLAYER_ENTITIES)
 		elif data.team == C.TEAM.ALLY:
 			add_to_group(C.GROUPS_ALLIES)
 	

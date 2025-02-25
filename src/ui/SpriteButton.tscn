@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsbux63fk1mlf"]
 
-[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="1_v7ykk"]
-[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_xr1if"]
-[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="3_kav1b"]
+[ext_resource type="Script" path="res://src/ui/level_ui/sprite_button.gd" id="1_g26nr"]
+[ext_resource type="Texture2D" uid="uid://crwbjao08acdh" path="res://assets/ui/button_bg_2.png" id="2_rnnn7"]
+[ext_resource type="FontFile" uid="uid://d2acik6tmked" path="res://assets/fonts/CrimsonText-Regular.ttf" id="3_tpjas"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dhy7t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8mpl"]
-font = ExtResource("3_kav1b")
+font = ExtResource("3_tpjas")
 font_size = 38
 font_color = Color(0.184314, 0.168627, 0.0980392, 1)
 outline_size = 8
@@ -22,12 +22,11 @@ size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dhy7t")
 flat = true
-script = ExtResource("1_v7ykk")
-strategy = 1
+script = ExtResource("1_g26nr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.396296, 0.5)
-texture = ExtResource("2_xr1if")
+texture = ExtResource("2_rnnn7")
 centered = false
 
 [node name="Label" type="Label" parent="."]

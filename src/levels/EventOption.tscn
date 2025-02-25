@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://tcnlfihjdihg"]
+
+[ext_resource type="Script" path="res://src/screens/map/select_view.gd" id="1_1jsc4"]
+[ext_resource type="LabelSettings" uid="uid://cxmoa2sbp616c" path="res://src/screens/map/map_label_settings.tres" id="2_333dv"]
+
+[node name="EventOption" type="Control"]
+custom_minimum_size = Vector2(380, 220)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 300.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_1jsc4")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LocationName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -20.0
+offset_right = 165.0
+offset_bottom = 17.0
+text = "Crossroads"
+label_settings = ExtResource("2_333dv")
+
+[node name="TypeOfAction" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 319.0
+offset_top = -31.0
+offset_right = 374.0
+offset_bottom = 24.0
+color = Color(1, 0.0287017, 0.095904, 1)
+
+[node name="Rewards" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 146.0
+offset_right = 252.0
+offset_bottom = 196.0
+
+[node name="ColorRect" type="ColorRect" parent="Rewards"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+color = Color(0.889188, 0.290437, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Rewards"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+color = Color(0.889188, 0.290437, 1, 1)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

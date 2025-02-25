@@ -12,7 +12,7 @@ func _ready() -> void:
 	state_id = C.STATE.ENTITY_SELECTED
 	
 func _on_configured():
-	for ally in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
+	for ally in get_tree().get_nodes_in_group(C.GROUPS.PLAYER_ENTITIES):
 		ally.selected.connect(_on_other_entity_selected)
 	
 	WorldManager.level.ready.connect(_on_scenetree_ready)

@@ -27,6 +27,7 @@ enum STATE{
 @onready var context_menu :ContextMenu= $ContextMenu
 @onready var strategy_node := $StrategyMenu
 @onready var strategy_container := $StrategyMenu/VBoxContainer
+@onready var event_options := $EventOptions
 var strategy_node_prev_pos #to prevent mouse event being taken unwantedly
 @onready var menu_button := $MenuButton
 var state := STATE.INACTIVE
@@ -58,10 +59,6 @@ func _ready() -> void:
 		child.pressed.connect(_on_strategy_selected.bind(child.get_meta("strategy")))
 	
 	menu_button.pressed.connect(_on_menu_button_pressed)
-	UIManager.call_deferred("set_resolution",
-		SettingsManager.current_resolution,
-		SettingsManager.resolution_scale
-	)
 
 func show_ability_icons():
 	ability_container.show()
@@ -160,7 +157,31 @@ func show_reward_overlay(ability_presets:Array[AbilityData]):
 	)
 func hide_reward_overlay():
 	reward_overlay.hide()
-	
+
+
+
+func show_event_options(events):
+		for child in event_options.get_children():
+			child.queue_free()
+		
+		var event_option_list = []
+		for event in events:
+			var event_option : EventOption = load(C.SCENES.UI.LEVEL.EVENT_OPTION).instantiate()
+			event_option.size_flags_horizontal = Control.SIZE_EXPAND + Control.SIZE_SHRINK_CENTER
+			event_option.size_flags_vertical = Control.SIZE_EXPAND + Control.SIZE_SHRINK_CENTER
+			event_options.add_child(event_option)
+			event_option_list.push_front(event_option)
+			event_option.set_rewards_list(event.rewards)
+			event_option.location_name.text = event.name
+			event_option.pressed.connect(func():
+				print("EVENT CLICKED ",event)
+				for e_option in event_option_list:
+					e_option.queue_free()
+				await get_tree().process_frame
+				#SceneManager.change_scene(event.scene)
+				SceneManager.load_level(event.level_preset)
+			, CONNECT_ONE_SHOT)
+			#event_option.scale = SettingsManager.get_ui_game_resolution_multiplier()
 func _on_strategy_selected(strategy:C.STRATEGIES):
 	if strategy != WorldManager.level.strategy:
 		strategy_changed.emit()

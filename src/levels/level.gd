@@ -2,9 +2,10 @@ extends Control
 class_name World
 
 @export var dialogues:Array[Dialogue]=[]
-@export var orientation:=C.ORIENTATION.HORIZONTAL
-@export var spawn_config:LevelSpawnConfig
-@export var rewards_config:LevelRewardsConfig
+#@export var orientation:=C.ORIENTATION.HORIZONTAL
+#@export var spawn_config:LevelSpawnConfig
+#@export var rewards_config:LevelRewardsConfig
+@export var level_preset:LevelPreset
 
 @onready var grid: Grid = $Grid
 
@@ -13,7 +14,6 @@ var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER]
 var ai_turn_queue = []
 var entity_moved_history:=[]
 var input_enabled = false
-var world:World
 var current_dialogue:Dialogue
 var entity_register_queue := []
 var animation_counter := 0
@@ -33,12 +33,16 @@ signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
 signal animation_counter_updated(val:int)
 signal animation_counter_cleared
+signal loaded
 
 func _enter_tree() -> void:
 	WorldManager.register_level(self)
 	
 func _ready() -> void:
 	turn_start.connect(_on_turn_start)
+	init(level_preset)
+	
+func init(_level_preset:LevelPreset):
 	UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
 	UIManager.level_ui.undo_move_pressed.connect(_on_undo_move_pressed)
 	UIManager.level_ui.end_turn_pressed.connect(_on_end_turn_pressed)
@@ -46,10 +50,37 @@ func _ready() -> void:
 	UIManager.level_ui.strategy_changed.connect(func ():
 		strategy_changed = true
 	)
-	
+	await load_level_data(_level_preset)
 	await load_data()
 	await game_start()
+	
+	var events = EventGenerator.generate_events()
+	UIManager.level_ui.show_event_options(events)
 
+func load_level_data(preset:LevelPreset):
+	var tilemap_node = load(preset.tilemap_node).instantiate()
+	add_child(tilemap_node)
+	
+	var preset_tiles_layer = tilemap_node.get_node("TileMapLayer")
+	preset_tiles_layer.get_parent().remove_child(preset_tiles_layer)
+	grid.tiles_layer.tile_set = preset_tiles_layer.tile_set
+	grid.tiles_layer.set_tile_map_data_from_array(preset_tiles_layer.tile_map_data) 
+	
+	var preset_team_position_layer = tilemap_node.get_node("TeamPositionLayer")
+	preset_team_position_layer.get_parent().remove_child(preset_team_position_layer)
+	grid.team_position_layer.tile_set = preset_team_position_layer.tile_set
+	grid.team_position_layer.set_tile_map_data_from_array(preset_team_position_layer.tile_map_data) 
+	grid.team_position_layer.hide()
+	
+	if tilemap_node.has_node("PropLayer"):
+		var preset_prop_layer = tilemap_node.get_node("PropLayer")
+		preset_prop_layer.get_parent().remove_child(preset_prop_layer)
+		grid.prop_layer.tile_set = preset_prop_layer.tile_set
+		grid.prop_layer.set_tile_map_data_from_array(preset_prop_layer.tile_map_data) 
+		
+	remove_child(tilemap_node)
+	loaded.emit()
+	
 func end_turn():
 	Util.sysprint("Level","end_turn: from %s to %s"%[
 		C.TEAM.keys()[turn_order[0]],
@@ -67,7 +98,7 @@ func end_turn():
 func _start_player_turn():
 	Util.sysprint("_start_player_turn","start")
 	input_enabled = true
-	for player_entity in get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES):
+	for player_entity in get_tree().get_nodes_in_group(C.GROUPS.PLAYER_ENTITIES):
 		player_entity.turn_start.emit()
 	
 func _start_ally_turn():
@@ -139,7 +170,7 @@ func game_start():
 		await UIManager.play_game_start_sequence()
 	
 	if Debug.play_game_start_dialogue:
-		for dialogue in world.dialogues:
+		for dialogue in dialogues:
 			if dialogue.trigger == C.DIALOGUE_TRIGGER.ON_START:
 				current_dialogue = dialogue
 				current_dialogue.input_waiting.connect(_on_dialogue_input_waiting)
@@ -162,8 +193,6 @@ func _on_dialogue_input_waiting():
 func check_player_victory():
 	if get_tree().get_nodes_in_group(C.GROUPS_ENEMIES).size() == 0:
 		UIManager.show_victory_overlay()
-		var player_entities = get_tree().get_nodes_in_group(C.GROUPS_PLAYER_ENTITIES)
-		player_entities.append_array(get_tree().get_nodes_in_group(C.GROUPS_ALLIES)) 
 		
 		UIManager.level_ui.overlay_clicked.connect(func():
 			UIManager.hide_victory_overlay()
@@ -177,12 +206,16 @@ func check_player_victory():
 				var entity = reward_card.get_meta("target_entity")
 				PlayerManager.add_entity_ability(entity,ability_preset)
 				UIManager.hide_reward_overlay()
-				SceneManager.change_scene(SceneManager.SCENES.MAP)
-				for player_entity in player_entities:
-					player_entity.get_parent().remove_child(player_entity)
-				WorldManager.level = null
-				WorldManager.level_complete.emit()
 				
+				var events = EventGenerator.generate_events()
+				UIManager.level_ui.show_event_options(events)
+				#
+				#SceneManager.change_scene(SceneManager.SCENES.MAP)
+				#for player_entity in player_entities:
+					#player_entity.get_parent().remove_child(player_entity)
+				#WorldManager.level = null
+				#WorldManager.level_complete.emit()
+				#
 				SaveManager.save_data("level",{})
 				SaveManager.save_game()
 
@@ -192,14 +225,28 @@ func check_player_victory():
 
 func give_player_rewards():
 	PlayerManager.add_gold(level_gold)
+
+func unload_units():
+	var entities = get_tree().get_nodes_in_group(C.GROUPS.ENTITIES)
+	for entity in entities:
+		if entity.data.team == C.TEAM.PLAYER or entity.data.team == C.TEAM.ALLY:
+			entity.get_parent().remove_child(entity)
+		else:
+			entity.free()	
+	
+
+func show_next_level_options():
+	var level_count = 3
+	for i in range(level_count):
+		pass
 	
 func get_reward_abilities():
 	var abilities :Array[AbilityData]= []
-	if !rewards_config:
+	if !level_preset.wards_config:
 		return abilities
-	while abilities.size() < rewards_config.max_rewards:
-		for ability_reward in rewards_config.ability_reward_pool:
-			if abilities.size() >= rewards_config.max_rewards:
+	while abilities.size() < level_preset.rewards_config.max_rewards:
+		for ability_reward in level_preset.rewards_config.ability_reward_pool:
+			if abilities.size() >= level_preset.rewards_config.max_rewards:
 				break
 			var rng = randf_range(0.1,1.0)
 			if rng < ability_reward.chance:
@@ -282,14 +329,14 @@ func register_entity(entity:Entity):
 		entity.turn_end.connect(_on_ai_unit_turn_end)
 		
 	if entity.data.team == C.TEAM.PLAYER or entity.data.team == C.TEAM.ALLY or entity.data.team == C.TEAM.CITIZEN:
-		entity.set_orientation(orientation == C.ORIENTATION.VERTICAL) 
+		entity.set_orientation(level_preset.orientation == C.ORIENTATION.VERTICAL) 
 
 	if entity.data.team == C.TEAM.ENEMY:
-		if orientation == C.ORIENTATION.VERTICAL:
-			entity.set_orientation(orientation == C.ORIENTATION.VERTICAL)
+		if level_preset.orientation == C.ORIENTATION.VERTICAL:
+			entity.set_orientation(level_preset.orientation == C.ORIENTATION.VERTICAL)
 			#entity.set_orientation(orientation == C.ORIENTATION.HORIZONTAL)
 		else:
-			entity.set_orientation(orientation == C.ORIENTATION.HORIZONTAL)
+			entity.set_orientation(level_preset.orientation == C.ORIENTATION.HORIZONTAL)
 			#entity.set_orientation(orientation == C.ORIENTATION.VERTICAL)
 	
 	entity.threat_updated.connect(_on_entity_threat_updated)
@@ -460,7 +507,7 @@ func load_data():
 	if SaveManager.get_loaded("level","entities",[]).size() > 0:
 		await load_units(SaveManager.get_loaded("level","entities",[]))
 	else:
-		if spawn_config:
+		if level_preset.spawn_config:
 			await spawn_units()
 			
 	team_turn = turn_order[0]
@@ -488,7 +535,6 @@ func spawn_units():
 	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
 	player_spawn_tiles.shuffle()
 	for player_unit in PlayerManager.units:
-		print("SPWANING PLAYER UNITS ", player_unit.data.entity_name)
 		EntityManager.spawn_entity(
 			WorldManager.level.grid.map_to_local(player_spawn_tiles.pop_front()),
 			player_unit
@@ -498,9 +544,9 @@ func spawn_units():
 	var spawn_record = {}
 	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
 	enemy_spawn_tiles.shuffle()
-	while(enemy_count < spawn_config.max_enemies):
-		for enemy_spawn in spawn_config.enemy_spawn_pool:
-			if enemy_count >= spawn_config.max_enemies:
+	while(enemy_count < level_preset.spawn_config.max_enemies):
+		for enemy_spawn in level_preset.spawn_config.enemy_spawn_pool:
+			if enemy_count >= level_preset.spawn_config.max_enemies:
 				break
 			var rng = randf_range(0.1,1.0)
 			if enemy_spawn.spawn_rate > rng:
@@ -515,8 +561,8 @@ func spawn_units():
 	
 	var neutral_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.NEUTRAL)
 	neutral_spawn_tiles.shuffle()
-	while(neutral_count < spawn_config.max_neutrals):
-		for neutral_spawn in spawn_config.neutral_spawn_pool:
+	while(neutral_count < level_preset.spawn_config.max_neutrals):
+		for neutral_spawn in level_preset.spawn_config.neutral_spawn_pool:
 			var rng = randf_range(0.1,1.0)
 			if neutral_spawn.spawn_rate > rng:
 				EntityManager.spawn_entity(

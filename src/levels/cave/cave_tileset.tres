@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://s4ki2g0cd8rf"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dvrpe3ah0yrmr"]
 
 [ext_resource type="Texture2D" uid="uid://b5ywm1ou2h5tt" path="res://assets/tiles/village/iso_tile_export-sheet2.png" id="1_pyd4q"]
 [ext_resource type="Texture2D" uid="uid://b7al7k2qqnjpk" path="res://assets/tiles/black_tile.png" id="2_56oou"]

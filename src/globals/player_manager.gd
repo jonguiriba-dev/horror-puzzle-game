@@ -20,6 +20,7 @@ func _ready() -> void:
 	print("READY PLAYER MANAGER")
 	WorldManager.level_complete.connect(_on_world_manager_level_complete)
 	SaveManager.game_loaded.connect(_on_game_loaded)
+	PlayerManager.load_starting_units()
 
 func load_starting_units():
 	Util.sysprint("PlayerManager","loading starting units")
@@ -29,7 +30,7 @@ func load_starting_units():
 		units.push_front(EntityManager.create_entity(starting_unit_preset))
 	SaveManager.save_data("player_manager",to_save_data())	
 	SaveManager.save_game()	
-	
+
 func get_units_by_name(entity_name:String):
 	return units.filter(func(e): 
 		if is_instance_valid(e) and e.data.entity_name == entity_name:

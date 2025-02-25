@@ -1,0 +1,34 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bj4kggyn2mccs"]
+
+[ext_resource type="Texture2D" uid="uid://4jnaecxqa5kl" path="res://assets/tiles/highlight_tiles.png" id="1_r4q7g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_io41m"]
+texture = ExtResource("1_r4q7g")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/modulate = Color(0, 1, 0, 0.686275)
+0:0/0/custom_data_0 = "citizen"
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/modulate = Color(1, 0.308333, 0.17, 0.517647)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+2:0/0/modulate = Color(0.33, 0.6315, 1, 0.545098)
+2:0/0/custom_data_0 = "player"
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
+3:0/0/modulate = Color(1, 0.1355, 0.09, 0.552941)
+3:0/0/custom_data_0 = "enemy"
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, -8)
+4:0/0/modulate = Color(0.446916, 0.146053, 0.807031, 0.552941)
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+custom_data_layer_0/name = "team_position"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_io41m")
