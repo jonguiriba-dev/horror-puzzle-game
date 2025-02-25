@@ -177,9 +177,9 @@ func show_event_options(events):
 				print("EVENT CLICKED ",event)
 				for e_option in event_option_list:
 					e_option.queue_free()
+				WorldManager.level.unload_units()
 				await get_tree().process_frame
-				#SceneManager.change_scene(event.scene)
-				SceneManager.load_level(event.level_preset)
+				SceneManager.change_scene(event.scene)
 			, CONNECT_ONE_SHOT)
 			#event_option.scale = SettingsManager.get_ui_game_resolution_multiplier()
 func _on_strategy_selected(strategy:C.STRATEGIES):

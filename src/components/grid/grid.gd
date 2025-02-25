@@ -52,23 +52,21 @@ signal tile_selected(map_pos: Vector2i)
 func _ready() -> void:
 	tile_selected.connect(_on_tile_selected)
 	
-	WorldManager.level.loaded.connect(func():
-		astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-		astar_grid.cell_size = tiles_layer.tile_set.tile_size
-		astar_grid.region = tiles_layer.get_used_rect()
-		astar_grid.update()
-		
-		if grid_label:
-			for cell_pos in tiles_layer.get_used_cells():
-				var coord_label = Label.new()
-				grid_label.add_child(coord_label)
-				coord_label.position = map_to_local(cell_pos) + Vector2(-2,2)
-				coord_label.text = "(%s,%s)" % [cell_pos.x, cell_pos.y]
-				coord_label.set("theme_override_font_sizes/font_size",6)
-			if !Debug.show_grid_coords_label:
-				grid_label.hide()
-	)
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar_grid.cell_size = tiles_layer.tile_set.tile_size
+	astar_grid.region = tiles_layer.get_used_rect()
+	astar_grid.update()
 	
+	if grid_label:
+		for cell_pos in tiles_layer.get_used_cells():
+			var coord_label = Label.new()
+			grid_label.add_child(coord_label)
+			coord_label.position = map_to_local(cell_pos) + Vector2(-2,2)
+			coord_label.text = "(%s,%s)" % [cell_pos.x, cell_pos.y]
+			coord_label.set("theme_override_font_sizes/font_size",6)
+		if !Debug.show_grid_coords_label:
+			grid_label.hide()
+
 enum TILE_EXCLUDE_FLAGS{
 	EXCLUDE_OBSTACLES = 1,
 	EXCLUDE_ENEMIES = 2,

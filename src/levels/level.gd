@@ -2,9 +2,6 @@ extends Control
 class_name World
 
 @export var dialogues:Array[Dialogue]=[]
-#@export var orientation:=C.ORIENTATION.HORIZONTAL
-#@export var spawn_config:LevelSpawnConfig
-#@export var rewards_config:LevelRewardsConfig
 @export var level_preset:LevelPreset
 
 @onready var grid: Grid = $Grid
@@ -50,37 +47,12 @@ func init(_level_preset:LevelPreset):
 	UIManager.level_ui.strategy_changed.connect(func ():
 		strategy_changed = true
 	)
-	await load_level_data(_level_preset)
 	await load_data()
 	await game_start()
 	
 	var events = EventGenerator.generate_events()
 	UIManager.level_ui.show_event_options(events)
 
-func load_level_data(preset:LevelPreset):
-	var tilemap_node = load(preset.tilemap_node).instantiate()
-	add_child(tilemap_node)
-	
-	var preset_tiles_layer = tilemap_node.get_node("TileMapLayer")
-	preset_tiles_layer.get_parent().remove_child(preset_tiles_layer)
-	grid.tiles_layer.tile_set = preset_tiles_layer.tile_set
-	grid.tiles_layer.set_tile_map_data_from_array(preset_tiles_layer.tile_map_data) 
-	
-	var preset_team_position_layer = tilemap_node.get_node("TeamPositionLayer")
-	preset_team_position_layer.get_parent().remove_child(preset_team_position_layer)
-	grid.team_position_layer.tile_set = preset_team_position_layer.tile_set
-	grid.team_position_layer.set_tile_map_data_from_array(preset_team_position_layer.tile_map_data) 
-	grid.team_position_layer.hide()
-	
-	if tilemap_node.has_node("PropLayer"):
-		var preset_prop_layer = tilemap_node.get_node("PropLayer")
-		preset_prop_layer.get_parent().remove_child(preset_prop_layer)
-		grid.prop_layer.tile_set = preset_prop_layer.tile_set
-		grid.prop_layer.set_tile_map_data_from_array(preset_prop_layer.tile_map_data) 
-		
-	remove_child(tilemap_node)
-	loaded.emit()
-	
 func end_turn():
 	Util.sysprint("Level","end_turn: from %s to %s"%[
 		C.TEAM.keys()[turn_order[0]],

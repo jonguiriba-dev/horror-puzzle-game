@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="LevelSpawnConfig" load_steps=11 format=3 uid="uid://drqgfae2et55r"]
+
+[ext_resource type="Script" path="res://src/levels/entity_spawn.gd" id="1_ahjcj"]
+[ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="2_1neqq"]
+[ext_resource type="Resource" uid="uid://dslk1ursehvik" path="res://src/entities/entity/presets/monsters/watcher/watcher.tres" id="3_tc0vl"]
+[ext_resource type="Resource" uid="uid://y68iwe3dy48k" path="res://src/entities/entity/presets/monsters/gore/gore.tres" id="4_3wvl4"]
+[ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="5_2celb"]
+[ext_resource type="Script" path="res://src/levels/level_spawn_config.gd" id="6_fcl13"]
+
+[sub_resource type="Resource" id="Resource_tcj2d"]
+script = ExtResource("1_ahjcj")
+entity_preset = ExtResource("2_1neqq")
+max_number = 5
+spawn_rate = 1.0
+
+[sub_resource type="Resource" id="Resource_x1tvh"]
+script = ExtResource("1_ahjcj")
+entity_preset = ExtResource("3_tc0vl")
+max_number = 3
+spawn_rate = 0.6
+
+[sub_resource type="Resource" id="Resource_p7jct"]
+script = ExtResource("1_ahjcj")
+entity_preset = ExtResource("4_3wvl4")
+max_number = 2
+spawn_rate = 0.4
+
+[sub_resource type="Resource" id="Resource_fm5px"]
+script = ExtResource("1_ahjcj")
+entity_preset = ExtResource("5_2celb")
+max_number = 5
+spawn_rate = 1.0
+
+[resource]
+script = ExtResource("6_fcl13")
+enemy_spawn_pool = Array[ExtResource("1_ahjcj")]([SubResource("Resource_tcj2d"), SubResource("Resource_x1tvh"), SubResource("Resource_p7jct")])
+neutral_spawn_pool = Array[ExtResource("1_ahjcj")]([SubResource("Resource_fm5px")])
+max_enemies = 3
+max_neutrals = 5

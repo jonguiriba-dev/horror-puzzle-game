@@ -11,7 +11,6 @@ const EVENT_PRESETS = [
 			{"type":EVENT_REWARD_TYPES.ABILITY}
 		],
 		"scene": C.SCENES.LEVELS.CAVE,
-		"level_preset": preload("res://src/levels/cave/cave_level_preset.tres")
 	},
 	{
 		"name":"To Gardens",
@@ -20,8 +19,7 @@ const EVENT_PRESETS = [
 			{"type":EVENT_REWARD_TYPES.GOLD},
 			{"type":EVENT_REWARD_TYPES.ABILITY}
 		],
-		"scene": C.SCENES.LEVELS.CAVE,
-		"level_preset": preload("res://src/levels/cave/cave_level_preset.tres")
+		"scene": C.SCENES.LEVELS.FOREST,
 	},
 	{
 		"name":"Look around",
@@ -31,8 +29,7 @@ const EVENT_PRESETS = [
 			{"type":EVENT_REWARD_TYPES.ABILITY},
 			{"type":EVENT_REWARD_TYPES.UNIT}
 		],
-		"scene": C.SCENES.LEVELS.CAVE,
-		"level_preset": preload("res://src/levels/cave/cave_level_preset.tres")
+		"scene": C.SCENES.LEVELS.LAKE,
 	},
 	{
 		"name":"Setup Camp",
@@ -41,8 +38,7 @@ const EVENT_PRESETS = [
 			{"type":EVENT_REWARD_TYPES.GOLD},
 			{"type":EVENT_REWARD_TYPES.ABILITY},
 		],
-		"scene": C.SCENES.LEVELS.CAVE,
-		"level_preset": preload("res://src/levels/cave/cave_level_preset.tres")
+		"scene": C.SCENES.LEVELS.FOREST,
 	}
 ]
 

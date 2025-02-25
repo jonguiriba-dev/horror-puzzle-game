@@ -33,10 +33,6 @@ func register_game_node(_scene_node:Control):
 	scene_node = _scene_node
 	game_node_registered.emit()
 
-func load_level(level_preset:LevelPreset):
-	WorldManager.level.unload_units()
-	WorldManager.level.init(level_preset)
-
 
 func change_scene(scene_path:String,keep_prev_scene:=false)->void:
 	keep_prev_scene = false

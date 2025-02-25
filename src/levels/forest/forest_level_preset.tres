@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelPreset" load_steps=4 format=3 uid="uid://vd0ui1x3cfri"]
+
+[ext_resource type="Resource" uid="uid://b1xxt2mfvban5" path="res://src/levels/forest/forest_rewards_config.tres" id="1_rk4uu"]
+[ext_resource type="Script" path="res://src/levels/level_preset.gd" id="2_034oc"]
+[ext_resource type="Resource" uid="uid://bfxu2tou8fc8s" path="res://src/levels/forest/forest_spawn_config.tres" id="3_a748v"]
+
+[resource]
+script = ExtResource("2_034oc")
+orientation = 0
+spawn_config = ExtResource("3_a748v")
+rewards_config = ExtResource("1_rk4uu")

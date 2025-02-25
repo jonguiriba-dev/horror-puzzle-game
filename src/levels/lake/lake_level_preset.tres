@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelPreset" load_steps=4 format=3 uid="uid://c0vksrxvm56u0"]
+
+[ext_resource type="Resource" uid="uid://dcgow3yonq4tq" path="res://src/levels/lake/lake_rewards_config.tres" id="1_gdsmh"]
+[ext_resource type="Script" path="res://src/levels/level_preset.gd" id="2_e2gjd"]
+[ext_resource type="Resource" uid="uid://drqgfae2et55r" path="res://src/levels/lake/lake_spawn_config.tres" id="3_86eqw"]
+
+[resource]
+script = ExtResource("2_e2gjd")
+orientation = 0
+spawn_config = ExtResource("3_86eqw")
+rewards_config = ExtResource("1_gdsmh")

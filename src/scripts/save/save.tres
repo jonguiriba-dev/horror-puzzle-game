@@ -27,7 +27,7 @@ region = Rect2(0, 0, 36, 40)
 atlas = ExtResource("4_palfe")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_08hfl"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_bbfs7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -41,7 +41,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_fl0w2"]
+[sub_resource type="Resource" id="Resource_nupfs"]
 script = ExtResource("3_g3l5h")
 entity_name = "Knight"
 max_health = 99
@@ -57,7 +57,7 @@ starting_abilities = Array[ExtResource("5_p4bvx")]([ExtResource("6_jxbpm"), ExtR
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_08hfl")
+sprite_frames = SubResource("SpriteFrames_bbfs7")
 portrait_image = null
 health = 1
 experience = 0
@@ -66,7 +66,7 @@ action_counter = 1
 move_counter = 1
 abilities = Array[ExtResource("1_8dgfq")]([])
 
-[sub_resource type="Resource" id="Resource_m3dl0"]
+[sub_resource type="Resource" id="Resource_ebyuy"]
 script = ExtResource("5_p4bvx")
 ability_name = "Strike"
 ability_range = 1
@@ -88,13 +88,13 @@ is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_ju2sj"]
+[sub_resource type="Resource" id="Resource_t3cv5"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_m3dl0")
+data = SubResource("Resource_ebyuy")
 
-[sub_resource type="Resource" id="Resource_lxte5"]
+[sub_resource type="Resource" id="Resource_ng7l2"]
 script = ExtResource("5_p4bvx")
 ability_name = "Move"
 ability_range = 3
@@ -116,13 +116,13 @@ is_passive = true
 animation_script = "res://src/abilities/ability_animations/animation_move.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_pvflx"]
+[sub_resource type="Resource" id="Resource_e7psk"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_lxte5")
+data = SubResource("Resource_ng7l2")
 
-[sub_resource type="Resource" id="Resource_wtmch"]
+[sub_resource type="Resource" id="Resource_sdhv7"]
 script = ExtResource("3_g3l5h")
 entity_name = "Knight"
 max_health = 99
@@ -144,9 +144,9 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_ju2sj"), SubResource("Resource_pvflx")])
+abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_t3cv5"), SubResource("Resource_e7psk")])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yhdta"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rsolq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -160,7 +160,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_x1t8n"]
+[sub_resource type="Resource" id="Resource_hc4lh"]
 script = ExtResource("3_g3l5h")
 entity_name = "Knight"
 max_health = 99
@@ -176,7 +176,7 @@ starting_abilities = Array[ExtResource("5_p4bvx")]([ExtResource("6_jxbpm"), ExtR
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_yhdta")
+sprite_frames = SubResource("SpriteFrames_rsolq")
 portrait_image = null
 health = 1
 experience = 0
@@ -185,7 +185,7 @@ action_counter = 1
 move_counter = 1
 abilities = Array[ExtResource("1_8dgfq")]([])
 
-[sub_resource type="Resource" id="Resource_lsv7g"]
+[sub_resource type="Resource" id="Resource_op818"]
 script = ExtResource("5_p4bvx")
 ability_name = "Strike"
 ability_range = 1
@@ -207,13 +207,13 @@ is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_alqat"]
+[sub_resource type="Resource" id="Resource_o8lmn"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_lsv7g")
+data = SubResource("Resource_op818")
 
-[sub_resource type="Resource" id="Resource_2evlg"]
+[sub_resource type="Resource" id="Resource_a68ql"]
 script = ExtResource("5_p4bvx")
 ability_name = "Move"
 ability_range = 3
@@ -235,13 +235,13 @@ is_passive = true
 animation_script = "res://src/abilities/ability_animations/animation_move.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_tqd5g"]
+[sub_resource type="Resource" id="Resource_vyvta"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_2evlg")
+data = SubResource("Resource_a68ql")
 
-[sub_resource type="Resource" id="Resource_tc2y1"]
+[sub_resource type="Resource" id="Resource_mgri2"]
 script = ExtResource("3_g3l5h")
 entity_name = "Knight"
 max_health = 99
@@ -263,9 +263,9 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_alqat"), SubResource("Resource_tqd5g")])
+abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_o8lmn"), SubResource("Resource_vyvta")])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_o57gw"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwk33"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -279,7 +279,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_x7q5u"]
+[sub_resource type="Resource" id="Resource_n364n"]
 script = ExtResource("3_g3l5h")
 entity_name = "Knight"
 max_health = 99
@@ -295,7 +295,7 @@ starting_abilities = Array[ExtResource("5_p4bvx")]([ExtResource("6_jxbpm"), ExtR
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_o57gw")
+sprite_frames = SubResource("SpriteFrames_gwk33")
 portrait_image = null
 health = 1
 experience = 0
@@ -304,7 +304,7 @@ action_counter = 1
 move_counter = 1
 abilities = Array[ExtResource("1_8dgfq")]([])
 
-[sub_resource type="Resource" id="Resource_1ew6t"]
+[sub_resource type="Resource" id="Resource_i5c4i"]
 script = ExtResource("5_p4bvx")
 ability_name = "Strike"
 ability_range = 1
@@ -326,13 +326,13 @@ is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_0abbc"]
+[sub_resource type="Resource" id="Resource_pfyt7"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_1ew6t")
+data = SubResource("Resource_i5c4i")
 
-[sub_resource type="Resource" id="Resource_evxep"]
+[sub_resource type="Resource" id="Resource_h0oh1"]
 script = ExtResource("5_p4bvx")
 ability_name = "Move"
 ability_range = 3
@@ -354,13 +354,13 @@ is_passive = true
 animation_script = "res://src/abilities/ability_animations/animation_move.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_5y2ms"]
+[sub_resource type="Resource" id="Resource_6phef"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_evxep")
+data = SubResource("Resource_h0oh1")
 
-[sub_resource type="Resource" id="Resource_12oh2"]
+[sub_resource type="Resource" id="Resource_is8x3"]
 script = ExtResource("3_g3l5h")
 entity_name = "Knight"
 max_health = 99
@@ -382,7 +382,7 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_0abbc"), SubResource("Resource_5y2ms")])
+abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_pfyt7"), SubResource("Resource_6phef")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgwg8"]
 atlas = ExtResource("13_v1sj4")
@@ -392,7 +392,7 @@ region = Rect2(0, 0, 36, 40)
 atlas = ExtResource("13_v1sj4")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_53c62"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_3itnk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -406,7 +406,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_ovh5d"]
+[sub_resource type="Resource" id="Resource_narsa"]
 script = ExtResource("3_g3l5h")
 entity_name = "Talya"
 max_health = 2
@@ -422,7 +422,7 @@ starting_abilities = Array[ExtResource("5_p4bvx")]([ExtResource("6_jxbpm"), ExtR
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
-sprite_frames = SubResource("SpriteFrames_53c62")
+sprite_frames = SubResource("SpriteFrames_3itnk")
 portrait_image = "res://assets/characters/angels/talya-body.png"
 health = 1
 experience = 0
@@ -431,7 +431,7 @@ action_counter = 1
 move_counter = 1
 abilities = Array[ExtResource("1_8dgfq")]([])
 
-[sub_resource type="Resource" id="Resource_1co1c"]
+[sub_resource type="Resource" id="Resource_lony7"]
 script = ExtResource("5_p4bvx")
 ability_name = "Shoot"
 ability_range = 5
@@ -453,13 +453,13 @@ is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_rjj7y"]
+[sub_resource type="Resource" id="Resource_pgy4h"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_1co1c")
+data = SubResource("Resource_lony7")
 
-[sub_resource type="Resource" id="Resource_xgy1p"]
+[sub_resource type="Resource" id="Resource_sdtfo"]
 script = ExtResource("5_p4bvx")
 ability_name = "Move"
 ability_range = 3
@@ -481,13 +481,13 @@ is_passive = true
 animation_script = "res://src/abilities/ability_animations/animation_move.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_77j8e"]
+[sub_resource type="Resource" id="Resource_wh0tu"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_xgy1p")
+data = SubResource("Resource_sdtfo")
 
-[sub_resource type="Resource" id="Resource_37w27"]
+[sub_resource type="Resource" id="Resource_1laqf"]
 script = ExtResource("3_g3l5h")
 entity_name = "Talya"
 max_health = 2
@@ -509,7 +509,7 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_rjj7y"), SubResource("Resource_77j8e")])
+abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_pgy4h"), SubResource("Resource_wh0tu")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ourl1"]
 atlas = ExtResource("15_ttmhv")
@@ -519,7 +519,7 @@ region = Rect2(0, 0, 36, 40)
 atlas = ExtResource("15_ttmhv")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4xjt0"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ev13"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -533,7 +533,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_skwyn"]
+[sub_resource type="Resource" id="Resource_bwhq7"]
 script = ExtResource("3_g3l5h")
 entity_name = "Layla"
 max_health = 3
@@ -549,7 +549,7 @@ starting_abilities = Array[ExtResource("5_p4bvx")]([ExtResource("6_jxbpm"), ExtR
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(3, -2)
-sprite_frames = SubResource("SpriteFrames_4xjt0")
+sprite_frames = SubResource("SpriteFrames_1ev13")
 portrait_image = "res://assets/characters/angels/layla-body.png"
 health = 1
 experience = 0
@@ -564,7 +564,7 @@ effect_type = 0
 value = 2
 entity_type = 0
 
-[sub_resource type="Resource" id="Resource_mpewy"]
+[sub_resource type="Resource" id="Resource_aq3o1"]
 script = ExtResource("5_p4bvx")
 ability_name = "Pierce"
 ability_range = 2
@@ -586,13 +586,13 @@ is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_spear_stab.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_lvhub"]
+[sub_resource type="Resource" id="Resource_1b2bm"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_mpewy")
+data = SubResource("Resource_aq3o1")
 
-[sub_resource type="Resource" id="Resource_iabd7"]
+[sub_resource type="Resource" id="Resource_7xldm"]
 script = ExtResource("5_p4bvx")
 ability_name = "Move"
 ability_range = 3
@@ -614,13 +614,13 @@ is_passive = true
 animation_script = "res://src/abilities/ability_animations/animation_move.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_toyj1"]
+[sub_resource type="Resource" id="Resource_pbq53"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_iabd7")
+data = SubResource("Resource_7xldm")
 
-[sub_resource type="Resource" id="Resource_5qnlp"]
+[sub_resource type="Resource" id="Resource_p25om"]
 script = ExtResource("3_g3l5h")
 entity_name = "Layla"
 max_health = 3
@@ -642,7 +642,7 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_lvhub"), SubResource("Resource_toyj1")])
+abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_1b2bm"), SubResource("Resource_pbq53")])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gilu8"]
 atlas = ExtResource("17_ruaph")
@@ -652,7 +652,7 @@ region = Rect2(0, 0, 36, 40)
 atlas = ExtResource("17_ruaph")
 region = Rect2(36, 0, 36, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_mx236"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mephf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -666,7 +666,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="Resource" id="Resource_hs0pn"]
+[sub_resource type="Resource" id="Resource_th86y"]
 script = ExtResource("3_g3l5h")
 entity_name = "Eliana"
 max_health = 4
@@ -682,7 +682,7 @@ starting_abilities = Array[ExtResource("5_p4bvx")]([ExtResource("6_jxbpm"), ExtR
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(2, -2)
-sprite_frames = SubResource("SpriteFrames_mx236")
+sprite_frames = SubResource("SpriteFrames_mephf")
 portrait_image = "res://assets/characters/angels/elyana-body.png"
 health = 1
 experience = 0
@@ -691,7 +691,7 @@ action_counter = 1
 move_counter = 1
 abilities = Array[ExtResource("1_8dgfq")]([])
 
-[sub_resource type="Resource" id="Resource_54xf4"]
+[sub_resource type="Resource" id="Resource_qp8ag"]
 script = ExtResource("5_p4bvx")
 ability_name = "Strike"
 ability_range = 1
@@ -713,13 +713,13 @@ is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_js2l3"]
+[sub_resource type="Resource" id="Resource_xuo6c"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_54xf4")
+data = SubResource("Resource_qp8ag")
 
-[sub_resource type="Resource" id="Resource_iir76"]
+[sub_resource type="Resource" id="Resource_uhrsd"]
 script = ExtResource("5_p4bvx")
 ability_name = "Move"
 ability_range = 3
@@ -741,13 +741,13 @@ is_passive = true
 animation_script = "res://src/abilities/ability_animations/animation_move.gd"
 custom_ability_script = null
 
-[sub_resource type="Resource" id="Resource_8ayd2"]
+[sub_resource type="Resource" id="Resource_o2o16"]
 script = ExtResource("1_8dgfq")
 state = 0
 has_ui = true
-data = SubResource("Resource_iir76")
+data = SubResource("Resource_uhrsd")
 
-[sub_resource type="Resource" id="Resource_52txx"]
+[sub_resource type="Resource" id="Resource_ut8qx"]
 script = ExtResource("3_g3l5h")
 entity_name = "Eliana"
 max_health = 4
@@ -769,7 +769,7 @@ experience = 0
 lvl = 1
 action_counter = 1
 move_counter = 1
-abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_js2l3"), SubResource("Resource_8ayd2")])
+abilities = Array[ExtResource("1_8dgfq")]([SubResource("Resource_xuo6c"), SubResource("Resource_o2o16")])
 
 [resource]
 script = ExtResource("1_n6hha")
@@ -777,39 +777,39 @@ player_manager = {
 "gold": 0,
 "inventory": {},
 "units": [{
-"data": SubResource("Resource_wtmch"),
+"data": SubResource("Resource_sdhv7"),
 "position": Vector2(0, 0),
-"preset": SubResource("Resource_fl0w2"),
+"preset": SubResource("Resource_nupfs"),
 "status_effects": Array[ExtResource("12_1b8m3")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_tc2y1"),
+"data": SubResource("Resource_mgri2"),
 "position": Vector2(0, 0),
-"preset": SubResource("Resource_x1t8n"),
+"preset": SubResource("Resource_hc4lh"),
 "status_effects": Array[ExtResource("12_1b8m3")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_12oh2"),
+"data": SubResource("Resource_is8x3"),
 "position": Vector2(0, 0),
-"preset": SubResource("Resource_x7q5u"),
+"preset": SubResource("Resource_n364n"),
 "status_effects": Array[ExtResource("12_1b8m3")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_37w27"),
+"data": SubResource("Resource_1laqf"),
 "position": Vector2(0, 0),
-"preset": SubResource("Resource_ovh5d"),
+"preset": SubResource("Resource_narsa"),
 "status_effects": Array[ExtResource("12_1b8m3")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_5qnlp"),
+"data": SubResource("Resource_p25om"),
 "position": Vector2(0, 0),
-"preset": SubResource("Resource_skwyn"),
+"preset": SubResource("Resource_bwhq7"),
 "status_effects": Array[ExtResource("12_1b8m3")]([]),
 "threat": null
 }, {
-"data": SubResource("Resource_52txx"),
+"data": SubResource("Resource_ut8qx"),
 "position": Vector2(0, 0),
-"preset": SubResource("Resource_hs0pn"),
+"preset": SubResource("Resource_th86y"),
 "status_effects": Array[ExtResource("12_1b8m3")]([]),
 "threat": null
 }]

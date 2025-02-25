@@ -13,7 +13,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 script = ExtResource("1_jtsqk")
-game_scene = "res://src/levels/Level.tscn"
+game_scene = "res://src/levels/cave/Cave.tscn"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1

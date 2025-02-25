@@ -109,7 +109,9 @@ var ALLIED_TEAMS = {
 
 const SCENES := {
 	"LEVELS":{
-		"CAVE":"res://src/levels/cave/Cave.tscn"
+		"CAVE":"res://src/levels/cave/Cave.tscn",
+		"FOREST":"res://src/levels/forest/Forest.tscn",
+		"LAKE":"res://src/levels/lake/Lake.tscn",
 	},
 	"UI":{
 		"LEVEL":{
