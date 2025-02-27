@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_ir6aq"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_jagov"]
 [ext_resource type="SpriteFrames" uid="uid://dpvcly4qbu5y5" path="res://src/entities/entity/presets/main_characters/elyana/elyana_sprite_frames.tres" id="5_3f5am"]
-[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike_v2_preset.tres" id="5_af4by"]
+[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="5_af4by"]
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_sc5j5"]
 
 [resource]

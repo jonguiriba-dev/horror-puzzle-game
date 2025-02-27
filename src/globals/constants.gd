@@ -45,7 +45,8 @@ enum TEAM{
 	ENEMY,
 	CITIZEN,
 	GUEST,
-	ALLY
+	ALLY,
+	PROP
 }
 
 enum STATE{

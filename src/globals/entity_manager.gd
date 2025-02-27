@@ -10,9 +10,14 @@ const PRESET_TALYA := "res://src/entities/entity/presets/main_characters/talya/t
 
 
 enum ENTITY_TYPES{
-	DARK_ORB
+	NONE,
+	DARK_ORB,
+	BOMB
 }
 
+const ENTITY_PRESETS := {
+	ENTITY_TYPES.BOMB:"res://src/entities/entity/presets/prop_entities/bomb/bomb_preset.tres"
+}
 func spawn_entity(position:Vector2,entity:Entity):
 	entity.position = position
 	WorldManager.level.grid.add_child_entity(entity)

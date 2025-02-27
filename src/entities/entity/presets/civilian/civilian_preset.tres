@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://ch7qmg8jhgmh8"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=5 format=3 uid="uid://ch7qmg8jhgmh8"]
 
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_1xqy7"]
 [ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_82yap"]
-[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_k6u3y"]
 [ext_resource type="SpriteFrames" uid="uid://bpcqw3ux8t2hk" path="res://src/entities/entity/presets/civilian/civilian_sprite_frames.tres" id="2_pyme8"]
-[ext_resource type="Resource" uid="uid://bcejyyr3x8qqb" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="2_wad3f"]
 [ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="5_1e7pr"]
 
 [resource]
@@ -18,7 +16,6 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("1_k6u3y")]([ExtResource("2_wad3f")])
 starting_abilities = Array[ExtResource("5_1e7pr")]([])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=6 format=3 uid="uid://dcwlxm28br27u"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_3uoq7"]
+[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="2_ecf6n"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_s82mo"]
+[ext_resource type="SpriteFrames" uid="uid://cuu38lfufsgi5" path="res://src/entities/entity/presets/prop_entities/bomb/bomb_sprite_frames.tres" id="3_1qwpc"]
+[ext_resource type="Resource" uid="uid://8ngny0nc5g51" path="res://src/abilities/ability_presets/Offense/ability_auto_explode/ability_auto_explode.tres" id="5_yhs35"]
+
+[resource]
+script = ExtResource("2_ecf6n")
+entity_name = "Bomb"
+max_health = 1
+move_range = 0
+team = 0
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+starting_abilities = Array[ExtResource("2_s82mo")]([ExtResource("5_yhs35")])
+state_machine = null
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = ExtResource("3_1qwpc")
+portrait_image = null
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_3uoq7")]([])

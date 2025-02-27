@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelRewardsConfig" load_steps=8 format=3 uid="uid://dcgow3yonq4tq"]
 
 [ext_resource type="Script" path="res://src/levels/chance_outcome.gd" id="1_bc05s"]
-[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike_v2_preset.tres" id="2_rhyxu"]
+[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="2_rhyxu"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_jhwva"]
 [ext_resource type="Script" path="res://src/levels/level_rewards_config.gd" id="4_2ucpj"]
 

@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://bv0od6fwjqnkm"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://bv0od6fwjqnkm"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_dvwti"]
-[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_wjcad"]
 [ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_1kwo7"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_xt53e"]
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_1i8lg"]
 [ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="5_q40xb"]
-[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike_v2_preset.tres" id="6_f002q"]
+[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="6_f002q"]
 
 [resource]
 script = ExtResource("4_xt53e")
@@ -19,7 +18,6 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("1_wjcad")]([])
 starting_abilities = Array[ExtResource("4_1kwo7")]([ExtResource("5_1i8lg"), ExtResource("6_f002q")])
 state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
 shadow_offset = Vector2(0, 0)

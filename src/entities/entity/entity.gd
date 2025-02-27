@@ -22,6 +22,7 @@ var threat = null
 var status_effects:Array[Status] = []
 
 signal hit(damage:int)
+signal stat_changed(key:String, value)
 signal knockback(distance:int,source_pos:Vector2)
 signal knockback_animation_finished(distance:int,source_map_pos:Vector2i,prev_map_position:Vector2i)
 signal apply_status(status:Status)
@@ -234,6 +235,7 @@ func _on_hit(damage:int) -> void:
 		VfxManager.flash(sprite,Color.DARK_RED,0.15)
 		VfxManager.spawn("hit-spark-1",self,{"offset":Vector2(randi_range(-12,12),randi_range(-12,4))})
 	
+	stat_changed.emit("health",data.health)
 	
 func _on_death() -> void:
 	for group in get_groups():

@@ -1,26 +1,31 @@
-[gd_resource type="Resource" script_class="AbilityProp" load_steps=5 format=3 uid="uid://2rkgneidf3pt"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://bprqcm81bu4mf"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_piv8f"]
-[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_8ew2t"]
-[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="3_hnxjq"]
-[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="4_onjm3"]
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_0achc"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_5hs6o"]
+[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_fekma"]
+[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="3_ccr8j"]
+[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="5_d07jr"]
 
 [resource]
-script = ExtResource("4_onjm3")
+script = ExtResource("2_5hs6o")
 ability_name = "Strike"
+description = "ability description"
 ability_range = 1
-effects = Array[ExtResource("1_piv8f")]([ExtResource("2_8ew2t"), ExtResource("3_hnxjq")])
+effects = Array[ExtResource("1_0achc")]([ExtResource("2_fekma"), ExtResource("3_ccr8j")])
+triggers = Array[ExtResource("5_d07jr")]([])
 highlight_color = 3
-is_enemy_obstacle = false
+initial_countdown = 0
 target_count = 1
-use_host_as_origin = false
 max_charges = 0
 action_cost = 1
 range_pattern = 1
 aoe_pattern = 3
 tile_exclude_flag = 5
+target_strategy = 0
+use_host_as_origin = false
 tile_exclude_self = false
 is_action = true
-description = "ability description"
+is_enemy_obstacle = false
+is_passive = false
 animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
 custom_ability_script = null

@@ -1,14 +1,21 @@
 extends Node
 
+#const STARTING_UNIT_PRESETS :Array[EntityData]= [
+	#preload("res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres"),
+	#preload("res://src/entities/entity/presets/main_characters/layla/layla_preset.tres"),
+	#preload("res://src/entities/entity/presets/main_characters/talya/talya_preset.tres"),
+	#preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
+	#preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
+	#preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres")
+#]
 const STARTING_UNIT_PRESETS :Array[EntityData]= [
-	preload("res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres"),
-	preload("res://src/entities/entity/presets/main_characters/layla/layla_preset.tres"),
-	preload("res://src/entities/entity/presets/main_characters/talya/talya_preset.tres"),
+	preload("res://src/entities/entity/presets/allies/archer/archer_preset.tres"),
+	preload("res://src/entities/entity/presets/allies/engineer/engineer_preset.tres"),
+	preload("res://src/entities/entity/presets/allies/mage/mage_preset.tres"),
 	preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
 	preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
 	preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres")
 ]
-
 var units := []
 var inventory := {
 	"abilities": []

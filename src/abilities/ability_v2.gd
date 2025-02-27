@@ -31,6 +31,22 @@ func setup(_host:Entity) -> void:
 		stopped_targetting.connect(_on_stopped_targetting)
 	if !used.is_connected(_on_used):
 		used.connect(_on_used)
+	
+	host.turn_end.connect(func():
+		data.decrement_countdown()
+	)
+	
+	
+	for trigger in data.triggers:
+		if trigger.source == AbilityTrigger.SOURCE_TYPES.HOST:
+			host.stat_changed.connect(func(key,value):
+				if key == trigger.key and value == trigger.value:
+					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+						use(host.map_position)	
+			)
+	
+	
+	
 	refresh_charges()
 	
 
@@ -93,20 +109,28 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		data.ability_range,
 		direction
 	)
+	
+	var self_damage_effects = data.effects.filter(
+		func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SELF_DAMAGE
+	)
+	for self_damage_effect in self_damage_effects:
+		host.hit.emit(self_damage_effect.value)
+		
+	
 	for affected_tile in affected_tiles:
 		var target_entity = _get_tile_target(affected_tile)
 		
 		if is_instance_valid(target_entity):
-			apply_entity_effect(target_entity)
+			apply_entity_effect(target_entity,data.effects)
 		
-		#if data.effects.filter(
-			#func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
-		#).size() > 0:
-			#await apply_move_effect(affected_tile)
-			#
-
-func apply_entity_effect(target:Entity):
-	for effect in data.effects:
+		if data.effects.filter(
+			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SUMMON
+		).size() > 0:
+			await apply_summon_effect(affected_tile,data.effects)
+			
+		
+func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
+	for effect in effects:
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
 			target.hit.emit(effect.value)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
@@ -114,9 +138,18 @@ func apply_entity_effect(target:Entity):
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:
 			var status = Status.new(effect.status_prop,effect.value)
 			target.apply_status.emit(status)		
-
 	applied.emit(self)
 
+func apply_summon_effect(target_map_position:Vector2i, effects:Array[AbilityEffect]):
+	for effect in effects:
+		var summon_entity = EntityManager.create_entity(
+			load(EntityManager.ENTITY_PRESETS[effect.entity_type])
+		)
+		EntityManager.spawn_entity(
+			WorldManager.level.grid.map_to_local(target_map_position), 
+			summon_entity
+		)
+		
 func apply_move_effect(target_map_position:Vector2i):
 	var path = WorldManager.level.grid.astar_grid.get_id_path(
 		host.map_position, 
@@ -241,6 +274,7 @@ func is_usable():
 	return false
 
 func refresh_charges():
+	data.countdown = data.initial_countdown
 	data.charges = data.max_charges
 	
 func _on_target_select() -> void:

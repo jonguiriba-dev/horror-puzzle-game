@@ -21,7 +21,6 @@ enum STATE_LISTS{
 @export var max_equipment_slots := 2
 @export_group("Nodes")
 ## Ability script file name
-@export var ability_props:Array[AbilityProp]
 @export var starting_abilities:Array[AbilityData]
 ## States
 @export_file() var state_machine
@@ -71,7 +70,8 @@ func apply_as_preset(entity:Entity):
 	entity.preset = self
 
 	entity.data.state_machine = state_machine
-	entity.add_child(load(state_machine).instantiate())
+	if state_machine:
+		entity.add_child(load(state_machine).instantiate())
 
 
 func apply_node_data(entity:Entity):

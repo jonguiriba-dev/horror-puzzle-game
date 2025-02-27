@@ -1,16 +1,23 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bik6xlmkjtmhy"]
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bik6xlmkjtmhy"]
 
-[ext_resource type="Texture2D" uid="uid://b2ir8nbkofioj" path="res://assets/characters/nightmares/Hound.png" id="1_os3n6"]
+[ext_resource type="Texture2D" uid="uid://3ghxqqt7t8y2" path="res://assets/characters/npc/Archer.png" id="1_fboyu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1266m"]
-atlas = ExtResource("1_os3n6")
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5w7f"]
+atlas = ExtResource("1_fboyu")
 region = Rect2(0, 0, 36, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo3nt"]
+atlas = ExtResource("1_fboyu")
+region = Rect2(36, 0, 36, 40)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1266m")
+"texture": SubResource("AtlasTexture_p5w7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo3nt")
 }],
 "loop": true,
 "name": &"idle",

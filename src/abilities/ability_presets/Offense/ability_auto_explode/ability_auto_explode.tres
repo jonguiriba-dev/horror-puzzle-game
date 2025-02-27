@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=9 format=3 uid="uid://8ngny0nc5g51"]
+
+[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_0pmx3"]
+[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="3_nowpt"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_boyav"]
+
+[sub_resource type="Resource" id="Resource_roimn"]
+script = ExtResource("1_0pmx3")
+effect_type = 0
+value = 2
+entity_type = 0
+
+[sub_resource type="Resource" id="Resource_vsmds"]
+script = ExtResource("1_0pmx3")
+effect_type = 1
+value = 1
+entity_type = 0
+
+[sub_resource type="Resource" id="Resource_68hov"]
+script = ExtResource("1_0pmx3")
+effect_type = 6
+value = 99
+entity_type = 0
+
+[sub_resource type="Resource" id="Resource_cqkyy"]
+script = ExtResource("3_nowpt")
+source = 0
+target = 0
+key = "countdown"
+value = 0
+
+[sub_resource type="Resource" id="Resource_w1vid"]
+script = ExtResource("3_nowpt")
+source = 0
+target = 0
+key = "health"
+value = 0
+
+[resource]
+script = ExtResource("4_boyav")
+ability_name = "Timed Explosive"
+description = "Explode after countdown finished or is destroyed"
+ability_range = 2
+effects = Array[ExtResource("1_0pmx3")]([SubResource("Resource_roimn"), SubResource("Resource_vsmds"), SubResource("Resource_68hov")])
+triggers = Array[ExtResource("3_nowpt")]([SubResource("Resource_cqkyy"), SubResource("Resource_w1vid")])
+highlight_color = 3
+initial_countdown = 2
+target_count = 1
+max_charges = 0
+action_cost = 0
+range_pattern = 1
+aoe_pattern = 1
+tile_exclude_flag = 5
+target_strategy = 0
+use_host_as_origin = false
+tile_exclude_self = false
+is_action = true
+is_enemy_obstacle = false
+is_passive = true
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null
