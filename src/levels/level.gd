@@ -320,6 +320,8 @@ func _on_end_turn_pressed():
 	Util.sysprint("Level:_on_end_turn_pressed","start")
 	if team_turn == C.TEAM.PLAYER:
 		UIManager.level_ui.end_turn.disabled = true
+		for entity in get_tree().get_nodes_in_group(C.GROUPS.ENTITIES):
+			entity.turn_end.emit()
 		end_turn()
 
 func _on_turn_order_pressed():

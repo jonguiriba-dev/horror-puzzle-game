@@ -21,7 +21,7 @@ enum TARGET_STRATEGIES{
 @export var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
 @export var target_strategy := TARGET_STRATEGIES.DEFAULT
 @export var use_host_as_origin := false
-@export var tile_exclude_self:=false
+@export var tile_include_self:=false
 @export var is_action:=true
 @export var is_enemy_obstacle := false
 @export var is_passive := false

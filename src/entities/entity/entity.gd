@@ -11,15 +11,18 @@ const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn")
 @onready var context_menu_point := $ContextMenuPoint
 @export var preset:EntityData
 @export var data:EntityData
+
 var animation_counter := 0
 var map_position:Vector2i:
 	get:
 		if WorldManager.level:
 			return WorldManager.level.grid.local_to_map(position)
 		return Vector2i.ZERO
+
 var flip_h:=false
 var threat = null
 var status_effects:Array[Status] = []
+var is_turn_done:= false
 
 signal hit(damage:int)
 signal stat_changed(key:String, value)
@@ -175,6 +178,7 @@ func add_ability(ability_data:AbilityData):
 func _on_turn_start():
 	Util.sysprint("%s.Entity._on_turn_start"%[data.entity_name],"counter refresh done")
 	refresh_move_and_action_counters()
+	is_turn_done = false
 	
 func refresh_move_and_action_counters():
 	var recently_loaded = get_meta("recently_loaded",false)
@@ -186,7 +190,8 @@ func refresh_move_and_action_counters():
 	
 func _on_turn_end():
 	Util.sysprint("%s.Entity._on_turn_end"%[data.entity_name],"saving level_entities")
-	
+	is_turn_done = true
+
 func _on_mouse_entered() -> void:
 	add_to_group(C.HOVERED_ENTITIES)
 	
@@ -236,7 +241,7 @@ func _on_hit(damage:int) -> void:
 		VfxManager.spawn("hit-spark-1",self,{"offset":Vector2(randi_range(-12,12),randi_range(-12,4))})
 	
 	stat_changed.emit("health",data.health)
-	
+	Util.sysprint("Entity %s"%[data.entity_name],"health after calculation: %s"%[data.health])
 func _on_death() -> void:
 	for group in get_groups():
 		remove_from_group(group)
@@ -291,7 +296,8 @@ func to_save_data():
 		"data" : data.to_save_data(),
 		"position": position,
 		"threat":threat,
-		"status_effects":status_effects.duplicate(true)
+		"status_effects":status_effects.duplicate(true),
+		"is_turn_done": is_turn_done
 	}
 	
 static func load_data(entity_load_data)->Entity:

@@ -7,6 +7,8 @@ enum STATE{
 }
 
 var host:Entity
+signal stat_changed(key:String,value)
+
 @export var state = STATE.INACTIVE
 @export var has_ui = true
 @export var data:AbilityData
@@ -34,6 +36,7 @@ func setup(_host:Entity) -> void:
 	
 	host.turn_end.connect(func():
 		data.decrement_countdown()
+		stat_changed.emit("countdown",data.countdown)
 	)
 	
 	
@@ -42,6 +45,16 @@ func setup(_host:Entity) -> void:
 			host.stat_changed.connect(func(key,value):
 				if key == trigger.key and value == trigger.value:
 					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+						use(host.map_position)	
+			)
+		if trigger.source == AbilityTrigger.SOURCE_TYPES.ABILITY:
+			print("HERE 1")
+			stat_changed.connect(func(key,value):
+				print("HERE 2")
+				if key == trigger.key and value == trigger.value:
+					print("HERE 3")
+					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+						print("HERE 4")
 						use(host.map_position)	
 			)
 	
@@ -204,8 +217,8 @@ func get_target_tiles(
 			host.data.team,
 			data.tile_exclude_flag
 		)
-		if data.tile_exclude_self:
-			possible_tiles.erase(map_pos)
+		if data.tile_include_self:
+			possible_tiles.push_front(map_pos)
 			
 		target_tiles = TilePattern.get_callable(data.range_pattern).call(map_pos,_range).filter(func(e):
 			return possible_tiles.has(e)	
