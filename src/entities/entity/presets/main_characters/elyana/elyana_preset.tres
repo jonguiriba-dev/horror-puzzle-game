@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://be0bd8arqf1my"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://be0bd8arqf1my"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_8o8hy"]
-[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="2_tqcw5"]
 [ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_ir6aq"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_jagov"]
 [ext_resource type="SpriteFrames" uid="uid://dpvcly4qbu5y5" path="res://src/entities/entity/presets/main_characters/elyana/elyana_sprite_frames.tres" id="5_3f5am"]
@@ -19,7 +18,6 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-ability_props = Array[ExtResource("2_tqcw5")]([])
 starting_abilities = Array[ExtResource("4_ir6aq")]([ExtResource("6_sc5j5"), ExtResource("5_af4by")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)

@@ -1,16 +1,43 @@
-[gd_scene load_steps=14 format=4 uid="uid://cs01m16vvh2vk"]
+[gd_scene load_steps=21 format=4 uid="uid://cs01m16vvh2vk"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_ufvuu"]
 [ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_dxwwt"]
+[ext_resource type="Script" path="res://src/levels/level_preset.gd" id="2_ekxpe"]
+[ext_resource type="Script" path="res://src/levels/chance_outcome.gd" id="2_v41ew"]
 [ext_resource type="TileSet" uid="uid://bsk21efd8hrce" path="res://src/components/grid/village_tileset.tres" id="3_4aa0e"]
+[ext_resource type="Script" path="res://src/levels/entity_spawn.gd" id="3_6f0mi"]
+[ext_resource type="Script" path="res://src/levels/level_rewards_config.gd" id="3_82umx"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_6xqer"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="5_0vs47"]
+[ext_resource type="Script" path="res://src/levels/level_spawn_config.gd" id="5_xm6oe"]
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="6_kt5py"]
 [ext_resource type="TileSet" uid="uid://b6heyfemjhkcd" path="res://src/components/grid/tilesets/offroad_props_tileset.tres" id="7_3jos5"]
-[ext_resource type="PackedScene" uid="uid://cybb46stuffbp" path="res://src/entities/entity/Entity.tscn" id="8_2kexs"]
-[ext_resource type="Resource" uid="uid://be0bd8arqf1my" path="res://src/entities/entity/presets/main_characters/elyana/elyana_preset.tres" id="9_cwqjs"]
 [ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="10_txymb"]
 [ext_resource type="Texture2D" uid="uid://cdpyqa1xwwcp0" path="res://assets/etc/grid-bg.png" id="12_vevov"]
+
+[sub_resource type="Resource" id="Resource_foim0"]
+script = ExtResource("3_82umx")
+ability_reward_pool = Array[ExtResource("2_v41ew")]([])
+max_rewards = 3
+
+[sub_resource type="Resource" id="Resource_gyam0"]
+script = ExtResource("3_6f0mi")
+entity_preset = ExtResource("10_txymb")
+max_number = 8
+spawn_rate = 1.0
+
+[sub_resource type="Resource" id="Resource_2xjuu"]
+script = ExtResource("5_xm6oe")
+enemy_spawn_pool = Array[ExtResource("3_6f0mi")]([SubResource("Resource_gyam0")])
+neutral_spawn_pool = Array[ExtResource("3_6f0mi")]([])
+max_enemies = 8
+max_neutrals = 0
+
+[sub_resource type="Resource" id="Resource_ow8ma"]
+script = ExtResource("2_ekxpe")
+orientation = 0
+spawn_config = SubResource("Resource_2xjuu")
+rewards_config = SubResource("Resource_foim0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7gmc3"]
 texture = ExtResource("4_6xqer")
@@ -29,6 +56,7 @@ sources/0 = SubResource("TileSetAtlasSource_7gmc3")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ufvuu")
+level_preset = SubResource("Resource_ow8ma")
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("2_dxwwt")
@@ -51,6 +79,11 @@ tile_set = ExtResource("5_0vs47")
 y_sort_enabled = true
 tile_set = ExtResource("5_0vs47")
 
+[node name="PropLayer" type="TileMapLayer" parent="Grid"]
+z_index = 1
+y_sort_enabled = true
+tile_set = ExtResource("7_3jos5")
+
 [node name="CursorLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
 tile_set = ExtResource("6_kt5py")
@@ -61,20 +94,8 @@ tile_set = ExtResource("5_0vs47")
 
 [node name="TeamPositionLayer" type="TileMapLayer" parent="Grid"]
 visible = false
-tile_map_data = PackedByteArray("AAD6//7/AAACAAAAAAD6//3/AAACAAAAAAD7//z/AAACAAAAAAD7//3/AAACAAAAAAD7//7/AAACAAAAAAD7////AAACAAAAAAD7/wAAAAACAAAAAAD7/wEAAAACAAAAAAD7/wIAAAACAAAAAAD7/wMAAAACAAAAAAD7/wQAAAACAAAAAAD6/wAAAAACAAAAAAD6////AAACAAAAAAD6/wEAAAACAAAAAAD6/wIAAAACAAAAAAD6/wMAAAACAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAJAAIAAAADAAAAAAAJAAMAAAADAAAAAAAJAAQAAAADAAAAAAAJAP3/AAADAAAAAAAJAPz/AAADAAAAAAAJAP7/AAADAAAAAAAJAP//AAADAAAAAAAIAAQAAAADAAAAAAAIAAMAAAADAAAAAAAIAAIAAAADAAAAAAAIAAEAAAADAAAAAAAIAAAAAAADAAAAAAAIAP//AAADAAAAAAAIAP7/AAADAAAAAAAIAP3/AAADAAAAAAAIAPz/AAADAAAAAAAHAAQAAAADAAAAAAAHAAMAAAADAAAAAAAHAAIAAAADAAAAAAAHAAEAAAADAAAAAAAHAAAAAAADAAAAAAAHAP//AAADAAAAAAAHAP7/AAADAAAAAAAHAP3/AAADAAAAAAAHAPz/AAADAAAAAAD8//z/AAACAAAAAAD8//3/AAACAAAAAAD8//7/AAACAAAAAAD8////AAACAAAAAAD8/wAAAAACAAAAAAD8/wEAAAACAAAAAAD8/wIAAAACAAAAAAD8/wMAAAACAAAAAAD8/wQAAAACAAAAAAD9//3/AAAAAAAAAAD9//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD+//7/AAAAAAAAAAD+//3/AAAAAAAAAAD+//z/AAAAAAAAAAD9/wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD///z/AAAAAAAAAAD///v/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAP3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAACAP3/AAAAAAAAAAACAPz/AAAAAAAAAAADAPz/AAAAAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAACAAQAAAAAAAAAAAADAAIAAAAAAAAAAAADAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAAEAAAAAAAAAAAADAAQAAAAAAAAAAAACAAIAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAP3/AAAAAAAAAAABAPz/AAAAAAAAAAAAAPv/AAAAAAAAAAABAPv/AAAAAAAAAAACAPv/AAAAAAAAAAAEAPz/AAAAAAAAAAADAPv/AAAAAAAAAAAEAP3/AAAAAAAAAAABAP7/AAAAAAAAAAAGAAQAAAADAAAAAAAGAAMAAAADAAAAAAAGAAIAAAADAAAAAAAGAAAAAAADAAAAAAAGAP//AAADAAAAAAAGAP7/AAADAAAAAAAGAPz/AAADAAAAAAAGAP3/AAADAAAAAAAGAAEAAAADAAAAAAD+/wMAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wQAAAADAAAAAAD//wMAAAADAAAAAAD//wIAAAADAAAAAAD//wEAAAADAAAAAAD//wAAAAADAAAAAAD/////AAADAAAAAAD///7/AAADAAAAAAD///3/AAADAAAAAAD8/wQAAAACAAAAAAD8/wMAAAACAAAAAAD8/wIAAAACAAAAAAD8/wEAAAACAAAAAAD8/wAAAAACAAAAAAD8////AAACAAAAAAD8//7/AAACAAAAAAD8//3/AAACAAAAAAA=")
 tile_set = ExtResource("5_0vs47")
-
-[node name="PropLayer" type="TileMapLayer" parent="Grid"]
-z_index = 1
-y_sort_enabled = true
-tile_set = ExtResource("7_3jos5")
-
-[node name="Eliana" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
-position = Vector2(-49, -25)
-preset = ExtResource("9_cwqjs")
-
-[node name="Entity" parent="Grid/PropLayer" instance=ExtResource("8_2kexs")]
-preset = ExtResource("10_txymb")
 
 [node name="GridLabel" type="Control" parent="Grid"]
 layout_mode = 3

@@ -37,6 +37,7 @@ signal turn_start
 signal selected
 signal threat_updated
 signal registered
+signal stun
 
 func _ready() -> void:
 	if preset:
@@ -51,7 +52,8 @@ func _ready() -> void:
 	turn_start.connect(_on_turn_start)
 	selected.connect(_on_selected)
 	apply_status.connect(_on_apply_status)
-
+	stun.connect(_on_stun)
+	
 	if data.team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
 	elif data.team == C.TEAM.PROP:
@@ -213,6 +215,10 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	remove_from_group(C.GROUPS_HOVERED_ENTITIES)
 
+func _on_stun():
+	unset_threat()
+	refresh_move_and_action_counters()
+
 func _on_hit(damage:int) -> void:
 	data.health -= damage
 	healthbar.value = data.health
@@ -264,7 +270,7 @@ func _on_ability_used(ability:AbilityV2):
 		UIManager.level_ui.set_context(self)
 
 func _on_apply_status(status:Status):
-	Util.sysprint("%s.Entity._on_apply_status"%[data.entity_name],"applying status: %s"%[status.status_props.status_name])
+	Util.sysprint("%s.Entity._on_apply_status"%[data.entity_name],"applying status: %s"%[status.status_data.status_name])
 	status_effects.push_front(status)
 	status.register_entity(self)
 	status.status_finished.connect(func (e):
@@ -303,4 +309,8 @@ func set_threat(target_map_position:Vector2i,ability:AbilityV2):
 	threat = {"tile":target_map_position, "ability":ability}
 	Util.sysprint("Entity.%s.set_threat"%[data.entity_name],"ability:%s tile:%s"%[threat.ability.data.ability_name,str(threat.tile)])
 	threat_updated.emit()
-	#var targetted_entity = WorldManager.level.grid.get_entity_on_tile(threat.tile)
+
+func unset_threat():
+	threat = null
+	Util.sysprint("Entity.%s.unset_threat"%[data.entity_name],"ok")
+	threat_updated.emit()

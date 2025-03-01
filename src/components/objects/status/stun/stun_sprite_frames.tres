@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cln04st8dbcer"]
+
+[ext_resource type="Texture2D" uid="uid://cogpjcfyg1i7c" path="res://assets/fx/status/stun-sheet.png" id="1_cykcb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q303o"]
+atlas = ExtResource("1_cykcb")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_en2tj"]
+atlas = ExtResource("1_cykcb")
+region = Rect2(0, 0, 10, 10)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q303o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_en2tj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]

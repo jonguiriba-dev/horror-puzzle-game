@@ -24,10 +24,10 @@ enum THREAT_STRATEGIES{
 @export var range_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.DIAMOND
 @export var aoe_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.POINT
 @export var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
+@export var tile_include_self:=false
 @export var target_strategy := TARGET_STRATEGIES.DEFAULT
 @export var threat_strategy := THREAT_STRATEGIES.MANUAL
 @export var use_host_as_origin := false
-@export var tile_include_self:=false
 @export var is_action:=true
 @export var is_enemy_obstacle := false
 @export var is_passive := false

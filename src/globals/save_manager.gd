@@ -43,13 +43,14 @@ func _ready() -> void:
 	Util.sysprint("SaveManager","file_path %s"%[save_file_path])
 	Util.sysprint("SaveManager","config_file %s"%[config_file])
 
+#TODO-FIX ME
 func save_game():
 	Util.sysprint("SaveManager","saving file to %s"%[save_file_path])
-	var res = ResourceSaver.save(
-		save_file,
-		save_file_path,
-		ResourceSaver.FLAG_RELATIVE_PATHS
-	)
+	#var res = ResourceSaver.save(
+		#save_file,
+		#save_file_path,
+		#ResourceSaver.FLAG_RELATIVE_PATHS
+	#)
 
 func save_data(key,data):
 	Util.sysprint("SaveManager","save data %s - %s"%[key,data])

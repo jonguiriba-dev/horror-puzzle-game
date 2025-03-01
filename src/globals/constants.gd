@@ -114,6 +114,7 @@ const SCENES := {
 		"CAVE":"res://src/levels/cave/Cave.tscn",
 		"FOREST":"res://src/levels/forest/Forest.tscn",
 		"LAKE":"res://src/levels/lake/Lake.tscn",
+		"TEST":"res://src/levels/tests/test2/test2.tscn",
 	},
 	"UI":{
 		"LEVEL":{

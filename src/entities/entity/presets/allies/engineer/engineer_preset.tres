@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://dcykv34deb1o6"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=9 format=3 uid="uid://dcykv34deb1o6"]
 
 [ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_mbrj3"]
 [ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="3_hq345"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_j1gmj"]
 [ext_resource type="Resource" uid="uid://cul6kg7iqvpdm" path="res://src/abilities/ability_presets/Offense/ability_bomb/ability_bomb.tres" id="7_ji08m"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="7_y7bfs"]
+[ext_resource type="Resource" uid="uid://cncy6wjwnswbm" path="res://src/abilities/ability_presets/Offense/ability_wrench_toss/ability_wrench_toss.tres" id="8_x7327"]
 
 [resource]
 script = ExtResource("3_hq345")
@@ -19,7 +20,7 @@ max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-starting_abilities = Array[ExtResource("5_f2ytu")]([ExtResource("6_j1gmj"), ExtResource("7_y7bfs"), ExtResource("7_ji08m")])
+starting_abilities = Array[ExtResource("5_f2ytu")]([ExtResource("6_j1gmj"), ExtResource("7_y7bfs"), ExtResource("7_ji08m"), ExtResource("8_x7327")])
 state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)

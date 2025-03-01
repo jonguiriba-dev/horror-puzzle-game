@@ -145,13 +145,22 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		
 func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 	for effect in effects:
+		var fail_rate = 1.0 - effect.success_rate
+		var rand := randf_range(0.0,1.0)
+		if rand < fail_rate:
+			continue
+			
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
 			target.hit.emit(effect.value)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
 			target.knockback.emit(effect.value, WorldManager.level.grid.local_to_map(host.position))
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:
-			var status = Status.new(effect.status_prop,effect.value)
-			target.apply_status.emit(status)		
+			var status = Status.new(
+				load(Status.STATUS_DATA[effect.status_type]),
+				effect.value
+			)
+			target.apply_status.emit(status)
+				
 	applied.emit(self)
 
 func apply_summon_effect(target_map_position:Vector2i, effects:Array[AbilityEffect]):

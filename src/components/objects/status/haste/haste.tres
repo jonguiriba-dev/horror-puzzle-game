@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="StatusProps" load_steps=3 format=3 uid="uid://cb70jx4rjfda3"]
+[gd_resource type="Resource" script_class="StatusData" load_steps=5 format=3 uid="uid://cb70jx4rjfda3"]
 
 [ext_resource type="SpriteFrames" uid="uid://d0tdm15k28md0" path="res://src/components/objects/status/haste/haste_sprite_frames.tres" id="1_1hngi"]
-[ext_resource type="Script" path="res://src/components/objects/status/status_props.gd" id="2_hw2xj"]
+[ext_resource type="Script" path="res://src/components/objects/status/status_data.gd" id="2_hw2xj"]
+[ext_resource type="Script" path="res://src/components/objects/modifier.gd" id="2_snj6v"]
+
+[sub_resource type="Resource" id="Resource_ywgsd"]
+script = ExtResource("2_snj6v")
+mode = 0
+target = "max_action_counter"
+value = 1
 
 [resource]
 script = ExtResource("2_hw2xj")
 status_name = "Haste"
-modifiers = Array[Dictionary]([{
-"mode": "add",
-"target": "max_action_counter",
-"value": 1
-}])
+modifiers = Array[ExtResource("2_snj6v")]([SubResource("Resource_ywgsd")])
 icon = ExtResource("1_1hngi")

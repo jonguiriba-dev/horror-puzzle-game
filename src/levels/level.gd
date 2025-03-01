@@ -48,7 +48,6 @@ func init(_level_preset:LevelPreset):
 	await game_start()
 	
 	var events = EventGenerator.generate_events()
-	UIManager.level_ui.show_event_options(events)
 
 func end_turn():
 	Util.sysprint("Level","end_turn: from %s to %s"%[

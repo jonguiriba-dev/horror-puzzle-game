@@ -10,7 +10,7 @@
 [resource]
 script = ExtResource("4_xt53e")
 entity_name = "Ghost"
-max_health = 2
+max_health = 99
 move_range = 5
 team = 1
 speed = 5

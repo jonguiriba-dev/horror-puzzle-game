@@ -27,7 +27,11 @@ func _enter_state(old_state, new_state):
 		if AnimationManager.animation_counter != 0:
 			print("Waiting on animation...")
 			await AnimationManager.animation_cleared
-			
+	
+	if  host.data.max_move_counter <= 0:
+		finalize_turn()
+		return
+	
 	if team_turn != C.TEAM.PLAYER:
 		for l in tile_labels:
 			l.queue_free()
@@ -77,6 +81,10 @@ func _transition():
 func find_threat():
 	Util.sysprint("%s(host).%s(sm_node).find_threat()"%[host.data.entity_name,'ai_attack'],"start")
 	var target_found = false
+	
+	if host.data.max_action_counter <= 0:
+		return
+	
 	for ability in host.get_abilities():
 		if target_found:
 			return

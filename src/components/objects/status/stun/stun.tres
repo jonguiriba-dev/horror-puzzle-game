@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="StatusData" load_steps=6 format=3 uid="uid://1vh6lah7sir3"]
+
+[ext_resource type="SpriteFrames" uid="uid://cln04st8dbcer" path="res://src/components/objects/status/stun/stun_sprite_frames.tres" id="1_317pe"]
+[ext_resource type="Script" path="res://src/components/objects/modifier.gd" id="2_33k1m"]
+[ext_resource type="Script" path="res://src/components/objects/status/status_data.gd" id="2_rn2yy"]
+
+[sub_resource type="Resource" id="Resource_25c7p"]
+script = ExtResource("2_33k1m")
+mode = 1
+target = "max_action_counter"
+value = 1
+
+[sub_resource type="Resource" id="Resource_nf703"]
+script = ExtResource("2_33k1m")
+mode = 1
+target = "max_move_counter"
+value = 1
+
+[resource]
+script = ExtResource("2_rn2yy")
+status_name = "Stun"
+modifiers = Array[ExtResource("2_33k1m")]([SubResource("Resource_25c7p"), SubResource("Resource_nf703")])
+icon = ExtResource("1_317pe")

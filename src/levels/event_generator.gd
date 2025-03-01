@@ -39,6 +39,15 @@ const EVENT_PRESETS = [
 			{"type":EVENT_REWARD_TYPES.ABILITY},
 		],
 		"scene": C.SCENES.LEVELS.FOREST,
+	},
+	{
+		"name":"TEST",
+		"type":EVENT_TYPES.COMBAT,
+		"rewards":[
+			{"type":EVENT_REWARD_TYPES.GOLD},
+			{"type":EVENT_REWARD_TYPES.ABILITY},
+		],
+		"scene": C.SCENES.LEVELS.TEST,
 	}
 ]
 
