@@ -1,5 +1,8 @@
 extends Node
 
+var animation_counter := 0
+
+signal animation_cleared
 
 func jump(host:Entity,target_pos:Vector2):
 	var tween = create_tween()
@@ -32,3 +35,13 @@ func warp(host:Entity):
 	await tween.finished
 	host.material = null
 	return
+
+func increment_animation_counter():
+	animation_counter += 1
+
+func decrement_animation_counter():
+	animation_counter -= 1
+	
+	if animation_counter <= 0:
+		animation_counter = 0
+		animation_cleared.emit()

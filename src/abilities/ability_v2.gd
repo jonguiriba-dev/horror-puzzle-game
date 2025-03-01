@@ -33,28 +33,30 @@ func setup(_host:Entity) -> void:
 		stopped_targetting.connect(_on_stopped_targetting)
 	if !used.is_connected(_on_used):
 		used.connect(_on_used)
-	
-	host.turn_end.connect(func():
-		data.decrement_countdown()
-		stat_changed.emit("countdown",data.countdown)
-	)
-	
-	
+	if !host.turn_end.is_connected(_on_host_turn_end):
+		host.turn_end.connect(_on_host_turn_end)
+		
+	if !host.registered.is_connected(_on_host_registered):
+		host.registered.connect(_on_host_registered)
+
 	for trigger in data.triggers:
 		if trigger.source == AbilityTrigger.SOURCE_TYPES.HOST:
-			host.stat_changed.connect(func(key,value):
-				if key == trigger.key and value == trigger.value:
+			if trigger.type == AbilityTrigger.TRIGGER_TYPES.SIGNAL:
+				if host.has_signal(trigger.key):
 					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
-						use(host.map_position)	
-			)
+						host.connect(trigger.key,func():
+							use(host.map_position)	
+						)
+			elif trigger.type == AbilityTrigger.TRIGGER_TYPES.PROPERTY:
+				host.stat_changed.connect(func(key,value):
+					if key == trigger.key and value == trigger.value:
+						if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+							use(host.map_position)	
+				)
 		if trigger.source == AbilityTrigger.SOURCE_TYPES.ABILITY:
-			print("HERE 1")
 			stat_changed.connect(func(key,value):
-				print("HERE 2")
 				if key == trigger.key and value == trigger.value:
-					print("HERE 3")
 					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
-						print("HERE 4")
 						use(host.map_position)	
 			)
 	
@@ -62,7 +64,6 @@ func setup(_host:Entity) -> void:
 	
 	refresh_charges()
 	
-
 func use(target_map_position:Vector2i, options:Dictionary={}):
 	print("Ability ",data.ability_name, " used on ", target_map_position)
 
@@ -102,7 +103,7 @@ func highlight_target_tiles():
 		)
 
 func _get_tile_target(map_pos:Vector2i):
-	var entities = host.get_tree().get_nodes_in_group(C.GROUPS_ENTITIES).filter(func(e):
+	var entities = WorldManager.level.get_tree().get_nodes_in_group(C.GROUPS_ENTITIES).filter(func(e):
 		return e.map_position == map_pos
 	)
 	if entities.size() > 0:
@@ -192,11 +193,13 @@ func apply_move_effect(target_map_position:Vector2i):
 	host.data.move_counter -= 1
 
 func _play_animation(target_map_position:Vector2i):
+	AnimationManager.increment_animation_counter()
 	if data.animation_script:
 		await load(data.animation_script).play(host,target_map_position)
 	else:	
 		await Util.wait(0.3)
 
+	AnimationManager.decrement_animation_counter()
 
 func set_state(_state:STATE):
 	if _state == state:
@@ -264,6 +267,8 @@ func get_threat_tiles(
 		direction
 	)
 	
+	if data.ability_name == "Timed Explosive":
+		print("affected_tiles",affected_tiles)
 	#for i in range(ability_range):
 		#prev_tile += direction
 		#threat_tiles.push_front(prev_tile)
@@ -311,5 +316,17 @@ func _on_used(ability:AbilityV2):
 	if data.charges < 0:
 		return
 	data.charges -=1
+	
+func _on_host_turn_end():
+	data.decrement_countdown()
+	stat_changed.emit("countdown",data.countdown)
+	
+	if data.threat_strategy == AbilityData.THREAT_STRATEGIES.ALWAYS:
+		host.set_threat(host.map_position,self)
+	
+func _on_host_registered():
+	if data.threat_strategy == AbilityData.THREAT_STRATEGIES.ALWAYS:
+		host.set_threat(host.map_position,self)
+	
 	
 	

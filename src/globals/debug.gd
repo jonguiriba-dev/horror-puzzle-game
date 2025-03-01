@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		text += "\nmouse_pos: %s"%WorldManager.level.grid.get_grid_local_mouse_position()
 		text += "\nmouse_map_pos: %s"%WorldManager.level.grid.get_map_mouse_position()
 		text += "\ninput_enabled: %s"%WorldManager.level.input_enabled
-		text += "\nanimation_counter: %s"%WorldManager.level.animation_counter
+		text += "\nanimation_counter: %s"%AnimationManager.animation_counter
 		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.level.team_turn]
 		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.level.strategy]
 		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.level.starting_position]

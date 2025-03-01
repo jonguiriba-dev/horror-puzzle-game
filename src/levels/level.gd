@@ -13,7 +13,6 @@ var entity_moved_history:=[]
 var input_enabled = false
 var current_dialogue:Dialogue
 var entity_register_queue := []
-var animation_counter := 0
 var selected_entity:Entity
 var strategy := C.STRATEGIES.NEAREST
 var strategy_changed := false
@@ -28,8 +27,6 @@ var loaded_data
 signal turn_changed
 signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
-signal animation_counter_updated(val:int)
-signal animation_counter_cleared
 signal loaded
 
 func _enter_tree() -> void:
@@ -131,11 +128,13 @@ func game_start():
 	Util.sysprint("Level","game start!")
 	selected_entity = null
 	
-	await register_entities()
+	#await register_entities()
 	if !UIManager.level_ui:
 		Util.sysprint("game_start","UIManager.level_ui not found")
 		return
+		
 	clear_entity_moved_history()
+	
 	UIManager.level_ui.turn_start_overlay.hide()
 
 	if Debug.play_game_start_sequence:
@@ -148,10 +147,7 @@ func game_start():
 				current_dialogue.input_waiting.connect(_on_dialogue_input_waiting)
 				await current_dialogue.play(get_tree().get_nodes_in_group(C.GROUPS_ENTITIES))
 	current_dialogue = null
-	
-	
 
-		
 	turn_start.emit(team_turn)
 	
 
@@ -214,7 +210,7 @@ func show_next_level_options():
 	
 func get_reward_abilities():
 	var abilities :Array[AbilityData]= []
-	if !level_preset.wards_config:
+	if !level_preset.rewards_config:
 		return abilities
 	while abilities.size() < level_preset.rewards_config.max_rewards:
 		for ability_reward in level_preset.rewards_config.ability_reward_pool:
@@ -225,16 +221,13 @@ func get_reward_abilities():
 				abilities.push_front(ability_reward.value)
 	print("get_reward_abilities",abilities)
 	return abilities
+	
 func clear_entity_moved_history():
 	entity_moved_history.clear()
 	if UIManager.level_ui:
 		UIManager.level_ui.disable_undo_move_button()
 		
-func increment_animation_counter(val: int):
-	animation_counter += val
-	animation_counter_updated.emit(animation_counter)
-	if animation_counter == 0:
-		animation_counter_cleared.emit()
+
 
 var order_labels = []
 func show_turn_order():
@@ -286,16 +279,14 @@ func get_team_group_threat_tiles(group:String):
 func get_world_bounds():
 	return grid.tiles_layer.get_used_rect()
 
-func register_entities():
-	print("entity_register_queue",entity_register_queue)
-	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
-		register_entity(entity)
-	entity_register_queue = []
-
 func register_entity(entity:Entity):
 	if !grid:
 		entity_register_queue.push_front(entity)
 		return
+		
+	entity.death.connect(func():
+		clear_entity(entity)
+	)
 		
 	if entity.data.team == C.TEAM.ENEMY or entity.data.team == C.TEAM.ALLY:
 		entity.turn_end.connect(_on_ai_unit_turn_end)
@@ -315,7 +306,15 @@ func register_entity(entity:Entity):
 	entity.turn_end.connect(_on_unit_turn_end)
 	entity.sprite.speed_scale = SystemManager.idle_animation_speed
 	entity.position = grid.map_to_local(entity.map_position)
-	
+	entity.registered.emit()
+
+func clear_entity(entity:Entity):
+	if entity.animation_counter == 0:
+		grid.remove_child_entity(entity)
+	else:
+		await AnimationManager.animation_cleared
+		grid.remove_child_entity(entity)
+
 func _on_end_turn_pressed():
 	Util.sysprint("Level:_on_end_turn_pressed","start")
 	if team_turn == C.TEAM.PLAYER:
@@ -390,8 +389,10 @@ func _on_undo_move_pressed():
 			clear_entity_moved_history()
 
 func _on_entity_threat_updated():
+	var enemy_threats = get_team_group_threat_tiles(C.GROUPS_ENEMIES)
+	enemy_threats.append_array(get_team_group_threat_tiles(C.GROUPS.PROPS))
 	grid.highlight_threat_tiles(
-		get_team_group_threat_tiles(C.GROUPS_ENEMIES),
+		enemy_threats,
 		get_team_group_threat_tiles(C.GROUPS_ALLIES)
 	)
 
@@ -545,3 +546,9 @@ func spawn_units():
 				)
 				neutral_count += 1
 	
+
+#func register_entities():
+	#print("entity_register_queue",entity_register_queue)
+	#for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
+		#register_entity(entity)
+	#entity_register_queue = []

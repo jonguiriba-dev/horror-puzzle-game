@@ -5,7 +5,7 @@ signal configured
 signal entered
 signal exited
 
-var host
+var host:Entity
 var state_id :C.STATE
 var events_active = false
 

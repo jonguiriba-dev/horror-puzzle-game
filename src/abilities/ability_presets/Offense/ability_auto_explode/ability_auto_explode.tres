@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_roimn"]
 script = ExtResource("1_0pmx3")
 effect_type = 0
-value = 2
+value = 3
 entity_type = 0
 
 [sub_resource type="Resource" id="Resource_vsmds"]
@@ -28,13 +28,15 @@ source = 0
 target = 0
 key = "countdown"
 value = 0
+type = 0
 
 [sub_resource type="Resource" id="Resource_w1vid"]
 script = ExtResource("3_nowpt")
-source = 0
+source = 1
 target = 0
-key = "health"
+key = "death"
 value = 0
+type = 1
 
 [resource]
 script = ExtResource("4_boyav")
@@ -44,7 +46,7 @@ ability_range = 2
 effects = Array[ExtResource("1_0pmx3")]([SubResource("Resource_roimn"), SubResource("Resource_vsmds"), SubResource("Resource_68hov")])
 triggers = Array[ExtResource("3_nowpt")]([SubResource("Resource_cqkyy"), SubResource("Resource_w1vid")])
 highlight_color = 3
-initial_countdown = 1
+initial_countdown = 3
 target_count = 1
 max_charges = 0
 action_cost = 0
@@ -52,6 +54,7 @@ range_pattern = 1
 aoe_pattern = 1
 tile_exclude_flag = 5
 target_strategy = 0
+threat_strategy = 1
 use_host_as_origin = false
 tile_include_self = true
 is_action = true

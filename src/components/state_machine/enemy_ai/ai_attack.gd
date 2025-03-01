@@ -24,9 +24,9 @@ func _enter_state(old_state, new_state):
 	var team_turn = WorldManager.level.team_turn
 	if host.threat:
 		await attack_target()
-		if WorldManager.level.animation_counter != 0:
+		if AnimationManager.animation_counter != 0:
 			print("Waiting on animation...")
-			await WorldManager.level.animation_counter_cleared
+			await AnimationManager.animation_cleared
 			
 	if team_turn != C.TEAM.PLAYER:
 		for l in tile_labels:
@@ -82,13 +82,14 @@ func find_threat():
 			return
 		if !ability.can_target_entities:
 			return
+			
 		var valid_targets = ability.get_valid_targets()
 		Util.sysprint("%s(host).%s(sm_node).find_threat()"%[host.data.entity_name,'ai_attack'],"ability:%s;valid_targets:%s"%[ability.data.ability_name,valid_targets])
 		
 		if valid_targets.size() > 0:
 			target_found = true
 			var valid_target = valid_targets[0]
-			set_threat(valid_target.map_position, ability)
+			host.set_threat(valid_target.map_position, ability)
 			
 	if !target_found:
 		host.clear_threat()
@@ -199,12 +200,6 @@ func get_tile_value(tile_pos:Vector2i)->int:
 		value -= 15
 	return value
 
-func set_threat(target_map_position:Vector2i,ability:AbilityV2):
-	var threat = {"tile":target_map_position, "ability":ability}
-	Util.sysprint("%s.ai_attack.set_threat"%[host.data.entity_name],"ability:%s tile:%s"%[threat.ability.data.ability_name,str(threat.tile)])
-	host.threat = threat
-	host.threat_updated.emit()
-	var targetted_entity = WorldManager.level.grid.get_entity_on_tile(host.threat.tile)
 
 
 	

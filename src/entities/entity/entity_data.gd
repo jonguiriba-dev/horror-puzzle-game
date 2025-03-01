@@ -36,7 +36,6 @@ enum STATE_LISTS{
 @export var health := 1
 @export var experience := 0
 @export var lvl := 1
-#var animation_counter := 0
 @export var action_counter := 1
 @export var move_counter := 1
 @export var abilities:Array[AbilityV2]=[]
@@ -63,7 +62,6 @@ func apply_as_preset(entity:Entity):
 		if starting_ability_data.custom_ability_script:
 			ability = load(starting_ability_data.custom_ability_script).new()
 		ability.data = starting_ability_data.duplicate()
-		ability.setup(entity)
 		entity.data.abilities.push_front(ability) 
 	
 	entity.set_max_health(max_health)

@@ -23,6 +23,7 @@ var flip_h:=false
 var threat = null
 var status_effects:Array[Status] = []
 var is_turn_done:= false
+var is_alive:= true
 
 signal hit(damage:int)
 signal stat_changed(key:String, value)
@@ -35,6 +36,7 @@ signal turn_end
 signal turn_start
 signal selected
 signal threat_updated
+signal registered
 
 func _ready() -> void:
 	if preset:
@@ -52,48 +54,23 @@ func _ready() -> void:
 
 	if data.team == C.TEAM.ENEMY:
 		add_to_group(C.GROUPS_ENEMIES)
+	elif data.team == C.TEAM.PROP:
+		add_to_group(C.GROUPS.PROPS)
 	else:
 		add_to_group(C.GROUPS_TARGETS)
 		if data.team == C.TEAM.PLAYER:
 			add_to_group(C.GROUPS.PLAYER_ENTITIES)
 		elif data.team == C.TEAM.ALLY:
 			add_to_group(C.GROUPS_ALLIES)
-	
 	if sprite:
 		sprite.play("idle")
 	
 	for ability in get_abilities():
 		if ability.data.ability_name == "move":
 			continue
+		ability.setup(self)
 		ability.used.connect(_on_ability_used)
 	
-	#WorldManager.level.register_entity(self)
-	
-	#
-#func load_preset(_preset:EntityData):
-	#Util.sysprint("Entity:loading_preset", "loading_preset")
-	#if !_preset:
-		#return
-	#entity_name = _preset.entity_name
-	#Util.sysprint("Entity:loading_preset", "name: "+entity_name)
-	#set_max_health(_preset.max_health)
-	#team = _preset.team
-	#move_range = _preset.move_range
-	#
-	#for ability in _preset.get_abilities():
-		#add_child(ability)
-	#
-	#add_child(_preset.get_state_machine())
-	#
-	#if preset.sprite_frames:
-		#sprite.sprite_frames = preset.sprite_frames
-	#
-	#if preset.portrait_image:
-		#portrait_image = load(preset.portrait_image)
-	#
-	#sprite.position += _preset.sprite_offset
-	#shadow.position += _preset.shadow_offset
-	#
 func set_max_health(_max_health:int):
 	data.max_health = _max_health
 	data.health = _max_health
@@ -138,6 +115,8 @@ func get_enemies()->Array[Entity]:
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		if entity.data.team != data.team:
 			if C.ALLIED_TEAMS[C.TEAM.keys()[data.team]].has(entity.data.team):
+				continue
+			if entity.data.team == C.TEAM.PROP:
 				continue
 			enemies.push_front(entity as Entity)
 				
@@ -212,16 +191,21 @@ func _on_knockback(distance:int, source_map_pos:Vector2i):
 	if !WorldManager.level.grid.get_possible_tiles(data.team).has(target_pos):
 		return
 	
-	WorldManager.level.increment_animation_counter(1) 
-	animation_counter+=1
+	increment_animation_counter()
 	var tween = create_tween()
 	tween.tween_property(self, "position", WorldManager.level.grid.map_to_local(target_pos), 0.3)
 	await tween.finished.connect(func():
 		knockback_animation_finished.emit(distance,source_map_pos,prev_position)
-		animation_counter -= 1
-		WorldManager.level.increment_animation_counter(-1) 
+		decrement_animation_counter()
 	)
+
+func increment_animation_counter():
+	animation_counter+=1
+	AnimationManager.increment_animation_counter() 
 	
+func decrement_animation_counter():
+	animation_counter-=1
+	AnimationManager.decrement_animation_counter() 
 	
 func _on_area_2d_mouse_entered() -> void:
 	add_to_group(C.GROUPS_HOVERED_ENTITIES)
@@ -242,6 +226,7 @@ func _on_hit(damage:int) -> void:
 	
 	stat_changed.emit("health",data.health)
 	Util.sysprint("Entity %s"%[data.entity_name],"health after calculation: %s"%[data.health])
+
 func _on_death() -> void:
 	for group in get_groups():
 		remove_from_group(group)
@@ -249,12 +234,14 @@ func _on_death() -> void:
 	if data.team == C.TEAM.ENEMY:
 		await WorldManager.level.check_player_victory()
 
-	print("animation_counter ", animation_counter)
-	if animation_counter != 0:
-		WorldManager.level.increment_animation_counter(animation_counter * -1)
+	#if animation_counter != 0:
+		#WorldManager.level.increment_animation_counter(animation_counter * -1)
 	
 	clear_threat()
-	queue_free()
+	is_alive = false
+	hit.disconnect(_on_hit)
+	knockback.disconnect(_on_knockback)
+	#queue_free()
 		
 func _on_selected():
 	if data.team == C.TEAM.PLAYER:
@@ -311,3 +298,9 @@ static func load_data(entity_load_data)->Entity:
 			entity_data.load_data(entity)
 			
 	return entity
+	
+func set_threat(target_map_position:Vector2i,ability:AbilityV2):
+	threat = {"tile":target_map_position, "ability":ability}
+	Util.sysprint("Entity.%s.set_threat"%[data.entity_name],"ability:%s tile:%s"%[threat.ability.data.ability_name,str(threat.tile)])
+	threat_updated.emit()
+	#var targetted_entity = WorldManager.level.grid.get_entity_on_tile(threat.tile)

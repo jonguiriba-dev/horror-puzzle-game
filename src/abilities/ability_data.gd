@@ -6,6 +6,11 @@ enum TARGET_STRATEGIES{
 	NAVIGATION
 }
 
+enum THREAT_STRATEGIES{
+	MANUAL,
+	ALWAYS
+}
+
 @export var ability_name := "ability_name"
 @export var description:="ability description"
 @export var ability_range := 0
@@ -20,11 +25,13 @@ enum TARGET_STRATEGIES{
 @export var aoe_pattern:TilePattern.PATTERNS = TilePattern.PATTERNS.POINT
 @export var tile_exclude_flag:Grid.TILE_EXCLUDE_FLAGS=Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
 @export var target_strategy := TARGET_STRATEGIES.DEFAULT
+@export var threat_strategy := THREAT_STRATEGIES.MANUAL
 @export var use_host_as_origin := false
 @export var tile_include_self:=false
 @export var is_action:=true
 @export var is_enemy_obstacle := false
 @export var is_passive := false
+
 @export_file("*gd") var animation_script
 @export_file("*gd") var custom_ability_script
 

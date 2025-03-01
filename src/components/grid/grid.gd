@@ -43,6 +43,7 @@ var player_entity_tiles: Array[Vector2i]= []
 var enemy_entity_tiles: Array[Vector2i]= []
 var ally_entity_tiles: Array[Vector2i]= []
 var neutral_entity_tiles: Array[Vector2i]= []
+var prop_entity_tiles: Array[Vector2i]= []
 
 var is_ability_select = false
 
@@ -104,6 +105,7 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 		enemy_tiles.append_array(player_entity_tiles)
 		ally_tiles = enemy_entity_tiles
 	
+	enemy_tiles.append_array(prop_entity_tiles)
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	
@@ -266,6 +268,7 @@ func populate_entity_tiles2():
 	enemy_entity_tiles = []
 	ally_entity_tiles = []
 	neutral_entity_tiles = []
+	prop_entity_tiles = []
 	
 	for entity in get_tree().get_nodes_in_group(C.GROUPS_ENTITIES):
 		if entity.data.team == C.TEAM.PLAYER:
@@ -276,6 +279,8 @@ func populate_entity_tiles2():
 			ally_entity_tiles.push_front(entity.map_position)
 		if entity.data.team == C.TEAM.CITIZEN:
 			neutral_entity_tiles.push_front(entity.map_position)
+		if entity.data.team == C.TEAM.PROP:
+			prop_entity_tiles.push_front(entity.map_position)
 		
 func highlight_threat_tiles(enemy_threat_tiles,ally_threat_tiles):
 	clear_all_highlights(HIGHLIGHT_LAYERS.THREAT)
@@ -285,6 +290,7 @@ func highlight_threat_tiles(enemy_threat_tiles,ally_threat_tiles):
 		var color = HIGHLIGHT_COLORS.RED
 		if ally_threat_tiles.has(tile_position):
 			color = HIGHLIGHT_COLORS.PURPLE
+		
 		set_highlight(tile_position,color,HIGHLIGHT_LAYERS.THREAT)
 		
 	for tile_position in ally_threat_tiles:
@@ -335,4 +341,9 @@ func get_team_position_tiles(filter:TEAM_POSITION_LAYER_FILTERS):
 func add_child_entity(entity:Entity):
 	Util.sysprint("Grid","adding child %s"%[entity.data.entity_name])
 	prop_layer.add_child(entity)
-	print("TEST")
+	WorldManager.level.register_entity(entity)
+
+func remove_child_entity(entity:Entity):
+	Util.sysprint("Grid","removing child %s"%[entity.data.entity_name])
+	prop_layer.remove_child(entity)
+	

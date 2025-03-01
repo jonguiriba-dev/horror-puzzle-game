@@ -6,6 +6,7 @@ const GROUPS:={
 	"ALLIES" : "allies",
 	"UNITS":"units",
 	"CIVILIANS":"civilians",
+	"PROPS" : "props",
 	"TARGETTING_ABILITY" : "targetting_ability",
 	"HOVERED_ENTITIES" : "hovered_entities",
 	"TARGETS" : "targets",
