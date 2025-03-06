@@ -7,14 +7,16 @@
 [sub_resource type="Resource" id="Resource_25c7p"]
 script = ExtResource("2_33k1m")
 mode = 1
-target = "max_action_counter"
+target_property = "max_action_counter"
 value = 1
+ability_data = null
 
 [sub_resource type="Resource" id="Resource_nf703"]
 script = ExtResource("2_33k1m")
 mode = 1
-target = "max_move_counter"
+target_property = "max_move_counter"
 value = 1
+ability_data = null
 
 [resource]
 script = ExtResource("2_rn2yy")

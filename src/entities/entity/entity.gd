@@ -25,7 +25,7 @@ var status_effects:Array[Status] = []
 var is_turn_done:= false
 var is_alive:= true
 
-signal hit(damage:int)
+signal hit(damage:int,source)
 signal stat_changed(key:String, value)
 signal knockback(distance:int,source_pos:Vector2)
 signal knockback_animation_finished(distance:int,source_map_pos:Vector2i,prev_map_position:Vector2i)
@@ -150,10 +150,19 @@ func clear_threat():
 	threat_updated.emit()
 
 func add_ability(ability_data:AbilityData):
+	Util.sysprint("%s.Entity.add_ability"%[data.entity_name],"%s"%[ability_data.ability_name])
 	var ability = AbilityV2.new()
 	ability.data = ability_data
 	ability.setup(self)
 	data.abilities.push_front(ability) 
+
+func remove_ability(ability_name:String):
+	Util.sysprint("%s.Entity.remove_ability"%[data.entity_name],"%s"%[ability_name])
+	var index := data.abilities.find(func(e):
+		return e.ability_name == ability_name
+	) 
+	if index != -1:
+		data.abilities.erase(index)
 
 
 func _on_turn_start():
@@ -219,7 +228,7 @@ func _on_stun():
 	unset_threat()
 	refresh_move_and_action_counters()
 
-func _on_hit(damage:int) -> void:
+func _on_hit(damage:int, source) -> void:
 	data.health -= damage
 	healthbar.value = data.health
 	

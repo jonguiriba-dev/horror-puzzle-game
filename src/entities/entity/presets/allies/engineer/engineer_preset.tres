@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="EntityData" load_steps=9 format=3 uid="uid://dcykv34deb1o6"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_mbrj3"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="3_hq345"]
+[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability_v2.gd" id="1_mbrj3"]
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="3_hq345"]
 [ext_resource type="SpriteFrames" uid="uid://4h3wfm814uyb" path="res://src/entities/entity/presets/allies/engineer/engineer_sprite_frames.tres" id="4_uip7y"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="5_f2ytu"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="5_f2ytu"]
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_j1gmj"]
 [ext_resource type="Resource" uid="uid://cul6kg7iqvpdm" path="res://src/abilities/ability_presets/Offense/ability_bomb/ability_bomb.tres" id="7_ji08m"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="7_y7bfs"]

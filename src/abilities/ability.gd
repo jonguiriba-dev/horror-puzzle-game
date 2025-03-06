@@ -86,7 +86,7 @@ func _get_tile_target(map_pos:Vector2i):
 func apply_effect(target):
 	for effect in effects:
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
-			target.hit.emit(effect.value)
+			target.hit.emit(effect.value,host)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
 			target.knockback.emit(effect.value, WorldManager.level.grid.local_to_map(host.position))
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:

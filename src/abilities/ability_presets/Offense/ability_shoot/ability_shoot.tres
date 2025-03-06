@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://ca6k8754tx2hw"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://ca6k8754tx2hw"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="2_lbtsf"]
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="2_lbtsf"]
 [ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="3_4nvh5"]
-[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="4_765a6"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_dwld2"]
-[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="5_pf2xy"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_dwld2"]
+[ext_resource type="Script" uid="uid://bsxainwo4gs4m" path="res://src/abilities/ability_trigger.gd" id="5_pf2xy"]
 
 [resource]
 script = ExtResource("4_dwld2")
 ability_name = "Shoot"
 description = "ability description"
 ability_range = 5
-effects = Array[ExtResource("2_lbtsf")]([ExtResource("3_4nvh5"), ExtResource("4_765a6")])
+effects = Array[ExtResource("2_lbtsf")]([ExtResource("3_4nvh5")])
 triggers = Array[ExtResource("5_pf2xy")]([])
 highlight_color = 3
 initial_countdown = 0
@@ -21,9 +20,10 @@ action_cost = 1
 range_pattern = 1
 aoe_pattern = 3
 tile_exclude_flag = 5
+tile_include_self = false
 target_strategy = 0
+threat_strategy = 0
 use_host_as_origin = false
-tile_exclude_self = false
 is_action = true
 is_enemy_obstacle = false
 is_passive = false

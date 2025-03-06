@@ -8,16 +8,18 @@ enum TRIGGER_TYPES{
 
 enum SOURCE_TYPES{
 	ABILITY,
-	HOST
+	HOST,
+	ALLY
 }
 
 enum TARGET_TYPES{
 	SELF,
+	ENEMY,
 }
 
 @export var source := SOURCE_TYPES.ABILITY
 @export var target := TARGET_TYPES.SELF
+@export var type := TRIGGER_TYPES.PROPERTY
 
 @export var key := ""
 @export var value := 0
-@export var type := TRIGGER_TYPES.PROPERTY

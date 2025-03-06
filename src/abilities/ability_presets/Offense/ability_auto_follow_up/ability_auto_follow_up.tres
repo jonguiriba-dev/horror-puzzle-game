@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://hwvd1erywv5j"]
+
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_cv4j2"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_r602e"]
+[ext_resource type="Script" uid="uid://bsxainwo4gs4m" path="res://src/abilities/ability_trigger.gd" id="3_kiyy0"]
+
+[sub_resource type="Resource" id="Resource_roimn"]
+script = ExtResource("1_cv4j2")
+effect_type = 0
+value = 1
+status_type = 0
+entity_type = 0
+success_rate = 1.0
+
+[sub_resource type="Resource" id="Resource_cqkyy"]
+script = ExtResource("3_kiyy0")
+source = 2
+target = 1
+type = 1
+key = "hit"
+value = 0
+
+[resource]
+script = ExtResource("2_r602e")
+ability_name = "Follow Up Shot"
+description = "Shoot once after an ally deals damage"
+ability_range = 7
+effects = Array[ExtResource("1_cv4j2")]([SubResource("Resource_roimn")])
+triggers = Array[ExtResource("3_kiyy0")]([SubResource("Resource_cqkyy")])
+highlight_color = 3
+initial_countdown = 3
+target_count = 1
+max_charges = 0
+action_cost = 0
+range_pattern = 2
+aoe_pattern = 3
+tile_exclude_flag = 4
+tile_include_self = false
+target_strategy = 0
+threat_strategy = 0
+use_host_as_origin = false
+is_action = false
+is_enemy_obstacle = false
+is_passive = true
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null

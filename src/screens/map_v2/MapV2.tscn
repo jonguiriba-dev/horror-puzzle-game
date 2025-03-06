@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=4 uid="uid://p843yk6tv8ue"]
 
-[ext_resource type="Script" path="res://src/screens/map_v2/map_v2.gd" id="1_7qc33"]
+[ext_resource type="Script" uid="uid://80t7t36d0fww" path="res://src/screens/map_v2/map_v2.gd" id="1_7qc33"]
 [ext_resource type="Texture2D" uid="uid://cbiiv0achhftf" path="res://assets/map/map.png" id="1_rdn8v"]
 [ext_resource type="Texture2D" uid="uid://4jnaecxqa5kl" path="res://assets/tiles/highlight_tiles.png" id="3_1pgkr"]
-[ext_resource type="Script" path="res://src/screens/map_v2/connection.gd" id="4_ooxib"]
+[ext_resource type="Script" uid="uid://bjnexftt8g1gx" path="res://src/screens/map_v2/connection.gd" id="4_ooxib"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wope"]
 atlas = ExtResource("1_rdn8v")

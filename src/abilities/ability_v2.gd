@@ -59,7 +59,21 @@ func setup(_host:Entity) -> void:
 					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
 						use(host.map_position)	
 			)
-	
+		if trigger.source == AbilityTrigger.SOURCE_TYPES.ALLY:
+			if trigger.type == AbilityTrigger.TRIGGER_TYPES.SIGNAL:
+				if host.has_signal(trigger.key):
+					if trigger.target == AbilityTrigger.TARGET_TYPES.ENEMY:
+						for enemy in WorldManager.get_tree().get_nodes_in_group(C.GROUPS.ENEMIES):
+							#trigger only when the hit source is from an ally and not the host 
+							if trigger.key == "hit":
+								enemy.connect(trigger.key,func(value,source):
+									if source != host:
+										use(enemy.map_position)	
+								)
+							else:
+								enemy.connect(trigger.key,func(a=null,b=null,c=null):
+									use(enemy.map_position)	
+								)
 	
 	
 	refresh_charges()
@@ -128,7 +142,7 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SELF_DAMAGE
 	)
 	for self_damage_effect in self_damage_effects:
-		host.hit.emit(self_damage_effect.value)
+		host.hit.emit(self_damage_effect.value,host)
 		
 	
 	for affected_tile in affected_tiles:
@@ -151,7 +165,7 @@ func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 			continue
 			
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
-			target.hit.emit(effect.value)
+			target.hit.emit(effect.value,host)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
 			target.knockback.emit(effect.value, WorldManager.level.grid.local_to_map(host.position))
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:

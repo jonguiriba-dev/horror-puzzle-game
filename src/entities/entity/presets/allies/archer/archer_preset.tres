@@ -1,25 +1,26 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://cnxebyxdvjec6"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://cnxebyxdvjec6"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_mgg53"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="4_sp7hp"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="5_dtda7"]
+[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability_v2.gd" id="1_mgg53"]
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="4_sp7hp"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="5_dtda7"]
 [ext_resource type="SpriteFrames" uid="uid://bik6xlmkjtmhy" path="res://src/entities/entity/presets/allies/archer/archer_sprite_frames.tres" id="5_la7xf"]
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_cmudh"]
-[ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="7_6g4rb"]
+[ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="6_fhoix"]
+[ext_resource type="Resource" uid="uid://1hv0b35sbs60" path="res://src/abilities/ability_presets/Offense/ability_follow_up/ability_follow_up.tres" id="7_ndegw"]
 
 [resource]
 script = ExtResource("4_sp7hp")
 entity_name = "Archer"
 max_health = 99
 move_range = 3
-team = 4
+team = 0
 speed = 5
 max_move_counter = 1
 max_action_counter = 1
 max_ability_slots = 1
 max_equipment_slots = 2
-starting_abilities = Array[ExtResource("5_dtda7")]([ExtResource("6_cmudh"), ExtResource("7_6g4rb")])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
+starting_abilities = Array[ExtResource("5_dtda7")]([ExtResource("6_cmudh"), ExtResource("6_fhoix"), ExtResource("7_ndegw")])
+state_machine = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"
 shadow_offset = Vector2(0, 0)
 sprite_offset = Vector2(0, 0)
 sprite_frames = ExtResource("5_la7xf")

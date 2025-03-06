@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusData" load_steps=5 format=3 uid="uid://ysl2bnu7h2dx"]
+
+[ext_resource type="SpriteFrames" uid="uid://c6phbfuj628e6" path="res://src/components/objects/status/follow_up/follow_up_sprite_frames.tres" id="1_j2lu1"]
+[ext_resource type="Script" path="res://src/components/objects/modifier.gd" id="2_msg5h"]
+[ext_resource type="Script" path="res://src/components/objects/status/status_data.gd" id="3_nbys0"]
+
+[sub_resource type="Resource" id="Resource_2vtfl"]
+script = ExtResource("2_msg5h")
+mode = 0
+target_property = "abilities"
+value = 0
+ability_data = "res://src/abilities/ability_presets/Offense/ability_auto_follow_up/ability_auto_follow_up.tres"
+
+[resource]
+script = ExtResource("3_nbys0")
+status_name = "Follow Up"
+modifiers = Array[ExtResource("2_msg5h")]([SubResource("Resource_2vtfl")])
+icon = ExtResource("1_j2lu1")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://byh4m2vm2s5a7"]
 
-[ext_resource type="Script" path="res://src/screens/game/game.gd" id="1_jtsqk"]
-[ext_resource type="Script" path="res://src/screens/game/sub_viewport_container.gd" id="2_1mwap"]
-[ext_resource type="Script" path="res://src/screens/game/sub_viewport.gd" id="2_646e1"]
-[ext_resource type="Script" path="res://src/screens/game/root.gd" id="3_jepba"]
-[ext_resource type="Script" path="res://src/screens/game/ui_container.gd" id="3_oas52"]
+[ext_resource type="Script" uid="uid://o5dkl4mjts07" path="res://src/screens/game/game.gd" id="1_jtsqk"]
+[ext_resource type="Script" uid="uid://cedgnaw5vmksa" path="res://src/screens/game/sub_viewport_container.gd" id="2_1mwap"]
+[ext_resource type="Script" uid="uid://cdt8sy4vmk5id" path="res://src/screens/game/sub_viewport.gd" id="2_646e1"]
+[ext_resource type="Script" uid="uid://bem85dqa3uj3i" path="res://src/screens/game/root.gd" id="3_jepba"]
+[ext_resource type="Script" uid="uid://rwtearmlbq5k" path="res://src/screens/game/ui_container.gd" id="3_oas52"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
