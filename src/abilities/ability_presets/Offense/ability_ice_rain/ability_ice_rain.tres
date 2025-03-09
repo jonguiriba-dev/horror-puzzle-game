@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://px545ffkmk5t"]
+
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_ohe55"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_06750"]
+[ext_resource type="Script" uid="uid://bsxainwo4gs4m" path="res://src/abilities/ability_trigger.gd" id="3_fxvv1"]
+
+[sub_resource type="Resource" id="Resource_ai36m"]
+script = ExtResource("1_ohe55")
+effect_type = 0
+value = 2
+status_type = 0
+entity_type = 0
+success_rate = 1.0
+
+[resource]
+script = ExtResource("2_06750")
+ability_name = "Ice Rain"
+description = "Rain ice on a large area"
+ability_range = 3
+effects = Array[ExtResource("1_ohe55")]([SubResource("Resource_ai36m")])
+triggers = Array[ExtResource("3_fxvv1")]([])
+highlight_color = 3
+initial_countdown = 0
+target_count = 1
+max_charges = 0
+action_cost = 1
+range_pattern = 2
+aoe_pattern = 2
+aoe_range = 3
+tile_exclude_flag = 0
+tile_include_self = false
+target_strategy = 0
+threat_strategy = 0
+use_host_as_origin = false
+is_action = true
+is_enemy_obstacle = false
+is_passive = false
+animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
+custom_ability_script = null

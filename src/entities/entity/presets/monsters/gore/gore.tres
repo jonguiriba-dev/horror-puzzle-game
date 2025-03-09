@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://y68iwe3dy48k"]
 
-[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_ef1yf"]
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_gbbto"]
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="1_ef1yf"]
+[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability_v2.gd" id="1_gbbto"]
 [ext_resource type="SpriteFrames" uid="uid://jcy5fw848v25" path="res://src/entities/entity/presets/monsters/gore/gore_sprite_frames.tres" id="2_5qki6"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="3_j7rkw"]
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_jfe2g"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="6_jujr1"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="6_jujr1"]
 
 [resource]
 script = ExtResource("1_ef1yf")

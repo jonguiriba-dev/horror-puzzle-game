@@ -11,8 +11,8 @@ extends Node
 const STARTING_UNIT_PRESETS :Array[EntityData]= [
 	preload("res://src/entities/entity/presets/allies/archer/archer_preset.tres"),
 	preload("res://src/entities/entity/presets/allies/engineer/engineer_preset.tres"),
-	#preload("res://src/entities/entity/presets/allies/mage/mage_preset.tres"),
-	#preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
+	preload("res://src/entities/entity/presets/allies/mage/mage_preset.tres"),
+	preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
 	#preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres"),
 	#preload("res://src/entities/entity/presets/allies/knight/knight_preset.tres")
 ]

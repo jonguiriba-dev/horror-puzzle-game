@@ -7,7 +7,7 @@ const GROUPS:={
 	"UNITS":"units",
 	"CIVILIANS":"civilians",
 	"PROPS" : "props",
-	"TARGETTING_ABILITY" : "targetting_ability",
+	"TARGETTING_ENTITY" : "targetting_entity",
 	"HOVERED_ENTITIES" : "hovered_entities",
 	"TARGETS" : "targets",
 	"HIGHLIGHT_TEXT" : "highlight_text",
@@ -20,7 +20,6 @@ var GROUPS_ENTITIES = "entities"
 var GROUPS_ALLIES = "allies"
 var GROUPS_UNITS= "units"
 var GROUPS_CIVILIANS= "civilians"
-var GROUPS_TARGETTING_ABILITY = "targetting_ability"
 var GROUPS_HOVERED_ENTITIES = "hovered_entities"
 var GROUPS_TARGETS = "targets"
 var GROUPS_HIGHLIGHT_TEXT = "highlight_text"
@@ -62,6 +61,13 @@ enum STATE{
 	AI_SPREAD,
 	AI_TOGETHER
 }
+
+const STATES = {
+	"LEVEL":{
+		"LOAD":"LOAD",
+		"START_SEQUENCE":"START_SEQUENCE",
+	}
+} 
 
 enum ORIENTATION{
 	HORIZONTAL,

@@ -134,9 +134,9 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		
 	var affected_tiles = TilePattern.get_callable(data.aoe_pattern).call(
 		origin,
-		data.ability_range,
+		data.aoe_range,
 		direction
-	)
+	)	
 	
 	var self_damage_effects = data.effects.filter(
 		func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SELF_DAMAGE
@@ -282,23 +282,12 @@ func get_threat_tiles(
 	var direction = Util.get_direction(source_map_pos,target_map_pos)
 	var threat_tiles = []
 	
-	#var prev_tile = source_map_pos
-	
 	var affected_tiles = TilePattern.get_callable(data.aoe_pattern).call(
 		target_map_pos,
-		data.ability_range,
+		data.aoe_range,
 		direction
 	)
-	
-	if data.ability_name == "Timed Explosive":
-		print("affected_tiles",affected_tiles)
-	#for i in range(ability_range):
-		#prev_tile += direction
-		#threat_tiles.push_front(prev_tile)
-	
-	#for tile in affected_tiles:
-		#prev_tile += direction
-		#threat_tiles.push_front(prev_tile)
+
 	return affected_tiles	
 
 func is_valid_target(map_pos:Vector2i):
@@ -323,17 +312,14 @@ func _on_target_select() -> void:
 	if host.data.action_counter == 0:
 		return 
 	set_state(STATE.TARGET_SELECT)
-	host.set_meta("targetting_ability",self)
-	host.add_to_group(C.GROUPS_TARGETTING_ABILITY)
-	WorldManager.level.grid.is_ability_select = true
+	WorldManager.set_meta("player_targetting_ability",self)
 	highlight_target_tiles()
 
 func _on_stopped_targetting() -> void:
 	host.set_meta("targetting_ability",null)
-	host.remove_from_group(C.GROUPS_TARGETTING_ABILITY)
+	WorldManager.set_meta("player_targetting_ability",null)
 	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	state = STATE.INACTIVE
-	WorldManager.level.grid.is_ability_select = false
 
 func _on_used(ability:AbilityV2):
 	if data.charges < 0:

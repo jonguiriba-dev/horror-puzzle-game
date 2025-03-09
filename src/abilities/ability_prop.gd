@@ -20,7 +20,7 @@ class_name AbilityProp
 @export_file("animation_*gd") var animation_script
 @export_file("*gd") var custom_ability_script
 
-func apply(ability:Ability):
+func apply(ability:AbilityV2):
 	var prop_list = [
 		"ability_name",
 		"ability_range",

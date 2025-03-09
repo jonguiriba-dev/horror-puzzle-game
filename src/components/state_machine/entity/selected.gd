@@ -41,7 +41,7 @@ func _enter_state(old_state, new_state):
 		ability_move.target_select.emit()
 		
 func _on_tile_selected(map_pos:Vector2i):
-	if (get_tree().get_node_count_in_group(C.GROUPS_TARGETTING_ABILITY) == 0):
+	if (get_tree().get_node_count_in_group(C.GROUPS.TARGETTING_ENTITY) == 0):
 		#and ability.state != Ability.STATE.TARGET_SELECT):
 		to_idle = true
 		

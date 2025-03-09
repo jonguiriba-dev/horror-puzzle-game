@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=4 uid="uid://bi1wboxbt8k8p"]
 
-[ext_resource type="Script" path="res://src/levels/level.gd" id="1_w3cj3"]
+[ext_resource type="Script" uid="uid://be4rcs0k58k2g" path="res://src/levels/level.gd" id="1_w3cj3"]
 [ext_resource type="Resource" uid="uid://dle2hisepbnbt" path="res://src/levels/cave/cave_level_preset.tres" id="2_hmtj0"]
-[ext_resource type="Script" path="res://src/components/grid/grid.gd" id="4_kxvs2"]
+[ext_resource type="Script" uid="uid://crqbx0lvj8b6n" path="res://src/components/grid/grid.gd" id="4_kxvs2"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="6_r2h54"]
 [ext_resource type="TileSet" uid="uid://fahxwg8eoo7q" path="res://src/components/grid/highlight_tileset.tres" id="7_ctsbu"]
 [ext_resource type="TileSet" uid="uid://b5rlgbfbfljvl" path="res://src/components/grid/cursor_tileset.tres" id="8_eqwif"]

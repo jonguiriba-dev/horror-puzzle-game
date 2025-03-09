@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelSpawnConfig" load_steps=11 format=3 uid="uid://br6uaxjggcqlg"]
 
-[ext_resource type="Script" path="res://src/levels/entity_spawn.gd" id="1_bay88"]
-[ext_resource type="Script" path="res://src/levels/level_spawn_config.gd" id="1_pa6u3"]
+[ext_resource type="Script" uid="uid://dd31aetb03ctx" path="res://src/levels/entity_spawn.gd" id="1_bay88"]
+[ext_resource type="Script" uid="uid://capd574h85x4u" path="res://src/levels/level_spawn_config.gd" id="1_pa6u3"]
 [ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="2_a0wgo"]
 [ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="3_001as"]
 [ext_resource type="Resource" uid="uid://dslk1ursehvik" path="res://src/entities/entity/presets/monsters/watcher/watcher.tres" id="3_nngy2"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=4 uid="uid://c7y4ec3rrkgjv"]
+[gd_scene load_steps=31 format=4 uid="uid://c7y4ec3rrkgjv"]
 
-[ext_resource type="Script" path="res://src/levels/level.gd" id="1_025me"]
-[ext_resource type="Script" path="res://src/components/grid/grid.gd" id="2_eodui"]
+[ext_resource type="Script" uid="uid://be4rcs0k58k2g" path="res://src/levels/level.gd" id="1_025me"]
+[ext_resource type="Script" uid="uid://crqbx0lvj8b6n" path="res://src/components/grid/grid.gd" id="2_eodui"]
 [ext_resource type="Resource" uid="uid://dle2hisepbnbt" path="res://src/levels/cave/cave_level_preset.tres" id="2_n425o"]
 [ext_resource type="TileSet" uid="uid://dvrpe3ah0yrmr" path="res://src/levels/cave/cave_tileset.tres" id="3_2w05r"]
 [ext_resource type="Texture2D" uid="uid://dn7i3g6migfca" path="res://assets/etc/gridline-tile.png" id="4_jovxc"]
@@ -16,6 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://tftvtkxipog8" path="res://assets/bgs/black.png" id="13_kpbvd"]
 [ext_resource type="Texture2D" uid="uid://c045pp86mh33s" path="res://assets/etc/shadow.png" id="14_8vady"]
 [ext_resource type="Texture2D" uid="uid://chihmnl6y46ny" path="res://assets/etc/light.png" id="15_8oh8e"]
+[ext_resource type="Script" uid="uid://6j85hnrcpncr" path="res://addons/godot_state_charts/state_chart.gd" id="18_kfawh"]
+[ext_resource type="Script" uid="uid://dy6a5bgmeu4fa" path="res://addons/godot_state_charts/compound_state.gd" id="19_wnjfx"]
+[ext_resource type="Script" uid="uid://bgvpa46t2eds4" path="res://addons/godot_state_charts/atomic_state.gd" id="20_p4l21"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="21_p4l21"]
+[ext_resource type="Script" uid="uid://dpomwwxuyh81j" path="res://addons/godot_state_charts/transition.gd" id="21_wnjfx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7tt8x"]
 texture = ExtResource("4_jovxc")
@@ -125,6 +130,10 @@ tile_set = ExtResource("5_xtins")
 y_sort_enabled = true
 tile_set = ExtResource("5_xtins")
 
+[node name="AbilityAOEHighlightLayer" type="TileMapLayer" parent="Grid"]
+y_sort_enabled = true
+tile_set = ExtResource("5_xtins")
+
 [node name="CursorLayer" type="TileMapLayer" parent="Grid"]
 y_sort_enabled = true
 tile_set = ExtResource("6_6ap5s")
@@ -171,3 +180,115 @@ energy = 1.31
 shadow_enabled = true
 texture = ExtResource("15_8oh8e")
 texture_scale = 0.2
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("18_kfawh")
+track_in_editor = true
+warn_on_sending_unknown_events = false
+metadata/_custom_type_script = "uid://6j85hnrcpncr"
+
+[node name="LevelStates" type="Node" parent="StateChart"]
+script = ExtResource("19_wnjfx")
+initial_state = NodePath("Load")
+metadata/_custom_type_script = "uid://dy6a5bgmeu4fa"
+
+[node name="Load" type="Node" parent="StateChart/LevelStates"]
+script = ExtResource("20_p4l21")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="Transition" type="Node" parent="StateChart/LevelStates/Load"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../StartSequence")
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="StartSequence" type="Node" parent="StateChart/LevelStates"]
+script = ExtResource("20_p4l21")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="Transition" type="Node" parent="StateChart/LevelStates/StartSequence"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../Running")
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="Running" type="Node" parent="StateChart/LevelStates"]
+script = ExtResource("19_wnjfx")
+initial_state = NodePath("AITurn")
+metadata/_custom_type_script = "uid://dy6a5bgmeu4fa"
+
+[node name="AITurn" type="Node" parent="StateChart/LevelStates/Running"]
+script = ExtResource("20_p4l21")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="ToPlayerTurn" type="Node" parent="StateChart/LevelStates/Running/AITurn"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../PlayerTurn")
+event = &"ai_turn_done"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="ToEndSequence" type="Node" parent="StateChart/LevelStates/Running/AITurn"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../../EndSequence")
+event = &"end_sequence"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="PlayerTurn" type="Node" parent="StateChart/LevelStates/Running"]
+script = ExtResource("19_wnjfx")
+initial_state = NodePath("AtomicState")
+metadata/_custom_type_script = "uid://dy6a5bgmeu4fa"
+
+[node name="ToAITurn" type="Node" parent="StateChart/LevelStates/Running/PlayerTurn"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../AITurn")
+event = &"player_turn_done"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="ToEndSequence" type="Node" parent="StateChart/LevelStates/Running/PlayerTurn"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../../EndSequence")
+event = &"end_sequence"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="AtomicState" type="Node" parent="StateChart/LevelStates/Running/PlayerTurn"]
+script = ExtResource("20_p4l21")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="EndSequence" type="Node" parent="StateChart/LevelStates"]
+script = ExtResource("20_p4l21")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="Transition" type="Node" parent="StateChart/LevelStates/EndSequence"]
+script = ExtResource("21_wnjfx")
+to = NodePath("../../Unload")
+event = &"unload"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="Unload" type="Node" parent="StateChart/LevelStates"]
+script = ExtResource("20_p4l21")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("21_p4l21")]
+layout_mode = 1
+offset_left = 515.0
+offset_top = -417.0
+offset_right = 876.0
+offset_bottom = -214.0
+initial_node_to_watch = NodePath("../StateChart")
+
+[connection signal="state_entered" from="StateChart/LevelStates/Load" to="." method="_on_load_state_entered"]
+[connection signal="state_entered" from="StateChart/LevelStates/StartSequence" to="." method="_on_start_sequence_state_entered"]
+[connection signal="state_entered" from="StateChart/LevelStates/Running" to="." method="_on_running_state_entered"]
+[connection signal="state_input" from="StateChart/LevelStates/Running" to="." method="_on_running_state_input"]
+[connection signal="state_entered" from="StateChart/LevelStates/Running/AITurn" to="." method="_on_ai_turn_state_entered"]
+[connection signal="state_exited" from="StateChart/LevelStates/Running/AITurn" to="." method="_on_turn_end"]
+[connection signal="state_entered" from="StateChart/LevelStates/Running/PlayerTurn" to="." method="_on_player_turn_state_entered"]
+[connection signal="state_exited" from="StateChart/LevelStates/Running/PlayerTurn" to="." method="_on_turn_end"]
+[connection signal="state_input" from="StateChart/LevelStates/Running/PlayerTurn" to="." method="_on_player_turn_state_input"]
+[connection signal="state_entered" from="StateChart/LevelStates/EndSequence" to="." method="_on_end_sequence_state_entered"]
+[connection signal="state_entered" from="StateChart/LevelStates/Unload" to="." method="_on_unload_state_entered"]

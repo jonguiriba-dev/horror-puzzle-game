@@ -47,12 +47,17 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/initial_position_type=2
-window/size/initial_screen=1
+window/size/initial_position_type=0
+window/size/initial_position=Vector2i(0, 500)
+window/size/initial_screen=2
 window/size/resizable=false
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/safe_resource_loader/plugin.cfg")
 
 [file_customization]
 

@@ -33,6 +33,7 @@ enum STATE_LISTS{
 @export var sprite_frames:SpriteFrames
 @export_file() var portrait_image
 
+@export_group("Private")
 @export var health := 1
 @export var experience := 0
 @export var lvl := 1

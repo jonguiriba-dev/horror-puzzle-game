@@ -40,12 +40,12 @@ func _ready() -> void:
 	else:
 		save_file_path = current_file_path
 	
-	Util.sysprint("SaveManager","file_path %s"%[save_file_path])
-	Util.sysprint("SaveManager","config_file %s"%[config_file])
+	Util.sysprint("SaveManager","file_path %s"%[save_file_path],"SaveManager")
+	Util.sysprint("SaveManager","config_file %s"%[config_file],"SaveManager")
 
 #TODO-FIX ME
 func save_game():
-	Util.sysprint("SaveManager","saving file to %s"%[save_file_path])
+	Util.sysprint("SaveManager","saving file to %s"%[save_file_path],"SaveManager")
 	#var res = ResourceSaver.save(
 		#save_file,
 		#save_file_path,
@@ -53,20 +53,20 @@ func save_game():
 	#)
 
 func save_data(key,data):
-	Util.sysprint("SaveManager","save data %s - %s"%[key,data])
+	Util.sysprint("SaveManager","save data %s - %s"%[key,data],"SaveManager")
 	save_file.set(key,data)
 	
 func reset_save_data():
 	
 	save_file.reset()
 func set_config(section,key,data):
-	Util.sysprint("SaveManager","save config data %s - %s"%[key,data])
+	Util.sysprint("SaveManager","save config data %s - %s"%[key,data],"SaveManager")
 	
 	config_file.set_value(section,key,data)
 	config_file.save_encrypted_pass(config_file_path,config_file_key)
 	
 func get_config(section, key, default=null):
-	Util.sysprint("SaveManager","load config %s - %s"%[section,key])
+	Util.sysprint("SaveManager","load config %s - %s"%[section,key],"SaveManager")
 	
 	return config_file.get_value(section,key,default)
 	

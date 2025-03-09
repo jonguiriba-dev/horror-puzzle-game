@@ -4,9 +4,12 @@ class_name Grid
 
 enum HIGHLIGHT_LAYERS{
 	ABILITY,
+	ABILITY_AOE,
 	THREAT,
+	CURSOR,
 	DEBUG
 }
+
 
 enum HIGHLIGHT_COLORS{
 	GREEN = 0,
@@ -27,6 +30,7 @@ var CUSTOM_DATA_LAYER_TEAM_POSITION = "team_position"
 
 @onready var tiles_layer :TileMapLayer= $TileMapLayer
 @onready var ability_highlight_layer :TileMapLayer= $AbilityHighlightLayer
+@onready var ability_aoe_highlight_layer :TileMapLayer= $AbilityAOEHighlightLayer
 @onready var threat_highlight_layer :TileMapLayer= $ThreatHighlightLayer
 @onready var debug_highlight_layer :TileMapLayer= $DebugHighlightLayer
 @onready var cursor_layer :TileMapLayer= $CursorLayer
@@ -34,6 +38,9 @@ var CUSTOM_DATA_LAYER_TEAM_POSITION = "team_position"
 @onready var team_position_layer :TileMapLayer= $TeamPositionLayer
 @onready var astar_grid = AStarGrid2D.new()
 @onready var grid_label = $GridLabel
+
+var highlight_layer_map := {
+}
 
 #var enemy_threat_tiles:Array[Vector2i]= []
 #var ally_threat_tiles:Array[Vector2i]= []
@@ -44,8 +51,6 @@ var enemy_entity_tiles: Array[Vector2i]= []
 var ally_entity_tiles: Array[Vector2i]= []
 var neutral_entity_tiles: Array[Vector2i]= []
 var prop_entity_tiles: Array[Vector2i]= []
-
-var is_ability_select = false
 
 signal tile_selected(map_pos: Vector2i)
 @onready var world := get_parent()
@@ -68,7 +73,15 @@ func _ready() -> void:
 		if !Debug.show_grid_coords_label:
 			grid_label.hide()
 
+	highlight_layer_map = {
+		HIGHLIGHT_LAYERS.ABILITY: ability_highlight_layer,
+		HIGHLIGHT_LAYERS.THREAT: threat_highlight_layer,
+		HIGHLIGHT_LAYERS.DEBUG: debug_highlight_layer,
+		HIGHLIGHT_LAYERS.CURSOR: cursor_layer,
+		HIGHLIGHT_LAYERS.ABILITY_AOE: ability_aoe_highlight_layer,
+	}
 enum TILE_EXCLUDE_FLAGS{
+	EXCLUDE_NONE = 0,
 	EXCLUDE_OBSTACLES = 1,
 	EXCLUDE_ENEMIES = 2,
 	EXCLUDE_OBSTACLES_ENEMIES = 3,
@@ -176,14 +189,12 @@ func get_all_tiles()->Array[Vector2i]:
 	return tiles_layer.get_used_cells()
 
 func set_highlight(map_position:Vector2i, color:HIGHLIGHT_COLORS,layer:HIGHLIGHT_LAYERS):
-	var highlight_layer = get_highlight_layer(layer)
-		
 	if color == HIGHLIGHT_COLORS.NONE:
 		highlight_tiles.erase(map_position)
-		highlight_layer.erase_cell(map_position)
+		highlight_layer_map[layer].erase_cell(map_position)
 	else:
 		highlight_tiles.push_front(map_position)
-		highlight_layer.set_cell(map_position,0,Vector2i(color,0))
+		highlight_layer_map[layer].set_cell(map_position,0,Vector2i(color,0))
 
 func set_highlight_area(
 	map_area:Array[Vector2i], 
@@ -191,27 +202,18 @@ func set_highlight_area(
 	layer:HIGHLIGHT_LAYERS=HIGHLIGHT_LAYERS.DEBUG
 ):
 	for map_position in map_area:
-		var highlight_layer = get_highlight_layer(layer)
 			
 		if color == HIGHLIGHT_COLORS.NONE:
 			highlight_tiles.erase(map_position)
-			highlight_layer.erase_cell(map_position)
+			highlight_layer_map[layer].erase_cell(map_position)
 		else:
 			highlight_tiles.push_front(map_position)
-			highlight_layer.set_cell(map_position,0,Vector2i(color,0))
+			highlight_layer_map[layer].set_cell(map_position,0,Vector2i(color,0))
 		
 func clear_all_highlights(layer:HIGHLIGHT_LAYERS):
-	var highlight_layer = get_highlight_layer(layer)
-	highlight_layer.clear()
+	highlight_layer_map[layer].clear()
 
-func get_highlight_layer(layer:HIGHLIGHT_LAYERS):
-	var highlight_layer = ability_highlight_layer
-	if layer == HIGHLIGHT_LAYERS.THREAT:
-		highlight_layer = threat_highlight_layer
-	elif layer == HIGHLIGHT_LAYERS.DEBUG:
-		highlight_layer = debug_highlight_layer
-	return highlight_layer
-	
+
 func get_grid_local_mouse_position()->Vector2:
 	return prop_layer.get_local_mouse_position()
 	
@@ -245,7 +247,7 @@ func is_within_bounds(map_pos:Vector2i):
 
 func _on_tile_selected(map_pos:Vector2i):
 	set_map_cursor(map_pos)
-	
+	clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY_AOE)
 func set_map_cursor(map_pos:Vector2i):
 	cursor_layer.clear()
 	cursor_layer.set_cell(map_pos,1,Vector2i(0,0))

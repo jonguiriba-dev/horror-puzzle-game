@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://88gq86tkgn7"]
+
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_bsccw"]
+[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_h7gqw"]
+[ext_resource type="Resource" uid="uid://3vuy8ogwr8cc" path="res://src/abilities/ability_effect/knockback_1.tres" id="3_077nr"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_cr8kc"]
+[ext_resource type="Script" uid="uid://bsxainwo4gs4m" path="res://src/abilities/ability_trigger.gd" id="5_fxrbr"]
+
+[resource]
+script = ExtResource("4_cr8kc")
+ability_name = "Bash"
+description = "A forceful attack knocks the enemy back"
+ability_range = 1
+effects = Array[ExtResource("1_bsccw")]([ExtResource("2_h7gqw"), ExtResource("3_077nr")])
+triggers = Array[ExtResource("5_fxrbr")]([])
+highlight_color = 3
+initial_countdown = 0
+target_count = 1
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 3
+tile_exclude_flag = 5
+tile_include_self = false
+target_strategy = 0
+threat_strategy = 0
+use_host_as_origin = false
+is_action = true
+is_enemy_obstacle = false
+is_passive = false
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null

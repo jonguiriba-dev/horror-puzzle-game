@@ -173,6 +173,7 @@ func show_event_options(events):
 			event_option_list.push_front(event_option)
 			event_option.set_rewards_list(event.rewards)
 			event_option.location_name.text = event.name
+			event_option.set_meta("event",event)
 			event_option.pressed.connect(func():
 				print("EVENT CLICKED ",event)
 				for e_option in event_option_list:
@@ -181,6 +182,7 @@ func show_event_options(events):
 				await get_tree().process_frame
 				SceneManager.change_scene(event.scene)
 			, CONNECT_ONE_SHOT)
+		return event_option_list
 			#event_option.scale = SettingsManager.get_ui_game_resolution_multiplier()
 func _on_strategy_selected(strategy:C.STRATEGIES):
 	if strategy != WorldManager.level.strategy:

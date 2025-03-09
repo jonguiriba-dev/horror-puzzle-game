@@ -42,6 +42,7 @@ max_charges = 0
 action_cost = 1
 range_pattern = 1
 aoe_pattern = 3
+aoe_range = 1
 tile_exclude_flag = 5
 tile_include_self = false
 target_strategy = 0

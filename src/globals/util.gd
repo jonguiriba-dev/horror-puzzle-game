@@ -7,6 +7,7 @@ var DIRECTIONS = {
 	"EAST"=Vector2i(1,0),
 	"SOUTH"=Vector2i(0,1)
 }
+var disabled_categories := ["SaveManager"]
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
@@ -18,7 +19,9 @@ func wait_for_input():
 func wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout
 
-func sysprint(source_text:String,info_text:String):
+func sysprint(source_text:String,info_text:String,category:=""):
+	if disabled_categories.has(category):
+		return
 	print_rich("[color=#ad9842]"+source_text+"[/color] : [color=#cec465]"+info_text+"[/color]")
 
 func get_nearest(pos:Vector2,nodes:Array):
