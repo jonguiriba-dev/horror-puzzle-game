@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcxbsateoow86"]
 
 [ext_resource type="PackedScene" uid="uid://1badq7nt0f5n" path="res://src/ui/reward_card/RewardCard.tscn" id="1_qqvoe"]
-[ext_resource type="Script" path="res://src/ui/level_ui/overlays/reward_overlay.gd" id="1_xlkof"]
+[ext_resource type="Script" uid="uid://dcoyn378m4iqa" path="res://src/ui/level_ui/overlays/reward_overlay.gd" id="1_xlkof"]
 
 [node name="RewardOverlay" type="Control"]
 layout_mode = 3
@@ -11,17 +11,24 @@ script = ExtResource("1_xlkof")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 66.0
-offset_top = 60.0
-offset_right = 640.0
-offset_bottom = 252.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 159.0
+offset_top = 231.0
+offset_right = 2079.0
+offset_bottom = 850.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
-
-[node name="RewardCard3" parent="HBoxContainer" instance=ExtResource("1_qqvoe")]
-layout_mode = 2
 
 [node name="RewardCard" parent="HBoxContainer" instance=ExtResource("1_qqvoe")]
 layout_mode = 2
 
 [node name="RewardCard2" parent="HBoxContainer" instance=ExtResource("1_qqvoe")]
+layout_mode = 2
+
+[node name="RewardCard3" parent="HBoxContainer" instance=ExtResource("1_qqvoe")]
 layout_mode = 2

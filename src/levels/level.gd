@@ -5,7 +5,7 @@ class_name World
 @export var level_preset:LevelPreset
 
 @onready var grid: Grid = $Grid
-@onready var state_chart:StateChart = $StateChart
+@onready var state_chart:LevelStateChart = $StateChart
 
 var team_turn:C.TEAM
 var turn_order:=[C.TEAM.ALLY,  C.TEAM.PLAYER]
@@ -41,6 +41,7 @@ func _enter_tree() -> void:
 	WorldManager.register_level(self)
 	
 func _ready() -> void:
+	
 	#state_machine = prepared_state_machine.duplicate()
 	#state_machine.setup(self)
 	#await Util.wait(0.5)
@@ -54,6 +55,16 @@ func _ready() -> void:
 		strategy_changed = true
 	)
 	WorldManager.set_meta("player_targetting_ability",null)
+	
+	state_chart.states.load.state_entered.connect(_on_load_state_entered)
+	state_chart.states.start_sequence.state_entered.connect(_on_start_sequence_state_entered)
+	state_chart.states.player_turn.state_entered.connect(_on_player_turn_state_entered)
+	state_chart.states.player_turn.state_exited.connect(_on_turn_end)
+	state_chart.states.player_turn.state_input.connect(_on_player_turn_state_input)
+	state_chart.states.ai_turn.state_entered.connect(_on_ai_turn_state_entered)
+	state_chart.states.ai_turn.state_exited.connect(_on_turn_end)
+	state_chart.states.end_sequence.state_entered.connect(_on_end_sequence_state_entered)
+	state_chart.states.unload.state_entered.connect(_on_load_state_entered)
 #func init(_level_preset:LevelPreset):
 	#UIManager.set_ui(UIManager.UI_TYPE.LEVEL)
 	#UIManager.level_ui.undo_move_pressed.connect(_on_undo_move_pressed)
@@ -66,7 +77,6 @@ func _ready() -> void:
 	#await game_start()
 	
 	#var events = EventGenerator.generate_events()
-
 #func end_turn():
 func _on_turn_end():
 	Util.sysprint("Level","end_turn: from %s to %s"%[

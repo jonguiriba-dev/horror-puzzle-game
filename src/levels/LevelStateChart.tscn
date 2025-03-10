@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwjoqmdksi2c3"]
+
+[ext_resource type="Script" uid="uid://cnscr2uocx1wb" path="res://src/levels/cave/level_state_chart.gd" id="1_3rwun"]
+[ext_resource type="Script" uid="uid://dy6a5bgmeu4fa" path="res://addons/godot_state_charts/compound_state.gd" id="2_44gff"]
+[ext_resource type="Script" uid="uid://bgvpa46t2eds4" path="res://addons/godot_state_charts/atomic_state.gd" id="3_4raur"]
+[ext_resource type="Script" uid="uid://dpomwwxuyh81j" path="res://addons/godot_state_charts/transition.gd" id="4_5bl4v"]
+
+[node name="StateChart" type="Node"]
+script = ExtResource("1_3rwun")
+track_in_editor = true
+warn_on_sending_unknown_events = false
+metadata/_custom_type_script = "uid://6j85hnrcpncr"
+
+[node name="LevelStates" type="Node" parent="."]
+script = ExtResource("2_44gff")
+initial_state = NodePath("Load")
+metadata/_custom_type_script = "uid://dy6a5bgmeu4fa"
+
+[node name="Load" type="Node" parent="LevelStates"]
+script = ExtResource("3_4raur")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="Transition" type="Node" parent="LevelStates/Load"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../StartSequence")
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="StartSequence" type="Node" parent="LevelStates"]
+script = ExtResource("3_4raur")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="Transition" type="Node" parent="LevelStates/StartSequence"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../Running")
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="Running" type="Node" parent="LevelStates"]
+script = ExtResource("2_44gff")
+initial_state = NodePath("AITurn")
+metadata/_custom_type_script = "uid://dy6a5bgmeu4fa"
+
+[node name="AITurn" type="Node" parent="LevelStates/Running"]
+script = ExtResource("3_4raur")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="ToPlayerTurn" type="Node" parent="LevelStates/Running/AITurn"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../PlayerTurn")
+event = &"ai_turn_done"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="ToEndSequence" type="Node" parent="LevelStates/Running/AITurn"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../../EndSequence")
+event = &"end_sequence"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="PlayerTurn" type="Node" parent="LevelStates/Running"]
+script = ExtResource("3_4raur")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="ToAITurn" type="Node" parent="LevelStates/Running/PlayerTurn"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../AITurn")
+event = &"player_turn_done"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="ToEndSequence" type="Node" parent="LevelStates/Running/PlayerTurn"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../../EndSequence")
+event = &"end_sequence"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="EndSequence" type="Node" parent="LevelStates"]
+script = ExtResource("3_4raur")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"
+
+[node name="Transition" type="Node" parent="LevelStates/EndSequence"]
+script = ExtResource("4_5bl4v")
+to = NodePath("../../Unload")
+event = &"unload"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://dpomwwxuyh81j"
+
+[node name="Unload" type="Node" parent="LevelStates"]
+script = ExtResource("3_4raur")
+metadata/_custom_type_script = "uid://bgvpa46t2eds4"

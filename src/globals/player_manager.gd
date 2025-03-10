@@ -45,7 +45,8 @@ func get_units_by_name(entity_name:String):
 	)
 	
 func add_entity_ability(entity:Entity,ability:AbilityData):
-	entity.add_ability(ability)
+	#entity.add_ability(ability)
+	pass
 
 func add_gold(amount:int):
 	gold += amount

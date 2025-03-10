@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="LevelRewardsConfig" load_steps=8 format=3 uid="uid://b1xxt2mfvban5"]
 
-[ext_resource type="Script" path="res://src/levels/chance_outcome.gd" id="1_0llfj"]
+[ext_resource type="Script" uid="uid://c6ljfa8hdn4i2" path="res://src/levels/chance_outcome.gd" id="1_0llfj"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="2_ufotr"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="3_15fds"]
-[ext_resource type="Script" path="res://src/levels/level_rewards_config.gd" id="4_6hkth"]
+[ext_resource type="Script" uid="uid://qsahiafk6gmb" path="res://src/levels/level_rewards_config.gd" id="4_6hkth"]
 
 [sub_resource type="Resource" id="Resource_km6ul"]
 script = ExtResource("1_0llfj")
