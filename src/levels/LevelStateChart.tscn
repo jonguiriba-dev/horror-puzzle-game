@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwjoqmdksi2c3"]
 
-[ext_resource type="Script" uid="uid://cnscr2uocx1wb" path="res://src/levels/cave/level_state_chart.gd" id="1_3rwun"]
+[ext_resource type="Script" uid="uid://cnscr2uocx1wb" path="res://src/levels/level_state_chart.gd" id="1_3rwun"]
 [ext_resource type="Script" uid="uid://dy6a5bgmeu4fa" path="res://addons/godot_state_charts/compound_state.gd" id="2_44gff"]
 [ext_resource type="Script" uid="uid://bgvpa46t2eds4" path="res://addons/godot_state_charts/atomic_state.gd" id="3_4raur"]
 [ext_resource type="Script" uid="uid://dpomwwxuyh81j" path="res://addons/godot_state_charts/transition.gd" id="4_5bl4v"]

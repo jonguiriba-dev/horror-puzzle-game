@@ -53,7 +53,7 @@ var neutral_entity_tiles: Array[Vector2i]= []
 var prop_entity_tiles: Array[Vector2i]= []
 
 signal tile_selected(map_pos: Vector2i)
-@onready var world := get_parent()
+@onready var level := get_parent()
 
 func _ready() -> void:
 	tile_selected.connect(_on_tile_selected)

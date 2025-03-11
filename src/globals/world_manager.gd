@@ -1,7 +1,7 @@
 extends Node
 
-var level:World
+var level:Level
 signal level_complete
 
-func register_level(_level:World):
+func register_level(_level:Level):
 	level = _level

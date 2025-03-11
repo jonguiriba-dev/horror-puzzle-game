@@ -17,14 +17,14 @@ func _physics_process(delta: float) -> void:
 		var text = ""
 		text += "\nmouse_pos: %s"%WorldManager.level.grid.get_grid_local_mouse_position()
 		text += "\nmouse_map_pos: %s"%WorldManager.level.grid.get_map_mouse_position()
-		text += "\ninput_enabled: %s"%WorldManager.level.input_enabled
+		text += "\ninput_enabled: %s"%WorldManager.level.player_input_handler.input_enabled
 		text += "\nanimation_counter: %s"%AnimationManager.animation_counter
-		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.level.team_turn]
+		text += "\nturn: %s"%C.TEAM.keys()[WorldManager.level.turn_handler.team_turn]
 		text += "\nstrategy: %s"%C.STRATEGIES.keys()[WorldManager.level.strategy]
 		text += "\nstarting_position: %s"%C.DIRECTION.keys()[WorldManager.level.starting_position]
-		text += "\nentity turn queue: %s"%", ".join(WorldManager.level.ai_turn_queue.map(func(e): if is_instance_valid(e): return e.data.entity_name))
-		if is_instance_valid(WorldManager.level.current_ai_entity_in_action):
-			text += "\nentity in action: %s"%WorldManager.level.current_ai_entity_in_action.data.entity_name
+		text += "\nentity turn queue: %s"%", ".join(WorldManager.level.turn_handler.ai_turn_queue.map(func(e): if is_instance_valid(e): return e.data.entity_name))
+		if is_instance_valid(WorldManager.level.turn_handler.current_ai_entity_in_action):
+			text += "\nentity in action: %s"%WorldManager.level.turn_handler.current_ai_entity_in_action.data.entity_name
 		var node = get_tree().get_first_node_in_group(C.GROUPS_HOVERED_ENTITIES)
 		if !node:
 			UIManager.info(text)

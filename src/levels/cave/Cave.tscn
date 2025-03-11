@@ -18,6 +18,8 @@ level_preset = ExtResource("2_n425o")
 
 [node name="Grid" parent="." instance=ExtResource("3_g5tll")]
 
+[node name="StateChart" parent="." instance=ExtResource("7_xxjsq")]
+
 [node name="WorldBg" type="Sprite2D" parent="."]
 modulate = Color(0.172833, 0.172833, 0.172833, 1)
 z_index = -99
@@ -41,8 +43,6 @@ energy = 1.31
 shadow_enabled = true
 texture = ExtResource("15_8oh8e")
 texture_scale = 0.2
-
-[node name="StateChart" parent="." instance=ExtResource("7_xxjsq")]
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("21_p4l21")]
 layout_mode = 1

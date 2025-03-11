@@ -178,7 +178,7 @@ func show_event_options(events):
 				print("EVENT CLICKED ",event)
 				for e_option in event_option_list:
 					e_option.queue_free()
-				WorldManager.level.unload_units()
+				WorldManager.level.load_handler.unload_units()
 				await get_tree().process_frame
 				SceneManager.change_scene(event.scene)
 			, CONNECT_ONE_SHOT)

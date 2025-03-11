@@ -262,7 +262,7 @@ func _on_selected():
 	if data.team == C.TEAM.PLAYER:
 		WorldManager.level.selected_entity = self
 		#UIManager.level_ui.set_context(self)
-		WorldManager.level.input_waiting_on_ability = false
+		WorldManager.level.waiting_on_ability = false
 		sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 	else:
 		clear_sprite_material()

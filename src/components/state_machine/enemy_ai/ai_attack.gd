@@ -21,7 +21,7 @@ func _on_configured():
 func _enter_state(old_state, new_state):
 	to_idle = false
 	Util.sysprint("%s.ai_attack._enter_state"%[host.data.entity_name],"Entered attack state: %s"%[host.data.entity_name])
-	var team_turn = WorldManager.level.team_turn
+	var team_turn = WorldManager.level.turn_handler.team_turn
 	if host.threat:
 		await attack_target()
 		if AnimationManager.animation_counter != 0:
