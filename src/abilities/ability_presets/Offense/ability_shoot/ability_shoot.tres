@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="2_lbtsf"]
 [ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="3_4nvh5"]
-[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_dwld2"]
-[ext_resource type="Script" uid="uid://bsxainwo4gs4m" path="res://src/abilities/ability_trigger.gd" id="5_pf2xy"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_dwld2"]
+[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="5_pf2xy"]
 
 [resource]
 script = ExtResource("4_dwld2")

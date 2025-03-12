@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="4_dj2ly"]
 [ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_6blun"]
 [ext_resource type="SpriteFrames" uid="uid://bhykddn2qcs7t" path="res://src/entities/entity/presets/allies/knight/knight_sprite_frames.tres" id="5_wv0s7"]
-[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="6_f3rm1"]
+[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="6_f3rm1"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="6_mjg5v"]
 [ext_resource type="Resource" uid="uid://88gq86tkgn7" path="res://src/abilities/ability_presets/Offense/ability_bash/ability_bash.tres" id="7_v74a3"]
 

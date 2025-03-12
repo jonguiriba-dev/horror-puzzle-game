@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://de11wfnraklxo"]
 
-[ext_resource type="Script" uid="uid://cw1n1nsuceyeb" path="res://src/ui/level_ui/level_ui.gd" id="1_vogrj"]
+[ext_resource type="Script" path="res://src/ui/level_ui/level_ui.gd" id="1_vogrj"]
 [ext_resource type="FontFile" uid="uid://sfmk3hf8i5ir" path="res://assets/fonts/CrimsonText-SemiBoldItalic.ttf" id="2_klg6i"]
 [ext_resource type="PackedScene" uid="uid://c15k8jyhng3o8" path="res://src/ui/level_ui/context_menu/context_menu.tscn" id="3_d06lw"]
 [ext_resource type="Texture2D" uid="uid://b5fi8m8o6eqr5" path="res://assets/ui/action-bar.png" id="4_16e8e"]

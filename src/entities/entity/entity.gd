@@ -265,7 +265,7 @@ func _on_death() -> void:
 		
 func _on_selected():
 	if data.team == C.TEAM.PLAYER:
-		WorldManager.level.selected_entity = self
+		WorldManager.level.player_input_handler.selected_entity = self
 		#UIManager.level_ui.set_context(self)
 		WorldManager.level.player_input_handler.waiting_on_ability = false
 		sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
@@ -275,7 +275,8 @@ func _on_selected():
 
 		
 func _on_ability_used(ability:AbilityV2):
-	WorldManager.level.clear_entity_moved_history()
+	if ability.data.ability_name.to_lower() != "move":
+		WorldManager.level.clear_entity_moved_history()
 	data.action_counter -= ability.data.action_cost
 	if ability.data.is_action:
 		data.move_counter = 0

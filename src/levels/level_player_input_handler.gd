@@ -52,12 +52,25 @@ func _on_player_turn_state_input(event: InputEvent) -> void:
 		
 		if UIManager.ability_hovered:
 			UIManager.ability_hovered.target_select.emit()	
-			
+		
 		if targetting_ability and !waiting_on_ability:		
+			print(">>>> ",targetting_ability.data.ability_name)
+			print(">>>> selected_entity ",selected_entity)
 			UIManager.level_ui.clear_context()
-			if selected_entity and targetting_ability.data.ability_name.to_lower() != "move":
-				selected_entity.clear_sprite_material()
-				selected_entity = null
+			if selected_entity:
+				if targetting_ability.data.ability_name.to_lower() != "move":
+					selected_entity.clear_sprite_material()
+					selected_entity = null
+					
+				if targetting_ability.data.ability_name.to_lower() == "move":
+					level.entity_moved_history.push_front(
+						{
+							"entity":targetting_ability.host,
+							"prev_map_position":targetting_ability.host.position
+						}
+					)
+					UIManager.level_ui.enable_undo_move_button()
+				
 			waiting_on_ability = true
 			targetting_ability.stopped_targetting.connect(func():
 				waiting_on_ability = false
