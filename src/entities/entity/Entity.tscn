@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://cybb46stuffbp"]
 
-[ext_resource type="Script" path="res://src/entities/entity/entity.gd" id="1_t518p"]
+[ext_resource type="Script" uid="uid://c7562waxx3cil" path="res://src/entities/entity/entity.gd" id="1_t518p"]
 [ext_resource type="Texture2D" uid="uid://uw1gg7rmh15v" path="res://assets/etc/player.png" id="2_4c15u"]
 [ext_resource type="Texture2D" uid="uid://bvjwcnx5134il" path="res://assets/ui/rescue_text.png" id="2_7u8pd"]
 [ext_resource type="Texture2D" uid="uid://jgjhswf5f3pi" path="res://assets/ui/healthbar/health_under.png" id="4_iflas"]
 [ext_resource type="Texture2D" uid="uid://b4pa8rvba3ac5" path="res://assets/ui/healthbar/health-over.png" id="5_70vys"]
-[ext_resource type="Texture2D" uid="uid://bwp1lkqnpimga" path="res://assets/ui/healthbar/health_progress.png" id="6_mvoms"]
-[ext_resource type="Script" path="res://src/entities/entity/healthbar.gd" id="7_v71x7"]
+[ext_resource type="Script" uid="uid://bhxxubo2wkare" path="res://src/entities/entity/healthbar.gd" id="7_v71x7"]
 [ext_resource type="Texture2D" uid="uid://ct74uc6bwpimb" path="res://assets/etc/tile-shadow.png" id="8_wyal1"]
+[ext_resource type="PackedScene" uid="uid://bwq035n8guw0g" path="res://src/ui/FractionRange.tscn" id="9_k1lsc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy7hk"]
 atlas = ExtResource("2_4c15u")
@@ -49,16 +49,19 @@ position = Vector2(0, 16)
 polygon = PackedVector2Array(-16, -4, 0, -12, 16, -4, 0, 4)
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]
-visible = false
 offset_left = -8.0
 offset_top = -33.0
 offset_right = 8.0
 offset_bottom = -29.0
 max_value = 5.0
 value = 4.0
+nine_patch_stretch = true
 texture_under = ExtResource("4_iflas")
 texture_over = ExtResource("5_70vys")
-texture_progress = ExtResource("6_mvoms")
+texture_progress = ExtResource("4_iflas")
+tint_under = Color(0.464844, 0.0826802, 0.106974, 1)
+tint_over = Color(0.81, 0.745605, 0.7371, 1)
+tint_progress = Color(0.878906, 0.18926, 0.149897, 1)
 script = ExtResource("7_v71x7")
 
 [node name="StatusBar" type="HBoxContainer" parent="."]
@@ -74,6 +77,12 @@ offset_left = 15.0
 offset_top = -27.0
 offset_right = 15.0
 offset_bottom = -27.0
+
+[node name="FractionRange" parent="." instance=ExtResource("9_k1lsc")]
+offset_left = 9.0
+offset_top = -31.0
+offset_right = 9.0
+offset_bottom = -31.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -78,7 +78,9 @@ func apply_node_data(entity:Entity):
 		apply_as_preset(entity)
 	
 	entity.healthbar.max_value = max_health
+	entity.numeric_health.set_max(max_health)
 	entity.healthbar.value = entity.data.health
+	entity.numeric_health.set_current(entity.data.health)
 	if sprite_frames:
 		entity.sprite.sprite_frames = sprite_frames
 	

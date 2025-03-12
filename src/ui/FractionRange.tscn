@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwq035n8guw0g"]
+
+[ext_resource type="Script" uid="uid://dhsu4wru4ipmb" path="res://src/ui/fraction_range.gd" id="1_ajsr8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ft14v"]
+font_size = 5
+outline_size = 8
+outline_color = Color(0.09375, 0.09375, 0.09375, 1)
+
+[node name="FractionRange" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ajsr8")
+
+[node name="Current" type="Label" parent="."]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -7.0
+offset_right = -1.0
+text = "1"
+label_settings = SubResource("LabelSettings_ft14v")
+horizontal_alignment = 2
+
+[node name="Divider" type="Label" parent="."]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 7.0
+offset_bottom = 3.0
+text = "  /"
+label_settings = SubResource("LabelSettings_ft14v")
+
+[node name="Max" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 10.0
+offset_bottom = 4.0
+text = "3"
+label_settings = SubResource("LabelSettings_ft14v")

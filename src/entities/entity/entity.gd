@@ -7,6 +7,7 @@ const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn")
 @onready var shadow :Sprite2D= $Shadow
 @onready var rescue_text := $EntitySprite/RescueText
 @onready var healthbar := $Healthbar
+@onready var numeric_health := $FractionRange
 @onready var status_bar := $StatusBar
 @onready var context_menu_point := $ContextMenuPoint
 @export var preset:EntityData
@@ -240,8 +241,12 @@ func _on_hit(damage:int, source) -> void:
 		VfxManager.spawn("hit-spark-1",self,{"offset":Vector2(randi_range(-12,12),randi_range(-12,4))})
 	
 	stat_changed.emit("health",data.health)
+	
+	numeric_health.set_current(data.health)
+	
 	Util.sysprint("Entity %s"%[data.entity_name],"health after calculation: %s"%[data.health])
-
+	
+	
 func _on_death() -> void:
 	for group in get_groups():
 		remove_from_group(group)
@@ -262,7 +267,7 @@ func _on_selected():
 	if data.team == C.TEAM.PLAYER:
 		WorldManager.level.selected_entity = self
 		#UIManager.level_ui.set_context(self)
-		WorldManager.level.waiting_on_ability = false
+		WorldManager.level.player_input_handler.waiting_on_ability = false
 		sprite.material = preload("res://src/shaders/outline/selected_highlight_material.tres")
 	else:
 		clear_sprite_material()
