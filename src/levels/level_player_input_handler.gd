@@ -55,7 +55,6 @@ func _on_player_turn_state_input(event: InputEvent) -> void:
 		
 		if targetting_ability and !waiting_on_ability:		
 			print(">>>> ",targetting_ability.data.ability_name)
-			print(">>>> selected_entity ",selected_entity)
 			UIManager.level_ui.clear_context()
 			if selected_entity:
 				if targetting_ability.data.ability_name.to_lower() != "move":

@@ -18,66 +18,13 @@ var can_target_entities:bool:
 		if data.tile_exclude_flag == Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_ALL_PROPS:
 			return false
 		return true
-	
 
 signal target_select
 signal stopped_targetting
 signal applied(ability:AbilityV2)
 signal used(ability:AbilityV2)
 
-func setup(_host:Entity) -> void:
-	self.host = _host
-	if !target_select.is_connected(_on_target_select):
-		target_select.connect(_on_target_select)
-	if !stopped_targetting.is_connected(_on_stopped_targetting):
-		stopped_targetting.connect(_on_stopped_targetting)
-	if !used.is_connected(_on_used):
-		used.connect(_on_used)
-	if !host.turn_end.is_connected(_on_host_turn_end):
-		host.turn_end.connect(_on_host_turn_end)
-		
-	if !host.registered.is_connected(_on_host_registered):
-		host.registered.connect(_on_host_registered)
 
-	for trigger in data.triggers:
-		if trigger.source == AbilityTrigger.SOURCE_TYPES.HOST:
-			if trigger.type == AbilityTrigger.TRIGGER_TYPES.SIGNAL:
-				if host.has_signal(trigger.key):
-					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
-						host.connect(trigger.key,func():
-							use(host.map_position)	
-						)
-			elif trigger.type == AbilityTrigger.TRIGGER_TYPES.PROPERTY:
-				host.stat_changed.connect(func(key,value):
-					if key == trigger.key and value == trigger.value:
-						if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
-							use(host.map_position)	
-				)
-		if trigger.source == AbilityTrigger.SOURCE_TYPES.ABILITY:
-			stat_changed.connect(func(key,value):
-				if key == trigger.key and value == trigger.value:
-					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
-						use(host.map_position)	
-			)
-		if trigger.source == AbilityTrigger.SOURCE_TYPES.ALLY:
-			if trigger.type == AbilityTrigger.TRIGGER_TYPES.SIGNAL:
-				if host.has_signal(trigger.key):
-					if trigger.target == AbilityTrigger.TARGET_TYPES.ENEMY:
-						for enemy in WorldManager.get_tree().get_nodes_in_group(C.GROUPS.ENEMIES):
-							#trigger only when the hit source is from an ally and not the host 
-							if trigger.key == "hit":
-								enemy.connect(trigger.key,func(value,source):
-									if source != host:
-										use(enemy.map_position)	
-								)
-							else:
-								enemy.connect(trigger.key,func(a=null,b=null,c=null):
-									use(enemy.map_position)	
-								)
-	
-	
-	refresh_charges()
-	
 func use(target_map_position:Vector2i, options:Dictionary={}):
 	print("Ability ",data.ability_name, " used on ", target_map_position)
 
@@ -156,6 +103,10 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		).size() > 0:
 			await apply_summon_effect(affected_tile,data.effects)
 			
+		if data.effects.filter(
+			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
+		).size() > 0:
+			await apply_move_effect(affected_tile)
 		
 func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 	for effect in effects:
@@ -188,10 +139,11 @@ func apply_summon_effect(target_map_position:Vector2i, effects:Array[AbilityEffe
 		)
 		
 func apply_move_effect(target_map_position:Vector2i):
+	var animation_speed = 0.1
 	var path = WorldManager.level.grid.astar_grid.get_id_path(
-		host.map_position, 
-		target_map_position
-	)
+			host.map_position, 
+			target_map_position
+		)
 	if path.size() > 0:
 		path.remove_at(0)
 		path = path.filter(func(e):
@@ -202,25 +154,27 @@ func apply_move_effect(target_map_position:Vector2i):
 		)
 	
 	var tween = host.create_tween()
+	
 	for tile in path:
 		tween.tween_property(
 			host,
 			"position",
 			WorldManager.level.grid.map_to_local(tile),
-			0.1
+			animation_speed
 		)	
-		tween.tween_interval(0.1)
+		#tween.tween_interval(0.05)
 	tween.play()
 	SfxManager.play("step-2")
 	await tween.finished
 	host.data.move_counter -= 1
+
 
 func _play_animation(target_map_position:Vector2i):
 	AnimationManager.increment_animation_counter()
 	if data.animation_script:
 		await load(data.animation_script).play(host,target_map_position)
 	else:	
-		await Util.wait(0.3)
+		await Util.wait(0.05)
 
 	AnimationManager.decrement_animation_counter()
 
@@ -337,5 +291,57 @@ func _on_host_registered():
 	if data.threat_strategy == AbilityData.THREAT_STRATEGIES.ALWAYS:
 		host.set_threat(host.map_position,self)
 	
+func setup(_host:Entity) -> void:
+	self.host = _host
+	if !target_select.is_connected(_on_target_select):
+		target_select.connect(_on_target_select)
+	if !stopped_targetting.is_connected(_on_stopped_targetting):
+		stopped_targetting.connect(_on_stopped_targetting)
+	if !used.is_connected(_on_used):
+		used.connect(_on_used)
+	if !host.turn_end.is_connected(_on_host_turn_end):
+		host.turn_end.connect(_on_host_turn_end)
+		
+	if !host.registered.is_connected(_on_host_registered):
+		host.registered.connect(_on_host_registered)
+
+	for trigger in data.triggers:
+		if trigger.source == AbilityTrigger.SOURCE_TYPES.HOST:
+			if trigger.type == AbilityTrigger.TRIGGER_TYPES.SIGNAL:
+				if host.has_signal(trigger.key):
+					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+						host.connect(trigger.key,func():
+							use(host.map_position)	
+						)
+			elif trigger.type == AbilityTrigger.TRIGGER_TYPES.PROPERTY:
+				host.stat_changed.connect(func(key,value):
+					if key == trigger.key and value == trigger.value:
+						if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+							use(host.map_position)	
+				)
+		if trigger.source == AbilityTrigger.SOURCE_TYPES.ABILITY:
+			stat_changed.connect(func(key,value):
+				if key == trigger.key and value == trigger.value:
+					if trigger.target == AbilityTrigger.TARGET_TYPES.SELF:
+						use(host.map_position)	
+			)
+		if trigger.source == AbilityTrigger.SOURCE_TYPES.ALLY:
+			if trigger.type == AbilityTrigger.TRIGGER_TYPES.SIGNAL:
+				if host.has_signal(trigger.key):
+					if trigger.target == AbilityTrigger.TARGET_TYPES.ENEMY:
+						for enemy in WorldManager.get_tree().get_nodes_in_group(C.GROUPS.ENEMIES):
+							#trigger only when the hit source is from an ally and not the host 
+							if trigger.key == "hit":
+								enemy.connect(trigger.key,func(value,source):
+									if source != host:
+										use(enemy.map_position)	
+								)
+							else:
+								enemy.connect(trigger.key,func(a=null,b=null,c=null):
+									use(enemy.map_position)	
+								)
+	
+	
+	refresh_charges()
 	
 	
