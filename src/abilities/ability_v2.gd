@@ -37,11 +37,6 @@ func use(target_map_position:Vector2i, options:Dictionary={}):
 	
 	var direction = Util.get_direction(host.map_position,target_map_position)
 	
-	var origin = target_map_position
-	
-	if data.use_host_as_origin:
-		origin = host.map_position + direction
-	
 	await apply_effect_to_tiles(target_map_position)
 	
 	used.emit(self)
@@ -79,11 +74,17 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 	if data.use_host_as_origin:
 		origin = host.map_position + direction
 		
+	print(">>>>>affected_tiles ",data.ability_name)
+	print(">>>>>affected_tiles ",data.aoe_range)
+	print(">>>>>affected_tiles ",data.aoe_pattern)
+	print("data.aoe_pattern ", TilePattern.PATTERNS.keys()[data.aoe_pattern])
+	
 	var affected_tiles = TilePattern.get_callable(data.aoe_pattern).call(
 		origin,
 		data.aoe_range,
 		direction
 	)	
+	print(">>>>>affected_tiles ",affected_tiles)
 	
 	var self_damage_effects = data.effects.filter(
 		func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SELF_DAMAGE
@@ -91,6 +92,11 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 	for self_damage_effect in self_damage_effects:
 		host.hit.emit(self_damage_effect.value,host)
 		
+	var move_effects = data.effects.filter(
+		func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
+	)
+	for move_effect in move_effects:
+		await apply_move_effect(target_map_position,move_effect)
 	
 	for affected_tile in affected_tiles:
 		var target_entity = _get_tile_target(affected_tile)
@@ -102,12 +108,7 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SUMMON
 		).size() > 0:
 			await apply_summon_effect(affected_tile,data.effects)
-			
-		if data.effects.filter(
-			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.MOVE
-		).size() > 0:
-			await apply_move_effect(affected_tile)
-		
+
 func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 	for effect in effects:
 		var fail_rate = 1.0 - effect.success_rate
@@ -116,7 +117,10 @@ func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 			continue
 			
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
-			target.hit.emit(effect.value,host)
+			if target == host and !effect.tags.has(AbilityEffect.TAGS.SELF_DAMAGE):
+				pass
+			else:
+				target.hit.emit(effect.value,host)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
 			target.knockback.emit(effect.value, WorldManager.level.grid.local_to_map(host.position))
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:
@@ -138,33 +142,32 @@ func apply_summon_effect(target_map_position:Vector2i, effects:Array[AbilityEffe
 			summon_entity
 		)
 		
-func apply_move_effect(target_map_position:Vector2i):
+func apply_move_effect(target_map_position:Vector2i, effect:AbilityEffect):
 	var animation_speed = 0.1
-	var path = WorldManager.level.grid.astar_grid.get_id_path(
-			host.map_position, 
-			target_map_position
-		)
-	if path.size() > 0:
-		path.remove_at(0)
-		path = path.filter(func(e):
-			for ally in host.get_allies():
-				if WorldManager.level.grid.local_to_map(ally.position) == e:
-					return false
-			return true
-		)
+	
+	var exclude_flag = Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
+	if effect.tags.has(AbilityEffect.TAGS.PASS_THROUGH):
+		exclude_flag = Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_NONE
+	
+	var path = WorldManager.level.grid.get_nearest_path(
+		host.data.team, 
+		host.map_position,
+		target_map_position, 
+		exclude_flag
+	)
 	
 	var tween = host.create_tween()
-	
-	for tile in path:
-		tween.tween_property(
-			host,
-			"position",
-			WorldManager.level.grid.map_to_local(tile),
-			animation_speed
-		)	
-		#tween.tween_interval(0.05)
-	tween.play()
-	SfxManager.play("step-2")
+	if tween:
+		for tile in path:
+			tween.tween_property(
+				host,
+				"position",
+				WorldManager.level.grid.map_to_local(tile),
+				animation_speed
+			)	
+			#tween.tween_interval(0.05)
+		tween.play()
+		SfxManager.play("step-2")
 	await tween.finished
 	host.data.move_counter -= 1
 
@@ -236,8 +239,11 @@ func get_threat_tiles(
 	var direction = Util.get_direction(source_map_pos,target_map_pos)
 	var threat_tiles = []
 	
+	if data.use_host_as_origin:
+		target_map_pos = host.map_position
+	
 	var affected_tiles = TilePattern.get_callable(data.aoe_pattern).call(
-		target_map_pos,
+		target_map_pos ,
 		data.aoe_range,
 		direction
 	)

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://bvuoiiif1goed"]
 
 [ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_7c58r"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_570c3"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_570c3"]
 [ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="3_0u3b0"]
 
 [sub_resource type="Resource" id="Resource_3726x"]
@@ -11,6 +11,7 @@ value = 2
 status_type = 0
 entity_type = 0
 success_rate = 1.0
+tags = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_2exi5"]
 script = ExtResource("1_7c58r")
@@ -19,13 +20,14 @@ value = 0
 status_type = 0
 entity_type = 0
 success_rate = 1.0
+tags = Array[int]([1])
 metadata/_custom_type_script = "uid://do7sg0g3lmv5q"
 
 [resource]
 script = ExtResource("2_570c3")
 ability_name = "Iai Slash"
 description = "Slash swiftly and deal damage in a line to the right of the target"
-ability_range = 5
+ability_range = 4
 effects = Array[ExtResource("1_7c58r")]([SubResource("Resource_3726x"), SubResource("Resource_2exi5")])
 triggers = Array[ExtResource("3_0u3b0")]([])
 highlight_color = 0
@@ -35,12 +37,12 @@ max_charges = 0
 action_cost = 1
 range_pattern = 1
 aoe_pattern = 0
-aoe_range = 1
-tile_exclude_flag = 5
+aoe_range = 4
+tile_exclude_flag = 7
 tile_include_self = false
 target_strategy = 0
 threat_strategy = 0
-use_host_as_origin = false
+use_host_as_origin = true
 is_action = true
 is_enemy_obstacle = false
 is_passive = false

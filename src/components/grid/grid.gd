@@ -96,7 +96,7 @@ enum TILE_EXCLUDE_FLAGS{
 var possible_tiles_cache:Dictionary = {}
 
 func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
-	populate_entity_tiles2()
+	populate_entity_tiles()
 	
 	var entity_tiles: Array[Vector2i]= []
 	entity_tiles.append_array(player_entity_tiles)
@@ -229,12 +229,15 @@ func local_to_map(local_pos:Vector2)->Vector2i:
 func map_to_local(map_pos:Vector2i)->Vector2:
 	return prop_layer.map_to_local(map_pos)
 	
-func get_nearest_path(team:C.TEAM, source:Vector2i,target:Vector2i, include_obstacles:bool=true)->Array[Vector2i]:
+func get_nearest_path(
+	team:C.TEAM, 
+	source:Vector2i,
+	target:Vector2i,
+	exclude_flags := TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
+)->Array[Vector2i]:
 	get_possible_tiles(
 		team, 
-		TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES if 
-		include_obstacles else 
-		TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ENEMIES
+		exclude_flags
 	)
 	var path = astar_grid.get_id_path(source, target)
 	if path.size() > 0:
@@ -265,7 +268,7 @@ func debug_tile_text(map_pos:Vector2i,text:String):
 	label.z_index = 99
 
 
-func populate_entity_tiles2():
+func populate_entity_tiles():
 	player_entity_tiles = []
 	enemy_entity_tiles = []
 	ally_entity_tiles = []
@@ -308,7 +311,7 @@ func get_entity_on_tile(map_pos:Vector2i):
 	return null
 
 func is_empty_tile(map_pos:Vector2i):
-	populate_entity_tiles2()
+	populate_entity_tiles()
 	
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()

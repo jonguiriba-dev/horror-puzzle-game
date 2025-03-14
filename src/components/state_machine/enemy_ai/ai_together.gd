@@ -58,7 +58,8 @@ func analyze_tile_scores():
 	nearest_path_to_nearest_target = WorldManager.level.grid.get_nearest_path(
 		host.data.team,
 		WorldManager.level.grid.local_to_map(host.position), 
-		WorldManager.level.grid.local_to_map(nearest.position)
+		WorldManager.level.grid.local_to_map(nearest.position),
+		Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ALLIES
 	)
 	
 	#if no path, then try to get as close as possbile by disregarding obstacles 
@@ -67,10 +68,9 @@ func analyze_tile_scores():
 			host.data.team,
 			WorldManager.level.grid.local_to_map(host.position), 
 			WorldManager.level.grid.local_to_map(nearest.position),
-			false
+			Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ENEMIES
 		)
 	heatmap = get_heat_map()
-	print("heat_map ",heatmap)
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
 	moveable_tiles.push_front(host.map_position)
 	for tile in moveable_tiles:

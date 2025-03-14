@@ -65,7 +65,7 @@ func analyze_tile_scores():
 			host.data.team,
 			WorldManager.level.grid.local_to_map(host.position), 
 			WorldManager.level.grid.local_to_map(nearest.position),
-			false
+			Grid.TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES_ENEMIES
 		)
 	heatmap = get_heat_map()
 	var moveable_tiles = host.get_ability("move").get_target_tiles()
