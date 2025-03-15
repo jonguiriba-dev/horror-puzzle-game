@@ -1,5 +1,5 @@
 extends Resource
-class_name AbilityV2
+class_name Ability
 
 enum STATE{
 	INACTIVE,
@@ -21,9 +21,9 @@ var can_target_entities:bool:
 
 signal target_select
 signal stopped_targetting
-signal applied(ability:AbilityV2)
-signal used(ability:AbilityV2)
-
+signal applied(ability:Ability)
+signal used(ability:Ability)
+signal setup_finished(ability:Ability)
 
 func use(target_map_position:Vector2i, options:Dictionary={}):
 	print("Ability ",data.ability_name, " used on ", target_map_position)
@@ -74,17 +74,11 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 	if data.use_host_as_origin:
 		origin = host.map_position + direction
 		
-	print(">>>>>affected_tiles ",data.ability_name)
-	print(">>>>>affected_tiles ",data.aoe_range)
-	print(">>>>>affected_tiles ",data.aoe_pattern)
-	print("data.aoe_pattern ", TilePattern.PATTERNS.keys()[data.aoe_pattern])
-	
 	var affected_tiles = TilePattern.get_callable(data.aoe_pattern).call(
 		origin,
 		data.aoe_range,
 		direction
 	)	
-	print(">>>>>affected_tiles ",affected_tiles)
 	
 	var self_damage_effects = data.effects.filter(
 		func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SELF_DAMAGE
@@ -123,6 +117,8 @@ func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 				target.hit.emit(effect.value,host)
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.KNOCKBACK:
 			target.knockback.emit(effect.value, WorldManager.level.grid.local_to_map(host.position))
+		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.CANCEL_THREAT:
+			target.unset_threat()
 		elif effect.effect_type == AbilityEffect.EFFECT_TYPES.STATUS:
 			var status = Status.new(
 				load(Status.STATUS_DATA[effect.status_type]),
@@ -281,7 +277,7 @@ func _on_stopped_targetting() -> void:
 	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
 	state = STATE.INACTIVE
 
-func _on_used(ability:AbilityV2):
+func _on_used(ability:Ability):
 	if data.charges < 0:
 		return
 	data.charges -=1

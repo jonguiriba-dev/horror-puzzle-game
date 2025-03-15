@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://capd574h85x4u" path="res://src/levels/level_spawn_config.gd" id="1_pa6u3"]
 [ext_resource type="Resource" uid="uid://ch7qmg8jhgmh8" path="res://src/entities/entity/presets/civilian/civilian_preset.tres" id="2_a0wgo"]
 [ext_resource type="Resource" uid="uid://bv0od6fwjqnkm" path="res://src/entities/entity/presets/monsters/ghost/ghost_preset.tres" id="3_001as"]
-[ext_resource type="Resource" uid="uid://dslk1ursehvik" path="res://src/entities/entity/presets/monsters/watcher/watcher.tres" id="3_nngy2"]
-[ext_resource type="Resource" uid="uid://y68iwe3dy48k" path="res://src/entities/entity/presets/monsters/gore/gore.tres" id="4_f15xs"]
+[ext_resource type="Resource" uid="uid://dslk1ursehvik" path="res://src/entities/entity/presets/monsters/watcher/watcher_preset.tres" id="3_gqacs"]
+[ext_resource type="Resource" uid="uid://y68iwe3dy48k" path="res://src/entities/entity/presets/monsters/gore/gore_preset.tres" id="4_f15xs"]
 
 [sub_resource type="Resource" id="Resource_tcj2d"]
 script = ExtResource("1_bay88")
@@ -15,7 +15,7 @@ spawn_rate = 1.0
 
 [sub_resource type="Resource" id="Resource_x1tvh"]
 script = ExtResource("1_bay88")
-entity_preset = ExtResource("3_nngy2")
+entity_preset = ExtResource("3_gqacs")
 max_number = 3
 spawn_rate = 0.6
 
@@ -35,5 +35,5 @@ spawn_rate = 1.0
 script = ExtResource("1_pa6u3")
 enemy_spawn_pool = Array[ExtResource("1_bay88")]([SubResource("Resource_tcj2d"), SubResource("Resource_x1tvh"), SubResource("Resource_p7jct")])
 neutral_spawn_pool = Array[ExtResource("1_bay88")]([SubResource("Resource_fm5px")])
-max_enemies = 1
+max_enemies = 8
 max_neutrals = 5

@@ -19,11 +19,10 @@ enum STATE_LISTS{
 @export var max_action_counter := 1
 @export var max_ability_slots := 1
 @export var max_equipment_slots := 2
+@export var armor := 0
 @export_group("Nodes")
 ## Ability script file name
 @export var starting_abilities:Array[AbilityData]
-## States
-@export_file() var state_machine
 
 @export_group("Visual")
 @export() var shadow_offset:Vector2
@@ -39,9 +38,12 @@ enum STATE_LISTS{
 @export var lvl := 1
 @export var action_counter := 1
 @export var move_counter := 1
-@export var abilities:Array[AbilityV2]=[]
+@export var abilities:Array[Ability]=[]
 	
-func get_abilities()->Array[AbilityV2]:
+const AI_STATE_MACHINE = 'res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn'	
+const PLAYER_STATE_MACHINE = "res://src/components/state_machine/entity/PlayerEntityStateMachine.tscn"	
+
+func get_abilities()->Array[Ability]:
 	return abilities 
 
 func apply_as_preset(entity:Entity):
@@ -59,7 +61,7 @@ func apply_as_preset(entity:Entity):
 	entity.data.max_equipment_slots = max_equipment_slots
 
 	for starting_ability_data in starting_abilities:
-		var ability = AbilityV2.new()
+		var ability = Ability.new()
 		if starting_ability_data.custom_ability_script:
 			ability = load(starting_ability_data.custom_ability_script).new()
 		ability.data = starting_ability_data.duplicate()
@@ -68,9 +70,10 @@ func apply_as_preset(entity:Entity):
 	entity.set_max_health(max_health)
 	entity.preset = self
 
-	entity.data.state_machine = state_machine
-	if state_machine:
-		entity.add_child(load(state_machine).instantiate())
+	if team == C.TEAM.PLAYER:
+		entity.add_child(load(PLAYER_STATE_MACHINE).instantiate())
+	else:
+		entity.add_child(load(AI_STATE_MACHINE).instantiate())
 
 
 func apply_node_data(entity:Entity):

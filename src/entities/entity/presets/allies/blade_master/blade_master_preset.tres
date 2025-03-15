@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://clvurowssc0ll"]
+
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="2_xcj1l"]
+[ext_resource type="SpriteFrames" uid="uid://cq1n7hiayhny3" path="res://src/entities/entity/presets/allies/blade_master/blade_master_frames.tres" id="3_xcpin"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_d23fj"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="5_npitc"]
+[ext_resource type="Resource" uid="uid://bvuoiiif1goed" path="res://src/abilities/ability_presets/Offense/ability_iai_slash/ability_iai_slash.tres" id="6_xcpin"]
+[ext_resource type="Resource" uid="uid://c5p4v6at5j73m" path="res://src/abilities/ability_presets/Offense/ability_disarming_slash/ability_disarming_slash.tres" id="7_hnmsd"]
+
+[resource]
+script = ExtResource("2_xcj1l")
+entity_name = "BladeMaster"
+max_health = 3
+move_range = null
+team = null
+speed = null
+max_move_counter = null
+max_action_counter = null
+max_ability_slots = null
+max_equipment_slots = null
+starting_abilities = Array[ExtResource("4_d23fj")]([ExtResource("5_npitc"), ExtResource("6_xcpin"), ExtResource("7_hnmsd")])
+shadow_offset = null
+sprite_offset = null
+sprite_frames = ExtResource("3_xcpin")
+portrait_image = null
+health = null
+experience = null
+lvl = null
+action_counter = null
+move_counter = null
+abilities = null

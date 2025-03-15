@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EntityData" load_steps=6 format=3 uid="uid://dcwlxm28br27u"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_3uoq7"]
-[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="2_ecf6n"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_s82mo"]
+[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability.gd" id="1_3uoq7"]
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="2_ecf6n"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_s82mo"]
 [ext_resource type="SpriteFrames" uid="uid://cuu38lfufsgi5" path="res://src/entities/entity/presets/prop_entities/bomb/bomb_sprite_frames.tres" id="3_1qwpc"]
 [ext_resource type="Resource" uid="uid://8ngny0nc5g51" path="res://src/abilities/ability_presets/Offense/ability_auto_explode/ability_auto_explode.tres" id="5_yhs35"]
 

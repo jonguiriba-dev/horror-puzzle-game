@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://bv0od6fwjqnkm"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=6 format=3 uid="uid://bv0od6fwjqnkm"]
 
-[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability_v2.gd" id="1_dvwti"]
 [ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_1kwo7"]
 [ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="4_xt53e"]
-[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_1i8lg"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="5_1i8lg"]
 [ext_resource type="SpriteFrames" uid="uid://dwailbo8shdd0" path="res://src/entities/entity/presets/monsters/ghost/ghost_sprite_frames.tres" id="5_q40xb"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="6_f002q"]
 
@@ -13,20 +12,19 @@ entity_name = "Ghost"
 max_health = 2
 move_range = 5
 team = 1
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
+speed = null
+max_move_counter = null
+max_action_counter = null
+max_ability_slots = null
+max_equipment_slots = null
 starting_abilities = Array[ExtResource("4_1kwo7")]([ExtResource("5_1i8lg"), ExtResource("6_f002q")])
-state_machine = "res://src/components/state_machine/enemy_ai/EnemyAiStateMachine.tscn"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
+shadow_offset = null
+sprite_offset = null
 sprite_frames = ExtResource("5_q40xb")
 portrait_image = "res://assets/portraits/layla-portrait.png"
-health = 1
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_dvwti")]([])
+health = null
+experience = null
+lvl = null
+action_counter = null
+move_counter = null
+abilities = null

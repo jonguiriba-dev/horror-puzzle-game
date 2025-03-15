@@ -6,7 +6,7 @@ enum UI_TYPE{
 }
 
 var ui_container:Control
-var ability_hovered:AbilityV2
+var ability_hovered:Ability
 var view_port:SubViewport
 var view_port_container:SubViewportContainer
 var resolution_scale := Vector2(1,1)

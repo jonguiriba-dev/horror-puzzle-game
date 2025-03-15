@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dxu5ht08wm0o7"]
+
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_cdl6m"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_2iwvp"]
+[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="3_4553q"]
+
+[sub_resource type="Resource" id="Resource_g1fl6"]
+script = ExtResource("1_cdl6m")
+effect_type = 8
+value = 1
+status_type = 0
+entity_type = 0
+stat_key = "armor"
+success_rate = 1.0
+tags = Array[int]([])
+metadata/_custom_type_script = "uid://do7sg0g3lmv5q"
+
+[resource]
+script = ExtResource("2_2iwvp")
+ability_name = "Iron Skin"
+description = "Reduce damage taken by 1"
+ability_range = 0
+effects = Array[ExtResource("1_cdl6m")]([SubResource("Resource_g1fl6")])
+triggers = Array[ExtResource("3_4553q")]([])
+highlight_color = 3
+initial_countdown = 0
+target_count = 1
+max_charges = 0
+action_cost = 0
+range_pattern = 3
+aoe_pattern = 3
+aoe_range = 1
+tile_exclude_flag = 5
+tile_include_self = true
+target_strategy = 0
+threat_strategy = 0
+use_host_as_origin = false
+is_action = true
+is_enemy_obstacle = false
+is_passive = true
+animation_script = null
+custom_ability_script = null

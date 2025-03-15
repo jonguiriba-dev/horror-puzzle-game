@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://duswqp4hpdc62"]
 
-[ext_resource type="Script" path="res://src/entities/entity/entity_data.gd" id="1_5ramq"]
-[ext_resource type="Script" path="res://src/abilities/ability_prop.gd" id="1_6mr6h"]
-[ext_resource type="Script" path="res://src/abilities/ability_v2.gd" id="1_ik2c4"]
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="1_5ramq"]
+[ext_resource type="Script" uid="uid://b37dyqjjej603" path="res://src/abilities/ability_prop.gd" id="1_6mr6h"]
+[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability.gd" id="1_ik2c4"]
 [ext_resource type="SpriteFrames" uid="uid://jc3proaf3kq0" path="res://src/entities/entity/presets/main_characters/talya/talya_sprite_frames.tres" id="2_gn7xq"]
-[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_hwvvs"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="5_hwvvs"]
 [ext_resource type="Resource" uid="uid://ca6k8754tx2hw" path="res://src/abilities/ability_presets/Offense/ability_shoot/ability_shoot.tres" id="7_eygvi"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="10_1akup"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="10_1akup"]
 
 [resource]
 script = ExtResource("1_5ramq")

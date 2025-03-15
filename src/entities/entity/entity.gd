@@ -101,10 +101,10 @@ func check_overlap(map_pos:Vector2i):
 		#
 	#return abilities
 	
-func get_abilities()->Array[AbilityV2]:
+func get_abilities()->Array[Ability]:
 	return data.abilities
 	
-func get_ability(ability_name:String)->AbilityV2:
+func get_ability(ability_name:String)->Ability:
 	for ability in get_abilities():
 		if ability.data.ability_name.to_lower() == ability_name.to_lower():
 			return ability
@@ -152,7 +152,7 @@ func clear_threat():
 
 func add_ability(ability_data:AbilityData):
 	Util.sysprint("%s.Entity.add_ability"%[data.entity_name],"%s"%[ability_data.ability_name])
-	var ability = AbilityV2.new()
+	var ability = Ability.new()
 	ability.data = ability_data
 	ability.setup(self)
 	data.abilities.push_front(ability) 
@@ -230,8 +230,9 @@ func _on_stun():
 	refresh_move_and_action_counters()
 
 func _on_hit(damage:int, source) -> void:
-	data.health -= damage
+	data.health -= damage - _get_stat("armor")
 	healthbar.value = data.health
+	
 	
 	if data.health <= 0:
 		data.health = 0
@@ -245,7 +246,16 @@ func _on_hit(damage:int, source) -> void:
 	numeric_health.set_current(data.health)
 	
 	Util.sysprint("Entity %s"%[data.entity_name],"health after calculation: %s"%[data.health])
-	
+
+func _get_stat(key:String)->int:
+	var data_stat = data.get(key)
+	var ability_stat = 0
+	for ability in data.abilities:
+		for effect in ability.data.effects:
+			if effect.effect_type == AbilityEffect.EFFECT_TYPES.STAT_CHANGE:
+				if effect.stat_key == key:
+					ability_stat += effect.value
+	return data_stat + ability_stat
 	
 func _on_death() -> void:
 	for group in get_groups():
@@ -274,7 +284,7 @@ func _on_selected():
 		UIManager.level_ui.clear_context()
 
 		
-func _on_ability_used(ability:AbilityV2):
+func _on_ability_used(ability:Ability):
 	if ability.data.ability_name.to_lower() != "move":
 		WorldManager.level.clear_entity_moved_history()
 	data.action_counter -= ability.data.action_cost
@@ -320,7 +330,7 @@ static func load_data(entity_load_data)->Entity:
 			
 	return entity
 	
-func set_threat(target_map_position:Vector2i,ability:AbilityV2):
+func set_threat(target_map_position:Vector2i,ability:Ability):
 	threat = {"tile":target_map_position, "ability":ability}
 	Util.sysprint("Entity.%s.set_threat"%[data.entity_name],"ability:%s tile:%s"%[threat.ability.data.ability_name,str(threat.tile)])
 	threat_updated.emit()

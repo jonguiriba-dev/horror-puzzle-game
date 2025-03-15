@@ -9,4 +9,3 @@ script = ExtResource("2_4i1bk")
 orientation = 0
 spawn_config = ExtResource("3_dfcsb")
 rewards_config = ExtResource("1_82bbg")
-tilemap_node = "res://src/levels/cave/CaveTilemapNode.tscn"

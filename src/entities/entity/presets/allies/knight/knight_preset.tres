@@ -1,33 +1,31 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=8 format=3 uid="uid://clywh0svuxrk4"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://clywh0svuxrk4"]
 
-[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability_v2.gd" id="1_hr368"]
 [ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="4_dj2ly"]
-[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="5_6blun"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="5_6blun"]
 [ext_resource type="SpriteFrames" uid="uid://bhykddn2qcs7t" path="res://src/entities/entity/presets/allies/knight/knight_sprite_frames.tres" id="5_wv0s7"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="6_f3rm1"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="6_f3rm1"]
 [ext_resource type="Resource" uid="uid://bprqcm81bu4mf" path="res://src/abilities/ability_presets/Offense/ability_strike/ability_strike.tres" id="6_mjg5v"]
 [ext_resource type="Resource" uid="uid://88gq86tkgn7" path="res://src/abilities/ability_presets/Offense/ability_bash/ability_bash.tres" id="7_v74a3"]
 
 [resource]
 script = ExtResource("4_dj2ly")
 entity_name = "Knight"
-max_health = 99
-move_range = 3
+max_health = 5
+move_range = null
 team = 4
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
+speed = null
+max_move_counter = null
+max_action_counter = null
+max_ability_slots = null
+max_equipment_slots = null
 starting_abilities = Array[ExtResource("6_f3rm1")]([ExtResource("5_6blun"), ExtResource("6_mjg5v"), ExtResource("7_v74a3")])
-state_machine = "uid://d1m61om70coef"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
+shadow_offset = null
+sprite_offset = null
 sprite_frames = ExtResource("5_wv0s7")
 portrait_image = null
-health = 1
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_hr368")]([])
+health = null
+experience = null
+lvl = null
+action_counter = null
+move_counter = null
+abilities = null

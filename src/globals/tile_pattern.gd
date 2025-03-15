@@ -4,7 +4,8 @@ enum PATTERNS{
 	DIRECTIONAL_LINE,
 	LINE,
 	DIAMOND,
-	POINT
+	POINT,
+	SQUARE
 }
 
 func get_callable(pattern:PATTERNS):
@@ -13,9 +14,9 @@ func get_callable(pattern:PATTERNS):
 		PATTERNS.LINE: return generate_line_pattern
 		PATTERNS.DIAMOND: return generate_diamond_pattern
 		PATTERNS.POINT: return generate_point_pattern
+		PATTERNS.SQUARE: return generate_square_pattern
 
 func generate_directional_line_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO):
-	print("generate_directional_line_pattern")
 	var tiles:Array[Vector2i]= []
 	
 	for i in range(_range):
@@ -24,7 +25,6 @@ func generate_directional_line_pattern(map_pos:Vector2i,_range:int,direction:Vec
 	return tiles
 	
 func generate_line_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
-	print("generate_line_pattern")
 	var tiles:Array[Vector2i]= []
 	for x in range(_range*-1, _range+1):
 		for y in range(_range*-1, _range+1):
@@ -37,7 +37,6 @@ func generate_line_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector
 	return tiles
 	
 func generate_diamond_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
-	print("generate_diamond_pattern")
 	var tiles:Array[Vector2i]= []
 	for x in range(_range*-1, _range+1):
 		for y in range(_range*-1, _range+1):
@@ -46,6 +45,16 @@ func generate_diamond_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vec
 					tiles.append(next_position)
 
 	return tiles
+	
+	
+func generate_square_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
+	var tiles:Array[Vector2i]= []
+	for x in range(_range*-1, _range+1):
+		for y in range(_range*-1, _range+1):
+			var next_position = Vector2i(x+map_pos.x, y+map_pos.y)
+			tiles.append(next_position)
+
+	return tiles
+	
 func generate_point_pattern(map_pos:Vector2i,_range:int,direction:Vector2i=Vector2i.ZERO)->Array[Vector2i]:
-	print("generate_point_pattern")
 	return [map_pos]

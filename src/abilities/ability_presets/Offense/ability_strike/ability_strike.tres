@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://bprqcm81bu4mf"]
 
 [ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_0achc"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="2_5hs6o"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_5hs6o"]
 [ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="5_d07jr"]
 
 [sub_resource type="Resource" id="Resource_3726x"]
@@ -11,6 +11,7 @@ value = 2
 status_type = 0
 entity_type = 0
 success_rate = 1.0
+tags = Array[int]([])
 
 [resource]
 script = ExtResource("2_5hs6o")

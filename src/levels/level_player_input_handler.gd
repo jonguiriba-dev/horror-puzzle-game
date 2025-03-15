@@ -112,7 +112,7 @@ func _handle_mouse_motion():
 		
 		if targetting_ability.get_target_tiles(targetting_ability.host.map_position).has(mouse_pos):
 			
-			targetting_ability = targetting_ability as AbilityV2
+			targetting_ability = targetting_ability as Ability
 			var threat_tiles = targetting_ability.get_threat_tiles(
 				targetting_ability.host.map_position,
 				level.grid.get_map_mouse_position()

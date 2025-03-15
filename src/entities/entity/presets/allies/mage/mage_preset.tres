@@ -1,34 +1,31 @@
-[gd_resource type="Resource" script_class="EntityData" load_steps=9 format=3 uid="uid://dbsqmmhlp60lk"]
+[gd_resource type="Resource" script_class="EntityData" load_steps=7 format=3 uid="uid://dbsqmmhlp60lk"]
 
-[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability_v2.gd" id="1_17qht"]
 [ext_resource type="SpriteFrames" uid="uid://c7bftoe8o5cb7" path="res://src/entities/entity/presets/allies/mage/mage_sprite_frames.tres" id="4_d0asr"]
 [ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="4_dacxi"]
 [ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="5_qdep3"]
-[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move_v2_preset.tres" id="6_78ueu"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="6_78ueu"]
 [ext_resource type="Resource" uid="uid://bl2l45rpb5k52" path="res://src/abilities/ability_presets/Offense/ability_magic_missile/ability_magic_missile.tres" id="6_cqihw"]
 [ext_resource type="Resource" uid="uid://px545ffkmk5t" path="res://src/abilities/ability_presets/Offense/ability_ice_rain/ability_ice_rain.tres" id="7_g2yme"]
-[ext_resource type="Resource" uid="uid://bvuoiiif1goed" path="res://src/abilities/ability_presets/Offense/ability_iai_slash/ability_iai_slash.tres" id="8_g2yme"]
 
 [resource]
 script = ExtResource("4_dacxi")
 entity_name = "Mage"
-max_health = 99
-move_range = 3
-team = 0
-speed = 5
-max_move_counter = 1
-max_action_counter = 1
-max_ability_slots = 1
-max_equipment_slots = 2
-starting_abilities = Array[ExtResource("5_qdep3")]([ExtResource("6_78ueu"), ExtResource("6_cqihw"), ExtResource("7_g2yme"), ExtResource("8_g2yme")])
-state_machine = "uid://qi4063hnm62t"
-shadow_offset = Vector2(0, 0)
-sprite_offset = Vector2(0, 0)
+max_health = 3
+move_range = null
+team = null
+speed = null
+max_move_counter = null
+max_action_counter = null
+max_ability_slots = null
+max_equipment_slots = null
+starting_abilities = Array[ExtResource("5_qdep3")]([ExtResource("6_78ueu"), ExtResource("6_cqihw"), ExtResource("7_g2yme")])
+shadow_offset = null
+sprite_offset = null
 sprite_frames = ExtResource("4_d0asr")
 portrait_image = null
-health = 1
-experience = 0
-lvl = 1
-action_counter = 1
-move_counter = 1
-abilities = Array[ExtResource("1_17qht")]([])
+health = null
+experience = null
+lvl = null
+action_counter = null
+move_counter = null
+abilities = null

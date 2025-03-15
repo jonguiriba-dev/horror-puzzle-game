@@ -44,7 +44,7 @@ func analyze_tile_scores():
 	
 	print("targets> ",targets)
 	target = nearest
-	print(host.data.entity_name, " is targeting ", nearest.entity_name)
+	print(host.data.entity_name, " is targeting ", nearest.data.entity_name)
 	
 	if Debug.highlight_enemy_target:
 		WorldManager.level.grid.set_highlight(

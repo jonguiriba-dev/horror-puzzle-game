@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=6 format=3 uid="uid://dslk1ursehvik"]
+
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="1_bowtb"]
+[ext_resource type="SpriteFrames" uid="uid://b0nvqdmmju3hj" path="res://src/entities/entity/presets/monsters/watcher/watcher_sprite_frames.tres" id="2_rokk4"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="3_3pj68"]
+[ext_resource type="Resource" uid="uid://xatyd8htdwfu" path="res://src/abilities/ability_presets/ability_move/ability_move.tres" id="4_rartu"]
+[ext_resource type="Resource" uid="uid://cljlblj3vo3gi" path="res://src/abilities/ability_presets/Offense/ability_explosive_laser/ability_explosive_laser.tres" id="5_xvsr0"]
+
+[resource]
+script = ExtResource("1_bowtb")
+entity_name = "Watcher"
+max_health = 3
+move_range = null
+team = 1
+speed = null
+max_move_counter = null
+max_action_counter = null
+max_ability_slots = null
+max_equipment_slots = null
+starting_abilities = Array[ExtResource("3_3pj68")]([ExtResource("4_rartu"), ExtResource("5_xvsr0")])
+shadow_offset = Vector2(0, 3)
+sprite_offset = null
+sprite_frames = ExtResource("2_rokk4")
+portrait_image = "res://assets/portraits/layla-portrait.png"
+health = null
+experience = null
+lvl = null
+action_counter = null
+move_counter = null
+abilities = null

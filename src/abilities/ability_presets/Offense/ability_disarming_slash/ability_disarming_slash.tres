@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://c5p4v6at5j73m"]
+
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_wy54g"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="2_jjn1j"]
+[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="3_rkjkr"]
+
+[sub_resource type="Resource" id="Resource_3726x"]
+script = ExtResource("1_wy54g")
+effect_type = 0
+value = 1
+status_type = 0
+entity_type = 0
+success_rate = 1.0
+tags = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_2exi5"]
+script = ExtResource("1_wy54g")
+effect_type = 7
+value = 0
+status_type = 0
+entity_type = 0
+success_rate = 1.0
+tags = Array[int]([1])
+metadata/_custom_type_script = "uid://do7sg0g3lmv5q"
+
+[resource]
+script = ExtResource("2_jjn1j")
+ability_name = "Disarming Slash"
+description = "Slash swiftly and disable the target"
+ability_range = 1
+effects = Array[ExtResource("1_wy54g")]([SubResource("Resource_3726x"), SubResource("Resource_2exi5")])
+triggers = Array[ExtResource("3_rkjkr")]([])
+highlight_color = 3
+initial_countdown = 0
+target_count = 1
+max_charges = 0
+action_cost = 1
+range_pattern = 2
+aoe_pattern = 3
+aoe_range = 1
+tile_exclude_flag = 5
+tile_include_self = false
+target_strategy = 0
+threat_strategy = 0
+use_host_as_origin = true
+is_action = true
+is_enemy_obstacle = false
+is_passive = false
+animation_script = "res://src/abilities/ability_animations/animation_strike.gd"
+custom_ability_script = null

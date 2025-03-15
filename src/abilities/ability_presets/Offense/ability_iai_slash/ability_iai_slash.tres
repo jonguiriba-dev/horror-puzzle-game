@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://do7sg0g3lmv5q"
 [resource]
 script = ExtResource("2_570c3")
 ability_name = "Iai Slash"
-description = "Slash swiftly and deal damage in a line to the right of the target"
+description = "Instantly dash and deal damage in a line"
 ability_range = 4
 effects = Array[ExtResource("1_7c58r")]([SubResource("Resource_3726x"), SubResource("Resource_2exi5")])
 triggers = Array[ExtResource("3_0u3b0")]([])

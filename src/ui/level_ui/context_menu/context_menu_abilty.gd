@@ -6,7 +6,7 @@ const CONTEXT_MENU_ABILITY_TSCN = "res://src/ui/level_ui/context_menu/context_me
 @onready var bg := $Bg
 @onready var label := $HBoxContainer/AbilityName
 @onready var charges := $HBoxContainer/Control/Charges
-var ability:AbilityV2
+var ability:Ability
 	
 func _on_mouse_entered() -> void:
 	if ability.is_usable():
@@ -21,7 +21,7 @@ func _on_mouse_exited() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if UIManager.ability_hovered and ability.is_usable():
-			var targetting_ability:AbilityV2=Util.get_meta_from_node(
+			var targetting_ability:Ability=Util.get_meta_from_node(
 				get_tree().get_first_node_in_group(C.GROUPS.TARGETTING_ENTITY),
 				"targetting_ability"
 			)

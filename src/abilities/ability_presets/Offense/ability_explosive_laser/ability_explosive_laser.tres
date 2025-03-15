@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://cljlblj3vo3gi"]
+
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_5kiup"]
+[ext_resource type="Resource" uid="uid://bmj2brulvutfl" path="res://src/abilities/ability_effect/damage_1.tres" id="2_3v72r"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="3_plkl1"]
+[ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="4_cs3gm"]
+
+[resource]
+script = ExtResource("3_plkl1")
+ability_name = "Explosive Laser"
+description = "fires a laser that explodes on the location"
+ability_range = 5
+effects = Array[ExtResource("1_5kiup")]([ExtResource("2_3v72r")])
+triggers = Array[ExtResource("4_cs3gm")]([])
+highlight_color = 3
+initial_countdown = 0
+target_count = 1
+max_charges = 0
+action_cost = 1
+range_pattern = 1
+aoe_pattern = 4
+aoe_range = 1
+tile_exclude_flag = 5
+tile_include_self = false
+target_strategy = 0
+threat_strategy = 0
+use_host_as_origin = false
+is_action = true
+is_enemy_obstacle = false
+is_passive = false
+animation_script = "res://src/abilities/ability_animations/animation_shoot.gd"
+custom_ability_script = null
