@@ -16,8 +16,8 @@ var selected_entity
 var current_dialogue:Dialogue
 
 
-func _init(level:Level):
-	self.level = level
+func _init(_level:Level):
+	level = _level
 	current_dialogue = null
 func _on_player_turn_state_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -110,7 +110,12 @@ func _on_player_turn_state_input(event: InputEvent) -> void:
 		
 		print("*Tile Position: ",mouse_map_position)
 
+var hover_labels = []
 func _handle_mouse_motion():
+	if hover_labels.size() > 0:
+		for hover_label in hover_labels:
+			hover_label.queue_free()
+	hover_labels = []
 	var targetting_ability = Util.get_meta_from_node(WorldManager,"player_targetting_ability")
 	if targetting_ability:
 		var mouse_pos = level.grid.get_map_mouse_position()
@@ -126,6 +131,23 @@ func _handle_mouse_motion():
 				targetting_ability.host.map_position,
 				level.grid.get_map_mouse_position()
 			)
+			
+			var entities = level.get_tree().get_nodes_in_group(C.GROUPS.ENTITIES)
+			for threat_tile in threat_tiles:
+				for entity in entities:
+					if entity.map_position == threat_tile:
+						var damage_effects = targetting_ability.data.effects.filter(func(e):
+							return e.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE
+						)
+						
+						if damage_effects.size() > 0:
+							var label = Label.new()
+							hover_labels.push_front(label)
+							label.text = "- "+str(entity.calculate_hit_damage(damage_effects[0].value))
+							UIManager.level_ui.add_child(label)
+							label.global_position = (entity.global_position + Vector2(0,-40)) * SettingsManager.get_ui_game_resolution_multiplier()
+			#show threat_tiles info
+			
 			level.grid.set_highlight_area(
 				threat_tiles,
 				Grid.HIGHLIGHT_COLORS.BLUE,

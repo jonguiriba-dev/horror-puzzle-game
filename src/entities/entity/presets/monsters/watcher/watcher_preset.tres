@@ -23,6 +23,7 @@ shadow_offset = Vector2(0, 3)
 sprite_offset = null
 sprite_frames = ExtResource("2_rokk4")
 portrait_image = "res://assets/portraits/layla-portrait.png"
+tags = Array[int]([])
 health = null
 experience = null
 lvl = null

@@ -23,6 +23,7 @@ shadow_offset = null
 sprite_offset = null
 sprite_frames = ExtResource("5_q40xb")
 portrait_image = "res://assets/portraits/layla-portrait.png"
+tags = Array[int]([])
 health = null
 experience = null
 lvl = null

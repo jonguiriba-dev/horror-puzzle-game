@@ -1,3 +1,4 @@
+@tool
 extends StateChart
 class_name LevelStateChart
 

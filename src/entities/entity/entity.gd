@@ -74,6 +74,8 @@ func _ready() -> void:
 		ability.setup(self)
 		ability.used.connect(_on_ability_used)
 	
+	scale = Vector2(0.75,0.75)
+	
 func set_max_health(_max_health:int):
 	data.max_health = _max_health
 	data.health = _max_health
@@ -230,7 +232,7 @@ func _on_stun():
 	refresh_move_and_action_counters()
 
 func _on_hit(damage:int, source) -> void:
-	data.health -= damage - _get_stat("armor")
+	data.health -= calculate_hit_damage(damage)
 	healthbar.value = data.health
 	
 	
@@ -342,3 +344,7 @@ func unset_threat():
 
 func is_prop():
 	return data.tags.has(EntityData.EntityTags.PROP)
+
+func calculate_hit_damage(damage:int)->int:
+	return damage - _get_stat("armor")
+	

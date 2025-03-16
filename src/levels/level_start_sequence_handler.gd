@@ -3,8 +3,8 @@ class_name LevelStartSequenceHandler
 
 var level:Level
 
-func _init(level:Level):
-	self.level = level
+func _init(_level:Level):
+	level = _level
 	
 func _on_start_sequence_state_entered():
 	Util.sysprint("Level","game start!")

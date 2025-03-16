@@ -6,8 +6,8 @@ var level
 var spawn_config:LevelSpawnConfig
 var environment_config:LevelEnvironmentConfig
 
-func _init(level:Level):
-	self.level = level
+func _init(_level:Level):
+	level = _level
 	spawn_config = level.level_preset.spawn_config
 	environment_config = level.level_preset.environment_config
 	
@@ -44,6 +44,11 @@ func spawn_units():
 	var prop_count := 0
 	
 	var all_tiles = WorldManager.level.grid.get_all_tiles()
+	all_tiles = all_tiles.filter(func (tile):
+		return !level.get_tree().get_nodes_in_group(C.GROUPS.ENTITIES).map(
+			func(entity): return entity.map_position
+		).has(tile)
+	)
 	all_tiles.shuffle()
 	while(prop_count < environment_config.max_props):
 		for props_spawn in environment_config.props_spawn_pool:
@@ -56,6 +61,12 @@ func spawn_units():
 				prop_count += 1
 	
 	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
+	
+	player_spawn_tiles = player_spawn_tiles.filter(func (tile):
+		return !level.get_tree().get_nodes_in_group(C.GROUPS.ENTITIES).map(
+			func(entity): return entity.map_position
+		).has(tile)
+	)
 	player_spawn_tiles.shuffle()
 	for player_unit in PlayerManager.units:
 		EntityManager.spawn_entity(
@@ -66,6 +77,11 @@ func spawn_units():
 		
 	var spawn_record = {}
 	var enemy_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.ENEMY)
+	enemy_spawn_tiles = enemy_spawn_tiles.filter(func (tile):
+		return !level.get_tree().get_nodes_in_group(C.GROUPS.ENTITIES).map(
+			func(entity): return entity.map_position
+		).has(tile)
+	)
 	enemy_spawn_tiles.shuffle()
 	while(enemy_count < spawn_config.max_enemies):
 		for enemy_spawn in spawn_config.enemy_spawn_pool:
@@ -83,6 +99,11 @@ func spawn_units():
 					enemy_count += 1
 	
 	var neutral_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.NEUTRAL)
+	neutral_spawn_tiles = neutral_spawn_tiles.filter(func (tile):
+		return !level.get_tree().get_nodes_in_group(C.GROUPS.ENTITIES).map(
+			func(entity): return entity.map_position
+		).has(tile)
+	)
 	neutral_spawn_tiles.shuffle()
 	while(neutral_count < spawn_config.max_neutrals):
 		for neutral_spawn in spawn_config.neutral_spawn_pool:

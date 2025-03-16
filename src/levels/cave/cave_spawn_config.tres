@@ -36,4 +36,4 @@ script = ExtResource("1_pa6u3")
 enemy_spawn_pool = Array[ExtResource("1_bay88")]([SubResource("Resource_tcj2d"), SubResource("Resource_x1tvh"), SubResource("Resource_p7jct")])
 neutral_spawn_pool = Array[ExtResource("1_bay88")]([SubResource("Resource_fm5px")])
 max_enemies = 8
-max_neutrals = 5
+max_neutrals = 3

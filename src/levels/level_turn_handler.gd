@@ -13,8 +13,8 @@ signal turn_start(team: C.TEAM)
 signal turn_end(team: C.TEAM)
 
 
-func _init(level:Level):
-	self.level = level
+func _init(_level:Level):
+	level = _level
 
 func _on_turn_end():
 	Util.sysprint("Level","end_turn: from %s to %s"%[
@@ -103,6 +103,10 @@ func _on_end_turn_pressed():
 func _on_ai_unit_turn_end():
 	Util.sysprint("Level:_on_ai_unit_turn_end","ai_turn_queue:%s"%[ai_turn_queue.size()])
 
+	#filter for valid entities to take their turn
+	ai_turn_queue = ai_turn_queue.filter(func(entity):
+		return is_instance_valid(entity)
+	)
 	if is_instance_valid(level.turn_handler.current_ai_entity_in_action):
 		level.turn_handler.current_ai_entity_in_action.clear_sprite_material()
 	level.turn_handler.current_ai_entity_in_action = null
@@ -112,10 +116,6 @@ func _on_ai_unit_turn_end():
 	):
 		_on_all_ai_done()
 	else:
-		#filter for valid entities to take their turn
-		ai_turn_queue = ai_turn_queue.filter(func(entity):
-			return is_instance_valid(entity)
-		)
 		#keep looping to find a valid ai_entity that could take its turn
 		while ai_turn_queue.size() > 0:
 			var ai_entity = ai_turn_queue.pop_front()

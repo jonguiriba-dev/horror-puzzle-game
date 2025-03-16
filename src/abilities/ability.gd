@@ -268,7 +268,6 @@ func refresh_charges():
 	data.charges = data.max_charges
 	
 func _on_target_select() -> void:
-	print("MOVE TARGET SELECT ",host.data.entity_name)
 	if host.data.action_counter == 0:
 		return 
 	set_state(STATE.TARGET_SELECT)
@@ -279,6 +278,7 @@ func _on_stopped_targetting() -> void:
 	host.set_meta("targetting_ability",null)
 	WorldManager.set_meta("player_targetting_ability",null)
 	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY)
+	WorldManager.level.grid.clear_all_highlights(Grid.HIGHLIGHT_LAYERS.ABILITY_AOE)
 	state = STATE.INACTIVE
 
 func _on_used(ability:Ability):
