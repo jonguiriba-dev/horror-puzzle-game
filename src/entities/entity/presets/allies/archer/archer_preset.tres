@@ -18,6 +18,7 @@ max_move_counter = null
 max_action_counter = null
 max_ability_slots = null
 max_equipment_slots = null
+armor = 0
 starting_abilities = Array[ExtResource("5_dtda7")]([ExtResource("6_cmudh"), ExtResource("6_fhoix"), ExtResource("7_ndegw")])
 shadow_offset = null
 sprite_offset = null

@@ -64,6 +64,12 @@ tint_over = Color(0.81, 0.745605, 0.7371, 1)
 tint_progress = Color(0.878906, 0.18926, 0.149897, 1)
 script = ExtResource("7_v71x7")
 
+[node name="FractionRange" parent="Healthbar" instance=ExtResource("9_k1lsc")]
+offset_left = 17.0
+offset_top = 2.0
+offset_right = 17.0
+offset_bottom = 2.0
+
 [node name="StatusBar" type="HBoxContainer" parent="."]
 offset_left = -14.0
 offset_top = -39.0
@@ -77,12 +83,6 @@ offset_left = 15.0
 offset_top = -27.0
 offset_right = 15.0
 offset_bottom = -27.0
-
-[node name="FractionRange" parent="." instance=ExtResource("9_k1lsc")]
-offset_left = 9.0
-offset_top = -31.0
-offset_right = 9.0
-offset_bottom = -31.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

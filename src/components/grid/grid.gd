@@ -118,13 +118,15 @@ func get_possible_tiles(team:C.TEAM,exclude_flags:int=7)->Array[Vector2i]:
 		enemy_tiles.append_array(player_entity_tiles)
 		ally_tiles = enemy_entity_tiles
 	
-	enemy_tiles.append_array(prop_entity_tiles)
 	var tiles = tiles_layer.get_used_cells()
 	var props = prop_layer.get_used_cells()
 	
 	astar_grid.fill_solid_region(astar_grid.region,false)
 	if (exclude_flags & TILE_EXCLUDE_FLAGS.EXCLUDE_OBSTACLES) != 0:
 		for prop_pos in props:
+			tiles.erase(prop_pos)
+			astar_grid.set_point_solid(prop_pos)
+		for prop_pos in prop_entity_tiles:
 			tiles.erase(prop_pos)
 			astar_grid.set_point_solid(prop_pos)
 	

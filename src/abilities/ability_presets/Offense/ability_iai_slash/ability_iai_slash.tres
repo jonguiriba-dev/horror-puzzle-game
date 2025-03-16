@@ -10,6 +10,7 @@ effect_type = 0
 value = 2
 status_type = 0
 entity_type = 0
+stat_key = ""
 success_rate = 1.0
 tags = Array[int]([])
 
@@ -19,6 +20,7 @@ effect_type = 3
 value = 0
 status_type = 0
 entity_type = 0
+stat_key = ""
 success_rate = 1.0
 tags = Array[int]([1])
 metadata/_custom_type_script = "uid://do7sg0g3lmv5q"

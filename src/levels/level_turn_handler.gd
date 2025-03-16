@@ -112,6 +112,10 @@ func _on_ai_unit_turn_end():
 	):
 		_on_all_ai_done()
 	else:
+		#filter for valid entities to take their turn
+		ai_turn_queue = ai_turn_queue.filter(func(entity):
+			return is_instance_valid(entity)
+		)
 		#keep looping to find a valid ai_entity that could take its turn
 		while ai_turn_queue.size() > 0:
 			var ai_entity = ai_turn_queue.pop_front()

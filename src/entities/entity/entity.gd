@@ -7,7 +7,7 @@ const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn")
 @onready var shadow :Sprite2D= $Shadow
 @onready var rescue_text := $EntitySprite/RescueText
 @onready var healthbar := $Healthbar
-@onready var numeric_health := $FractionRange
+@onready var numeric_health := $Healthbar/FractionRange
 @onready var status_bar := $StatusBar
 @onready var context_menu_point := $ContextMenuPoint
 @export var preset:EntityData
@@ -339,3 +339,6 @@ func unset_threat():
 	threat = null
 	Util.sysprint("Entity.%s.unset_threat"%[data.entity_name],"ok")
 	threat_updated.emit()
+
+func is_prop():
+	return data.tags.has(EntityData.EntityTags.PROP)

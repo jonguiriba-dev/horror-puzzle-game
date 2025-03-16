@@ -1,42 +1,54 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=9 format=3 uid="uid://8ngny0nc5g51"]
 
-[ext_resource type="Script" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_0pmx3"]
+[ext_resource type="Script" uid="uid://do7sg0g3lmv5q" path="res://src/abilities/ability_effect/ability_effect.gd" id="1_0pmx3"]
 [ext_resource type="Script" path="res://src/abilities/ability_trigger.gd" id="3_nowpt"]
-[ext_resource type="Script" path="res://src/abilities/ability_data.gd" id="4_boyav"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_boyav"]
 
 [sub_resource type="Resource" id="Resource_roimn"]
 script = ExtResource("1_0pmx3")
 effect_type = 0
 value = 3
+status_type = 0
 entity_type = 0
+stat_key = ""
+success_rate = 1.0
+tags = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_vsmds"]
 script = ExtResource("1_0pmx3")
 effect_type = 1
 value = 1
+status_type = 0
 entity_type = 0
+stat_key = ""
+success_rate = 1.0
+tags = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_68hov"]
 script = ExtResource("1_0pmx3")
 effect_type = 6
 value = 99
+status_type = 0
 entity_type = 0
+stat_key = ""
+success_rate = 1.0
+tags = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_cqkyy"]
 script = ExtResource("3_nowpt")
 source = 0
 target = 0
+type = 0
 key = "countdown"
 value = 0
-type = 0
 
 [sub_resource type="Resource" id="Resource_w1vid"]
 script = ExtResource("3_nowpt")
 source = 1
 target = 0
+type = 1
 key = "death"
 value = 0
-type = 1
 
 [resource]
 script = ExtResource("4_boyav")
@@ -52,11 +64,12 @@ max_charges = 0
 action_cost = 0
 range_pattern = 1
 aoe_pattern = 1
+aoe_range = 1
 tile_exclude_flag = 5
+tile_include_self = true
 target_strategy = 0
 threat_strategy = 1
 use_host_as_origin = false
-tile_include_self = true
 is_action = true
 is_enemy_obstacle = false
 is_passive = true

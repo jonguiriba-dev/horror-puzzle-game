@@ -96,7 +96,10 @@ func apply_effect_to_tiles(target_map_position:Vector2i):
 		var target_entity = _get_tile_target(affected_tile)
 		
 		if is_instance_valid(target_entity):
-			apply_entity_effect(target_entity,data.effects)
+			if target_entity.is_prop():
+				pass
+			else:
+				apply_entity_effect(target_entity,data.effects)
 		
 		if data.effects.filter(
 			func(e): return e.effect_type == AbilityEffect.EFFECT_TYPES.SUMMON
@@ -109,7 +112,8 @@ func apply_entity_effect(target:Entity, effects:Array[AbilityEffect]):
 		var rand := randf_range(0.0,1.0)
 		if rand < fail_rate:
 			continue
-			
+		
+	
 		if effect.effect_type == AbilityEffect.EFFECT_TYPES.DAMAGE:
 			if target == host and !effect.tags.has(AbilityEffect.TAGS.SELF_DAMAGE):
 				pass

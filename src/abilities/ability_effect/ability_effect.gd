@@ -16,6 +16,7 @@ enum EFFECT_TYPES{
 enum TAGS{
 	SELF_DAMAGE,
 	PASS_THROUGH,
+	PROP_DAMAGE
 }
 
 @export var effect_type:EFFECT_TYPES

@@ -5,8 +5,13 @@ const ENTITY_TSCN := preload("res://src/entities/entity/Entity.tscn")
 
 var ability_file_path = "res://src/abilities"
 var state_file_path = "res://src/components/state_machine/entity"
+
 enum STATE_LISTS{
 	PLAYER_STATES
+}
+
+enum EntityTags{
+	PROP
 }
 
 @export_group("Stats")
@@ -31,6 +36,7 @@ enum STATE_LISTS{
 @export_group("Etc")
 @export var sprite_frames:SpriteFrames
 @export_file() var portrait_image
+@export var tags : Array[EntityTags]
 
 @export_group("Private")
 @export var health := 1
@@ -59,6 +65,7 @@ func apply_as_preset(entity:Entity):
 	entity.data.max_action_counter = max_action_counter
 	entity.data.max_ability_slots = max_ability_slots
 	entity.data.max_equipment_slots = max_equipment_slots
+	entity.data.tags = tags
 
 	for starting_ability_data in starting_abilities:
 		var ability = Ability.new()
@@ -93,6 +100,11 @@ func apply_node_data(entity:Entity):
 	entity.sprite.position += sprite_offset
 	entity.shadow.position += shadow_offset
 
+	print("data.tags ",tags)
+	if tags.has(EntityData.EntityTags.PROP):
+		print("PROP HIDE")
+		entity.healthbar.hide()
+	
 func to_save_data():
 	var res = self.duplicate(true)
 	return res

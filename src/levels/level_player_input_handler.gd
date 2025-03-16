@@ -22,7 +22,16 @@ func _init(level:Level):
 func _on_player_turn_state_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_handle_mouse_motion()
-		
+	
+	if event.is_action_pressed("alt-click"):
+		if selected_entity and selected_entity.data.team == C.TEAM.PLAYER:
+			if UIManager.level_ui.context:
+				UIManager.level_ui.clear_context()
+			else:
+				UIManager.level_ui.set_context(selected_entity)
+				
+	
+	
 	if event.is_action_pressed("click") :
 		Util.sysprint("Level._unhandled_input()","click")
 		var mouse_map_position = level.grid.local_to_map(level.grid.get_local_mouse_position())
@@ -45,7 +54,7 @@ func _on_player_turn_state_input(event: InputEvent) -> void:
 			print(">selected_entity and !targetting_abilit")
 			selected_entity.clear_sprite_material()
 			selected_entity = null
-		
+			
 		if input_waiting_on_dialogue:
 			current_dialogue.input_recieved.emit()
 			input_waiting_on_dialogue = false

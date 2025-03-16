@@ -17,6 +17,7 @@ max_move_counter = null
 max_action_counter = null
 max_ability_slots = null
 max_equipment_slots = null
+armor = 0
 starting_abilities = Array[ExtResource("3_3pj68")]([ExtResource("4_rartu"), ExtResource("5_xvsr0")])
 shadow_offset = Vector2(0, 3)
 sprite_offset = null

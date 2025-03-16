@@ -21,7 +21,7 @@ var loaded_data
 signal loaded
 
 var player_input_handler :LevelPlayerInputHandler
-var load_handler :LevelLoader
+var load_handler :LevelLoadHandler
 var end_sequence_handler :LevelEndSequenceHandler
 var start_sequence_handler :LevelStartSequenceHandler
 var turn_handler :LevelTurnHandler
@@ -31,7 +31,7 @@ func _enter_tree() -> void:
 	
 func _ready() -> void:
 	player_input_handler = LevelPlayerInputHandler.new(self)
-	load_handler = LevelLoader.new(self)
+	load_handler = LevelLoadHandler.new(self)
 	end_sequence_handler = LevelEndSequenceHandler.new(self)
 	start_sequence_handler = LevelStartSequenceHandler.new(self)
 	turn_handler = LevelTurnHandler.new(self)

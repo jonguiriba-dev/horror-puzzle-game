@@ -1,15 +1,15 @@
 extends Object
-class_name LevelLoader
+class_name LevelLoadHandler
 
-var enemy_count := 0
-var neutral_count := 0
 
 var level
-var spawn_config
+var spawn_config:LevelSpawnConfig
+var environment_config:LevelEnvironmentConfig
 
 func _init(level:Level):
 	self.level = level
 	spawn_config = level.level_preset.spawn_config
+	environment_config = level.level_preset.environment_config
 	
 func _on_load_state_entered():
 	if SaveManager.get_loaded("level","entities",[]).size() > 0:
@@ -38,6 +38,23 @@ func load_units(entities_load_data):
 		loaded_entity.refresh_move_and_action_counters()
 
 func spawn_units():
+		
+	var enemy_count := 0
+	var neutral_count := 0
+	var prop_count := 0
+	
+	var all_tiles = WorldManager.level.grid.get_all_tiles()
+	all_tiles.shuffle()
+	while(prop_count < environment_config.max_props):
+		for props_spawn in environment_config.props_spawn_pool:
+			var rng = randf_range(0.1,1.0)
+			if props_spawn.spawn_rate > rng:
+				EntityManager.spawn_entity(
+					WorldManager.level.grid.map_to_local(all_tiles.pop_front()), 
+					EntityManager.create_entity(props_spawn.entity_preset)
+				)
+				prop_count += 1
+	
 	var player_spawn_tiles = WorldManager.level.grid.get_team_position_tiles(Grid.TEAM_POSITION_LAYER_FILTERS.PLAYER)
 	player_spawn_tiles.shuffle()
 	for player_unit in PlayerManager.units:

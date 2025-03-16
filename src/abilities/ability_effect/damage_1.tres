@@ -8,5 +8,6 @@ effect_type = 0
 value = 1
 status_type = 0
 entity_type = 0
+stat_key = ""
 success_rate = 1.0
 tags = Array[int]([])

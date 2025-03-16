@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelEnvironmentConfig" load_steps=5 format=3 uid="uid://dp2myr2k124dm"]
+
+[ext_resource type="Script" uid="uid://dd31aetb03ctx" path="res://src/levels/entity_spawn.gd" id="1_htadg"]
+[ext_resource type="Script" uid="uid://dg56q886xyopl" path="res://src/levels/level_environment_config.gd" id="2_htadg"]
+[ext_resource type="Resource" uid="uid://dduv1vey85lvf" path="res://src/entities/entity/presets/prop_entities/stalegmite/stalegmite_preset.tres" id="2_jasmj"]
+
+[sub_resource type="Resource" id="Resource_xg6q2"]
+script = ExtResource("1_htadg")
+entity_preset = ExtResource("2_jasmj")
+max_number = 7
+spawn_rate = 1.0
+metadata/_custom_type_script = "uid://dd31aetb03ctx"
+
+[resource]
+script = ExtResource("2_htadg")
+props_spawn_pool = Array[ExtResource("1_htadg")]([SubResource("Resource_xg6q2")])
+max_props = 7

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://qi4063hnm62t"]
 
-[ext_resource type="Script" path="res://src/components/state_machine/state_machine.gd" id="1_t1i2r"]
-[ext_resource type="Script" path="res://src/components/state_machine/entity/idle.gd" id="2_g2d7m"]
-[ext_resource type="Script" path="res://src/components/state_machine/entity/target_select.gd" id="4_8vho7"]
-[ext_resource type="Script" path="res://src/components/state_machine/entity/done.gd" id="4_pckyt"]
-[ext_resource type="Script" path="res://src/components/state_machine/entity/selected.gd" id="5_kw1wi"]
+[ext_resource type="Script" uid="uid://cuvxo2x0v2ri8" path="res://src/components/state_machine/state_machine.gd" id="1_t1i2r"]
+[ext_resource type="Script" uid="uid://bcp5wixn0uktj" path="res://src/components/state_machine/entity/idle.gd" id="2_g2d7m"]
+[ext_resource type="Script" uid="uid://bfv1i8q64dlm2" path="res://src/components/state_machine/entity/target_select.gd" id="4_8vho7"]
+[ext_resource type="Script" uid="uid://oy5ako7gistj" path="res://src/components/state_machine/entity/done.gd" id="4_pckyt"]
+[ext_resource type="Script" uid="uid://bo0levc2f0v80" path="res://src/components/state_machine/entity/selected.gd" id="5_kw1wi"]
 
 [node name="PlayerEntityStateMachine" type="Node"]
 script = ExtResource("1_t1i2r")

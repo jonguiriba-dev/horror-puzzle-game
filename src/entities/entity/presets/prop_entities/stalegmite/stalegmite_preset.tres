@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=5 format=3 uid="uid://dduv1vey85lvf"]
+
+[ext_resource type="Script" uid="uid://dsho06uke1g5i" path="res://src/abilities/ability.gd" id="1_spr8y"]
+[ext_resource type="Script" uid="uid://jpj874bywkjf" path="res://src/entities/entity/entity_data.gd" id="2_tvhgj"]
+[ext_resource type="SpriteFrames" uid="uid://cl3jr11gu785x" path="res://src/entities/entity/presets/prop_entities/stalegmite/stalegmite_frames.tres" id="3_y7hhw"]
+[ext_resource type="Script" uid="uid://ujai4kxw0qy5" path="res://src/abilities/ability_data.gd" id="4_xe06q"]
+
+[resource]
+script = ExtResource("2_tvhgj")
+entity_name = "Stalegmite"
+max_health = 1
+move_range = 0
+team = 5
+speed = 5
+max_move_counter = 1
+max_action_counter = 1
+max_ability_slots = 1
+max_equipment_slots = 2
+armor = 0
+starting_abilities = Array[ExtResource("4_xe06q")]([])
+shadow_offset = Vector2(0, 0)
+sprite_offset = Vector2(0, 0)
+sprite_frames = ExtResource("3_y7hhw")
+portrait_image = null
+tags = Array[int]([0])
+health = 1
+experience = 0
+lvl = 1
+action_counter = 1
+move_counter = 1
+abilities = Array[ExtResource("1_spr8y")]([])

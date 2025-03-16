@@ -71,6 +71,7 @@ func set_context(_context:Entity):
 	show_context_menu(context)
 		
 func clear_context():
+	context = null
 	hide_portrait()
 	hide_context_menu()
 	hide_ability_icons()

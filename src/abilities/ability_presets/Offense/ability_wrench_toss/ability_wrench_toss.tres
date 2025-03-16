@@ -10,6 +10,7 @@ effect_type = 0
 value = 1
 status_type = 0
 entity_type = 0
+stat_key = ""
 success_rate = 1.0
 tags = Array[int]([])
 
@@ -19,6 +20,7 @@ effect_type = 1
 value = 1
 status_type = 0
 entity_type = 0
+stat_key = ""
 success_rate = 1.0
 tags = Array[int]([])
 
@@ -28,6 +30,7 @@ effect_type = 4
 value = 1
 status_type = 2
 entity_type = 0
+stat_key = ""
 success_rate = 0.5
 tags = Array[int]([])
 
