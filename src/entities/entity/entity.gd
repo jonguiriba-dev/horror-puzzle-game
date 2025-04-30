@@ -74,7 +74,7 @@ func _ready() -> void:
 		ability.setup(self)
 		ability.used.connect(_on_ability_used)
 	
-	scale = Vector2(0.75,0.75)
+	#scale = Vector2(0.75,0.75)
 	
 func set_max_health(_max_health:int):
 	data.max_health = _max_health
